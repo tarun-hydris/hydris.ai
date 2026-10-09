@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 const r = (p) => fileURLToPath(new URL(p, import.meta.url));
 
 // Multi-page build: every page is a real HTML file, so any static host
-// (Vercel, Netlify, GitHub Pages) serves /about/, /contact/ and 404.html natively.
+// (Vercel, Netlify, GitHub Pages) serves /platform/, /about/, /press/, /contact/, /privacy/, /terms/ and 404.html natively.
 export default defineConfig({
   plugins: [react()],
   appType: 'mpa',
@@ -24,8 +24,12 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: r('./index.html'),
+        platform: r('./platform/index.html'),
         about: r('./about/index.html'),
+        press: r('./press/index.html'),
         contact: r('./contact/index.html'),
+        privacy: r('./privacy/index.html'),
+        terms: r('./terms/index.html'),
         notFound: r('./404.html'),
       },
       output: {

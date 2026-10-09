@@ -1,7 +1,8 @@
 import { useEffect, useId, useRef, useState } from 'react';
+import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import BlurText from '../reactbits/BlurText/BlurText.jsx';
-import { useInView, useReady } from '../../lib/hooks.js';
+import { reduced, useInView, useReady } from '../../lib/hooks.js';
 
 /* Appear on scroll: soft blur + rise (the original site's entrance, made quieter) */
 export function Reveal({ as: Tag = 'div', delay = 0, className = '', style, children, ...rest }) {
@@ -39,17 +40,48 @@ export function Heading({ as = 'h2', text, className = '', delay = 55, center = 
   );
 }
 
-/* Section header: (index) label on the left, title on the right */
-export function SecHead({ index, label, title, text }) {
+/* Headline reveal: every word slides up out of its own mask (used for page H1s) */
+export function Words({ as: Tag = 'h1', text, className = '', delay = 0, center = false }) {
+  const ready = useReady();
+  const [ref, inView] = useInView({ once: true });
+  const words = text.split(' ');
   return (
-    <header className="sechead grid">
-      <Reveal as="p" className="s-label sechead__label">({index}) {label}</Reveal>
+    <Tag ref={ref} className={`wm ${ready && inView ? 'is-in' : ''} ${className}`} style={center ? { textAlign: 'center' } : undefined}>
+      {words.map((w, i) => (
+        <span key={i}>
+          <span className="wm__w"><span className="wm__i" style={{ '--i': i, '--d': `${delay}s` }}>{w}</span></span>
+          {i < words.length - 1 && ' '}
+        </span>
+      ))}
+    </Tag>
+  );
+}
+
+/* Section header: (index) label on the left, title on the right */
+export function SecHead({ index, label, title, text, tone }) {
+  return (
+    <header className={`sechead grid ${tone === 'dark' ? 'sechead--dark' : ''}`}>
+      <Reveal as="p" className="s-label sechead__label">({index}){label ? ` ${label}` : ''}</Reveal>
       <div className="sechead__main">
         <Heading text={title} className="t-m" />
         {text && <Reveal as="p" className="sechead__text lead mute" delay={0.15}>{text}</Reveal>}
       </div>
     </header>
   );
+}
+
+/* Scroll-linked drift for decorative elements (GSAP ScrollTrigger scrub) */
+export function Parallax({ children, amount = 60, className = '' }) {
+  const ref = useRef(null);
+  useEffect(() => {
+    if (reduced || !ref.current) return undefined;
+    const tween = gsap.fromTo(ref.current, { y: amount }, {
+      y: -amount, ease: 'none',
+      scrollTrigger: { trigger: ref.current, start: 'top bottom', end: 'bottom top', scrub: true },
+    });
+    return () => { if (tween.scrollTrigger) tween.scrollTrigger.kill(); tween.kill(); };
+  }, [amount]);
+  return <div ref={ref} className={className}>{children}</div>;
 }
 
 export { Arrow } from './Icon.jsx';

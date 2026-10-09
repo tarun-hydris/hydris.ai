@@ -1,14 +1,12 @@
 import ScrollReveal from '../components/reactbits/ScrollReveal/ScrollReveal.jsx';
 import Threads from '../components/reactbits/Threads/Threads.jsx';
-import CountUp from '../components/reactbits/CountUp/CountUp.jsx';
-import { Cta, Dots, Faq } from '../components/sections/Blocks.jsx';
-import { Mark } from '../components/ui/Brand.jsx';
-import Icon from '../components/ui/Icon.jsx';
-import { Heading, Reveal, SecHead, Visible } from '../components/ui/Primitives.jsx';
-import { ABOUT_FAQ, AUTO, MANUAL, TEAM, VALUES, WHO } from '../lib/content.js';
+import { Cta, Dots, Quote } from '../components/sections/Blocks.jsx';
+import { Reveal, SecHead, Visible, Words } from '../components/ui/Primitives.jsx';
+import { ABOUT } from '../lib/content.js';
 import { reduced } from '../lib/hooks.js';
 
 export default function About() {
+  const A = ABOUT;
   return (
     <>
       <section className="phero">
@@ -20,41 +18,53 @@ export default function About() {
           </div>
         )}
         <div className="phero__inner grid">
-          <Reveal as="p" className="s-label phero__label">(About) Hydris AI</Reveal>
-          <Heading as="h1" text="Helping water teams grow" className="t-xl phero__title" delay={70} />
-          <Reveal as="p" className="lead phero__lead" delay={0.3}>
-            We help water teams grow by strengthening their operations, reducing downtime, and empowering every operator with faster, smarter decisions.
-          </Reveal>
+          <Reveal as="p" className="s-label phero__label">(About) Hydris</Reveal>
+          <Words as="h1" text={A.title} className="t-xl phero__title" delay={0.1} />
+          <Reveal as="p" className="lead phero__lead" delay={0.5}>{A.lead}</Reveal>
         </div>
       </section>
 
-      <section className="sec info" id="who">
-        <div className="grid">
-          <Reveal as="p" className="s-label info__label">(01) Who we are</Reveal>
-          <div className="info__main">
-            <ScrollReveal as="p" textClassName="statement" baseOpacity={0.12} enableBlur blurStrength={5} baseRotation={1.5}>
-              We are a team building intelligent systems that capture expert knowledge and strengthen the way water operations run. Our mission is to support operators, simplify complex processes, and create smarter, safer, and more resilient water systems.
-            </ScrollReveal>
+      <section className="sec story" id="why">
+        <SecHead index="01" label={A.why.eyebrow} title={A.why.title} />
+        <div className="story__body grid">
+          <Reveal as="p" className="lead story__lede" delay={0.05}>{A.why.lede}</Reveal>
+          <div className="story__paras">
+            {A.why.paras.map((t, i) => <Reveal as="p" className="body mute" key={i} delay={0.08 + i * 0.08}>{t}</Reveal>)}
           </div>
         </div>
-        <div className="cols3 grid">
-          {WHO.map((w, i) => (
-            <Reveal className="col3" key={w.title} delay={i * 0.08}>
-              <span className="col3__n">{String(i + 1).padStart(2, '0')}</span>
-              {i === 2 ? <span className="col3__big"><small>up to</small><CountUp to={95} duration={2.2} />%</span> : <span className="col3__big col3__big--icon"><Icon name={i === 0 ? 'book' : 'filter'} /></span>}
-              <h3 className="col3__t">{w.title}</h3>
-              <p className="body mute">{w.text}</p>
-            </Reveal>
-          ))}
+        <Quote text={A.why.quote} cite={A.why.cite} />
+      </section>
+
+      <section className="sec alt" id="founder">
+        <SecHead index="02" label={A.founder.eyebrow} title={A.founder.title} />
+        <div className="story__body grid">
+          <div className="story__paras story__paras--wide">
+            {A.founder.paras.map((t, i) => <Reveal as="p" className={i === 0 ? 'lead' : 'body mute'} key={i} delay={0.06 + i * 0.08}>{t}</Reveal>)}
+          </div>
+        </div>
+        <Quote text={A.founder.quote} cite={A.founder.cite} />
+      </section>
+
+      <section className="sec info" id="protecting">
+        <div className="grid">
+          <Reveal as="p" className="s-label info__label">(03) {A.protect.eyebrow}</Reveal>
+          <div className="info__main">
+            <ScrollReveal as="h2" textClassName="statement" baseOpacity={0.12} enableBlur blurStrength={5} baseRotation={1.5}>{A.protect.title}</ScrollReveal>
+          </div>
+        </div>
+        <div className="story__body grid protect__body">
+          <Reveal as="p" className="lead story__lede" delay={0.05}>{A.protect.lede}</Reveal>
+          <div className="story__paras">
+            {A.protect.paras.map((t, i) => <Reveal as="p" className="body mute" key={i} delay={0.08 + i * 0.08}>{t}</Reveal>)}
+          </div>
         </div>
       </section>
 
       <section className="sec values" id="values">
-        <SecHead index="02" label="Values" title="The values behind Hydris AI"
-          text="We believe in empowering operators, simplifying complex processes, and preserving knowledge that strengthens water systems." />
+        <SecHead index="04" label={A.work.eyebrow} title={A.work.title} />
         <div className="vgrid">
-          {VALUES.map((v, i) => (
-            <Reveal className="vcell" key={v.title} delay={(i % 2) * 0.08}>
+          {A.work.items.map((v, i) => (
+            <Reveal className="vcell hl" key={v.title} delay={i * 0.1}>
               <span className="vcell__n">{String(i + 1).padStart(2, '0')}</span>
               <h3 className="t-s">{v.title}</h3>
               <p className="body mute">{v.text}</p>
@@ -63,38 +73,19 @@ export default function About() {
         </div>
       </section>
 
-      <section className="sec" id="why">
-        <SecHead index="03" label="Why us" title="What makes us stand out in the industry"
-          text="Deep operational expertise and advanced AI, together. Clarity, speed, and reliability so teams work smarter and plants run stronger." />
-        <div className="compare grid">
-          <Reveal className="compare__col">
-            <p className="compare__h"><span>Manual work</span><small>Today</small></p>
-            <ul>{MANUAL.map((m) => <li key={m}><Icon name="x" />{m}</li>)}</ul>
-          </Reveal>
-          <Reveal className="compare__col compare__col--dark" delay={0.12}>
-            <p className="compare__h"><span><Mark className="compare__mark" />Hydris AI automation</span><small>With Hydris</small></p>
-            <ul>{AUTO.map((m) => <li key={m}><Icon name="check" />{m}</li>)}</ul>
-          </Reveal>
-        </div>
-      </section>
-
       <section className="sec team" id="team">
         <Dots className="dots--soft" />
-        <SecHead index="04" label="Team" title="The minds behind Hydris AI"
-          text="A team of industry experts, engineers, and designers united to build smarter, safer, and more resilient water operations." />
-        <div className="tiles grid">
-          {TEAM.map((t, i) => (
-            <Reveal className="tile" key={t.title} delay={i * 0.08}>
-              <span className="tile__n">{String(i + 1).padStart(2, '0')}</span>
-              <h3 className="t-s">{t.title}</h3>
-              <p className="body mute">{t.text}</p>
-            </Reveal>
-          ))}
+        <SecHead index="05" label={A.team.eyebrow} title={A.team.title} />
+        <div className="story__body grid team__body">
+          <Reveal as="p" className="lead story__lede" delay={0.05}>{A.team.text}</Reveal>
+          <Reveal className="team__places" delay={0.15}>
+            <span className="chip chip--live">United States</span>
+            <span className="chip chip--live">India</span>
+          </Reveal>
         </div>
       </section>
 
-      <Faq index="05" items={ABOUT_FAQ} />
-      <Cta />
+      <Cta short />
     </>
   );
 }
