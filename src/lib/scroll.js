@@ -27,6 +27,12 @@ const samePage = (url) => {
   return url.origin === location.origin && norm(url.pathname) === norm(location.pathname);
 };
 
+/* A plain click on a link to another page of this site (not a new tab, download or mailto) */
+const leavesPage = (a, url, e) =>
+  !e.defaultPrevented && e.button === 0 && !(e.metaKey || e.ctrlKey || e.shiftKey || e.altKey)
+  && (!a.target || a.target === '_self') && !a.hasAttribute('download')
+  && url.origin === location.origin && !samePage(url);
+
 /* Smooth scrolling (Lenis) kept in sync with GSAP ScrollTrigger, plus anchor handling */
 export function initScroll() {
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
@@ -46,6 +52,12 @@ export function initScroll() {
     if (!a) return;
     if (a.dataset.top !== undefined) { e.preventDefault(); scrollToY(0); return; }
     const url = new URL(a.href, location.href);
+    if (!reduced && leavesPage(a, url, e)) {
+      e.preventDefault();
+      document.documentElement.classList.add('is-leaving');
+      setTimeout(() => { location.href = a.href; }, 380);
+      return;
+    }
     if (!url.hash || !samePage(url)) return;
     const target = document.getElementById(decodeURIComponent(url.hash.slice(1)));
     if (!target) return;
@@ -55,6 +67,8 @@ export function initScroll() {
   });
 
   window.addEventListener('load', () => ScrollTrigger.refresh());
+  // Coming back through the browser cache must not leave the page faded out
+  window.addEventListener('pageshow', (e) => { if (e.persisted) document.documentElement.classList.remove('is-leaving'); });
 }
 
 /* After the page is ready: honour a #hash coming from another page */

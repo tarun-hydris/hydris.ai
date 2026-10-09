@@ -1,10 +1,10 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Mark, Wordmark } from '../ui/Brand.jsx';
 import { Arrow } from '../ui/Icon.jsx';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
-import { NAV, EMAIL } from '../../lib/content.js';
-import { reduced, setReady } from '../../lib/hooks.js';
+import { EMAIL, FOOTER, NAV, PHONE } from '../../lib/content.js';
+import { reduced, setReady, useMedia } from '../../lib/hooks.js';
 import { initScroll, lockScroll, scrollToHashWhenReady } from '../../lib/scroll.js';
 
 const session = {
@@ -15,6 +15,7 @@ const session = {
 /* Fixed header. mix-blend-mode: difference keeps it legible on white, black and the animated hero. */
 export function Header({ page }) {
   const [hidden, setHidden] = useState(false);
+  const small = useMedia('(max-width: 640px)');
   useEffect(() => {
     let last = window.scrollY;
     let raf = 0;
@@ -31,21 +32,25 @@ export function Header({ page }) {
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => { window.removeEventListener('scroll', onScroll); cancelAnimationFrame(raf); };
   }, []);
+  // On a phone the logo is the way home and Contact takes the place of the call to action
+  const items = small
+    ? [...NAV.filter((n) => n.key !== 'home'), { key: 'contact', label: 'Contact', href: '/contact/' }]
+    : NAV;
   return (
     <header className={`hdr ${hidden ? 'is-hidden' : ''}`}>
-      <a className="hdr__logo" href="/" aria-label="Hydris AI, home">
+      <a className="hdr__logo" href="/" aria-label="Hydris, home">
         <Mark className="hdr__mark" />
         <Wordmark className="hdr__word" />
       </a>
       <nav className="hdr__nav" aria-label="Primary">
-        {NAV.map((n, i) => (
+        {items.map((n, i) => (
           <span key={n.key}>
             <a href={n.href} aria-current={page === n.key ? 'page' : undefined}>{n.label}</a>
-            {i < NAV.length - 1 && <span aria-hidden="true">,&nbsp;</span>}
+            {i < items.length - 1 && <span aria-hidden="true">,&nbsp;</span>}
           </span>
         ))}
       </nav>
-      <a className="hdr__cta" href="/contact/">Early access <Arrow /></a>
+      <a className="hdr__cta" href="/contact/" aria-current={page === 'contact' ? 'page' : undefined}>Talk to us <Arrow /></a>
     </header>
   );
 }
@@ -56,34 +61,50 @@ export function Footer() {
       <div className="ftr__top grid">
         <div className="ftr__brand">
           <Mark className="ftr__icon" />
-          <p className="ftr__lead">Capture knowledge, guide decisions, and strengthen operations.</p>
+          <p className="ftr__lead">{FOOTER.tag}</p>
         </div>
+        {FOOTER.cols.map((c) => (
+          <div className="ftr__col" key={c.h}>
+            <p className="ftr__h">{c.h}</p>
+            {c.links.map(([label, href]) => <a href={href} key={label}>{label}</a>)}
+          </div>
+        ))}
         <div className="ftr__col">
-          <p className="ftr__h">Navigation</p>
-          <a href="/">Index</a><a href="/about/">About</a><a href="/contact/">Contact</a><a href="/404.html">404</a>
-        </div>
-        <div className="ftr__col">
-          <p className="ftr__h">Platform</p>
-          <a href="/#services">Services</a><a href="/#process">Process</a><a href="/#benefits">Benefits</a>
-        </div>
-        <div className="ftr__col">
-          <p className="ftr__h">Contact</p>
+          <p className="ftr__h">Write to us</p>
           <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
-          <a href="/contact/">Request early access</a>
-        </div>
-        <div className="ftr__col">
-          <p className="ftr__h">Company</p>
-          <span>Hydris Inc.</span><span>Water intelligence</span>
+          <a href={`tel:${PHONE.replace(/[^+\d]/g, '')}`}>{PHONE}</a>
+          <span>Portland, Oregon</span>
         </div>
       </div>
       <div className="ftr__mark" aria-hidden="true"><Wordmark /></div>
       <div className="ftr__bottom">
-        <span>Hydris Inc. &copy; 2026</span>
-        <span>All rights reserved</span>
+        <span>{FOOTER.line} &copy; 2026</span>
+        <span>{FOOTER.right}</span>
         <a href="#main" data-top="">Back to top <Arrow dir="up" /></a>
       </div>
     </footer>
   );
+}
+
+/* Hairline reading-progress bar along the top edge */
+export function ScrollBar() {
+  const bar = useRef(null);
+  useEffect(() => {
+    if (reduced) return undefined;
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+      if (bar.current) bar.current.style.transform = `scaleX(${p})`;
+    };
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    return () => { window.removeEventListener('scroll', onScroll); window.removeEventListener('resize', onScroll); cancelAnimationFrame(raf); };
+  }, []);
+  return <div className="sbar" aria-hidden="true"><i ref={bar} /></div>;
 }
 
 /* Counter preloader, shown once per session on the home page */
@@ -124,8 +145,8 @@ export function Preloader() {
   return (
     <div className={`loader ${done ? 'is-done' : ''}`} aria-hidden="true">
       <div className="loader__top">
-        <span className="loader__brand"><Mark className="loader__mark" /> Hydris AI</span>
-        <span>The intelligence layer for water</span>
+        <span className="loader__brand"><Mark className="loader__mark" /> Hydris</span>
+        <span>Operational water intelligence</span>
       </div>
       <div className="loader__bottom">
         <span className="loader__count">{p}</span>
@@ -145,6 +166,7 @@ export function Site({ page, children }) {
     <>
       <a className="skip" href="#main">Skip to content</a>
       {page === 'home' && <Preloader />}
+      <ScrollBar />
       <Header page={page} />
       <main id="main">{children}</main>
       <Footer />

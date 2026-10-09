@@ -6,8 +6,12 @@ import './styles/global.css';
 
 const pages = {
   home: lazy(() => import('./pages/Home.jsx')),
+  platform: lazy(() => import('./pages/Platform.jsx')),
   about: lazy(() => import('./pages/About.jsx')),
+  press: lazy(() => import('./pages/Press.jsx')),
   contact: lazy(() => import('./pages/Contact.jsx')),
+  privacy: lazy(() => import('./pages/Privacy.jsx')),
+  terms: lazy(() => import('./pages/Terms.jsx')),
   notfound: lazy(() => import('./pages/NotFound.jsx')),
 };
 

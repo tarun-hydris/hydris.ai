@@ -1,76 +1,171 @@
 import ScrollReveal from '../components/reactbits/ScrollReveal/ScrollReveal.jsx';
 import Hero from '../components/sections/Hero.jsx';
-import { Benefits, Cta, Faq, Panel, Process, StackLoop, Stats, Velocity } from '../components/sections/Blocks.jsx';
-import { Heading, Reveal, SecHead } from '../components/ui/Primitives.jsx';
-import { HOME_FAQ, SERVICES } from '../lib/content.js';
-
-function Service({ s, i }) {
-  return (
-    <article className="svc grid">
-      <Reveal as="p" className="svc__n">{String(i + 1).padStart(2, '0')}</Reveal>
-      <div className="svc__text">
-        <Reveal as="p" className="s-label">{s.tag}</Reveal>
-        <Heading as="h3" text={s.title} className="t-s" />
-        <Reveal as="p" className="body mute svc__p" delay={0.1}>{s.text}</Reveal>
-        <Reveal as="p" className="svc__tags" delay={0.15}>{s.tags.join(', ')}</Reveal>
-      </div>
-      <Reveal className="svc__panel" delay={0.1}><Panel name={s.widget} /></Reveal>
-    </article>
-  );
-}
+import {
+  Cta, Definition, Faq, IconCards, Nots, Oneline, Process, Products, RowList, SystemsLoop, Timeline, Velocity,
+} from '../components/sections/Blocks.jsx';
+import { Capture, LayerStack, Proof, Readout, ResultStrip } from '../components/sections/Sections.jsx';
+import { KnowledgeBase } from '../components/widgets/Widgets.jsx';
+import { Arrow, Parallax, Reveal, SecHead } from '../components/ui/Primitives.jsx';
+import {
+  AUDIENCE, CATEGORY, GET_IN, HOME_FAQ, HOW, IMPL, KNOWLEDGE, LOOKS, MATTERS, MISSING, PLATFORM_HOME,
+  PRODUCTS, PROBLEM, PROOF, WHY,
+} from '../lib/content.js';
 
 export default function Home() {
   return (
     <>
       <Hero />
 
-      <section className="title" id="intro">
-        <Heading as="h2" text="Advanced intelligence for water teams" className="t-xl title__h" center delay={70} />
-        <div className="title__caps grid">
-          <Reveal as="p" className="cap cap--a">Hydris AI brings expert knowledge to your team with clarity.</Reveal>
-          <Reveal as="p" className="cap cap--b" delay={0.1}>Capture knowledge, guide decisions, and strengthen operations.</Reveal>
-        </div>
+      {/* 01 Get Hydris in your plant */}
+      <section className="sec" id="start">
+        <SecHead index="01" label="Get started" title={GET_IN.title} text={GET_IN.lead} />
+        <IconCards items={GET_IN.items} cols={4} variant="icards--four" />
+        <Reveal className="sec__action" delay={0.1}>
+          <a className="pill" href="/contact/">Talk to us <Arrow /></a>
+        </Reveal>
       </section>
 
-      <section className="sec info">
-        <div className="grid">
-          <dl className="info__dl">
-            <Reveal className="info__row"><dt className="s-label">Company</dt><dd>Hydris Inc.</dd></Reveal>
-            <Reveal className="info__row" delay={0.05}><dt className="s-label">Focus</dt><dd>Water and wastewater operations</dd></Reveal>
-            <Reveal className="info__row" delay={0.1}><dt className="s-label">Platform</dt><dd>An AI layer that captures expert knowledge and delivers it to every shift</dd></Reveal>
-          </dl>
-          <div className="info__main">
-            <ScrollReveal as="p" textClassName="statement" baseOpacity={0.12} enableBlur blurStrength={5} baseRotation={1.5}>
-              Hydris captures how your most experienced operators solve problems, then delivers that knowledge to every shift as clear, step by step guidance. Fewer guesses, faster answers, safer water.
-            </ScrollReveal>
+      <SystemsLoop />
+
+      {/* 02 The problem */}
+      <section className="sec problem" id="problem">
+        <SecHead index="02" label={PROBLEM.eyebrow} title={PROBLEM.title} />
+        <div className="problem__body grid">
+          <Reveal as="p" className="lead problem__lede" delay={0.05}>{PROBLEM.lede}</Reveal>
+          {PROBLEM.points.map((p, i) => (
+            <Reveal className="problem__pt hl" key={p.title} delay={0.1 + i * 0.12}>
+              <h3 className="t-row">{p.title}</h3>
+              <p className="body mute">{p.text}</p>
+            </Reveal>
+          ))}
+        </div>
+        <div className="problem__close grid">
+          <div className="problem__statement">
+            <ScrollReveal as="p" textClassName="statement" baseOpacity={0.12} enableBlur blurStrength={5} baseRotation={1.5}>{PROBLEM.close}</ScrollReveal>
           </div>
         </div>
-        <Stats />
       </section>
 
-      <Velocity texts={['Capture knowledge · Guide decisions · Strengthen operations ·', 'Workflow automation · AI assistant · Operations · Custom projects ·']} />
-
-      <section className="sec" id="services">
-        <SecHead index="02" label="Services" title="AI solutions that elevate water operations to the next level"
-          text="We craft intelligent solutions that elevate water operations and empower every team." />
-        <div className="services">{SERVICES.map((s, i) => <Service s={s} i={i} key={s.title} />)}</div>
+      {/* 03 The category */}
+      <section className="sec alt" id="category">
+        <SecHead index="03" label={CATEGORY.eyebrow} title={CATEGORY.title} />
+        <div className="wide">
+          <Definition term={CATEGORY.term} d1={CATEGORY.d1} d2={CATEGORY.d2} />
+          <Nots items={CATEGORY.nots} />
+        </div>
       </section>
 
-      <section className="sec sec--process" id="process">
-        <SecHead index="03" label="Process" title="Our simple, smart, and scalable process"
-          text="We design, develop, and implement automation tools that help you work smarter, not harder." />
-        <Process />
+      <Velocity texts={['Capture knowledge · Guide decisions · Strengthen operations ·', 'Data · Understand · Reason · Act · Learn ·']} />
+
+      {/* 04 How it works */}
+      <section className="sec sec--process" id="how">
+        <SecHead index="04" label={HOW.eyebrow} title={HOW.title} text={HOW.lead} />
+        <Process steps={HOW.steps} />
+        <ResultStrip items={HOW.result} />
       </section>
 
-      <StackLoop />
-
-      <section className="sec" id="benefits">
-        <SecHead index="04" label="Benefits" title="The key benefits of Hydris AI for your operational growth"
-          text="Discover how Hydris AI enhances efficiency, reduces costs, and drives growth with smarter, faster processes." />
-        <Benefits />
+      {/* 05 What it runs on */}
+      <section className="sec alt kbsec" id="knowledge">
+        <SecHead index="05" label={KNOWLEDGE.eyebrow} title={KNOWLEDGE.title} />
+        <div className="kbsec__grid grid">
+          <div className="kbsec__text">
+            <Reveal as="h3" className="t-s" delay={0.05}>{KNOWLEDGE.lead}</Reveal>
+            <Reveal as="p" className="body mute" delay={0.12}>{KNOWLEDGE.text}</Reveal>
+            <Reveal as="p" className="body mute" delay={0.18}>{KNOWLEDGE.text2}</Reveal>
+            <Reveal as="p" className="body kbsec__not" delay={0.24}>{KNOWLEDGE.not}</Reveal>
+          </div>
+          <Reveal className="kbsec__viz" delay={0.1}><KnowledgeBase layers={KNOWLEDGE.layers} /></Reveal>
+        </div>
       </section>
 
-      <Faq index="05" items={HOME_FAQ} />
+      {/* 06 Why Hydris */}
+      <section className="sec" id="why">
+        <SecHead index="06" label={WHY.eyebrow} title={WHY.title} text={WHY.lead} />
+        <IconCards items={WHY.items} cols={3} />
+      </section>
+
+      {/* 07 The platform */}
+      <section className="sec alt" id="platform">
+        <SecHead index="07" label={PLATFORM_HOME.eyebrow} title={PLATFORM_HOME.title} text={PLATFORM_HOME.lead} />
+        <div className="wide">
+          <Products items={PRODUCTS} />
+          <Reveal className="sec__action sec__action--start" delay={0.1}>
+            <a className="link-u" href="/platform/">See the platform <Arrow /></a>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* 08 How you get it in */}
+      <section className="sec" id="implementation">
+        <SecHead index="08" label={IMPL.eyebrow} title={IMPL.title} text={IMPL.lead} />
+        <div className="wide">
+          <Timeline steps={IMPL.steps} />
+          <Oneline parts={IMPL.close} />
+        </div>
+      </section>
+
+      {/* 09 Where we are today */}
+      <section className="sec alt sec--proof" id="proof">
+        <SecHead index="09" label={PROOF.eyebrow} title={PROOF.title} text={PROOF.lead} />
+        <Proof big={PROOF.big} unit={PROOF.unit} note={PROOF.note} />
+      </section>
+
+      {/* 10 What it looks like */}
+      <section className="sec" id="looks">
+        <SecHead index="10" label={LOOKS.eyebrow} title={LOOKS.title} text={LOOKS.lead} />
+        <div className="looks grid">
+          <Parallax amount={18} className="looks__card"><Readout /></Parallax>
+          <div className="looks__copy">
+            {LOOKS.copy.map((t, i) => (
+              <Reveal as="p" className={i === 0 ? 'lead' : i === 2 ? 'body mute' : 'body'} key={i} delay={0.1 + i * 0.12}>{t}</Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 11 Why it matters */}
+      <section className="sec alt" id="matters">
+        <SecHead index="11" label={MATTERS.eyebrow} title={MATTERS.title} />
+        <div className="matters grid">
+          {MATTERS.principles.map((p, i) => (
+            <Reveal className="matters__col hl" key={p.title} delay={i * 0.1}>
+              <span className="matters__n">{String(i + 1).padStart(2, '0')}</span>
+              <h3 className="t-s">{p.title}</h3>
+              <p className="body mute">{p.text}</p>
+            </Reveal>
+          ))}
+        </div>
+        <RowList rows={MATTERS.levers.map((l, i) => ({ ...l, a: String(i + 1).padStart(2, '0') }))} />
+        <div className="matters__notes grid">
+          <Reveal as="p" className="body mute matters__note">{MATTERS.note}</Reveal>
+          <Reveal as="p" className="lead matters__strong" delay={0.1}>{MATTERS.strong}</Reveal>
+        </div>
+      </section>
+
+      {/* 12 The missing layer */}
+      <section className="sec dark" id="layer">
+        <SecHead index="12" label={MISSING.eyebrow} title={MISSING.title} text={MISSING.lead} tone="dark" />
+        <div className="wide">
+          <LayerStack items={MISSING.stack} />
+          <Reveal as="p" className="s-label layer__note">{MISSING.note}</Reveal>
+          <Reveal as="p" className="t-s layer__foot" delay={0.1}>{MISSING.foot}</Reveal>
+        </div>
+      </section>
+
+      {/* 13 Who it is for */}
+      <section className="sec" id="audience">
+        <SecHead index="13" label={AUDIENCE.eyebrow} title={AUDIENCE.title} text={AUDIENCE.lead} />
+        <RowList rows={AUDIENCE.rows} variant="rows--icons" />
+        <div className="verts grid">
+          <div className="verts__chips">
+            {AUDIENCE.verticals.map((v, i) => <Reveal as="span" className="chip" key={v} delay={i * 0.08}>{v}</Reveal>)}
+          </div>
+          <Reveal as="p" className="body mute verts__note" delay={0.2}>{AUDIENCE.note}</Reveal>
+        </div>
+      </section>
+
+      <Faq index="14" items={HOME_FAQ} />
+      <Capture />
       <Cta />
     </>
   );
