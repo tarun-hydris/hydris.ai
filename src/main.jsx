@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Site } from './components/layout/Layout.jsx';
 import './styles/global.css';
+import './styles/imagery.css';
 
 const pages = {
   home: lazy(() => import('./pages/Home.jsx')),

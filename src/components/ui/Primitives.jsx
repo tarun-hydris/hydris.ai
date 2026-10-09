@@ -24,6 +24,7 @@ export function Visible({ children, rootMargin = '200px', className = '' }) {
 /* Word-by-word blur entrance for headings (React Bits BlurText) */
 export function Heading({ as = 'h2', text, className = '', delay = 55, center = false }) {
   const ready = useReady();
+  if (reduced) { const Tag = as; return <Tag className={className} style={center ? { textAlign: 'center' } : undefined}>{text}</Tag>; }
   return (
     <BlurText
       as={as}

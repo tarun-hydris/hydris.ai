@@ -15,6 +15,7 @@ const session = {
 /* Fixed header. mix-blend-mode: difference keeps it legible on white, black and the animated hero. */
 export function Header({ page }) {
   const [hidden, setHidden] = useState(false);
+  const [solid, setSolid] = useState(false);
   const small = useMedia('(max-width: 640px)');
   useEffect(() => {
     let last = window.scrollY;
@@ -24,6 +25,7 @@ export function Header({ page }) {
       raf = requestAnimationFrame(() => {
         raf = 0;
         const y = window.scrollY;
+        setSolid(y > 24);
         if (y > last + 6 && y > 160) setHidden(true);
         else if (y < last - 6 || y < 160) setHidden(false);
         last = y;
@@ -37,7 +39,7 @@ export function Header({ page }) {
     ? [...NAV.filter((n) => n.key !== 'home'), { key: 'contact', label: 'Contact', href: '/contact/' }]
     : NAV;
   return (
-    <header className={`hdr ${hidden ? 'is-hidden' : ''}`}>
+    <header className={`hdr ${hidden ? 'is-hidden' : ''} ${solid ? 'is-solid' : ''}`}>
       <a className="hdr__logo" href="/" aria-label="Hydris, home">
         <Mark className="hdr__mark" />
         <Wordmark className="hdr__word" />

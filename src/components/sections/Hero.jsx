@@ -89,7 +89,7 @@ export default function Hero() {
 
       <div className="hero__copy grid" ref={copy}>
         <p className="s-label hero__eyebrow">
-          {ready
+          {ready && !reduced
             ? <DecryptedText text={HERO.eyebrow} animateOn="view" sequential speed={22} revealDirection="start" encryptedClassName="dec-enc" />
             : <span className="dec-wait">{HERO.eyebrow}</span>}
         </p>

@@ -1,0 +1,97 @@
+"""Turn source photographs into the site's slate duotone, responsive WebP set and manifest.
+
+Usage:  python scripts/build-photos.py ["<source folder>"]
+        (default source: E:/Startup/Hydris/website/0. assets/photos, one <name>.jpg per entry below)
+Adding a photo: drop <name>.jpg in the source folder, add a line to PHOTOS, rerun.
+Output: public/photos/<name>-<width>.webp and src/lib/photos.js
+"""
+import base64, io, json, os, sys
+from PIL import Image, ImageOps
+
+Image.MAX_IMAGE_PIXELS = None
+HERE = os.path.dirname(os.path.abspath(__file__))
+SRC = sys.argv[1] if len(sys.argv) > 1 else r'E:/Startup/Hydris/website/0. assets/photos'
+OUT = os.path.join(HERE, '..', 'public', 'photos')
+MANIFEST = os.path.join(HERE, '..', 'src', 'lib', 'photos.js')
+
+# name -> accessible description ('' = decorative texture, hidden from assistive tech)
+PHOTOS = {
+    # Plants and people
+    'operators':        'Two experienced operators leaning over machinery in a plant, lit by warm window light',
+    'hands-valve':      'Gloved hands fitting a valve onto a water line',
+    'stairway':         'Looking down a metal stairway onto circular clarifier tanks',
+    'outfall':          'Treated water pouring from a row of outfall pipes',
+    'plant-night':      'A water treatment plant lit at night, seen from above',
+    'plant-fog':        'Aerial view of a treatment plant with domed tanks in morning mist',
+    'plant-bw':         'Black and white aerial view of a large treatment plant with many circular clarifiers',
+    # Aerials
+    'aerial-rust':      'Aerial view of an industrial site with clarifier tanks and process buildings',
+    'aerial-river':     'Aerial view of a clarifier and buildings beside a river',
+    'aerial-green':     'Aerial view of circular tanks within a green field',
+    'aerial-bank':      'Aerial view of a treatment plant beside a river embankment',
+    'riverside':        'Aerial view of a riverside plant with rectangular settling basins and circular clarifiers',
+    'clarifiers':       'Aerial view of six circular clarifier and settling tanks',
+    'clarifiers-twin':  'Two circular clarifiers joined by a walkway at a hillside treatment plant',
+    'clarifier-teal':   'Aerial view of a circular clarifier with a bridge arm',
+    'clarifier-top':    'A circular clarifier seen from directly above, its bridge reaching to the centre well',
+    'clarifier-detail': 'Looking straight down on the centre well of a clarifier as its bridge crosses the frame',
+    'clarifier-snow':   'A clarifier in winter seen from above, a dark circle of water in a field of snow',
+    'aeration':         'Aerial view of an aeration basin with bubbling diffusers',
+    'tanks-grid':       'Aerial view of two clarifiers beside a grid of aeration tanks',
+    'basins':           'Aerial view of aeration basins and two large clarifiers',
+    # Water surfaces (decorative textures)
+    'water-caustic-dark':  '',
+    'water-caustic-light': '',
+    'water-caustic-sand':  '',
+    'water-ripple':        '',
+    'water-surface':       '',
+    'water-night':         '',
+    'water-dusk':          '',
+    'water-deep':          '',
+}
+
+# Slate duotone: shadows, mids and highlights share one hue so every image sits in the same palette
+INK, MID, PAPER = (11, 18, 24), (96, 112, 128), (244, 247, 249)
+WIDTHS = [640, 1024, 1600, 2000]
+MAX_LANDSCAPE, MAX_PORTRAIT = 2000, 1400
+
+def s_curve(t):  # gentle contrast, keeps detail in shadows
+    return t * t * (3 - 2 * t) * 0.35 + t * 0.65
+
+LUT = [int(round(255 * s_curve(i / 255))) for i in range(256)]
+
+os.makedirs(OUT, exist_ok=True)
+for f in os.listdir(OUT):  # rebuild from scratch so removed photos do not linger
+    if f.endswith('.webp'):
+        os.remove(os.path.join(OUT, f))
+
+manifest = {}
+for name, alt in PHOTOS.items():
+    im = Image.open(os.path.join(SRC, f'{name}.jpg'))
+    im = ImageOps.exif_transpose(im).convert('RGB')
+    W0, H0 = im.size
+    cap = MAX_PORTRAIT if H0 > W0 else MAX_LANDSCAPE
+    top = min(W0, cap)
+    im = im.resize((top, round(H0 * top / W0)), Image.LANCZOS)
+    g = ImageOps.autocontrast(ImageOps.grayscale(im), cutoff=0.6).point(LUT)
+    duo = ImageOps.colorize(g, black=INK, white=PAPER, mid=MID)
+    W, H = duo.size
+    sizes = [w for w in WIDTHS if w < W] + [W]
+    for w in sizes:
+        out = duo if w == W else duo.resize((w, round(H * w / W)), Image.LANCZOS)
+        out.save(os.path.join(OUT, f'{name}-{w}.webp'), 'WEBP', quality=72, method=6)
+    tiny = duo.resize((24, max(1, round(H * 24 / W))), Image.LANCZOS)
+    buf = io.BytesIO()
+    tiny.save(buf, 'WEBP', quality=40)
+    avg = duo.resize((1, 1), Image.BOX).getpixel((0, 0))
+    manifest[name] = {
+        'w': sizes, 'W': W, 'H': H,
+        'bg': '#%02x%02x%02x' % avg,
+        'lqip': 'data:image/webp;base64,' + base64.b64encode(buf.getvalue()).decode(),
+        'alt': alt,
+    }
+    print(f'{name:20s} {W0}x{H0} -> {W}x{H} {sizes}')
+
+with open(MANIFEST, 'w', encoding='utf8', newline='\n') as f:
+    f.write('// Generated by scripts/build-photos.py. Do not edit by hand.\n')
+    f.write('export const PHOTOS = ' + json.dumps(manifest, indent=1) + ';\n')

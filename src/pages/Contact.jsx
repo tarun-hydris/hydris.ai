@@ -2,9 +2,10 @@ import { useState } from 'react';
 import Magnet from '../components/reactbits/Magnet/Magnet.jsx';
 import SpotlightCard from '../components/reactbits/SpotlightCard/SpotlightCard.jsx';
 import { Dots } from '../components/sections/Blocks.jsx';
+import { Band } from '../components/sections/Imagery.jsx';
 import Icon from '../components/ui/Icon.jsx';
 import { Arrow, Reveal, SecHead, Words } from '../components/ui/Primitives.jsx';
-import { CONTACT, FACILITIES } from '../lib/content.js';
+import { CONTACT, FACILITIES, IMAGERY } from '../lib/content.js';
 
 const RULES = {
   name: (v) => (v.trim().length > 1 ? '' : 'Please enter your name.'),
@@ -124,6 +125,8 @@ export default function Contact() {
           ))}
         </div>
       </section>
+
+      <Band {...IMAGERY.bands.contact} />
 
       <section className="sec alt reach" id="write">
         <SecHead index="01" label="Details" title="Where to find us" />

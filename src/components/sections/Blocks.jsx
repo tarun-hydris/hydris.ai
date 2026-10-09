@@ -13,6 +13,7 @@ import Icon from '../ui/Icon.jsx';
 import { EMAIL, LOOP, START, SYSTEMS } from '../../lib/content.js';
 import { reduced, useInView, useMedia } from '../../lib/hooks.js';
 import { scrollToY } from '../../lib/scroll.js';
+import { Texture } from './Imagery.jsx';
 
 /* A quiet grey "drafting table" panel that hosts one live widget */
 export function Panel({ name, on }) {
@@ -306,6 +307,7 @@ export function Faq({ index, items }) {
 export function Cta({ short = false }) {
   return (
     <section className="cta" aria-label={START.eyebrow}>
+      <Texture name="water-dusk" className="tex--cta" />
       <div className="cta__bg" aria-hidden="true">{!reduced && <Visible><Threads color={[1, 1, 1]} amplitude={1.1} distance={0.05} enableMouseInteraction /></Visible>}</div>
       <div className="cta__inner">
         <Reveal as="p" className="s-label cta__label">{START.eyebrow}</Reveal>

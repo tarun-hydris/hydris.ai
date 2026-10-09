@@ -1,7 +1,8 @@
 import { Cta, Definition, IconCards, Panel, Products, RowList } from '../components/sections/Blocks.jsx';
 import { InkField } from '../components/sections/Hero.jsx';
+import { Band, Mosaic, Texture } from '../components/sections/Imagery.jsx';
 import { Reveal, SecHead, Visible, Words } from '../components/ui/Primitives.jsx';
-import { PLATFORM, PRODUCTS } from '../lib/content.js';
+import { IMAGERY, PLATFORM, PRODUCTS } from '../lib/content.js';
 import { reduced } from '../lib/hooks.js';
 
 export default function Platform() {
@@ -20,6 +21,8 @@ export default function Platform() {
           <Reveal as="p" className="lead phero__lead" delay={0.5}>{P.lead}</Reveal>
         </div>
       </section>
+
+      <Band {...IMAGERY.bands.platform} />
 
       <section className="sec alt" id="bet">
         <SecHead index="01" label={P.bet.eyebrow} title={P.bet.title} />
@@ -44,6 +47,7 @@ export default function Platform() {
       </section>
 
       <section className="sec dark" id="principles">
+        <Texture name="water-deep" />
         <SecHead index="05" label={P.principles.eyebrow} title={P.principles.title} tone="dark" />
         <div className="matters matters--dark grid">
           {P.principles.items.map((p, i) => (
@@ -70,6 +74,7 @@ export default function Platform() {
       <section className="sec alt" id="reach">
         <SecHead index="07" label={P.reach.eyebrow} title={P.reach.title} text={P.reach.lead} />
         <RowList rows={P.reach.rows.map((r) => ({ ...r, a: r.verb }))} variant="rows--verb" />
+        <Mosaic items={IMAGERY.reach} />
       </section>
 
       <section className="sec" id="start">

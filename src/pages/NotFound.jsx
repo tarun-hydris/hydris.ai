@@ -1,11 +1,13 @@
 import FuzzyText from '../components/reactbits/FuzzyText/FuzzyText.jsx';
 import { InkField } from '../components/sections/Hero.jsx';
+import { Texture } from '../components/sections/Imagery.jsx';
 import { Arrow, Heading, Reveal, Visible } from '../components/ui/Primitives.jsx';
 import { reduced } from '../lib/hooks.js';
 
 export default function NotFound() {
   return (
     <section className="nf">
+      <Texture name="water-caustic-light" className="tex--light" />
       <div className="nf__bg" aria-hidden="true"><Visible rootMargin="0px"><InkField color="rgba(0, 0, 0, 0.16)" /></Visible></div>
       <div className="nf__veil" aria-hidden="true" />
       <div className="nf__inner">
