@@ -486,3 +486,57 @@ export const FOOTER = {
   line: 'Hydris, Inc. Portland, Oregon.',
   right: 'Operational Water Intelligence',
 };
+
+/* ------------------------------------------------------------ Imagery */
+// Photography is illustrative. Captions describe what is shown; none of these plants is presented as a customer site.
+// Circle positions (x, y as a share of width / height, r as a share of width) were measured on the photographs.
+
+export const IMAGERY = {
+  aperture: {
+    name: 'clarifier-snow',
+    circle: { x: 0.531, y: 0.491, r: 0.21 },
+    kicker: 'Seen from above',
+    title: 'Every plant is already a record of how it behaves.',
+    tag: 'Clarifier, seen from above',
+    end: 'Hydris reads the plant you already run, as one system.',
+    endSmall: 'Nothing new is installed. Nothing in the plant is changed.',
+  },
+  stages: {
+    eyebrow: 'Across the plant',
+    title: 'Every stage of the plant already produces the data.',
+    lead: 'Hydris reads it where it already lives. Nothing new is installed at any of them.',
+    items: [
+      { name: 'aeration', title: 'Aeration', reads: 'Dissolved oxygen, airflow and blower load.' },
+      { name: 'clarifier-top', title: 'Clarification', reads: 'Sludge blanket, turbidity and the return rate.' },
+      { name: 'tanks-grid', title: 'Biological treatment', reads: 'The biology, and what every feed change does to it.' },
+      { name: 'outfall', title: 'Discharge', reads: 'Flow, pH and the samples a permit is judged on.' },
+      { name: 'plant-night', title: 'The night shift', reads: 'Logbooks, alarms and what the operator saw.' },
+    ],
+  },
+  problem: { name: 'operators', caption: 'The judgement that runs a plant lives with the people who run it.' },
+  control: { name: 'hands-valve', label: 'In control', caption: 'The only thing that changes a setting in your plant is a person who decided to.' },
+  sweep: { name: 'clarifier-top', circle: { x: 0.496, y: 0.482, r: 0.302 }, caption: 'A clarifier, seen from above.' },
+  spots: {
+    name: 'clarifiers',
+    caption: 'Illustrative. The readings on the photograph match the readout below.',
+    items: [
+      { x: 0.662, y: 0.319, side: 'ul', p: 'Oxygen', v: '4.2', s: 'stable' },
+      { x: 0.896, y: 0.319, side: 'ul', p: 'pH', v: '7.1', s: 'stable' },
+      { x: 0.645, y: 0.704, side: 'ul', p: 'Biomass', v: '3 480', s: 'drifting 6h', alert: true },
+      { x: 0.874, y: 0.702, side: 'ul', p: 'Flow', v: '212', s: 'stable' },
+      { x: 0.365, y: 0.559, side: 'ur', p: 'Discharge quality', v: '118', s: 'stable' },
+    ],
+  },
+  bands: {
+    platform: { name: 'plant-night', label: 'After dark', caption: 'Built for the person on shift at two in the morning.' },
+    about: { name: 'operators', label: 'On the floor', caption: 'We have stood where your operators stand.' },
+    protect: { name: 'outfall', caption: 'What leaves the plant is what the plant is accountable for.' },
+    press: { name: 'plant-fog', label: 'Industrial water', caption: 'Treatment, seen from above.' },
+    contact: { name: 'riverside', label: 'Write to us', caption: 'Tell us how your plant actually runs.' },
+  },
+  reach: [
+    { name: 'aerial-green', caption: 'One plant' },
+    { name: 'riverside', caption: 'A second site' },
+    { name: 'aerial-bank', caption: 'Every site, on one basis' },
+  ],
+};

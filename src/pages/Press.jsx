@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { Dots, RowList } from '../components/sections/Blocks.jsx';
+import { Band } from '../components/sections/Imagery.jsx';
 import Icon from '../components/ui/Icon.jsx';
 import { Arrow, Reveal, SecHead, Words } from '../components/ui/Primitives.jsx';
-import { EMAIL_PRESS, PRESS } from '../lib/content.js';
+import { EMAIL_PRESS, IMAGERY, PRESS } from '../lib/content.js';
 
 function CopyButton({ text }) {
   const [done, setDone] = useState(false);
@@ -31,6 +32,8 @@ export default function Press() {
           </Reveal>
         </div>
       </section>
+
+      <Band {...IMAGERY.bands.press} />
 
       <section className="sec alt" id="copy">
         <SecHead index="01" label={PRESS.copyEyebrow} title={PRESS.copyTitle} />

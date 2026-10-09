@@ -1,8 +1,10 @@
 import ScrollReveal from '../components/reactbits/ScrollReveal/ScrollReveal.jsx';
 import Threads from '../components/reactbits/Threads/Threads.jsx';
 import { Cta, Dots, Quote } from '../components/sections/Blocks.jsx';
+import { Band } from '../components/sections/Imagery.jsx';
+import { Frame } from '../components/ui/Photo.jsx';
 import { Reveal, SecHead, Visible, Words } from '../components/ui/Primitives.jsx';
-import { ABOUT } from '../lib/content.js';
+import { ABOUT, IMAGERY } from '../lib/content.js';
 import { reduced } from '../lib/hooks.js';
 
 export default function About() {
@@ -23,6 +25,8 @@ export default function About() {
           <Reveal as="p" className="lead phero__lead" delay={0.5}>{A.lead}</Reveal>
         </div>
       </section>
+
+      <Band {...IMAGERY.bands.about} position="40% 50%" />
 
       <section className="sec story" id="why">
         <SecHead index="01" label={A.why.eyebrow} title={A.why.title} />
@@ -53,6 +57,9 @@ export default function About() {
           </div>
         </div>
         <div className="story__body grid protect__body">
+          <Frame name={IMAGERY.bands.protect.name} ratio="4 / 5" sizes="(min-width: 901px) 24vw, 100vw" drift={0.14} className="protect__photo">
+            <figcaption className="s-label frame__cap">{IMAGERY.bands.protect.caption}</figcaption>
+          </Frame>
           <Reveal as="p" className="lead story__lede" delay={0.05}>{A.protect.lede}</Reveal>
           <div className="story__paras">
             {A.protect.paras.map((t, i) => <Reveal as="p" className="body mute" key={i} delay={0.08 + i * 0.08}>{t}</Reveal>)}

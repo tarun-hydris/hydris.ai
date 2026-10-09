@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Arrow, Reveal } from '../ui/Primitives.jsx';
+import { Sweep } from './Imagery.jsx';
 import { EMAIL, LOOKS, NOTE } from '../../lib/content.js';
 import { reduced, useInView } from '../../lib/hooks.js';
 
@@ -72,14 +73,15 @@ export function LayerStack({ items }) {
   );
 }
 
-/* Where we are today: the figure fills like a tank, a wave runs underneath */
-export function Proof({ big, unit, note }) {
+/* Where we are today: the figure fills like a tank, a clarifier turns beside it, a wave runs underneath */
+export function Proof({ big, unit, note, sweep }) {
   return (
-    <div className="proof grid">
+    <div className={`proof grid ${sweep ? 'proof--photo' : ''}`}>
       <Reveal className="proof__main">
         <p className="proof__big" aria-label={big}><span>{big}</span></p>
         <p className="lead proof__unit">{unit}</p>
       </Reveal>
+      {sweep && <div className="proof__sweep"><Sweep {...sweep} /></div>}
       <Reveal as="p" className="body mute proof__note" delay={0.2}>{note}</Reveal>
       <div className="proof__wave" aria-hidden="true" />
     </div>

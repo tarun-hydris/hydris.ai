@@ -415,6 +415,9 @@ export default function MetallicPaint({
       if (textureRef.current && glRef.current) {
         glRef.current.deleteTexture(textureRef.current);
       }
+      // HYDRIS: release the GPU context so remounts do not pile up live contexts
+      const lc = glRef.current && glRef.current.getExtension('WEBGL_lose_context');
+      if (lc) lc.loseContext();
     };
   }, [initGL]);
 

@@ -157,10 +157,12 @@ const LOOP_STAGES = ['Decided', 'Happened next', 'Goes back in', 'Sharper'];
 export function Learn({ active }) {
   const [i, setI] = useState(0);
   const [lap, setLap] = useState(0);
+  const [turn, setTurn] = useState(0);
   useLoop(active, async (alive) => {
     for (let k = 1; k <= LOOP_STAGES.length; k++) {
       await sleep(1000);
       if (!alive()) return;
+      setTurn((t) => t + 1);
       if (k === LOOP_STAGES.length) { setLap((l) => Math.min(l + 1, 4)); setI(0); } else setI(k);
     }
   });
@@ -171,7 +173,7 @@ export function Learn({ active }) {
       <div className="w-learn__body">
         <div className="w-learn__ring">
           <svg className="w-learn__circle" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" /></svg>
-          <span className="w-learn__orbit" style={{ transform: `rotate(${i * 90}deg)` }}><i /></span>
+          <span className="w-learn__orbit" style={{ transform: `rotate(${turn * (360 / LOOP_STAGES.length)}deg)` }}><i /></span>
           <Mark className="w-learn__mark" />
         </div>
         <ol className="w-learn__steps">

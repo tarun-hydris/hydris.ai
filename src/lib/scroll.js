@@ -17,7 +17,9 @@ export function scrollToEl(el, immediate = false) {
   scrollToY(Math.max(0, y), immediate);
 }
 
+let pendingLock = false;
 export function lockScroll(lock) {
+  pendingLock = lock;
   document.documentElement.style.overflow = lock ? 'hidden' : '';
   if (lenis) (lock ? lenis.stop() : lenis.start());
 }
@@ -44,6 +46,7 @@ export function initScroll() {
     gsap.ticker.add((t) => lenis.raf(t * 1000));
     gsap.ticker.lagSmoothing(0);
     if (!location.hash) lenis.scrollTo(0, { immediate: true, force: true });
+    if (pendingLock) lenis.stop(); // the preloader may have locked scrolling before Lenis existed
     window.__lenis = lenis;
   }
 
@@ -56,6 +59,8 @@ export function initScroll() {
       e.preventDefault();
       document.documentElement.classList.add('is-leaving');
       setTimeout(() => { location.href = a.href; }, 380);
+      // If the navigation is cancelled, do not leave the page faded out
+      setTimeout(() => document.documentElement.classList.remove('is-leaving'), 2500);
       return;
     }
     if (!url.hash || !samePage(url)) return;
@@ -63,6 +68,8 @@ export function initScroll() {
     if (!target) return;
     e.preventDefault();
     scrollToEl(target);
+    if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
+    target.focus({ preventScroll: true });
     history.replaceState(null, '', url.hash);
   });
 

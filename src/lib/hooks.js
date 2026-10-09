@@ -76,5 +76,9 @@ export function useLoop(active, step, deps = []) {
 
 /* WebGL2 support (for the liquid-metal logo) */
 export const hasWebGL2 = (() => {
-  try { return !!document.createElement('canvas').getContext('webgl2'); } catch { return false; }
+  try {
+    const gl = document.createElement('canvas').getContext('webgl2');
+    if (gl) { const lc = gl.getExtension('WEBGL_lose_context'); if (lc) lc.loseContext(); }
+    return !!gl;
+  } catch { return false; }
 })();
