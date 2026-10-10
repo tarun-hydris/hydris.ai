@@ -298,3 +298,14 @@ main:not(:has(> .cta:last-child)) + .ftr { padding-top: calc(clamp(60px, 7vw, 10
   .frame--reveal .frame__clip::after { display: none; }
   .velo__row:first-child .velo__txt { animation: none; }
 }
+
+/* Aperture: an instrument ring instead of plain outlines.
+   A soft teal glow hugs the picture, a ring of gauge ticks turns slowly, a white hairline sits outside */
+.aperture__ring { fill: none; stroke: none; overflow: visible; }
+.aperture__glow { stroke: rgba(111, 148, 147, 0.55); stroke-width: 14; filter: blur(9px); }
+.aperture__ticks { stroke: url(#apg); stroke-width: 9; stroke-dasharray: 1.2 6.5; opacity: 0.9; animation: aptick 60s linear infinite; }
+.aperture__hair { stroke: rgba(255, 255, 255, 0.95); stroke-width: 1.2; filter: drop-shadow(0 0 6px rgba(42, 65, 72, 0.35)); }
+@keyframes aptick { to { stroke-dashoffset: -400; } }
+.aperture__tag { color: var(--slate, #2a4148); }
+.aperture__tag i { background: linear-gradient(90deg, transparent, #6f9493); height: 1px; width: 40px; }
+@media (prefers-reduced-motion: reduce) { .aperture__ticks { animation: none; } }

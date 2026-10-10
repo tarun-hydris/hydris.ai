@@ -74,7 +74,7 @@ export function Aperture({ name, circle, kicker, title, tag, end, endSmall }) {
       const ringOn = 1 - clamp(t * 2.4);
       const circles = ring.current.querySelectorAll('circle');
       circles.forEach((c, i) => {
-        c.setAttribute('cx', cx); c.setAttribute('cy', cy); c.setAttribute('r', r + 10 + i * 16);
+        c.setAttribute('cx', cx); c.setAttribute('cy', cy); c.setAttribute('r', r + [3, 20, 34][i]);
       });
       ring.current.style.opacity = ringOn;
       const a = -Math.PI / 4;
@@ -125,7 +125,12 @@ export function Aperture({ name, circle, kicker, title, tag, end, endSmall }) {
           <div className="aperture__veil" aria-hidden="true" />
         </div>
         <svg className="aperture__ring" ref={ring} aria-hidden="true" preserveAspectRatio="none">
-          <circle /><circle /><circle className="aperture__dash" />
+          <defs>
+            <linearGradient id="apg" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stopColor="#a9c0bf" /><stop offset="0.5" stopColor="#6f9493" /><stop offset="1" stopColor="#2a4148" />
+            </linearGradient>
+          </defs>
+          <circle className="aperture__glow" /><circle className="aperture__ticks" /><circle className="aperture__hair" />
         </svg>
         <span className="aperture__tag s-label" ref={tagEl} aria-hidden="true"><i />{tag}</span>
 
