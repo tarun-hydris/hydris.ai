@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { Mark, Wordmark } from '../ui/Brand.jsx';
 import { Arrow } from '../ui/Icon.jsx';
 import { Analytics } from '@vercel/analytics/react';
-import { Glide, Grain, ScrollLean } from '../ui/Motion.jsx';
+import { Alive, Glide, Grain, ScrollLean } from '../ui/Motion.jsx';
 import Backdrop from '../ui/Backdrop.jsx';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import { EMAIL, FOOTER, NAV, PHONE } from '../../lib/content.js';
@@ -177,6 +177,7 @@ export function Site({ page, children }) {
       <Footer />
       <ScrollLean />
       <Glide />
+      <Alive />
       <Grain />
       <Analytics />
       <SpeedInsights />

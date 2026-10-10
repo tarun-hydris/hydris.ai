@@ -61,6 +61,9 @@ PHOTOS = {
     'drops-falling':    'Drops falling in a line into still blue water',
     'drops-falling-2':  '',
     'glass-layers':     'Layers of translucent blue glass blocks stacked in depth, an abstract picture of a layered system',
+    'crew-rounds':      'Operators at work on a clarifier bridge, seen from above',
+    'crew-clarifier':   'A crew on the bridge of a large clarifier, seen from the air',
+    'crew-weir':        'Operators checking the weir channel at the edge of a clarifier',
     'data-terrain':     'An abstract landscape of thousands of small columns rising and falling like a data surface',
 }
 LIGHT = {'water-blue', 'water-copper', 'water-sunset', 'ripple-rings', 'drop-rise', 'drop-splash', 'drop-mono',

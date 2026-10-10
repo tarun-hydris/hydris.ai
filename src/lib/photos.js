@@ -512,6 +512,45 @@ export const PHOTOS = {
   "lqip": "data:image/webp;base64,UklGRooAAABXRUJQVlA4IH4AAAAwBACdASoYAA4APu1iqU2ppaOiMAgBMB2JbACw7Buw6xOVlNLzJrkJvUAA/uf114p6lyjHe/IJNUeVAO9nT2u98V6y/b7hxGrj811jHBc0EBDO6FraWpWyNh2LKlveM3kRlsEfIpLlvduADalANXJZFCHIswvARwARayYAAAA=",
   "alt": "Layers of translucent blue glass blocks stacked in depth, an abstract picture of a layered system"
  },
+ "crew-rounds": {
+  "w": [
+   640,
+   1024,
+   1600,
+   2000
+  ],
+  "W": 2000,
+  "H": 1125,
+  "bg": "#9c8e89",
+  "lqip": "data:image/webp;base64,UklGRoYAAABXRUJQVlA4IHoAAADQAwCdASoYAA4APu1iqU2ppaOiMAgBMB2JYwC2yBM+vSpINxaAHCAA/qZcn1B+QqnCYgoHPtiiYOwYEKZtU4+Ueqze2iz9ufqFNfWYEoYmMFUni9xqmQw3cwX7JqFGYmcTcbEoXLojMmMaz4D3ripaVXg7O1SjFEgoAA==",
+  "alt": "Operators at work on a clarifier bridge, seen from above"
+ },
+ "crew-clarifier": {
+  "w": [
+   640,
+   1024,
+   1600,
+   2000
+  ],
+  "W": 2000,
+  "H": 1125,
+  "bg": "#9b9590",
+  "lqip": "data:image/webp;base64,UklGRqoAAABXRUJQVlA4IJ4AAAAwBACdASoYAA4APu1iqU2ppaOiMAgBMB2JZQC+SBwydersBH+J2E6JwAAA+6SMvU9JWyp+LfB4azIp+MnuZEy5XnBbjNPZXnzWFHGg0px+/ABcFj16O4LKPzhdZKce/sm4/rnOZc3UcNjIcHceV33+g+tjt9UsO10lAJjbVSYVkURGYkiL8IFwpoQUAW4QuR+ddRabDDfyfQIsEbZoAA==",
+  "alt": "A crew on the bridge of a large clarifier, seen from the air"
+ },
+ "crew-weir": {
+  "w": [
+   640,
+   1024,
+   1600,
+   2000
+  ],
+  "W": 2000,
+  "H": 1125,
+  "bg": "#8f8680",
+  "lqip": "data:image/webp;base64,UklGRqIAAABXRUJQVlA4IJYAAACQBACdASoYAA4APu1iqU2ppaOiMAgBMB2JZQC7AYxO5wmN2XyNba36lNEKFgAA/i+YmAzd8b2znVTWurZ7TKlrY9aVY2/85BAIJ/SilvWgzepbE7FPh6quvv5xIn9SXWqUhqmR4JnEPPxnZvhpdAhQMZaBopDP/a+yGY25N/ksyf/viYWLjZRcM7uFXm+yESObtJsAAAA=",
+  "alt": "Operators checking the weir channel at the edge of a clarifier"
+ },
  "data-terrain": {
   "w": [
    640,

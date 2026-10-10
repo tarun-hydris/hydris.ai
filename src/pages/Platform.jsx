@@ -47,7 +47,7 @@ export default function Platform() {
       </section>
 
       <section className="sec dark" id="principles">
-        <Texture name="water-deep" />
+        <Texture name="water-caustic-light" className="tex--soft" />
         <SecHead index="05" label={P.principles.eyebrow} title={P.principles.title} tone="dark" />
         <div className="matters matters--dark grid">
           {P.principles.items.map((p, i) => (

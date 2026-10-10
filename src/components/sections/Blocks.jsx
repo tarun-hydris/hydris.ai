@@ -34,7 +34,7 @@ export function Dots({ className = '' }) {
   return (
     <div className={`dots ${className}`} aria-hidden="true">
       <Visible>
-        <DotGrid dotSize={3} gap={26} baseColor="#dcdcdc" activeColor="#111111" proximity={140}
+        <DotGrid dotSize={3} gap={26} baseColor="#d9e0e4" activeColor="#2A4148" proximity={140}
           shockRadius={220} shockStrength={4} resistance={750} returnDuration={1.5} />
       </Visible>
     </div>
@@ -307,8 +307,8 @@ export function Faq({ index, items }) {
 export function Cta({ short = false }) {
   return (
     <section className="cta" aria-label={START.eyebrow}>
-      <Texture name="water-dusk" className="tex--cta" />
-      <div className="cta__bg" aria-hidden="true">{!reduced && <Visible><Threads color={[1, 1, 1]} amplitude={1.1} distance={0.05} enableMouseInteraction /></Visible>}</div>
+      <Texture name="ripple-rings" className="tex--cta tex--soft" />
+      <div className="cta__bg" aria-hidden="true">{!reduced && <Visible><Threads color={[0.16, 0.25, 0.28]} amplitude={1.1} distance={0.05} enableMouseInteraction /></Visible>}</div>
       <div className="cta__inner">
         <Reveal as="p" className="s-label cta__label">{START.eyebrow}</Reveal>
         <Words as="h2" text={START.title} className="t-m cta__title" center />

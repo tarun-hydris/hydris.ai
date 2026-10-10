@@ -161,7 +161,7 @@ export default function Home() {
 
       {/* 13 The missing layer */}
       <section className="sec dark" id="layer">
-        <Texture name="water-night" />
+        <Texture name="water-caustic-light" className="tex--soft" />
         <SecHead index="13" label={MISSING.eyebrow} title={MISSING.title} text={MISSING.lead} tone="dark" />
         <div className="wide">
           <LayerStack items={MISSING.stack} />

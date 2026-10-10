@@ -48,3 +48,39 @@ export function Grain() {
   if (reduced) return null;
   return <div className="grain" aria-hidden="true" />;
 }
+
+/* Cards lean towards the pointer with a soft light moving across them; buttons are drawn to it */
+export function Alive() {
+  useEffect(() => {
+    if (reduced || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return undefined;
+    const cards = '.card-spotlight, .defn, .kb, .ro__card, .form, .lbar';
+    const onMove = (e) => {
+      const c = e.target.closest && e.target.closest(cards);
+      if (c) {
+        const r = c.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5; const y = (e.clientY - r.top) / r.height - 0.5;
+        const big = r.width > 700 ? 0.35 : 1;
+        c.style.transform = `perspective(1100px) rotateX(${(-y * 5 * big).toFixed(2)}deg) rotateY(${(x * 6 * big).toFixed(2)}deg)`;
+        c.style.setProperty('--gx', `${((x + 0.5) * 100).toFixed(1)}%`);
+        c.style.setProperty('--gy', `${((y + 0.5) * 100).toFixed(1)}%`);
+        c.classList.add('is-lit');
+      }
+      const b = e.target.closest && e.target.closest('.pill, .round');
+      if (b) {
+        const r = b.getBoundingClientRect();
+        const dx = e.clientX - (r.left + r.width / 2); const dy = e.clientY - (r.top + r.height / 2);
+        b.style.transform = `translate(${(dx * 0.18).toFixed(1)}px, ${(dy * 0.28).toFixed(1)}px)`;
+      }
+    };
+    const onOut = (e) => {
+      const c = e.target.closest && e.target.closest(cards);
+      if (c && !c.contains(e.relatedTarget)) { c.style.transform = ''; c.classList.remove('is-lit'); }
+      const b = e.target.closest && e.target.closest('.pill, .round');
+      if (b && !b.contains(e.relatedTarget)) b.style.transform = '';
+    };
+    document.addEventListener('pointermove', onMove, { passive: true });
+    document.addEventListener('pointerout', onOut);
+    return () => { document.removeEventListener('pointermove', onMove); document.removeEventListener('pointerout', onOut); };
+  }, []);
+  return null;
+}
