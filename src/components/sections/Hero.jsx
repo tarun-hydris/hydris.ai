@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import MetallicPaint from '../reactbits/MetallicPaint/MetallicPaint.jsx';
 import Waves from '../reactbits/Waves/Waves.jsx';
 import DecryptedText from '../reactbits/DecryptedText/DecryptedText.jsx';
-import { Mark, Wordmark } from '../ui/Brand.jsx';
+import { Mark } from '../ui/Brand.jsx';
 import { Arrow, Reveal, Visible, Words } from '../ui/Primitives.jsx';
 import { HERO, SHIFTS } from '../../lib/content.js';
 import { hasWebGL2, reduced, useReady } from '../../lib/hooks.js';
@@ -50,58 +50,78 @@ export function Splash() {
   const small = typeof window !== 'undefined' && window.innerWidth < 760;
   const src = `/video/ocean-${small ? 720 : 1280}${canAv1 ? '.av1' : ''}.mp4`;
 
-  /* Scroll story. The logo-shaped window onto the water opens into a full frame that settles on the
-     right (like the clarifier in "Every plant is already a record"), the footage zooms out inside it,
-     and the line about Hydris arrives bottom-left. */
+  /* Scroll story, in two movements.
+     1. The camera dives into the mark: the logo grows about a point deep inside its lower bar until
+        that solid part covers the whole screen, so the water simply fills the view with no edges.
+     2. The full-screen water glides back into a frame on the right while the footage settles, and the
+        line about Hydris arrives bottom-left. */
   useEffect(() => {
     if (reduced || !root.current) return undefined;
     const stage = root.current.querySelector('.splash__stage');
     const win = root.current.querySelector('.splash__win');
+    const AX = 0.502; const AY = 0.898;               // deepest point of the mark's lower bar
+    const RATIO = 552 / 541;
     const geo = () => {
       const w = stage.clientWidth; const h = stage.clientHeight; const wide = w > 900;
       const pad = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--pad')) || 24;
-      const logo = Math.max(220, Math.min(w * 0.25, 380));
-      const end = wide
-        ? { l: w * 0.47, t: 76, r: pad, b: 36 }
-        : { l: pad, t: 76, r: pad, b: h * 0.46 };
-      return { w, h, logo, end };
+      const s0 = wide ? Math.max(220, Math.min(w * 0.25, 380)) : w * 0.58;
+      const end = wide ? { l: w * 0.47, t: 76, r: pad, b: 36 } : { l: pad, t: 76, r: pad, b: h * 0.46 };
+      // how big the mark must get for its lower bar (radius 0.18 of its width) to cover every corner
+      const far = Math.hypot(Math.max(w / 2, w / 2), Math.max(h / 2, h / 2)) * 1.25;
+      const zmax = Math.max(8, far / (0.18 * s0));
+      return { w, h, s0, end, zmax };
     };
     let g = geo();
-    const st = { p: 0 };
+    const st = { z: 0, f: 0 };
+    const smooth = (t) => t * t * (3 - 2 * t);
     const render = () => {
-      const k = st.p;
-      const e = k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
-      const { logo, end } = g;
-      win.style.left = `${(end.l * e).toFixed(1)}px`;
-      win.style.top = `${(end.t * e).toFixed(1)}px`;
-      win.style.right = `${(end.r * e).toFixed(1)}px`;
-      win.style.bottom = `${(end.b * e).toFixed(1)}px`;
-      win.style.borderRadius = `${(4 * e).toFixed(1)}px`;
-      const grow = Math.min(1, Math.max(0, (k - 0.08) / 0.82));
-      const ge = grow * grow * (3 - 2 * grow);
-      const size = `${logo.toFixed(0)}px ${(logo * 552 / 541).toFixed(0)}px, ${(ge * 100).toFixed(2)}% ${(ge * 100).toFixed(2)}%`;
-      win.style.webkitMaskSize = size; win.style.maskSize = size;
+      const { w, h, s0, end, zmax } = g;
+      /* 1. Dive: exponential growth reads as an even zoom; the anchor drifts to the centre */
+      if (st.z < 1) {
+        win.style.webkitMaskImage = ''; win.style.maskImage = '';
+        const size = s0 * Math.pow(zmax, st.z * st.z);
+        const startX = w / 2 - s0 / 2 + AX * s0;
+        const startY = h / 2 - (s0 * RATIO) / 2 + AY * s0 * RATIO;
+        const k = smooth(Math.min(1, st.z * 1.4));
+        const px = startX + (w / 2 - startX) * k;
+        const py = startY + (h / 2 - startY) * k;
+        const pos = `${(px - AX * size).toFixed(1)}px ${(py - AY * size * RATIO).toFixed(1)}px`;
+        const sz = `${size.toFixed(1)}px ${(size * RATIO).toFixed(1)}px`;
+        win.style.webkitMaskSize = sz; win.style.maskSize = sz;
+        win.style.webkitMaskPosition = pos; win.style.maskPosition = pos;
+      } else {
+        win.style.webkitMaskImage = 'none'; win.style.maskImage = 'none';
+      }
+      /* 2. Settle into the frame */
+      const f = smooth(st.f);
+      win.style.left = `${(end.l * f).toFixed(1)}px`;
+      win.style.top = `${(end.t * f).toFixed(1)}px`;
+      win.style.right = `${(end.r * f).toFixed(1)}px`;
+      win.style.bottom = `${(end.b * f).toFixed(1)}px`;
+      win.style.borderRadius = `${(6 * f).toFixed(1)}px`;
     };
     render();
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
         defaults: { ease: 'none' },
         scrollTrigger: {
-          trigger: root.current, start: 'top top', end: 'bottom bottom', scrub: 0.6,
+          trigger: root.current, start: 'top top', end: 'bottom bottom', scrub: 0.8,
           onRefresh: () => { g = geo(); render(); },
         },
       });
-      tl.to(st, { p: 1, duration: 0.55, onUpdate: render }, 0)
-        .fromTo('.splash__film', { scale: 2.4 }, { scale: 1, duration: 0.55 }, 0)
-        .to('.splash__word', { opacity: 0, y: -16, duration: 0.15 }, 0.03)
+      tl.to(st, { z: 1, duration: 0.42, ease: 'power1.in', onUpdate: render }, 0)
+        .fromTo('.splash__film', { scale: 1.9 }, { scale: 1.15, duration: 0.42, ease: 'power1.inOut' }, 0)
         .to('.splash__foot', { opacity: 0, y: -24, duration: 0.12 }, 0)
-        .to('.splash__field, .splash__veil', { opacity: 0.35, duration: 0.4 }, 0.1)
-        .fromTo('.splash__label', { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.1 }, 0.42)
-        .fromTo('.splash__w', { yPercent: 115, rotate: 3, opacity: 0 }, { yPercent: 0, rotate: 0, opacity: 1, duration: 0.2, stagger: 0.03, ease: 'power3.out' }, 0.45)
-        .fromTo('.splash__sub', { opacity: 0, y: 20, filter: 'blur(8px)' }, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.14 }, 0.66)
-        .fromTo('.splash__cta', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.12 }, 0.74)
-        .fromTo('.splash__figcap', { opacity: 0 }, { opacity: 1, duration: 0.1 }, 0.6)
-        .to({}, { duration: 0.1 });
+        .to('.splash__frame', { opacity: 0, duration: 0.2 }, 0.05)
+        .to(st, { f: 1, duration: 0.3, onUpdate: render }, 0.44)
+        .to('.splash__film', { scale: 1, duration: 0.3, ease: 'power2.out' }, 0.44)
+        .fromTo('.splash__label', { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.1 }, 0.56)
+        .fromTo('.splash__w', { yPercent: 115, rotate: 3, opacity: 0 }, { yPercent: 0, rotate: 0, opacity: 1, duration: 0.2, stagger: 0.03, ease: 'power3.out' }, 0.58)
+        .fromTo('.splash__sub', { opacity: 0, y: 20, filter: 'blur(8px)' }, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.12 }, 0.76)
+        .fromTo('.splash__cta', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.1 }, 0.82)
+        .fromTo('.splash__figcap', { opacity: 0 }, { opacity: 1, duration: 0.1 }, 0.74)
+        .to('.splash__frame', { opacity: 1, duration: 0.12 }, 0.8)
+        .to({}, { duration: 0.08 });
     }, root);
     const onResize = () => { g = geo(); render(); };
     window.addEventListener('resize', onResize);
@@ -164,7 +184,6 @@ export function Splash() {
           <span className="splash__sheen" aria-hidden="true" />
           <p className="splash__figcap">Fig. 1  Water, the thing every plant is accountable for.</p>
         </div>
-        <div className="splash__center"><p className="splash__word"><Wordmark /></p></div>
 
         <div className="splash__say">
           <p className="splash__label">Operational Water Intelligence</p>

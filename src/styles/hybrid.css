@@ -18,15 +18,13 @@
 .splash__frame i:nth-child(2) { right: var(--pad); top: 84px; }
 .splash__frame i:nth-child(3) { left: var(--pad); bottom: 64px; }
 .splash__frame i:nth-child(4) { right: var(--pad); bottom: 64px; }
-.splash__center { position: absolute; inset: 0; display: grid; justify-items: center; align-content: center; gap: clamp(22px, 2.6vw, 36px); pointer-events: none; padding-bottom: 40px; }
 /* The window onto the water: logo-shaped at first (two mask layers: the mark, and a rectangle
    that grows from the centre), then a full frame on the right */
 .splash__win {
-  position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; background: #0b1a26;
-  -webkit-mask-image: url('/brand/mark.svg'), linear-gradient(#000, #000); mask-image: url('/brand/mark.svg'), linear-gradient(#000, #000);
-  -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center, center; mask-position: center, center;
-  -webkit-mask-size: clamp(220px, 25vw, 380px) auto, 0% 0%; mask-size: clamp(220px, 25vw, 380px) auto, 0% 0%;
-  -webkit-mask-composite: source-over; mask-composite: add;
+  position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; background: #0b1a26; will-change: mask-size, mask-position;
+  -webkit-mask-image: url('/brand/mark.svg'); mask-image: url('/brand/mark.svg');
+  -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;
+  -webkit-mask-size: clamp(220px, 25vw, 380px) auto; mask-size: clamp(220px, 25vw, 380px) auto;
   opacity: 0; filter: blur(14px); transition: opacity 1.6s var(--ease) 0.25s, filter 1.6s var(--ease) 0.25s;
 }
 .splash.is-in .splash__win { opacity: 1; filter: none; }
@@ -34,11 +32,7 @@
 .splash__film { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform-origin: 50% 50%; will-change: transform; }
 .splash__sheen { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(125deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0) 38%, rgba(255, 255, 255, 0) 70%, rgba(255, 255, 255, 0.1) 100%); mix-blend-mode: screen; }
 .splash__figcap { position: absolute; left: 16px; bottom: 14px; color: #fff; font-size: 12px; opacity: 0; text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5); }
-.splash__center { position: absolute; inset: 0; display: grid; justify-items: center; align-content: center; pointer-events: none; padding-top: calc(clamp(220px, 25vw, 380px) * 1.02 + 110px); }
-.splash__word { width: clamp(150px, 13vw, 210px); clip-path: inset(0 100% 0 0); transition: clip-path 1.6s var(--ease-io) 1s; }
-.splash.is-in .splash__word { clip-path: inset(0 -20% 0 0); }
-.splash__word svg { width: 100%; height: auto; display: block; }
-
+.splash.is-in 
 /* The line, bottom-left, like the Swiss version */
 .splash__say { position: absolute; left: var(--pad); bottom: 44px; width: calc(45vw - var(--pad)); display: grid; gap: 22px; justify-items: start; text-align: left; }
 .splash__label { font-size: 13px; color: var(--mute); opacity: 0; }
@@ -58,8 +52,7 @@
 .splash--still { height: auto; }
 .splash--still .splash__stage { position: relative; height: auto; min-height: 0; padding: calc(var(--hdr) + 60px) 0 120px; }
 .splash--still .splash__win { position: relative; inset: auto; height: 56vh; margin: 0 var(--pad); -webkit-mask: none; mask: none; border-radius: 4px; }
-.splash--still .splash__center { display: none; }
-.splash--still .splash__say { position: relative; left: auto; bottom: auto; width: auto; padding: 40px var(--pad) 0; }
+.splash--still .splash--still .splash__say { position: relative; left: auto; bottom: auto; width: auto; padding: 40px var(--pad) 0; }
 .splash--still .splash__w, .splash--still .splash__sub, .splash--still .splash__cta, .splash--still .splash__label, .splash--still .splash__figcap { transform: none; opacity: 1; }
 .splash--still .splash__foot { display: none; }
 
@@ -84,11 +77,9 @@
   .splash__index { display: none; }
   .splash { height: 240vh; }
   .splash__say { width: auto; right: var(--pad); bottom: 28px; gap: 16px; }
-  .splash__win { -webkit-mask-size: 58vw auto, 0% 0%; mask-size: 58vw auto, 0% 0%; }
-  .splash__center { padding-top: calc(58vw * 1.02 + 90px); }
-}
+  .splash__win { -webkit-mask-size: 58vw auto; mask-size: 58vw auto; }
+  }
 @media (prefers-reduced-motion: reduce) {
   .splash__logo, .splash__field, .splash__frame i { opacity: 1; transform: none; filter: none; }
-  .splash__word { clip-path: none; }
-  .splash__scroll .arrow { animation: none; }
+    .splash__scroll .arrow { animation: none; }
 }
