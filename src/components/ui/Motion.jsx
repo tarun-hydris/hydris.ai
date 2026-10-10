@@ -10,7 +10,7 @@ export function ScrollLean() {
   useEffect(() => {
     if (reduced) return undefined;
     let skew = 0;
-    const set = () => gsap.utils.toArray('.frame__clip, .band__wrap').forEach((el) => { el.style.transform = `skewY(${skew.toFixed(3)}deg)`; });
+    const set = () => gsap.utils.toArray('.frame__clip, .band__wrap').filter((el) => !el.closest('.stages')).forEach((el) => { el.style.transform = `skewY(${skew.toFixed(3)}deg)`; });
     const st = ScrollTrigger.create({
       onUpdate: (self) => {
         const target = gsap.utils.clamp(-2.2, 2.2, self.getVelocity() / -900);
