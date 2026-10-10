@@ -83,7 +83,7 @@ void main() {
   o = vec4(c, 1.0);
 }`;
 
-const HYDRIS = ['#0F4971', '#6FA3C4']; // the blues of the water in the Hydris mark
+const HYDRIS = ['#2A4148', '#6F9493']; // the slate and teal of the water in the hero
 const hex = (c) => { const v = parseInt(c.replace('#', ''), 16); return [(v >> 16 & 255) / 255, (v >> 8 & 255) / 255, (v & 255) / 255]; };
 
 export default function FlutedGlass({

@@ -96,7 +96,102 @@
   radial-gradient(55% 50% at 30% 40%, rgba(15, 73, 113, 0.16), transparent 70%),
   radial-gradient(45% 45% at 75% 65%, rgba(111, 163, 196, 0.18), transparent 70%),
   repeating-linear-gradient(118deg, rgba(15, 73, 113, 0.05) 0 2px, transparent 2px 9vw), #fff; }
-.splash__win { background: #0f4971; }
+.splash__win { background: #223338; }
 .splash__win::after { content: ''; position: absolute; inset: 0; pointer-events: none; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12); border-radius: inherit; }
 .splash__say::before { content: ''; position: absolute; inset: -40px -40px -30px -30px; z-index: -1; background: radial-gradient(70% 70% at 30% 60%, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0) 80%); pointer-events: none; }
 .splash__say { z-index: 1; }
+
+
+/* ==========================================================================
+   Flow: one ground for the whole site
+   The fluted glass is fixed behind everything (Backdrop.jsx). Sections do not paint
+   their own ground; tinted and dark bands fade in and out over a long gradient, so
+   moving from one section to the next never cuts.
+   ========================================================================== */
+:root { --fade: clamp(120px, 18vh, 220px); }
+html, body { background: #fff; }
+.backdrop { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+.backdrop .visible, .backdrop .fluted { position: absolute; inset: 0; width: 100%; height: 100%; }
+.backdrop__still { position: absolute; inset: 0; background:
+  radial-gradient(55% 50% at 30% 40%, rgba(15, 73, 113, 0.14), transparent 70%),
+  radial-gradient(45% 45% at 75% 65%, rgba(111, 163, 196, 0.16), transparent 70%),
+  repeating-linear-gradient(118deg, rgba(15, 73, 113, 0.05) 0 2px, transparent 2px 9vw), #fff; }
+.backdrop__veil { position: absolute; inset: 0; background: #fff; opacity: 0; }
+#main, .ftr, .hdr { position: relative; z-index: 1; }
+.hdr { position: fixed; z-index: 50; }
+
+/* See-through light sections */
+.splash, .hero, .sec, .aperture, .aperture__stage, .stages, .phero, .nf, .capture, .stack, .velo, .routes-sec { background: transparent; }
+.splash__say::before { display: none; }
+
+/* Tinted bands: frosted white that fades in at the top and out at the bottom */
+.sec.alt { background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0, rgba(255, 255, 255, 0.72) var(--fade), rgba(255, 255, 255, 0.72) calc(100% - var(--fade)), rgba(255, 255, 255, 0) 100%); border-block: 0; }
+
+/* Dark bands: the black arrives and leaves over a long gradient */
+.sec.dark, .cta, .ftr { background: transparent; isolation: isolate; }
+.sec.dark::before, .cta::before, .ftr::before {
+  content: ''; position: absolute; inset: 0; z-index: -2; background: #050608;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 var(--fade), #000 calc(100% - var(--fade)), transparent 100%);
+  mask-image: linear-gradient(180deg, transparent 0, #000 var(--fade), #000 calc(100% - var(--fade)), transparent 100%);
+}
+.sec.dark, .cta { padding-top: calc(var(--section, clamp(100px, 13vw, 200px)) + var(--fade) * 0.7); padding-bottom: calc(var(--section, clamp(100px, 13vw, 200px)) + var(--fade) * 0.7); }
+.cta { min-height: calc(100svh + var(--fade) * 1.4); }
+/* the closing invitation runs straight into the footer: no light gap between them */
+.cta::before { -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 var(--fade)); mask-image: linear-gradient(180deg, transparent 0, #000 var(--fade)); }
+main:has(> .cta:last-child) + .ftr::before { -webkit-mask-image: none; mask-image: none; }
+.ftr::before { -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 var(--fade)); mask-image: linear-gradient(180deg, transparent 0, #000 var(--fade)); }
+main:not(:has(> .cta:last-child)) + .ftr { padding-top: calc(clamp(60px, 7vw, 100px) + var(--fade) * 0.7); }
+.ftr { border-top: 0; }
+.tex { z-index: -1; }
+
+/* Pinned stage heading reads over the glass without a hard white slab */
+.stages--pinned .stages__head { background: rgba(255, 255, 255, 0.8); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+.stages--pinned .stages__head::after { background: linear-gradient(90deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0)); }
+
+/* Cards and panels let a little of the glass through */
+.card-spotlight.icard, .card-spotlight.prodcard, .card-spotlight.route, .not, .form, .ui, .copy, .chip { background: rgba(255, 255, 255, 0.86); }
+.panel { background: rgba(243, 243, 243, 0.8); }
+.logoloop { --logoloop-fadeColorAuto: rgba(255, 255, 255, 0.9); }
+
+/* Textures and effects inside dark bands fade with the band, so no straight edge shows */
+.sec.dark > .tex, .cta > .tex, .cta__bg {
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 calc(var(--fade) * 1.3), #000 calc(100% - var(--fade) * 1.3), transparent 100%);
+  mask-image: linear-gradient(180deg, transparent 0, #000 calc(var(--fade) * 1.3), #000 calc(100% - var(--fade) * 1.3), transparent 100%);
+}
+
+
+/* ==========================================================================
+   Cinema: letterbox in the hero, grain across the picture, softer media
+   ========================================================================== */
+.splash__film { filter: saturate(1.04) contrast(1.03); }
+.splash__win::before { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: radial-gradient(120% 90% at 50% 50%, transparent 55%, rgba(5, 6, 8, 0.35) 100%); }
+
+.grain { position: fixed; inset: -50%; z-index: 90; pointer-events: none; opacity: 0.055; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain 0.9s steps(6) infinite; }
+@keyframes grain {
+  0% { transform: translate(0, 0); } 17% { transform: translate(-3%, 2%); } 33% { transform: translate(2%, -4%); }
+  50% { transform: translate(-4%, -1%); } 67% { transform: translate(3%, 3%); } 83% { transform: translate(-1%, 4%); } 100% { transform: translate(0, 0); }
+}
+/* Photographs open more slowly, like a fade-in from the cut */
+.frame--reveal .frame__clip { transition-duration: 1.9s; }
+.frame--reveal .frame__zoom { transition-duration: 3s; }
+.frame__img { filter: saturate(1.02) contrast(1.02); }
+@media (prefers-reduced-motion: reduce) { .grain { display: none; } 
+
+/* ==========================================================================
+   Hero end state: the water is the full background, the line sits on it in white
+   (like "Hydris reads the plant you already run")
+   ========================================================================== */
+.splash__shade { position: absolute; inset: 0; z-index: 2; pointer-events: none; opacity: 0;
+  background: linear-gradient(0deg, rgba(5, 10, 14, 0.78) 0%, rgba(5, 10, 14, 0.4) 34%, rgba(5, 10, 14, 0) 62%),
+              linear-gradient(90deg, rgba(5, 10, 14, 0.45) 0%, rgba(5, 10, 14, 0) 55%); }
+.splash__say { bottom: calc(16% + 10px); z-index: 4; }
+.splash__label { color: rgba(255, 255, 255, 0.72); }
+.splash__line { color: #fff; }
+.splash__sub { color: rgba(255, 255, 255, 0.84); }
+.splash__cta .link-u { color: #fff; }
+.splash .pill--light { background: #fff; color: #050608; }
+.splash .pill--light:hover { background: #1746e4; color: #fff; }
+.splash__line, .splash__sub { text-shadow: 0 2px 24px rgba(5, 10, 14, 0.35); }
+@media (max-width: 900px) { .splash__say { bottom: calc(16% + 6px); } }

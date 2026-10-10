@@ -41,7 +41,7 @@ export function initScroll() {
   if (!location.hash) window.scrollTo(0, 0);
 
   if (!reduced) {
-    lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
+    lenis = new Lenis({ lerp: 0.075, smoothWheel: true, wheelMultiplier: 0.9, touchMultiplier: 1.4 });
     lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add((t) => lenis.raf(t * 1000));
     gsap.ticker.lagSmoothing(0);

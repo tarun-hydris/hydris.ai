@@ -129,7 +129,7 @@ export function SystemsLoop() {
         <Reveal as="p" className="s-label stack__label">The systems you already run</Reveal>
         <Reveal as="p" className="lead stack__text" delay={0.1}>We do not replace them. We add the intelligence layer on top.</Reveal>
       </div>
-      <LogoLoop logos={logos} speed={46} direction="left" logoHeight={64} gap={64} pauseOnHover fadeOut fadeOutColor="#ffffff" ariaLabel="The systems you already run" />
+      <LogoLoop logos={logos} speed={46} direction="left" logoHeight={64} gap={64} pauseOnHover fadeOut fadeOutColor="rgba(255, 255, 255, 0.9)" ariaLabel="The systems you already run" />
     </section>
   );
 }

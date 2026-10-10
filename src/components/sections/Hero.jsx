@@ -5,7 +5,6 @@ import MetallicPaint from '../reactbits/MetallicPaint/MetallicPaint.jsx';
 import Waves from '../reactbits/Waves/Waves.jsx';
 import DecryptedText from '../reactbits/DecryptedText/DecryptedText.jsx';
 import { Mark } from '../ui/Brand.jsx';
-import FlutedGlass from '../ui/FlutedGlass.jsx';
 import { Arrow, Reveal, Visible, Words } from '../ui/Primitives.jsx';
 import { HERO, SHIFTS } from '../../lib/content.js';
 import { hasWebGL2, reduced, useReady } from '../../lib/hooks.js';
@@ -38,12 +37,6 @@ export function LiquidMark() {
    the section holds still: the footage zooms out inside the mark, the mark settles smaller and
    higher, and the line about Hydris rises into place word by word.
    --------------------------------------------------------------------------------------------- */
-/* Fluted glass on white, the liquid in the blues of the water inside the mark */
-const GLASS = {
-  backgroundColor: '#FFFFFF', angle: 28, flutes: 9, refraction: 4, aberration: 0.61, softness: 0.5, wave: 0.06, waveFrequency: 1.5,
-  highlight: 0.1, highlightSoftness: 0.32, lightAngle: -90, radius: 7, momentum: 13, swirl: 0.15, intensity: 1, trail: 1,
-  texture: 0.55, grain: 0.035, speed: 0.8,
-};
 const SPLASH_LINE = 'The intelligence layer for industrial water.';
 const SPLASH_SUB = 'Hydris turns the water data your plant already collects into decisions your team can act on.';
 const canAv1 = (() => { try { return document.createElement('video').canPlayType('video/mp4; codecs="av01.0.08M.08"') !== ''; } catch { return false; } })();
@@ -55,7 +48,7 @@ export function Splash() {
   const video = useRef(null);
   const [rings, setRings] = useState([]);
   const small = typeof window !== 'undefined' && window.innerWidth < 760;
-  const src = `/video/ocean-${small ? 720 : 1280}${canAv1 ? '.av1' : ''}.mp4`;
+  const src = small ? '/video/cine-1080.mp4' : `/video/cine-1920${canAv1 ? '.av1' : ''}.mp4`;
 
   /* Scroll story, in two movements.
      1. The camera dives into the mark: the logo grows about a point deep inside its lower bar until
@@ -97,7 +90,10 @@ export function Splash() {
         win.style.webkitMaskSize = sz; win.style.maskSize = sz;
         win.style.webkitMaskPosition = pos; win.style.maskPosition = pos;
       } else {
-        win.style.webkitMaskImage = 'none'; win.style.maskImage = 'none';
+        const fadeEdge = 'linear-gradient(180deg, #000 0, #000 86%, transparent 100%)';
+        win.style.webkitMaskImage = fadeEdge; win.style.maskImage = fadeEdge;
+        win.style.webkitMaskSize = '100% 100%'; win.style.maskSize = '100% 100%';
+        win.style.webkitMaskPosition = '0 0'; win.style.maskPosition = '0 0';
       }
       /* 2. Settle into the frame */
       const f = smooth(st.f);
@@ -120,15 +116,12 @@ export function Splash() {
         .fromTo('.splash__film', { scale: 1.9 }, { scale: 1.15, duration: 0.42, ease: 'power1.inOut' }, 0)
         .to('.splash__foot', { opacity: 0, y: -24, duration: 0.12 }, 0)
         .to('.splash__frame', { opacity: 0, duration: 0.2 }, 0.05)
-        .to('.splash__glass', { opacity: 0.7, duration: 0.3 }, 0.2)
-        .to(st, { f: 1, duration: 0.3, onUpdate: render }, 0.44)
-        .to('.splash__film', { scale: 1, duration: 0.3, ease: 'power2.out' }, 0.44)
+        .to('.splash__film', { scale: 1, duration: 0.4, ease: 'power2.out' }, 0.42)
+        .fromTo('.splash__shade', { opacity: 0 }, { opacity: 1, duration: 0.2 }, 0.5)
         .fromTo('.splash__label', { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.1 }, 0.56)
         .fromTo('.splash__w', { yPercent: 115, rotate: 3, opacity: 0 }, { yPercent: 0, rotate: 0, opacity: 1, duration: 0.2, stagger: 0.03, ease: 'power3.out' }, 0.58)
         .fromTo('.splash__sub', { opacity: 0, y: 20, filter: 'blur(8px)' }, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.12 }, 0.76)
         .fromTo('.splash__cta', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.1 }, 0.82)
-        .fromTo('.splash__figcap', { opacity: 0 }, { opacity: 1, duration: 0.1 }, 0.74)
-        .to('.splash__frame', { opacity: 1, duration: 0.12 }, 0.8)
         .to({}, { duration: 0.08 });
     }, root);
     const onResize = () => { g = geo(); render(); };
@@ -175,9 +168,6 @@ export function Splash() {
   return (
     <section ref={root} className={`splash ${ready ? 'is-in' : ''} ${reduced ? 'splash--still' : ''}`} aria-label="Hydris">
       <div className="splash__stage" onPointerDown={drop}>
-        <div className="splash__glass">
-          {hasWebGL2 && !reduced ? <Visible rootMargin="0px"><FlutedGlass {...GLASS} /></Visible> : <span className="splash__glassfb" />}
-        </div>
         <div className="splash__frame" aria-hidden="true"><i /><i /><i /><i /></div>
         <div className="splash__rings" aria-hidden="true">
           {rings.map((r) => (
@@ -187,11 +177,11 @@ export function Splash() {
 
         <div className="splash__win">
           <div className="splash__tilt" ref={tilt}>
-            <video ref={video} className="splash__film" src={src} poster="/video/ocean.webp" muted loop playsInline autoPlay={!reduced}
+            <video ref={video} className="splash__film" src={src} poster="/video/cine.webp" muted loop playsInline autoPlay={!reduced}
               preload="auto" disablePictureInPicture aria-hidden="true" />
           </div>
           <span className="splash__sheen" aria-hidden="true" />
-          <p className="splash__figcap">Fig. 1  Water, the thing every plant is accountable for.</p>
+          <span className="splash__shade" aria-hidden="true" />
         </div>
 
         <div className="splash__say">
@@ -203,7 +193,7 @@ export function Splash() {
           </h1>
           <p className="splash__sub">{SPLASH_SUB}</p>
           <div className="splash__cta">
-            <a className="pill" href="#how">How it works <Arrow dir="down" /></a>
+            <a className="pill pill--light" href="#how">How it works <Arrow dir="down" /></a>
             <a className="link-u" href="/contact/">Talk to us <Arrow /></a>
           </div>
         </div>

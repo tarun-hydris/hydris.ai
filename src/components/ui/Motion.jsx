@@ -24,3 +24,27 @@ export function ScrollLean() {
   }, []);
   return null;
 }
+
+/* Section headings arrive like a slow camera move: a little depth and travel, tied to the scroll */
+export function Glide() {
+  useEffect(() => {
+    if (reduced) return undefined;
+    const ctx = gsap.context(() => {
+      gsap.utils.toArray('.sechead, .phero__inner, .band__cap').forEach((el) => {
+        gsap.fromTo(el, { y: 70, opacity: 0.25, scale: 0.985 }, {
+          y: 0, opacity: 1, scale: 1, ease: 'none',
+          scrollTrigger: { trigger: el, start: 'top 98%', end: 'top 55%', scrub: 1.2 },
+        });
+      });
+    });
+    const t = setTimeout(() => ScrollTrigger.refresh(), 400);
+    return () => { clearTimeout(t); ctx.revert(); };
+  }, []);
+  return null;
+}
+
+/* A fine moving film grain across the whole site */
+export function Grain() {
+  if (reduced) return null;
+  return <div className="grain" aria-hidden="true" />;
+}
