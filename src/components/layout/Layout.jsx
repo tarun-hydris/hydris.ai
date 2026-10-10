@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { Mark, Wordmark } from '../ui/Brand.jsx';
 import { Arrow } from '../ui/Icon.jsx';
 import { Analytics } from '@vercel/analytics/react';
-import { CursorRing, ScrollLean } from '../ui/Motion.jsx';
+import { ScrollLean } from '../ui/Motion.jsx';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import { EMAIL, FOOTER, NAV, PHONE } from '../../lib/content.js';
 import { reduced, setReady, useMedia } from '../../lib/hooks.js';
@@ -173,7 +173,6 @@ export function Site({ page, children }) {
       <Header page={page} />
       <main id="main">{children}</main>
       <Footer />
-      <CursorRing />
       <ScrollLean />
       <Analytics />
       <SpeedInsights />
