@@ -40,19 +40,22 @@ const GLASS = `#version 300 es
 precision highp float;
 in vec2 uv; out vec4 o;
 uniform sampler2D liq; uniform vec2 res; uniform float t;
-uniform vec3 bg, c1, c2; uniform float ang, flutes, refr, aber, soft, wave, wfreq, drift, hil, hsoft, lang, tex, grain;
+uniform vec3 bg, c1, c2; uniform float light; uniform float ang, flutes, refr, aber, soft, wave, wfreq, drift, hil, hsoft, lang, tex, grain;
 float h(vec2 p) { return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453); }
 float n(vec2 p) { vec2 i = floor(p), f = fract(p); f = f * f * (3.0 - 2.0 * f);
   return mix(mix(h(i), h(i + vec2(1, 0)), f.x), mix(h(i + vec2(0, 1)), h(i + vec2(1, 1)), f.x), f.y); }
 float fbm(vec2 p) { float s = 0.0, a = 0.5; for (int i = 0; i < 4; i++) { s += a * n(p); p *= 2.03; a *= 0.5; } return s; }
-vec3 surface(vec2 q) {
+vec4 surface(vec2 q) {
   float f = fbm(q * 1.6 + vec2(t * 0.04, -t * 0.03));
   float g = fbm(q * 2.3 - vec2(t * 0.03, t * 0.05) + f);
-  return mix(c1, c2, smoothstep(0.25, 0.85, g)) * smoothstep(0.35, 0.95, f) * tex * 0.55;
+  return vec4(mix(c1, c2, smoothstep(0.25, 0.85, g)), smoothstep(0.35, 0.95, f) * tex * 0.55);
 }
+/* colour over the ground: the slow surface swirl, then the poured liquid on top */
 vec3 look(vec2 q) {
+  vec4 s = surface(q);
   vec4 l = texture(liq, q);
-  return surface(q) + l.rgb * l.a;
+  vec3 c = mix(bg, s.rgb, s.a);
+  return mix(c, l.rgb, clamp(l.a, 0.0, 1.0));
 }
 void main() {
   vec2 asp = vec2(res.x / res.y, 1.0);
@@ -73,13 +76,14 @@ void main() {
   col.b = look(base - dir * aber * 0.012 * seam).b;
   float lp = sin(radians(lang)) * 0.5;
   float hl = exp(-pow((cell - lp) / (0.02 + hsoft * 0.2), 2.0)) * hil;
-  float shade = 1.0 - pow(abs(cell * 2.0), 2.0) * 0.18;
-  vec3 c = bg + col * shade + vec3(hl);
+  float shade = 1.0 - pow(abs(cell * 2.0), 2.0) * mix(0.18, 0.06, light);
+  vec3 c = col * shade;
+  c = light > 0.5 ? c * (1.0 - hl * 0.9) : c + vec3(hl);
   c += (h(uv * res + fract(t) * 91.0) - 0.5) * grain * (1.2 - dot(c, vec3(0.333)));
   o = vec4(c, 1.0);
 }`;
 
-const HYDRIS = ['#1746E4', '#DD79FD']; // the blue and the violet glow of hydris.ai
+const HYDRIS = ['#0F4971', '#6FA3C4']; // the blues of the water in the Hydris mark
 const hex = (c) => { const v = parseInt(c.replace('#', ''), 16); return [(v >> 16 & 255) / 255, (v >> 8 & 255) / 255, (v & 255) / 255]; };
 
 export default function FlutedGlass({
@@ -156,7 +160,7 @@ export default function FlutedGlass({
         // momentum: keep pouring along the last direction for a moment after the pointer rests
       } else { px += vx; py += vy; vx *= 1 - 1 / Math.max(2, momentum); vy *= 1 - 1 / Math.max(2, momentum); }
       const sp = Math.hypot(vx, vy);
-      const mix = Math.min(1, Math.max(0, 0.5 + (vx + vy) * 18)) * 0.55; // mostly Hydris blue, violet as the accent
+      const mix = Math.min(1, Math.max(0, 0.5 + (vx + vy) * 18));
       const col = [C1[0] + (C2[0] - C1[0]) * mix, C1[1] + (C2[1] - C1[1]) * mix, C1[2] + (C2[2] - C1[2]) * mix];
 
       const src = targets[read]; const dst = targets[1 - read];
@@ -177,6 +181,7 @@ export default function FlutedGlass({
       const U = glass.u;
       gl.uniform2f(U.res, canvas.width, canvas.height); gl.uniform1f(U.t, t);
       gl.uniform3fv(U.bg, bg); gl.uniform3fv(U.c1, C1); gl.uniform3fv(U.c2, C2);
+      gl.uniform1f(U.light, bg[0] + bg[1] + bg[2] > 1.5 ? 1 : 0);
       gl.uniform1f(U.ang, angle); gl.uniform1f(U.flutes, flutes); gl.uniform1f(U.refr, refraction); gl.uniform1f(U.aber, aberration);
       gl.uniform1f(U.soft, softness); gl.uniform1f(U.wave, wave); gl.uniform1f(U.wfreq, waveFrequency); gl.uniform1f(U.drift, drift);
       gl.uniform1f(U.hil, highlight); gl.uniform1f(U.hsoft, highlightSoftness); gl.uniform1f(U.lang, lightAngle);
