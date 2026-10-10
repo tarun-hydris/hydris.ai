@@ -50,25 +50,62 @@ export function Splash() {
   const small = typeof window !== 'undefined' && window.innerWidth < 760;
   const src = `/video/ocean-${small ? 720 : 1280}${canAv1 ? '.av1' : ''}.mp4`;
 
-  /* Scroll story: zoom out, settle, then the words */
+  /* Scroll story. The logo-shaped window onto the water opens into a full frame that settles on the
+     right (like the clarifier in "Every plant is already a record"), the footage zooms out inside it,
+     and the line about Hydris arrives bottom-left. */
   useEffect(() => {
     if (reduced || !root.current) return undefined;
+    const stage = root.current.querySelector('.splash__stage');
+    const win = root.current.querySelector('.splash__win');
+    const geo = () => {
+      const w = stage.clientWidth; const h = stage.clientHeight; const wide = w > 900;
+      const pad = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--pad')) || 24;
+      const logo = Math.max(220, Math.min(w * 0.25, 380));
+      const end = wide
+        ? { l: w * 0.47, t: 76, r: pad, b: 36 }
+        : { l: pad, t: 76, r: pad, b: h * 0.46 };
+      return { w, h, logo, end };
+    };
+    let g = geo();
+    const st = { p: 0 };
+    const render = () => {
+      const k = st.p;
+      const e = k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+      const { logo, end } = g;
+      win.style.left = `${(end.l * e).toFixed(1)}px`;
+      win.style.top = `${(end.t * e).toFixed(1)}px`;
+      win.style.right = `${(end.r * e).toFixed(1)}px`;
+      win.style.bottom = `${(end.b * e).toFixed(1)}px`;
+      win.style.borderRadius = `${(4 * e).toFixed(1)}px`;
+      const grow = Math.min(1, Math.max(0, (k - 0.08) / 0.82));
+      const ge = grow * grow * (3 - 2 * grow);
+      const size = `${logo.toFixed(0)}px ${(logo * 552 / 541).toFixed(0)}px, ${(ge * 100).toFixed(2)}% ${(ge * 100).toFixed(2)}%`;
+      win.style.webkitMaskSize = size; win.style.maskSize = size;
+    };
+    render();
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
         defaults: { ease: 'none' },
-        scrollTrigger: { trigger: root.current, start: 'top top', end: 'bottom bottom', scrub: 0.6 },
+        scrollTrigger: {
+          trigger: root.current, start: 'top top', end: 'bottom bottom', scrub: 0.6,
+          onRefresh: () => { g = geo(); render(); },
+        },
       });
-      tl.fromTo('.splash__film', { scale: 2.4 }, { scale: 1, duration: 0.5 }, 0)
-        .fromTo('.splash__mask', { scale: 1.18, yPercent: 0 }, { scale: 0.62, yPercent: -34, duration: 0.5, ease: 'power1.inOut' }, 0)
-        .to('.splash__word', { opacity: 0, y: -16, duration: 0.18 }, 0.04)
-        .to('.splash__foot', { opacity: 0, y: -24, duration: 0.15 }, 0)
-        .to('.splash__frame', { opacity: 0.25, duration: 0.3 }, 0.1)
-        .fromTo('.splash__w', { yPercent: 115, rotate: 4, opacity: 0 }, { yPercent: 0, rotate: 0, opacity: 1, duration: 0.22, stagger: 0.035, ease: 'power3.out' }, 0.36)
-        .fromTo('.splash__sub', { opacity: 0, y: 24, filter: 'blur(8px)' }, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.16 }, 0.62)
-        .fromTo('.splash__rule', { scaleX: 0 }, { scaleX: 1, duration: 0.22, ease: 'power2.inOut' }, 0.58)
-        .to({}, { duration: 0.12 });
+      tl.to(st, { p: 1, duration: 0.55, onUpdate: render }, 0)
+        .fromTo('.splash__film', { scale: 2.4 }, { scale: 1, duration: 0.55 }, 0)
+        .to('.splash__word', { opacity: 0, y: -16, duration: 0.15 }, 0.03)
+        .to('.splash__foot', { opacity: 0, y: -24, duration: 0.12 }, 0)
+        .to('.splash__field, .splash__veil', { opacity: 0.35, duration: 0.4 }, 0.1)
+        .fromTo('.splash__label', { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.1 }, 0.42)
+        .fromTo('.splash__w', { yPercent: 115, rotate: 3, opacity: 0 }, { yPercent: 0, rotate: 0, opacity: 1, duration: 0.2, stagger: 0.03, ease: 'power3.out' }, 0.45)
+        .fromTo('.splash__sub', { opacity: 0, y: 20, filter: 'blur(8px)' }, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.14 }, 0.66)
+        .fromTo('.splash__cta', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.12 }, 0.74)
+        .fromTo('.splash__figcap', { opacity: 0 }, { opacity: 1, duration: 0.1 }, 0.6)
+        .to({}, { duration: 0.1 });
     }, root);
-    return () => ctx.revert();
+    const onResize = () => { g = geo(); render(); };
+    window.addEventListener('resize', onResize);
+    return () => { ctx.revert(); window.removeEventListener('resize', onResize); };
   }, []);
 
   /* The mark leans towards the pointer */
@@ -119,27 +156,28 @@ export function Splash() {
           ))}
         </div>
 
-        <div className="splash__center">
-          <div className="splash__mask">
-            <div className="splash__tilt" ref={tilt}>
-              <div className="splash__logo">
-                <video ref={video} className="splash__film" src={src} poster="/video/ocean.webp" muted loop playsInline autoPlay={!reduced}
-                  preload="auto" disablePictureInPicture aria-hidden="true" />
-                <span className="splash__sheen" aria-hidden="true" />
-              </div>
-            </div>
+        <div className="splash__win">
+          <div className="splash__tilt" ref={tilt}>
+            <video ref={video} className="splash__film" src={src} poster="/video/ocean.webp" muted loop playsInline autoPlay={!reduced}
+              preload="auto" disablePictureInPicture aria-hidden="true" />
           </div>
-          <p className="splash__word"><Wordmark /></p>
+          <span className="splash__sheen" aria-hidden="true" />
+          <p className="splash__figcap">Fig. 1  Water, the thing every plant is accountable for.</p>
         </div>
+        <div className="splash__center"><p className="splash__word"><Wordmark /></p></div>
 
         <div className="splash__say">
+          <p className="splash__label">Operational Water Intelligence</p>
           <h1 className="splash__line">
             {words.map((w, i) => (
               <span key={i}><span className="splash__wm"><span className="splash__w">{w}</span></span>{i < words.length - 1 && ' '}</span>
             ))}
           </h1>
-          <span className="splash__rule" aria-hidden="true" />
           <p className="splash__sub">{SPLASH_SUB}</p>
+          <div className="splash__cta">
+            <a className="pill" href="#how">How it works <Arrow dir="down" /></a>
+            <a className="link-u" href="/contact/">Talk to us <Arrow /></a>
+          </div>
         </div>
 
         <div className="splash__foot">
