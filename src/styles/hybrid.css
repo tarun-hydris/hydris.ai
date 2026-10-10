@@ -177,7 +177,7 @@ main:not(:has(> .cta:last-child)) + .ftr { padding-top: calc(clamp(60px, 7vw, 10
 .frame--reveal .frame__clip { transition-duration: 1.9s; }
 .frame--reveal .frame__zoom { transition-duration: 3s; }
 .frame__img { filter: saturate(1.02) contrast(1.02); }
-@media (prefers-reduced-motion: reduce) { .grain { display: none; } 
+@media (prefers-reduced-motion: reduce) { .grain { display: none; } }
 
 /* ==========================================================================
    Hero end state: the water is the full background, the line sits on it in white
