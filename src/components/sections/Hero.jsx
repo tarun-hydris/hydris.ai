@@ -5,6 +5,7 @@ import MetallicPaint from '../reactbits/MetallicPaint/MetallicPaint.jsx';
 import Waves from '../reactbits/Waves/Waves.jsx';
 import DecryptedText from '../reactbits/DecryptedText/DecryptedText.jsx';
 import { Mark } from '../ui/Brand.jsx';
+import FlutedGlass from '../ui/FlutedGlass.jsx';
 import { Arrow, Reveal, Visible, Words } from '../ui/Primitives.jsx';
 import { HERO, SHIFTS } from '../../lib/content.js';
 import { hasWebGL2, reduced, useReady } from '../../lib/hooks.js';
@@ -37,6 +38,12 @@ export function LiquidMark() {
    the section holds still: the footage zooms out inside the mark, the mark settles smaller and
    higher, and the line about Hydris rises into place word by word.
    --------------------------------------------------------------------------------------------- */
+/* Fluted glass tuned to hydris.ai: near-black ground, Hydris blue and its violet glow, calm motion */
+const GLASS = {
+  backgroundColor: '#050608', angle: 28, flutes: 9, refraction: 4, aberration: 0.61, softness: 0.5, wave: 0.06, waveFrequency: 1.5,
+  highlight: 0.1, highlightSoftness: 0.32, lightAngle: -90, radius: 7, momentum: 13, swirl: 0.15, intensity: 1, trail: 1,
+  texture: 0.7, grain: 0.05, speed: 0.8,
+};
 const SPLASH_LINE = 'The intelligence layer for industrial water.';
 const SPLASH_SUB = 'Hydris turns the water data your plant already collects into decisions your team can act on.';
 const canAv1 = (() => { try { return document.createElement('video').canPlayType('video/mp4; codecs="av01.0.08M.08"') !== ''; } catch { return false; } })();
@@ -113,6 +120,7 @@ export function Splash() {
         .fromTo('.splash__film', { scale: 1.9 }, { scale: 1.15, duration: 0.42, ease: 'power1.inOut' }, 0)
         .to('.splash__foot', { opacity: 0, y: -24, duration: 0.12 }, 0)
         .to('.splash__frame', { opacity: 0, duration: 0.2 }, 0.05)
+        .to('.splash__glass', { opacity: 0.55, duration: 0.3 }, 0.2)
         .to(st, { f: 1, duration: 0.3, onUpdate: render }, 0.44)
         .to('.splash__film', { scale: 1, duration: 0.3, ease: 'power2.out' }, 0.44)
         .fromTo('.splash__label', { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.1 }, 0.56)
@@ -126,6 +134,16 @@ export function Splash() {
     const onResize = () => { g = geo(); render(); };
     window.addEventListener('resize', onResize);
     return () => { ctx.revert(); window.removeEventListener('resize', onResize); };
+  }, []);
+
+  /* The header turns light while the dark hero sits behind it */
+  useEffect(() => {
+    const el = root.current;
+    if (!el) return undefined;
+    const io = new IntersectionObserver(([e]) => document.documentElement.classList.toggle('hdr-dark', e.isIntersecting),
+      { rootMargin: '0px 0px -100% 0px' });
+    io.observe(el);
+    return () => { io.disconnect(); document.documentElement.classList.remove('hdr-dark'); };
   }, []);
 
   /* The mark leans towards the pointer */
@@ -167,8 +185,9 @@ export function Splash() {
   return (
     <section ref={root} className={`splash ${ready ? 'is-in' : ''} ${reduced ? 'splash--still' : ''}`} aria-label="Hydris">
       <div className="splash__stage" onPointerDown={drop}>
-        <div className="splash__field"><Visible rootMargin="0px"><InkField /></Visible></div>
-        <div className="splash__veil" aria-hidden="true" />
+        <div className="splash__glass">
+          {hasWebGL2 && !reduced ? <Visible rootMargin="0px"><FlutedGlass {...GLASS} /></Visible> : <span className="splash__glassfb" />}
+        </div>
         <div className="splash__frame" aria-hidden="true"><i /><i /><i /><i /></div>
         <div className="splash__rings" aria-hidden="true">
           {rings.map((r) => (
@@ -194,7 +213,7 @@ export function Splash() {
           </h1>
           <p className="splash__sub">{SPLASH_SUB}</p>
           <div className="splash__cta">
-            <a className="pill" href="#how">How it works <Arrow dir="down" /></a>
+            <a className="pill pill--light" href="#how">How it works <Arrow dir="down" /></a>
             <a className="link-u" href="/contact/">Talk to us <Arrow /></a>
           </div>
         </div>
