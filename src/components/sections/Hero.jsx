@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import MetallicPaint from '../reactbits/MetallicPaint/MetallicPaint.jsx';
 import Waves from '../reactbits/Waves/Waves.jsx';
 import DecryptedText from '../reactbits/DecryptedText/DecryptedText.jsx';
-import { Mark } from '../ui/Brand.jsx';
+import { Mark, Wordmark } from '../ui/Brand.jsx';
 import { Arrow, Reveal, Visible, Words } from '../ui/Primitives.jsx';
 import { HERO, SHIFTS } from '../../lib/content.js';
 import { hasWebGL2, reduced, useReady } from '../../lib/hooks.js';
@@ -29,6 +29,85 @@ export function LiquidMark() {
       liquid={0.42} speed={0.2} brightness={1.12} contrast={1} angle={24} fresnel={0.8} lightColor="#8a8a8a"
       darkColor="#000000" tintColor="#ffffff" patternSharpness={1} waveAmplitude={0.8} noiseScale={0.5}
       chromaticSpread={0} mouseAnimation={false} distortion={0.6} contour={0.45} />
+  );
+}
+
+/* ---------------------------------------------------------------------------------------------
+   Splash (from version 1): the liquid-metal mark and the wordmark alone over the water field.
+   The mark leans towards the pointer; a click sends rings out across the water; scrolling away
+   lifts the mark and opens the wordmark's letter spacing.
+   --------------------------------------------------------------------------------------------- */
+export function Splash() {
+  const ready = useReady();
+  const root = useRef(null);
+  const center = useRef(null);
+  const tilt = useRef(null);
+  const [rings, setRings] = useState([]);
+
+  useEffect(() => {
+    if (reduced || !root.current) return undefined;
+    const ctx = gsap.context(() => {
+      const trigger = { trigger: root.current, start: 'top top', end: 'bottom top', scrub: true };
+      gsap.to(center.current, { yPercent: -22, scale: 1.12, opacity: 0, ease: 'none', scrollTrigger: trigger });
+      gsap.to('.splash__word svg', { letterSpacing: '0.2em', scaleX: 1.08, ease: 'none', scrollTrigger: trigger });
+      gsap.to('.splash__foot', { opacity: 0, y: -30, ease: 'none', scrollTrigger: { ...trigger, end: '40% top' } });
+    }, root);
+    return () => ctx.revert();
+  }, []);
+
+  useEffect(() => {
+    if (reduced || !tilt.current || !root.current) return undefined;
+    const el = root.current;
+    const rx = gsap.quickTo(tilt.current, 'rotationY', { duration: 1.2, ease: 'power3.out' });
+    const ry = gsap.quickTo(tilt.current, 'rotationX', { duration: 1.2, ease: 'power3.out' });
+    const mx = gsap.quickTo(tilt.current, 'x', { duration: 1.2, ease: 'power3.out' });
+    const my = gsap.quickTo(tilt.current, 'y', { duration: 1.2, ease: 'power3.out' });
+    const move = (e) => {
+      const nx = e.clientX / window.innerWidth - 0.5;
+      const ny = e.clientY / window.innerHeight - 0.5;
+      rx(nx * 18); ry(-ny * 18); mx(nx * 26); my(ny * 26);
+    };
+    el.addEventListener('pointermove', move);
+    return () => el.removeEventListener('pointermove', move);
+  }, []);
+
+  /* A drop on the water: three rings spread from where you click */
+  const drop = (e) => {
+    if (reduced) return;
+    const r = root.current.getBoundingClientRect();
+    const id = performance.now();
+    setRings((v) => [...v.slice(-4), { id, x: e.clientX - r.left, y: e.clientY - r.top }]);
+    setTimeout(() => setRings((v) => v.filter((x) => x.id !== id)), 2400);
+  };
+
+  return (
+    <section ref={root} className={`splash ${ready ? 'is-in' : ''}`} aria-label="Hydris" onPointerDown={drop}>
+      <div className="splash__field"><Visible rootMargin="0px"><InkField /></Visible></div>
+      <div className="splash__veil" aria-hidden="true" />
+      <div className="splash__frame" aria-hidden="true"><i /><i /><i /><i /></div>
+      <div className="splash__rings" aria-hidden="true">
+        {rings.map((r) => (
+          <span key={r.id} className="splash__drop" style={{ left: r.x, top: r.y }}><i /><i /><i /></span>
+        ))}
+      </div>
+
+      <div className="splash__center" ref={center}>
+        <div className="splash__tilt" ref={tilt}>
+          <div className="splash__logo"><Visible rootMargin="0px"><LiquidMark /></Visible></div>
+        </div>
+        <p className="splash__word"><Wordmark /></p>
+      </div>
+
+      <div className="splash__foot">
+        <p className="splash__cap">
+          {ready && !reduced
+            ? <DecryptedText text="The intelligence layer for modern water operations" animateOn="inViewHover" sequential speed={26} revealDirection="start" encryptedClassName="dec-enc" />
+            : <span className="dec-wait">The intelligence layer for modern water operations</span>}
+        </p>
+        <p className="splash__index">(01) Index</p>
+        <a className="splash__scroll" href="#intro">Scroll <Arrow dir="down" /></a>
+      </div>
+    </section>
   );
 }
 
@@ -76,16 +155,8 @@ export default function Hero() {
   }, [ready]);
 
   return (
-    <section ref={root} className={`hero ${ready ? 'is-in' : ''}`} aria-label="Hydris">
-      <div className="hero__field"><Visible rootMargin="0px"><InkField /></Visible></div>
-      <div className="hero__veil" aria-hidden="true" />
-      <div className="hero__frame" aria-hidden="true"><i /><i /><i /><i /></div>
-
-      <div className="hero__markwrap" ref={mark} aria-hidden="true">
-        <div className="hero__tilt" ref={tilt}>
-          <div className="hero__logo"><Visible rootMargin="0px"><LiquidMark /></Visible></div>
-        </div>
-      </div>
+    <section ref={root} id="intro" className={`hero hero--intro ${ready ? 'is-in' : ''}`} aria-label="What Hydris does">
+      <div className="hero__markwrap" ref={mark} aria-hidden="true" hidden><div ref={tilt} /></div>
 
       <div className="hero__copy grid" ref={copy}>
         <p className="s-label hero__eyebrow">

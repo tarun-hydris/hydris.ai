@@ -1,5 +1,5 @@
 import ScrollReveal from '../components/reactbits/ScrollReveal/ScrollReveal.jsx';
-import Hero from '../components/sections/Hero.jsx';
+import Hero, { Splash } from '../components/sections/Hero.jsx';
 import {
   Cta, Definition, Faq, IconCards, Nots, Oneline, Process, Products, RowList, SystemsLoop, Timeline, Velocity,
 } from '../components/sections/Blocks.jsx';
@@ -18,6 +18,7 @@ const IMG = IMAGERY;
 export default function Home() {
   return (
     <>
+      <Splash />
       <Hero />
 
       {/* The plant, from above: the clarifier opens out into the whole site */}

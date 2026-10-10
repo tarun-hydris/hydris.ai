@@ -9,8 +9,8 @@ export const PHOTOS = {
   ],
   "W": 2000,
   "H": 1333,
-  "bg": "#3b444b",
-  "lqip": "data:image/webp;base64,UklGRpAAAABXRUJQVlA4IIQAAAAQBACdASoYABAAPu1iqU2ppaQiMAgBMB2JZwCdACNZzgP5cLxZZk2wAAD8+dE0xdazwS3y8vMQhikOoLVA4KVzd2p47PIcSB+CCQdPMW+XjfvN3xQ9EUS7zVve/XWxSif4pmDbjavc7UuL75HU0zPeeeBriDIq3BrjF+QaL9OI378AAAA=",
+  "bg": "#453d34",
+  "lqip": "data:image/webp;base64,UklGRqoAAABXRUJQVlA4IJ4AAABwBQCdASoYABAAPu1iqU2ppaQiMAgBMB2JQBOl0AtwYQAcwAU5nL+n/4C+9DgAGaAiM0IAAP4IbG8eY0/eNUqi81KWpgTaIUe39oUSlaWdEOj3UlADr+3mB7Yec5DDpdPt86/1UdGs3a+rU7C5Ur9EzXIIoF18Xzp+Z4wufH3Iy+FQA1c3SQ90RhfyqaaPcZX9X3HMoYKzbA7Br6oAAA==",
   "alt": "Two experienced operators leaning over machinery in a plant, lit by warm window light"
  },
  "hands-valve": {
@@ -21,8 +21,8 @@ export const PHOTOS = {
   ],
   "W": 1400,
   "H": 2488,
-  "bg": "#3f4a53",
-  "lqip": "data:image/webp;base64,UklGRhwBAABXRUJQVlA4IBABAADwBgCdASoYACsAPu1sqFAppiOiqqoBMB2JZwDKAmyLXqGzyCe9OuJMw+SWkzjefnb3YpUXVTsZHFrDkbiTy8SAAP6meW/zQiwCsFcRWhFJTT1cQdZTK/FW3YJRuHXGot2bTmV2aFhb6lD+6D1L3w0YV1qEdokoXTvlqO2BHTkI+K743hFD9Prltpdx2PKV7Oqz1elvU8yCHA1sxXvJI7QS9GsnphzHbdR2HQqrjrcvg2Mvwd4EZakxESnUIurS9U8h5chDsnUsOGBLfOv0SOmChya2ulaC1HYyg8OL+e5Gy5samm7Da/+qFgvynUPJav2lBdA9iAW0FW17/s7ZKPBFpxRk2U7hL+v/vcgaOXgAAA==",
+  "bg": "#584030",
+  "lqip": "data:image/webp;base64,UklGRmQBAABXRUJQVlA4IFgBAACwBwCdASoYACsAPu1op1AppaMiqqoBMB2JagCdMwTIqELzAHlkJrMasEiQ0cpAfyNbSsuQvoXR5Y8eqkBdfmPXzuS7YaIAAP6mrxsaGJwcFmT6sOpsOzec9UxSPBa+QpIFZ9iCNZufIO33Lk+HrD7p86mx7yesUux/cnUrbjfkMR8u0YP/aOQYuo6PAd1loketQvZsKM30IT6IRCq6+U4WVbw63mdypnoINj9ujziH4jlKykddXJb+k4xVVqInNdwqsjEQBzv+LUnIfDVGKkw0jQcGhGYUk9hlVcm+2NPewaq2yqv/1cARWefZqGQkqSpoIghCNBrpOhUfgYfkDFDXyJIecYZUyVdXdRk1+kf3rkziwwuLnGlBgZB28jXJdK/jHj6WTFJ7J3IjPUkJ28r2rU45SsxtwDnQ41F4L3ybFUypQMx+5g19TAM0wZjUpcNKTFtNoAAAAA==",
   "alt": "Gloved hands fitting a valve onto a water line"
  },
  "stairway": {
@@ -33,8 +33,8 @@ export const PHOTOS = {
   ],
   "W": 1400,
   "H": 2096,
-  "bg": "#4b555f",
-  "lqip": "data:image/webp;base64,UklGRiIBAABXRUJQVlA4IBYBAADwBgCdASoYACQAPu1srlIppaQiqrgIATAdiWcAxrst+HraJBUtCRR+TrRNlqiW6DZ0q9uS+XPBlS9/nBG1fwGAAPlr225RvxhMrVwIVaME/Mk1tKaqUUUa7dki8Mk4B0Toj5iPhw7XF9U66/aEBtMTvuT/RB9gH/+9A8uhP3qdDSVmCeP8MyNxaYh5N31x2GK+3vlxyX94j+Pi3i7jpVEnYHDSmu7dUAPc+lth36mr4PjqDfHD7iMkQwRZDZI0GZgdSgT9joJTUguYkoQ0xqa5I1Q5eUyDv+Pur8rQTmjRps+hSu1zOJ9UiYYXcp3hGip+OPjKc865GR8YSu9TLJAJowgQiMxAEiAl5eYOEeTiAFWkB/hgAA==",
+  "bg": "#505253",
+  "lqip": "data:image/webp;base64,UklGRiwBAABXRUJQVlA4ICABAAAQBwCdASoYACQAPu1urVCppqQiqqgBMB2JaQALB2d5EZ1phNcZ+jV4qQteLZ6v3y+SOvYVH7wa/nUDXCkTFB+uAAD5a9tuUR4nqfUG4qzjRZxgD8ewTOk2S3FCNfzL8ULjV81eDfB9kyh/82tm1u8P9DSObj8nC85tyhW2oAwRXplitCV/Ynh/wuf6tfwyNWaq40d6K/au4zJirbwMhYN7qFvW+HH4Fxx6xZ6jCX/7FO5ynHmLyJ68KTSfJtTUKR+QZ9D1ImDSR3wx3U3/P76F/KwOHnmTq8cm/QoqRxlxdgxBXzno5ZFEsFw7kTcb7k7wlKZbtWce1w72DZi44gWlNnQ/WQf6v/P9tXJUGYbh3syjz1jfKIuCVAcYMswAAAA=",
   "alt": "Looking down a metal stairway onto circular clarifier tanks"
  },
  "outfall": {
@@ -46,8 +46,8 @@ export const PHOTOS = {
   ],
   "W": 2000,
   "H": 1333,
-  "bg": "#4f5b67",
-  "lqip": "data:image/webp;base64,UklGRpAAAABXRUJQVlA4IIQAAADwAwCdASoYABAAPu1iqU2ppaOiMAgBMB2JZwAD5LHZmQwqsPi5+Y4AAP7L5+x0nHMkg8Nm3H2LVhNH8B0ocqDzIdhDXxOtw1DF0AfkypqBAgmLqo1iO16vK80fyfSi4tR5RFmp2pE5yGC1h7bP+OQjQuYci+gWQ+k7ZLj7cZ5YhQUMAAA=",
+  "bg": "#525a61",
+  "lqip": "data:image/webp;base64,UklGRp4AAABXRUJQVlA4IJIAAABwBACdASoYABAAPu1iqU2ppaQiMAgBMB2JYwCdLwAVf+3EFf5HoZchBa55tAD+0LZ58hETu5DQURgOs0F+7xyq0qtuNcF5t8lgaFWabc++WQDqSGXEa3QZkojnly5hGk1YkMbMPQNL9VWnOnkqMBRoklBgpUZi1SUaySWzouv70Md9nRsvdjvc7HaNHrhiGAAAAA==",
   "alt": "Treated water pouring from a row of outfall pipes"
  },
  "plant-night": {
@@ -59,8 +59,8 @@ export const PHOTOS = {
   ],
   "W": 2000,
   "H": 1335,
-  "bg": "#323b43",
-  "lqip": "data:image/webp;base64,UklGRqgAAABXRUJQVlA4IJwAAABQBACdASoYABAAPu1iqU2ppaOiMAgBMB2JZwCo9Yuk3q5EB7YONqEgwVS4AP7wxbXMjo3Yx8zLyNbVeFhoxVDjidXrfkBDEF7hI25FBkfiOerfnPKSnKfHWAnKJmuS0IgXDFYnZfjK9aQOEHtbnOHqoJwu8Ae/K/MZxCD0g3LRWrtKurTpCLUFSkGV5Kd+6fOqi7wdmpZPfSR74AA=",
+  "bg": "#343531",
+  "lqip": "data:image/webp;base64,UklGRr4AAABXRUJQVlA4ILIAAAAwBACdASoYABAAPu1iqU2ppaOiMAgBMB2JZQAD5CIM9ngpvOtKa8r1pIAA/vKfT2Wc5Su0z5k95bxaN0d7G7W50yJDrCIH10b3rVdHfM3XWkJPtBvS62L9qdKCWFavn5ut260C6AyIccotlMX46w1xnht/scq/xREBT168r7hh32RlnaWsx2DX6BnfeGg/GjyTNyy1/P+oBMSLImYNHPzvyI1PGN+TrgHBDQUtwShyAAAA",
   "alt": "A water treatment plant lit at night, seen from above"
  },
  "plant-fog": {
@@ -72,8 +72,8 @@ export const PHOTOS = {
   ],
   "W": 2000,
   "H": 1332,
-  "bg": "#677079",
-  "lqip": "data:image/webp;base64,UklGRngAAABXRUJQVlA4IGwAAAAQBACdASoYABAAPu1kqU2ppaOiMAgBMB2JZwCdACHcIq2jM44eMQHmAAD+6uxVD1nc8LxicdnZX4Eu38yCQbGSmxjfgh7AlP7FUqv/53+r8paqHIpkOxxvRWIimTEfcK/myc/8th3q+RvYAAA=",
+  "bg": "#6b7172",
+  "lqip": "data:image/webp;base64,UklGRnoAAABXRUJQVlA4IG4AAADQAwCdASoYABAAPu1iqk2ppaQiMAgBMB2JZwAAW+hCIDXrn0DrIYAA/u2tE725BcLqhcQp7F+GbWwn/MG/UGlQxZoSzi0IwzhYXM+slbfPRrdoyZs9m/JFGIfNyUDuHoyJ36UKoecFCMMoGyAAAA==",
   "alt": "Aerial view of a treatment plant with domed tanks in morning mist"
  },
  "plant-bw": {
@@ -85,8 +85,8 @@ export const PHOTOS = {
   ],
   "W": 2000,
   "H": 1125,
-  "bg": "#56626d",
-  "lqip": "data:image/webp;base64,UklGRpgAAABXRUJQVlA4IIwAAADwAwCdASoYAA4APu1iqU2ppaOiMAgBMB2JZwAFEB7wC5i/Ctzwl2QAAPsFc5R7TwG+FCkqRx+7qxNPMILsJ54aQPymKHxL+03vQPBKZjWlQkuxrKprPUC/pYjter4ONYDt0q1/D2llyYYFO0uXMea/ezTjuJIZnHi0s0rd5I/pwSXmyvNlNPqcUIAAAA==",
+  "bg": "#626364",
+  "lqip": "data:image/webp;base64,UklGRqYAAABXRUJQVlA4IJoAAAAwBACdASoYAA4APu1iqU2ppaOiMAgBMB2JaQAFEB7q0WtYL0qpCz397+AA+wXlkgD21OCCuLIq/zbyM3DLSCq1n9jcPpA9gpJZSgrpvZrKSasiR7ElUCZLnvXjLuOxCuNoJH8WQkdn/G6DxHUXvanjbp5OWI22hjeaupf+5skIwf5wNj0GYF2M5IVS59BeYB4jnEzCsADZwIAA",
   "alt": "Black and white aerial view of a large treatment plant with many circular clarifiers"
  },
  "aerial-rust": {
@@ -98,8 +98,8 @@ export const PHOTOS = {
   ],
   "W": 2000,
   "H": 1333,
-  "bg": "#49535d",
-  "lqip": "data:image/webp;base64,UklGRrAAAABXRUJQVlA4IKQAAABQBACdASoYABAAPu1iqU2ppaOiMAgBMB2JZwCw7Yw6yAviQ1FuAm+SdJ6gAP7BJZssrL3HJak+PH5Lg4mY/aB5U+qUSkNq/BRZa140z2BUiXvdW0K3Nh/LBEgdGiwTuj/rPpHNTTMSj8rM3wCtRxrJTdvqNdYLJocqAYTjZ/Vl0yFJSD1IQW1lOhF549F1Z+HtdILjmuhMhEhK3IyYMwUdooAAAA==",
+  "bg": "#644943",
+  "lqip": "data:image/webp;base64,UklGRswAAABXRUJQVlA4IMAAAACwBACdASoYABAAPu1iqU2ppaOiMAgBMB2JYgCsAYx21ZT3Xs3ZWZKjPdE9WqM4AP7RgTCnJZ+4Qt4E4vADAj06pzephr+FBeqroyvF0v82/g0W/jqIxaK+HmccedUCr3spNVKo3GxV1zel7DbN/VcOYaDSwpJD9fXgJE/pLNryAuzW+dO51lWibZz0A2f9jayPKxexA52b5iq68aY3TFyqglU/+aav3iIHrTUuSp0erkjvAslHYwr1+WBYLIcAAAA=",
   "alt": "Aerial view of an industrial site with clarifier tanks and process buildings"
  },
  "aerial-river": {
@@ -111,8 +111,8 @@ export const PHOTOS = {
   ],
   "W": 2000,
   "H": 1333,
-  "bg": "#5b6772",
-  "lqip": "data:image/webp;base64,UklGRqAAAABXRUJQVlA4IJQAAAAQBACdASoYABAAPu1iqU2ppaOiMAgBMB2JZwAD5noHLf1W1o2+IgVUOAD6Nlv47WvakSnGr0uqfJiQQcQfReVyl3KhqPloHwP/cQWT1z6QR0rpRhs9L3yPPE3PTeLrEeYY1NOybyx/kNbBIm9VzG1ULgGoZIc1swcTRxx8v2Yx6f/9+LxZChTffzH3E4e37QMQAAAA",
+  "bg": "#646952",
+  "lqip": "data:image/webp;base64,UklGRrQAAABXRUJQVlA4IKgAAAAQBACdASoYABAAPu1iqU2ppaOiMAgBMB2JQAB8pTcaJFbZYzBRCWcBMAD6NldM4x77ZBupPdgKiHZCmx/BGxZkqYy2v0rRY8Y5trR6E8SUv1VUfvqfGlrlQE/Bs3j1hDvUwZZ/PU+6pNM36Ne+2QMdUBqKzxHKf3PLZ9YRKhy3OCIA8wB7/1IHugdSSFL3fE31dsMbISk2SzyGz9a0eTAPRdUknJ9wAAA=",
   "alt": "Aerial view of a clarifier and buildings beside a river"
  },
  "aerial-green": {
@@ -124,8 +124,8 @@ export const PHOTOS = {
   ],
   "W": 2000,
   "H": 1500,
-  "bg": "#4f5b67",
-  "lqip": "data:image/webp;base64,UklGRpQAAABXRUJQVlA4IIgAAAAwBQCdASoYABIAPu1sq1EppaOiqAqpMB2JZwDOOA9H5r1oZBejucAx7WO5BJR4ye0egAD+cZlN2KTmOXtw2AC/5FwkDhW6Mw3+JffGwBhMPv/RReHy7DnRcKvx2LxddS8sidXZx0gNtql4Ffqs7fsbN7Shha3btyU+28zjxp+DOUqtXIorQAAA",
+  "bg": "#506542",
+  "lqip": "data:image/webp;base64,UklGRqIAAABXRUJQVlA4IJYAAACwBACdASoYABIAPu1srFEppaQiqAqpMB2JQAAFOnMno0Zye3sE5wwAKuaB862QAP59RNKCbs6nzQaXg22tffhIHCt0ZRpSHFJvsqMOKAqsi2r9yo0PIvO5Ydt4ksZ8VZpmlQOydrPunLs1GNgHqEbG1TSH4OKyU1g/Y9fOAe8HtEUsjLPIkxzYd4qPol7KjYHXMpQAAAA=",
   "alt": "Aerial view of circular tanks within a green field"
  },
  "aerial-bank": {
@@ -137,8 +137,8 @@ export const PHOTOS = {
   ],
   "W": 2000,
   "H": 1333,
-  "bg": "#636e79",
-  "lqip": "data:image/webp;base64,UklGRpgAAABXRUJQVlA4IIwAAADQAwCdASoYABAAPu1iqU2ppaQiMAgBMB2JZwAAVI/psJGWGw9qCwAA/sv30zeliKgpgyeDXjCfZ+aLMnY4CPauYuyRTGGi5ZJzTLVj2iwX8QGhZbKV3apb02LUUMR2vUqhkiJW4s8RuUDyud5ZxuGLALO0o4Iohyt5oA3Nq76n/KE6KmQ86QGfRAAAAA==",
+  "bg": "#73726e",
+  "lqip": "data:image/webp;base64,UklGRrQAAABXRUJQVlA4IKgAAABQBACdASoYABAAPu1iqU2ppaQiMAgBMB2JZQDE6f/gMO2qdPcT4fTPL4fgAP7L99M3p5DN8HrEq639u1Vm2xHPN1TscBUFpt5EQN+1s7ZNskxBsypuD1FPDp+Y+d1zv6dYsZwLmTXT7RUsLTBWoUtwhihj/uzD4hK89zDV2aVM0ZkO0JoeRcxy2F693vKRdi0b7GqiG0T6zx+I2U6lR5mAMNZUF5AOIAA=",
   "alt": "Aerial view of a treatment plant beside a river embankment"
  },
  "riverside": {
@@ -150,8 +150,8 @@ export const PHOTOS = {
   ],
   "W": 2000,
   "H": 1333,
-  "bg": "#6c7782",
-  "lqip": "data:image/webp;base64,UklGRp4AAABXRUJQVlA4IJIAAAAQBACdASoYABAAPu1iqU2ppaOiMAgBMB2JZwAAP/vUHV0LRJHGqR1twAD+qGUU/ubNqMOrkhS2Swc14laSgXAjH/J9QKFO0gV5/PvyRezcyM3SJ3SYJ1T2I7XnI6DMhvc/RWhlsjtSacc9MrlTN6WW4rFqDsZDeU/XKsvVx72HEts5EPHOUGGeztDfonULQAAAAA==",
+  "bg": "#7f7d7b",
+  "lqip": "data:image/webp;base64,UklGRqwAAABXRUJQVlA4IKAAAABQBACdASoYABAAPu1iqU2ppaOiMAgBMB2JZwDKEf/gO3fksubIzWD7YqooAP6Chp4jkCNkhWqsJp3/h2DOd6+QRFeBzv26KWaFv44jqFh0xMoA8l65CPCX8h5eFKYyd2fcd7MgVVkcKVCW9gOzIm1l7K6/Pe83d4pJapvBZHrynQGNaocpEDKiqOPLO9ujtKv0syuxlBdGvbR4Gl8HEAAA",
   "alt": "Aerial view of a riverside plant with rectangular settling basins and circular clarifiers"
  },
  "clarifiers": {
@@ -163,8 +163,8 @@ export const PHOTOS = {
   ],
   "W": 2000,
   "H": 1357,
-  "bg": "#5c6670",
-  "lqip": "data:image/webp;base64,UklGRrQAAABXRUJQVlA4IKgAAACQBACdASoYABAAPu1iqU2ppaOiMAgBMB2JZwCdBagR+ooHSQi+WVJTrloTvAAA/rocH8OuDAnGDa/eg73yawJ6ZeUFw7Dmb7Wz/79/4ut4LQPNFfcUfhozJK98auZISX2Sk2pwzHT0CW28aBgtRckPuLtqSSc9RI2bkRxjqmwRh0ZhA/kcSbcMwJfyuO+ys6a8h64c0N1E+LZ41StAbfuEqP+3cEDgAAA=",
+  "bg": "#676968",
+  "lqip": "data:image/webp;base64,UklGRs4AAABXRUJQVlA4IMIAAACQBACdASoYABAAPu1iqU2ppaOiMAgBMB2JYwC26ExqQPcsY+s/zLRp7S6YHhwA/r/BX6Mj/untKWoZTfzN9OI/VbASkc1Ec8yRocHBUdeCygjBT6ptaLJcP/S83yaMv3pQNS+14KKC8omLlevCKiFvEHlRdBYsVgon2YKvON6Jk1rf+FgrPYe5A6faLNtUHSGyrWWS9HWL+Lz9UcDIk7cgd/nwMHJdOoMkYiouojRMCHS6S9hQ/yHw/FkzXF5BAgAAAA==",
   "alt": "Aerial view of six circular clarifier and settling tanks"
  },
  "clarifiers-twin": {
@@ -176,8 +176,8 @@ export const PHOTOS = {
   ],
   "W": 2000,
   "H": 1353,
-  "bg": "#4f5a64",
-  "lqip": "data:image/webp;base64,UklGRr4AAABXRUJQVlA4ILIAAABwBACdASoYABAAPu1iqU2ppaOiMAgBMB2JZwC7AYv+3nzr4remDxL5J5m2AAD+M7B2CIVhraHh5e8mNs/rvMYwV23GzUGrdQP4oNYuRVqEbyqRjsLPs4i+Qhh04u7eskyvXGylvkFZHoRZZFCyGiOA6ucjzJMIuyOyXqlJO4Kw+sXQAMOP5/Rn/4raJ/x2gs65y83SxsNhO4YB+WetvLuQmeu9ulLm1SjwChsSM4sKAAAA",
+  "bg": "#4b5c54",
+  "lqip": "data:image/webp;base64,UklGRtoAAABXRUJQVlA4IM4AAADQBACdASoYABAAPu1iqU2ppaOiMAgBMB2JbAC7MoAvQTOowV+GXdlW8Q7+auHYQAD+flWpsMtM2kts4/aMj4fAy2PIHKmuwzQioFHWzQnP9WXOIBlTykVQ71twuytir98k4+JktqYWufJs4ORBwqd+nQpS+TNqMVfRSir3NFMHo9l0NjPMmtzhDjSS2UF9kARgj5/JcP4grq/X3HcsLk/X3kbvTiKkgRZVJboxn49NxmIea3aPIuFJUIxW2KwFdle/wZJhRVo3jw8zR3LAAA==",
   "alt": "Two circular clarifiers joined by a walkway at a hillside treatment plant"
  },
  "clarifier-teal": {
@@ -189,8 +189,8 @@ export const PHOTOS = {
   ],
   "W": 2000,
   "H": 1124,
-  "bg": "#6d7680",
-  "lqip": "data:image/webp;base64,UklGRpQAAABXRUJQVlA4IIgAAACwAwCdASoYAA0APu1iqU2ppaQiMAgBMB2JZwCdABuZI14uGPgs0AD+4kSaXQVOrmg5KGBHGv6ksyStO7y/Z5gvgPUpRIHHyo/3Qs9MKKlqBEzMo74ZJTNAgpoj2PZ2wDLCrjB22FvTdcalvwCKyj7BDBcrSER2pEXxW9fd2HbHUc4eDnj2gAAA",
+  "bg": "#847769",
+  "lqip": "data:image/webp;base64,UklGRqgAAABXRUJQVlA4IJwAAAAQBACdASoYAA0APu1iqU2ppaOiMAgBMB2JQBOgA3Pvlo9coOo0RTepvAD+6IzCp/EZdD1d//IDkYgHvdXksU8O9JCsuAtSQkgZQEGAT0fw4suLjxX1BBsDcSM0RXOie3cE33srRINwi1ch153/ga37Di3dM/TWiodT3axsGBr9cPGmJXYIm1rRkDDBwYvdmQqGHJ10JOluRGQRUAA=",
   "alt": "Aerial view of a circular clarifier with a bridge arm"
  },
  "clarifier-top": {
@@ -202,8 +202,8 @@ export const PHOTOS = {
   ],
   "W": 2000,
   "H": 1500,
-  "bg": "#67717b",
-  "lqip": "data:image/webp;base64,UklGRswAAABXRUJQVlA4IMAAAABQBQCdASoYABIAPu1sqlEppaOiqAqpMB2JZwC/7Yxia8szpp5r+2tECNjuCl3DS9ElHAAA/gkLIvqqlpOuZ0vJ3SMwiSWBxFSNTvyHqLlLozTVKaBg9AVwr1Lva6qs7xz3fpzsbunat900vBXUDLUwe26GV9PfxZJpnPgqEucvBMmKteNiscHzlkypNcFG/oDiKDwsPhOe4CxcEY2KhoeuVxpDZtg+BgsqzmRAg+vMpOOUFaG6qWkv75eyfOdQAAA=",
+  "bg": "#727368",
+  "lqip": "data:image/webp;base64,UklGRtoAAABXRUJQVlA4IM4AAACQBQCdASoYABIAPu1ur1KppiQiqAgBMB2JQBh0UAe1ZhPjZK2uwHaMEmmm1niJ2GiezKxioAD+CQsc3Dveq4fPrnw1zm/i6h3LW4uZGHsLTcNQVISFmE+C9YvQWQCoJZd0EyVy5DOTD+CPgC9AROG3yRI251z2qGwukgd/48vPePYA4Q3Gw+QPBOLkbpYa0t+kOAq2yhph/ivIngRYfh+f7gxij0Gam1xpn85YC0tl+q/DhkESXJPa2VIg5SiBg3aOelytgMSA9UmSjbuIAA==",
   "alt": "A circular clarifier seen from directly above, its bridge reaching to the centre well"
  },
  "clarifier-detail": {
@@ -215,8 +215,8 @@ export const PHOTOS = {
   ],
   "W": 2000,
   "H": 1500,
-  "bg": "#5a646f",
-  "lqip": "data:image/webp;base64,UklGRqYAAABXRUJQVlA4IJoAAAAQBQCdASoYABIAPu1qq1EppaOiqAqpMB2JZwDMHYv+cVq0W4narXb3zcqo4LSVFivgAP69E0PVuCRKUaM6JPDBlZRM5HDkLAte0ABxRh8RrxJuJUt6F+YxjMu9wCGgKgW08zDUX0ovf57N1byXmBzN+sGx0hKE4EHvgvHBiE9tL4Q1/Rb6mwnCMWkyLaOSVoYxvPcYXBsmgAAA",
+  "bg": "#63645f",
+  "lqip": "data:image/webp;base64,UklGRroAAABXRUJQVlA4IK4AAABwBQCdASoYABIAPu1srFEppaQiqAqpMB2JYwDCgYv+aGZSp76tdZA4BAJaRlQGK+If1oAAAP7Oweh7rmCgXPLFYOBXY5prhfYMQTU7k/XZz5UMCtUAaxtuyR6UZ7WF+KDPhZaszxDVUZd3t7f978RMjPUJUD6RlncKEoyRvZzGhZMzsptYFiuYIgzP+oBloNTiRF2ZO+HYpI6KT4f8HkgapMDHbjfdSb8TWIWeAAA=",
   "alt": "Looking straight down on the centre well of a clarifier as its bridge crosses the frame"
  },
  "clarifier-snow": {
@@ -228,8 +228,8 @@ export const PHOTOS = {
   ],
   "W": 2000,
   "H": 1500,
-  "bg": "#78828b",
-  "lqip": "data:image/webp;base64,UklGRsgAAABXRUJQVlA4ILwAAABwBQCdASoYABIAPu1sqlEppaOiqAqpMB2JZwDNwy6TogVz6iDAsCX1HRyS4ghUEpK4GDMAAP5qeK/ZvPzUJMWps979L8VS606nc5f2OHVRquFS2sw2xkaxfFvs1aVrNIm3j7wrtkHRG3anZz430hO09s7Ni3p50GltM15pkFHCfmql3JUp2I6o5PtLdaVEw3QlmWfnKNVHbje3igoxDUgBoYajUpcTA9oWrq0SAYfJ0uIKUEjFr/lr/eAAAA==",
+  "bg": "#7d868d",
+  "lqip": "data:image/webp;base64,UklGRt4AAABXRUJQVlA4INIAAACQBQCdASoYABIAPu1urlIppiQiqAgBMB2JZQC7M1XlvArn3xmpNFRZaroc92m8HJsbdQYnAAD+mpGrlpqO8L9AdJg214S1VHv9p7BL/Y0+1ZobM035FE8LPeLMCprk6zAsgmDZPTJAPCZJ6GNFBd/kHEl/nt6j6depwmZjnsri46HWZ6o1e1sb25HZS4ha6BS/BkKJUoYuuB/0kJa1yMxCB1UpvOglQPaup9PaGFMq5xMLyV+dRcwnkyulQnYsiIJEcoUFcxW82V9Z0l/xDv8AAAA=",
   "alt": "A clarifier in winter seen from above, a dark circle of water in a field of snow"
  },
  "aeration": {
@@ -241,8 +241,8 @@ export const PHOTOS = {
   ],
   "W": 2000,
   "H": 1340,
-  "bg": "#727d87",
-  "lqip": "data:image/webp;base64,UklGRpIAAABXRUJQVlA4IIYAAABwBACdASoYABAAPu1iqU2ppaOiMAgBMB2JZwC06B7H3zH2cpLVGD26vzByAAD9SbRUt91Z8W44dAYwvA+0WSX+hSVwU/na2KL2K5K0QoQL3qVrMmTp2twt2EYjpCd+WUAmlnQHQrTGml7t+r0wz8I3wcOGiSQzekSblJdENgdSmIV6AIAAAA==",
+  "bg": "#7e8281",
+  "lqip": "data:image/webp;base64,UklGRqoAAABXRUJQVlA4IJ4AAACwBACdASoYABAAPu1iqU2ppaOiMAgBMB2JZACsG1/AWOPk8so0f8fwddvya7VYAP1JtFOSBm9DTex2cNgiBZkzNGUS+ts67uO2L/NTRw0c5+EHPQzzo7pxOg0Z6DwsvvEpFaLKdvbralbT4nK0J6G14mLDaXCVOSHFV+HOajDp8vBA033ZEZ+QgABfeUwNFAMNrdifROxhGLp2fAAAAA==",
   "alt": "Aerial view of an aeration basin with bubbling diffusers"
  },
  "tanks-grid": {
@@ -254,8 +254,8 @@ export const PHOTOS = {
   ],
   "W": 2000,
   "H": 1500,
-  "bg": "#5f6a75",
-  "lqip": "data:image/webp;base64,UklGRrAAAABXRUJQVlA4IKQAAABwBACdASoYABIAPu1ur1IppiQiqAgBMB2JZwC/PagAyxau8Y6bxaK/YdBPcAD+hX88IWB+agMiDKNieeq9Qc/RkKdrc0wFI9lrB4BCtFrrA6krT6JJq0ymbdpNTlXTUizGEUfc4klMIwIysMI0+luS0Aj/hybFQ787XX2PqJh2Qx1d2FFTJJy00Hzo4usaFaIIKk2BbxOCNYu2jalVYKqXJFgAAA==",
+  "bg": "#666a63",
+  "lqip": "data:image/webp;base64,UklGRrwAAABXRUJQVlA4ILAAAACQBACdASoYABIAPu1ur1IppiQiqAgBMB2JZQAOcC0dzd1+0zCtGsDQgkMwxfAA/oWBaMJEYYiIURU8PkGwteA1QHLXBN1yUVm/n/8UxwgglJ73/TLeBxHpxY+02jkS1YdhjtPyUU6S9KTwuC915wiReE31fV7jeXDhahfiwEqwlkqNkFavnudnzZkKYbe7AU9jfw2NwfcO2K8J52fAH/gvreTrlJOcpKhOm1nAAAAAAA==",
   "alt": "Aerial view of two clarifiers beside a grid of aeration tanks"
  },
  "basins": {
@@ -267,8 +267,8 @@ export const PHOTOS = {
   ],
   "W": 2000,
   "H": 1500,
-  "bg": "#616a73",
-  "lqip": "data:image/webp;base64,UklGRrwAAABXRUJQVlA4ILAAAAAwBQCdASoYABIAPu1mqk8ppaOiKA1RMB2JaQC7AYxEXFOfaXI+eHHfpnF7XXjAwHL6AAD+wkm67u78dGGtWxF9YWRX0pPeLCKqF8gE1if0Db5sALB7vMk/OGb4/TJHXCxYIsl3FJDHLcNwYKQ6E4hLuSL3opWXAlib5KIb/Q2okgXXiWuw8WWcRIpqp3eqgZUvQU6wwjuleChLOypAKdjBMvFZGDyefMxRTingUMAAAA==",
+  "bg": "#6b6a68",
+  "lqip": "data:image/webp;base64,UklGRsgAAABXRUJQVlA4ILwAAAAQBQCdASoYABIAPu1mqk8ppaOiKA1RMB2JZwDOdYw6Zcp99CKHKUDMogwwOuS53xgAAP7CSbru7gR0Ni1D1rcdUBM1RzV/apisEFVZ1vwPxE1Pu7lR/Skf4Iur6A2/JKJUm5zbFVOFnTzrwjEje0COE1U7pSNA4J9Jk+WZncH42fDvTSJHwbkIxsnJUuiffFV5gU20adyWsJQ3SSLiJrmMRtQcTmu7gbAuCowFCLz1ugUQPG4IitoQZgAAAA==",
   "alt": "Aerial view of aeration basins and two large clarifiers"
  },
  "water-caustic-dark": {
@@ -279,8 +279,8 @@ export const PHOTOS = {
   ],
   "W": 1400,
   "H": 2093,
-  "bg": "#3f4a55",
-  "lqip": "data:image/webp;base64,UklGRvgAAABXRUJQVlA4IOwAAADwBQCdASoYACQAPu1srVCppiQiqqgBMB2JaTuAIB86dRLcT9Q9Vve27xKRCz9ZrAJw8uKGMIw6QAD+40ptP2Qce8eV0I9+kQD/Zl8jbD1TLWAa/X0oQYUq+apuLtl+C6cvSF7hJX0ssYnPobewYHBLXuDvRBu4DqQmhQMOxng3zDnlqeg8VIBLNcX3SNEUPmCJDIqK6RpMFH93wEwkzTMFkoUz5LyeBYYfrEoMw+/d5iHGUtQCprUUREWAL9F1tz5zqEpWeaZigpa2IuSEi55jmd2j9RZD3Zt7mj+odG24gqltPHY3vEjFBdYAAA==",
+  "bg": "#3c4943",
+  "lqip": "data:image/webp;base64,UklGRhgBAABXRUJQVlA4IAwBAABwBgCdASoYACQAPu1qrVCppaQiqqgBMB2JZxwADcvKAdpfaRxNHeyJMlkiBrDWO+LzdBD3x6N6sc/ndYAA/ujv3YHCeOQrK7jDuLnoLUHS7SgY/bCnLikO9vXa5EHC1bLJX7gDu3zSE7j52yye1XPK21tDv0OJ3kZ5C9nfGExMNAoNQAl3flnCVZJRD154c5OKbqsH0Qiw2Vd8+eBi9Xf3YOfEAQUNyYy24UTzPESMjYozCg6thUJx/RkrTmJzCpmc3ghZNB7C4wY2S3H4Qrg1T1w+AhJN01wLjwYr+TMn/Xmy2iYeFbrl8xsKqUgkEr4YoTQ5aVLIBD0E+0KJNP62TaVuqIYD0PAcYAAA",
   "alt": ""
  },
  "water-caustic-light": {
@@ -291,8 +291,8 @@ export const PHOTOS = {
   ],
   "W": 1400,
   "H": 2100,
-  "bg": "#64707c",
-  "lqip": "data:image/webp;base64,UklGRggBAABXRUJQVlA4IPwAAAAwBwCdASoYACQAPu1mp08ppaMiKqwBMB2JaQAOf3YvKB4AaaFooH2LrKlpigiRNVdh3YUt+j4qS4gJmPcVzgpG2AAA/ocO4vjNkRc1U3UMQLO+YaSH6UYxHUARjk0JioL1G8ABKs3em2xB9Gu+YgSbnpn0Hyt2ByJh8DeM49zeJnDPxjZjd9E8cR0jIlVWlkChWKI9qG3FPnaVmsf4GNteM0fSX8DdqrxAuk9ksUPXSfkCrDlFX2wlUHpqarbkXj3PS7CRJzED4I5HE9gQhrmbFyo6yBVfTnAihi8apcAmKCD4qnvHrRuJgpBLxdlTVAdhXRzd/t4oVgAAAAA=",
+  "bg": "#617f90",
+  "lqip": "data:image/webp;base64,UklGRhwBAABXRUJQVlA4IBABAABQBwCdASoYACQAPu1oqE8ppiOiKqwBMB2JZwDG+vF1cs7csDTMNKBaLrSEQuyW9dPgdNL4RIhZ5iZ9hQKzbTDLM5YAAP5II29BiWHFFavLESE72f3FSMvWlUYnUHEDqj/8T8xyN/r895oLxtA89tk0Oc7HuD3N3tHgJ9pxJZYIpksUVnAr5Xe9+N4dytA6XpS6GXvqhiRNhDt2NNz+OGdmCY8Il3siF9ZGVmMvBHHzFOqlAUlvqI8OIt0OXi4JDy4kZmTbdcgHCynfTDd9pCRwlpIJ5a0lMvyMoqFEKz1KsVObWnmzGRJ6ElONemwVycVv9q+mwUEAmv6Q65/cS7dMglmDWvvPa7GRQQTvA4MAAA==",
   "alt": ""
  },
  "water-caustic-sand": {
@@ -303,8 +303,8 @@ export const PHOTOS = {
   ],
   "W": 1400,
   "H": 1640,
-  "bg": "#5b6772",
-  "lqip": "data:image/webp;base64,UklGRtQAAABXRUJQVlA4IMgAAABwBQCdASoYABwAPu1qqlEppaOiqAqpMB2JaQDOPavlG5wAA7Txbcy1UvtcP8hCaTUHn/pAAP002SCG1k34ONCa+AiRJLuoKNMSuBqBhTsCnCc5sjkVgabuWCnvKtNM9D0kAddGhghPd0MWzJ1NZwRLNSBfsLyFa6w49prTucnDN7+ywcQSgT3K0zi6TWz2OXCmu9b6C/n0uaos2fMJt3f6cMYqKMQ5KiBGBsVGkoPR6V8kr+G31Px8N4TjmIB7TjRPuGiV1iHQAA==",
+  "bg": "#796d4f",
+  "lqip": "data:image/webp;base64,UklGRuwAAABXRUJQVlA4IOAAAAAwBgCdASoYABwAPu1qq1EppaOiqAqpMB2JZQC4raglLJqGRPiNwOMzCaFbGQPIK/kLhQfCN5YWTnAAAPQ5oIpSPh4V5GVC3ctFXBoa2otYki70rSCZEOUYRs1tW7BRWgBiMNaCK4+mFpmHkDaZKvC+kEi4b6Lqg3JNU5M8XReQLGVMgfYFMPa/A8NJOJfkBRWR6GQfe9pSOieH0DaoYHNp6pD6/9wWPForvNoB4nxlHL73MmQofn71HVhjFF7SM5azSTSj9CCfdijgK7n+ju4HtQxw+e+6CfjyqynncwAAAA==",
   "alt": ""
  },
  "water-ripple": {
@@ -316,8 +316,8 @@ export const PHOTOS = {
   ],
   "W": 2000,
   "H": 1335,
-  "bg": "#75818c",
-  "lqip": "data:image/webp;base64,UklGRpQAAABXRUJQVlA4IIgAAADwAwCdASoYABAAPu1iqU2ppaOiMAgBMB2JZwAOcAKULS6y71hlR1MAAP6TfqDEG7Y/pIZrP7oOBCxCjwix0fLIQePR22iJVJhNsSBNz03ZpYfWoUYRcuTbUsWHo9A+HtU+psrWH4KMZNuz9Gc271h4TF4fRI1eh7rYi+74eLe1iy+OX9N5AAAA",
+  "bg": "#b17d51",
+  "lqip": "data:image/webp;base64,UklGRqoAAABXRUJQVlA4IJ4AAABwBACdASoYABAAPu1iqU2ppaOiMAgBMB2JagCdMoR3BtABOEhH4AxPGbKIgAD+s0ROmvZaNzIw/adBkYx4HKQhmGfLIHYTSHN6OwcPPuW2u4PV4r5M8o5zOgjwA11MYk8jaLAEGJXldMK1PCuNnc8f/9HFXL22mykE2EMPuWfoKAxZvlBI9v7ZOm4/MO5kD22ysgU1tWQMgfPBTngAAA==",
   "alt": ""
  },
  "water-surface": {
@@ -329,8 +329,8 @@ export const PHOTOS = {
   ],
   "W": 2000,
   "H": 1125,
-  "bg": "#747f8a",
-  "lqip": "data:image/webp;base64,UklGRn4AAABXRUJQVlA4IHIAAACwAwCdASoYAA4APu1iqU2ppaOiMAgBMB2JZwC7ABKbBkiQxocCqADg/UmD6FeF8JgjPezbofGuX2bn4/jmQ7n0rptEQfLG74R26/rWVLlCrJsJtF7nKUGUQ3vhpRO9nbiClHcxBB8Uu36Irfm3sACgAAA=",
+  "bg": "#61858c",
+  "lqip": "data:image/webp;base64,UklGRoYAAABXRUJQVlA4IHoAAADwAwCdASoYAA4APu1iqU2ppaOiMAgBMB2JZACw7B2hoLM/z05RpCtwAOD81JQKZNnSwD3OYraWfTgXz9driNQ7JecujebC0iGdfIS2CrXgBLh00V6hdBIVza4ZZgGREwMqFuRR76jCSSu/cIJ/DOG5PVPsq0+onL5AAA==",
   "alt": ""
  },
  "water-night": {
@@ -342,8 +342,8 @@ export const PHOTOS = {
   ],
   "W": 2000,
   "H": 1333,
-  "bg": "#3e4a54",
-  "lqip": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAADwAwCdASoYABAAPu1iqU2ppaQiMAgBMB2JZwAAQtecrqQi+SguLgBgAP7kG7oxyVtfbSbWtM8RNz02tf4whAU65NNWvcise0HE31s7XFO1DAULctkLcl4AAAA=",
+  "bg": "#414849",
+  "lqip": "data:image/webp;base64,UklGRnYAAABXRUJQVlA4IGoAAAAQBACdASoYABAAPu1kqk4ppaQiMAgBMB2JQBOmUABNdYQ5CtvP957vwAD+5Bu6MclbkelG/Fk6yMtPrS8Ru4R/D7P6N0TJMOxGMfpaXZMA+MWfUhrH+YRpXGJC45ElkRV7GnEJsZffIAAA",
   "alt": ""
  },
  "water-dusk": {
@@ -354,8 +354,8 @@ export const PHOTOS = {
   ],
   "W": 1400,
   "H": 2100,
-  "bg": "#4c5761",
-  "lqip": "data:image/webp;base64,UklGRqQAAABXRUJQVlA4IJgAAAAwBgCdASoYACQAPu1crU2ppKSiMBqqqTAdiWkAygKvAD4uVbx8DZpdxkwmbo9LjczPb54eHrhe1egAANnKtQ9vwr1tjCOiQPr4N3ipb6gyC+aAb/SylhtBNMFqY/5ARFCtwydA/I3ewWoEEkHxIH4Iojp9fe5/qIBTGFdZeVnaojkInal93JDsOCHpiDwKrZD8OAH5ge4AAA==",
+  "bg": "#4d4e5d",
+  "lqip": "data:image/webp;base64,UklGRqYAAABXRUJQVlA4IJoAAACwBQCdASoYACQAPu1iq02ppaQiMBqqqTAdiWUAwCqv8FBIGD2w8+etfuPRSMKbWDH8eB1A7cAA2cq1D0b1B4cMVEYro/MUbfLS8z7rTDRn4YrkiSuLx4DsKi306B+a46b0ECkuQ8wQOE5RyA8NlsmL/scA3u6n5ao8fetk0dXj71bSTmmNJLzvazLz+WLlWirItUjcfnmGHDAA",
   "alt": ""
  },
  "water-deep": {
@@ -366,8 +366,163 @@ export const PHOTOS = {
   ],
   "W": 1400,
   "H": 2100,
-  "bg": "#343f49",
-  "lqip": "data:image/webp;base64,UklGRq4AAABXRUJQVlA4IKIAAACQBQCdASoYACQAPu1wrVIppiQipWsxMB2JaQDPZC6b+brxPsqnrNEXZhe6Hcu9Rw1egadV0AD+9o2vDKQwxTfHL++u4GTkdoFAllF73s7uNBIyoNWoJZBN373HaVTcW4uqBDjGiRvDiLoljGgk1g3a6Sn5HYS1qwhUYyBGbUeLGL+n48PTvLGv4NIe8lF1vTGPTBieVNjrmrEDovES/tgAAAA=",
+  "bg": "#135a48",
+  "lqip": "data:image/webp;base64,UklGRsgAAABXRUJQVlA4ILwAAAAwBgCdASoYACQAPu1uqVAppqOiqrgMATAdiUAY5lXaHBTNy4/nK12C/gi/zI6URR3bc1+vRnlgqs0gAP7yqoVXBFu+YmJcjw7vzs+BviwYfEkT6AjuFPsVJnpp9Q5C97DkEHgB1KQ6Hw3SA11DFkmO2TJAlnG2+oBKFQMngRYMlGCAsaOtIaRR+ewmTOTdYkZfOjMdwAO4nAAdpqBjWb3VByV0Sn2ovuGAev+e14puhe/87s3kLIfcKVswAA==",
   "alt": ""
+ },
+ "water-blue": {
+  "w": [
+   640,
+   1024,
+   1600,
+   2000
+  ],
+  "W": 2000,
+  "H": 1333,
+  "bg": "#294e70",
+  "lqip": "data:image/webp;base64,UklGRqQAAABXRUJQVlA4IJgAAAAQBACdASoYABAAPu1iqU2ppaOiMAgBMB2JaACdMoACs/kCoXZZ/V8NAAD+5bp+cwxzwKXtHP8N1CuFzVoayvTasHvACA3x9ty9BTrZ0Ef21d45RYUikq94H2mEdjTdq1nMq3Wvh5mh5o0FiVOWOwvGVaQP+UUO73Fy2Z8QiZ8pdWt85jSylXelxB5hl/xe1LYgFTjBMQAAAA==",
+  "alt": ""
+ },
+ "water-copper": {
+  "w": [
+   640,
+   1024,
+   1600,
+   2000
+  ],
+  "W": 2000,
+  "H": 816,
+  "bg": "#7a919d",
+  "lqip": "data:image/webp;base64,UklGRoIAAABXRUJQVlA4IHYAAADwAwCdASoYAAoAPu1iqU2ppaOiMAgBMB2JQBOmUAA3AsPTAiFGjBAAAMm6QkKHQKQpGP2SCr2j1wOAboBNIIyCJI8m7hivAhbbksSsYc+/MDe7gkQRBMrVqhgXRiEj5AHHhzr2fdnKHOJAxvYBapvojAVNO4AA",
+  "alt": ""
+ },
+ "water-sunset": {
+  "w": [
+   640,
+   1024,
+   1600,
+   2000
+  ],
+  "W": 2000,
+  "H": 1333,
+  "bg": "#3e5057",
+  "lqip": "data:image/webp;base64,UklGRnoAAABXRUJQVlA4IG4AAAAQBACdASoYABAAPu1iqU2ppaOiMAgBMB2JQAALlf5LKy5qJ+jNb+c3gAD8AovmWpDeZfl796iZMGib1jsMhyje2xQ/b/s5Adzj5/mXiAUeExPnyNV4j6A/81ibCi05dx0nbkU3rJugky/OECKAAA==",
+  "alt": ""
+ },
+ "ripple-rings": {
+  "w": [
+   640,
+   1024,
+   1400
+  ],
+  "W": 1400,
+  "H": 2097,
+  "bg": "#87a4ba",
+  "lqip": "data:image/webp;base64,UklGRjIBAABXRUJQVlA4ICYBAAAQBwCdASoYACQAPu1kqE8ppSOiKqwBMB2JQBXJ8BnJ4lYYGt5Tw7DNFDmbRCITzawBzK1dmqjXoFz3lOydOOLZaAD+zEq2DOfgWduu9aGAbDmE9aOhDyXol8FUFf0+r4PnF543XQ5IojRtZE6QTUBYDkutiF3TLWTWPwLbFB4igi+vBQ+q1VZ6dR9owyha7e8nYVNaBgpBQs26uRof/vVyMSUGctTwwk/5oxAsPqpewavxbxMB/Df9MTDeXxe/UpZSizRv0MJMT4vkpLridXjVwTFq94TZCPSkMxU6SbrrDsPtM+IU8YrV3/ASZRckP/4R3oGdhNpvlXcV67bas4BrzMfRioepjVfNCjVrr327QvhCOMaCAv/jL0T+mFk0rKQkigqAAAA=",
+  "alt": ""
+ },
+ "drop-rise": {
+  "w": [
+   640,
+   1024,
+   1600,
+   2000
+  ],
+  "W": 2000,
+  "H": 1126,
+  "bg": "#314247",
+  "lqip": "data:image/webp;base64,UklGRqAAAABXRUJQVlA4IJQAAABQBACdASoYAA4APu1iqU2ppaOiMAgBMB2JZQCdACHfaZ2VIvUCqrT5stAAAP7wyQjAYi3KdHtqZBxnftzDe4lQXUk6lMvYKlrYMcRdVaCgfMekUi8wmuewyU7+iaZXnbyks4Yhl9p/InBN6hRJopAYRSHm6e0S6rvfCI9SaLgHDAoWCZtN7jTCd1Ev1hSp19AC/QAA",
+  "alt": "A drop rising from dark water, light breaking into colour across the ripples"
+ },
+ "drop-splash": {
+  "w": [
+   640,
+   1024,
+   1600,
+   2000
+  ],
+  "W": 2000,
+  "H": 1126,
+  "bg": "#2c3d43",
+  "lqip": "data:image/webp;base64,UklGRqoAAABXRUJQVlA4IJ4AAABwBACdASoYAA4APu1iqU2ppaOiMAgBMB2JZQCsAYxs32xNlkixbHWmrUwcAAD+8qJYi/hspiDdwhs06I8tTHTYmm2w4nQ7YqcVIjwa7vTXnGQicrIUv/VsJBjrJ/O/rFefS7syKMnsn+A5aIWK1D7/OH+Q9IRySp5X87qJWriXUdUn21214HPDPuBaCLi9F6gKuhwAIZuwAeLAR6kAAA==",
+  "alt": ""
+ },
+ "drop-mono": {
+  "w": [
+   640,
+   1024,
+   1600,
+   2000
+  ],
+  "W": 2000,
+  "H": 1125,
+  "bg": "#acc1ca",
+  "lqip": "data:image/webp;base64,UklGRpoAAABXRUJQVlA4II4AAABwBACdASoYAA4APu1iqU2ppaQiMAgBMB2JZQCsAYwwyV8kK4MrRXoWhmBbQAD+50E2BWnO8Mkb6Ajx7luW/tBd9+auJ/6x1vEjYSJWqTXVORapSyeK3ca9miTQYbhXSnOJK3W7a3XkoT8Jxbm+DpTDp3H3hw9kQbp5VHssfftttu8HHW8j48MFlaJMSYAA",
+  "alt": "A single drop rising from a ring of ripples"
+ },
+ "drop-crown": {
+  "w": [
+   640,
+   1024,
+   1600,
+   2000
+  ],
+  "W": 2000,
+  "H": 903,
+  "bg": "#5478b6",
+  "lqip": "data:image/webp;base64,UklGRn4AAABXRUJQVlA4IHIAAAAQBACdASoYAAsAPu1iqU2ppaQiMAgBMB2JaACxG1ABQT2BCXVzau+YEAD+FaOXLx8qHG1kUlUc3xSxcMand5wCU2pIUf5N8A5xk0YS/NZDFPxpAPtgmi8ssM2b6rM+SGv94eJC+fJPerFI4gnrIPoAAAA=",
+  "alt": "A crown of water thrown up by a falling drop"
+ },
+ "drops-falling": {
+  "w": [
+   640,
+   1024,
+   1600,
+   2000
+  ],
+  "W": 2000,
+  "H": 1333,
+  "bg": "#123d58",
+  "lqip": "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAAAwBACdASoYABAAPu1iqU2ppaQiMAgBMB2JZgCdMoMxgEmNgFwuLGPDHYAA/vQf7Z+yQBMakE7vPke6BhrBXDxyys2gXsnA3y6jC+ekwT/UsRLv8vHGdI9FVwLBTQFvSAA=",
+  "alt": "Drops falling in a line into still blue water"
+ },
+ "drops-falling-2": {
+  "w": [
+   640,
+   1024,
+   1600,
+   2000
+  ],
+  "W": 2000,
+  "H": 1333,
+  "bg": "#123c58",
+  "lqip": "data:image/webp;base64,UklGRnIAAABXRUJQVlA4IGYAAACwBACdASoYABAAPu1kqU4ppaOiMAgBMB2JaACdMoMYORVtACB/Sciu5kVn2hV8AP70H+2fx5C5WfYGD9CdL31u/gj40vx6tJ4e1XSnkRFVzj8g8godqdhJjueFpHvjaKOw/hTRwAA=",
+  "alt": ""
+ },
+ "glass-layers": {
+  "w": [
+   640,
+   1024,
+   1600,
+   2000
+  ],
+  "W": 2000,
+  "H": 1125,
+  "bg": "#c3cfe3",
+  "lqip": "data:image/webp;base64,UklGRooAAABXRUJQVlA4IH4AAAAwBACdASoYAA4APu1iqU2ppaOiMAgBMB2JbACw7Buw6xOVlNLzJrkJvUAA/uf114p6lyjHe/IJNUeVAO9nT2u98V6y/b7hxGrj811jHBc0EBDO6FraWpWyNh2LKlveM3kRlsEfIpLlvduADalANXJZFCHIswvARwARayYAAAA=",
+  "alt": "Layers of translucent blue glass blocks stacked in depth, an abstract picture of a layered system"
+ },
+ "data-terrain": {
+  "w": [
+   640,
+   1024,
+   1600,
+   2000
+  ],
+  "W": 2000,
+  "H": 1125,
+  "bg": "#8088a7",
+  "lqip": "data:image/webp;base64,UklGRqgAAABXRUJQVlA4IJwAAACQBACdASoYAA4APu1iqU2ppaOiMAgBMB2JZgCdEf/l2AIVJzxWh1dgwCUwQ4AA/LHQcbQDb5W1YP4ULSLqOp+DRN+Kx92M6u0jyFtMchXsy1n4TQjpblk70XmMO+/U5vm7zPvwcPsUBvvnUB1rii0u/MqgWKcKOwHIzdMmc55jGlvZGUTmAdBYSBEWnK7TRmkGcmqDV048zjiAAAA=",
+  "alt": "An abstract landscape of thousands of small columns rising and falling like a data surface"
  }
 };

@@ -1,4 +1,4 @@
-"""Turn source photographs into the site's slate duotone, responsive WebP set and manifest.
+"""Grade source photographs into one consistent colour look, as a responsive WebP set and manifest.
 
 Usage:  python scripts/build-photos.py ["<source folder>"]
         (default source: E:/Startup/Hydris/website/0. assets/photos, one <name>.jpg per entry below)
@@ -6,6 +6,7 @@ Adding a photo: drop <name>.jpg in the source folder, add a line to PHOTOS, reru
 Output: public/photos/<name>-<width>.webp and src/lib/photos.js
 """
 import base64, io, json, os, sys
+import numpy as np
 from PIL import Image, ImageOps
 
 Image.MAX_IMAGE_PIXELS = None
@@ -48,17 +49,59 @@ PHOTOS = {
     'water-night':         '',
     'water-dusk':          '',
     'water-deep':          '',
+    # Water and abstract studies (2026-10-10). Already graded by their makers, so they get a lighter touch.
+    'water-blue':       '',
+    'water-copper':     '',
+    'water-sunset':     '',
+    'ripple-rings':     '',
+    'drop-rise':        'A drop rising from dark water, light breaking into colour across the ripples',
+    'drop-splash':      '',
+    'drop-mono':        'A single drop rising from a ring of ripples',
+    'drop-crown':       'A crown of water thrown up by a falling drop',
+    'drops-falling':    'Drops falling in a line into still blue water',
+    'drops-falling-2':  '',
+    'glass-layers':     'Layers of translucent blue glass blocks stacked in depth, an abstract picture of a layered system',
+    'data-terrain':     'An abstract landscape of thousands of small columns rising and falling like a data surface',
 }
+LIGHT = {'water-blue', 'water-copper', 'water-sunset', 'ripple-rings', 'drop-rise', 'drop-splash', 'drop-mono',
+         'drop-crown', 'drops-falling', 'drops-falling-2', 'glass-layers', 'data-terrain'}
 
-# Slate duotone: shadows, mids and highlights share one hue so every image sits in the same palette
-INK, MID, PAPER = (11, 18, 24), (96, 112, 128), (244, 247, 249)
+# The Hydris grade: colour kept, saturation eased, a gentle S-curve and cool, deep-water shadows,
+# so photographs from many cameras sit together beside the monochrome interface.
+SHADOW = np.array([10, 24, 36], dtype=np.float32) / 255
 WIDTHS = [640, 1024, 1600, 2000]
 MAX_LANDSCAPE, MAX_PORTRAIT = 2000, 1400
 
-def s_curve(t):  # gentle contrast, keeps detail in shadows
-    return t * t * (3 - 2 * t) * 0.35 + t * 0.65
+def tame_greens(im):
+    """Grass and trees are the loudest thing in an aerial: pull them back and towards teal."""
+    hsv = np.asarray(im.convert('HSV'), dtype=np.float32)
+    h = hsv[..., 0] * (360 / 255)
+    w = np.clip(1 - np.abs(h - 105) / 55, 0, 1) ** 0.8                  # 50 to 160 degrees, peak at 105
+    hsv[..., 1] *= 1 - 0.62 * w
+    hsv[..., 0] = ((h + 14 * w) % 360) * (255 / 360)
+    hsv[..., 2] *= 1 - 0.14 * w
+    return Image.fromarray(np.clip(hsv, 0, 255).astype(np.uint8), 'HSV').convert('RGB')
 
-LUT = [int(round(255 * s_curve(i / 255))) for i in range(256)]
+def grade(im, strength=1.0):
+    a = np.asarray(im, dtype=np.float32) / 255
+    if strength >= 1:
+        im = tame_greens(im)
+    a0 = a
+    a = np.asarray(im, dtype=np.float32) / 255
+    luma = lambda x: x[..., 0] * 0.2126 + x[..., 1] * 0.7152 + x[..., 2] * 0.0722
+    L = luma(a)
+    lo, hi = np.percentile(L, [0.4, 99.6])
+    g = np.clip((a - lo) / max(hi - lo, 1e-3), 0, 1)                      # levels, same for every channel
+    L = luma(g)[..., None]
+    g = L + (g - L) * 0.8                                                 # ease saturation
+    g = np.clip(g, 0, 1)
+    g = g * g * (3 - 2 * g) * 0.32 + g * 0.68                            # gentle S-curve
+    L = luma(g)[..., None]
+    w = (1 - L) ** 2.2 * 0.22
+    g = g + (SHADOW - g) * w                                              # cool shadows
+    g = g * 0.985 + 0.006
+    out = a0 + (g - a0) * strength
+    return Image.fromarray((np.clip(out, 0, 1) * 255 + 0.5).astype(np.uint8))
 
 os.makedirs(OUT, exist_ok=True)
 for f in os.listdir(OUT):  # rebuild from scratch so removed photos do not linger
@@ -73,13 +116,12 @@ for name, alt in PHOTOS.items():
     cap = MAX_PORTRAIT if H0 > W0 else MAX_LANDSCAPE
     top = min(W0, cap)
     im = im.resize((top, round(H0 * top / W0)), Image.LANCZOS)
-    g = ImageOps.autocontrast(ImageOps.grayscale(im), cutoff=0.6).point(LUT)
-    duo = ImageOps.colorize(g, black=INK, white=PAPER, mid=MID)
+    duo = grade(im, 0.45 if name in LIGHT else 1.0)
     W, H = duo.size
     sizes = [w for w in WIDTHS if w < W] + [W]
     for w in sizes:
         out = duo if w == W else duo.resize((w, round(H * w / W)), Image.LANCZOS)
-        out.save(os.path.join(OUT, f'{name}-{w}.webp'), 'WEBP', quality=72, method=6)
+        out.save(os.path.join(OUT, f'{name}-{w}.webp'), 'WEBP', quality=74, method=6)
     tiny = duo.resize((24, max(1, round(H * 24 / W))), Image.LANCZOS)
     buf = io.BytesIO()
     tiny.save(buf, 'WEBP', quality=40)
