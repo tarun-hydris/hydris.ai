@@ -32,6 +32,7 @@
 .splash__film { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform-origin: 50% 50%; will-change: transform; }
 .splash__sheen { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(125deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0) 38%, rgba(255, 255, 255, 0) 70%, rgba(255, 255, 255, 0.1) 100%); mix-blend-mode: screen; }
 .splash__figcap { position: absolute; left: 16px; bottom: 14px; color: #fff; font-size: 12px; opacity: 0; text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5); }
+.splash.is-in 
 /* The line, bottom-left, like the Swiss version */
 .splash__say { position: absolute; left: var(--pad); bottom: 44px; width: calc(45vw - var(--pad)); display: grid; gap: 22px; justify-items: start; text-align: left; }
 .splash__label { font-size: 13px; color: var(--mute); opacity: 0; }

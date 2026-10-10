@@ -38,7 +38,7 @@ export function LiquidMark() {
    higher, and the line about Hydris rises into place word by word.
    --------------------------------------------------------------------------------------------- */
 const SPLASH_LINE = 'The intelligence layer for industrial water.';
-const SPLASH_SUB = 'Hydris helps water operations teams interpret plant data, investigate problems, and decide what to check next.';
+const SPLASH_SUB = 'Hydris turns the water data your plant already collects into decisions your team can act on.';
 const canAv1 = (() => { try { return document.createElement('video').canPlayType('video/mp4; codecs="av01.0.08M.08"') !== ''; } catch { return false; } })();
 
 export function Splash() {
@@ -65,8 +65,7 @@ export function Splash() {
       const w = stage.clientWidth; const h = stage.clientHeight; const wide = w > 900;
       const pad = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--pad')) || 24;
       const s0 = wide ? Math.max(220, Math.min(w * 0.25, 380)) : w * 0.58;
-      const inset = Math.max(12, Math.min(w * 0.022, 32));
-      const end = { l: inset, t: inset + (wide ? 56 : 52), r: inset, b: inset };
+      const end = wide ? { l: w * 0.47, t: 76, r: pad, b: 36 } : { l: pad, t: 76, r: pad, b: h * 0.46 };
       // how big the mark must get for its lower bar (radius 0.18 of its width) to cover every corner
       const far = Math.hypot(Math.max(w / 2, w / 2), Math.max(h / 2, h / 2)) * 1.25;
       const zmax = Math.max(8, far / (0.18 * s0));
@@ -91,7 +90,8 @@ export function Splash() {
         win.style.webkitMaskSize = sz; win.style.maskSize = sz;
         win.style.webkitMaskPosition = pos; win.style.maskPosition = pos;
       } else {
-        win.style.webkitMaskImage = 'none'; win.style.maskImage = 'none';
+        const fadeEdge = 'linear-gradient(180deg, #000 0, #000 86%, transparent 100%)';
+        win.style.webkitMaskImage = fadeEdge; win.style.maskImage = fadeEdge;
         win.style.webkitMaskSize = '100% 100%'; win.style.maskSize = '100% 100%';
         win.style.webkitMaskPosition = '0 0'; win.style.maskPosition = '0 0';
       }
@@ -101,8 +101,7 @@ export function Splash() {
       win.style.top = `${(end.t * f).toFixed(1)}px`;
       win.style.right = `${(end.r * f).toFixed(1)}px`;
       win.style.bottom = `${(end.b * f).toFixed(1)}px`;
-      win.style.borderRadius = `${(18 * f).toFixed(1)}px`;
-      root.current.style.setProperty('--f', f.toFixed(3));
+      win.style.borderRadius = `${(6 * f).toFixed(1)}px`;
     };
     render();
     const ctx = gsap.context(() => {
@@ -118,13 +117,12 @@ export function Splash() {
         .to('.splash__foot', { opacity: 0, y: -24, duration: 0.12 }, 0)
         .to('.splash__frame', { opacity: 0, duration: 0.2 }, 0.05)
         .to('.splash__film', { scale: 1, duration: 0.4, ease: 'power2.out' }, 0.42)
-        .to(st, { f: 1, duration: 0.16, ease: 'power1.inOut', onUpdate: render }, 0.9)
         .fromTo('.splash__shade', { opacity: 0 }, { opacity: 1, duration: 0.2 }, 0.5)
         .fromTo('.splash__label', { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.1 }, 0.56)
         .fromTo('.splash__w', { yPercent: 115, rotate: 3, opacity: 0 }, { yPercent: 0, rotate: 0, opacity: 1, duration: 0.2, stagger: 0.03, ease: 'power3.out' }, 0.58)
         .fromTo('.splash__sub', { opacity: 0, y: 20, filter: 'blur(8px)' }, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.12 }, 0.76)
         .fromTo('.splash__cta', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.1 }, 0.82)
-        .to({}, { duration: 0.04 });
+        .to({}, { duration: 0.08 });
     }, root);
     const onResize = () => { g = geo(); render(); };
     window.addEventListener('resize', onResize);
@@ -187,7 +185,7 @@ export function Splash() {
         </div>
 
         <div className="splash__say">
-          <p className="splash__label">AI for industrial water operations</p>
+          <p className="splash__label">Operational Water Intelligence</p>
           <h1 className="splash__line">
             {words.map((w, i) => (
               <span key={i}><span className="splash__wm"><span className="splash__w">{w}</span></span>{i < words.length - 1 && ' '}</span>
@@ -195,8 +193,8 @@ export function Splash() {
           </h1>
           <p className="splash__sub">{SPLASH_SUB}</p>
           <div className="splash__cta">
-            <a className="pill pill--light" href="/contact/">Request a walkthrough <Arrow /></a>
-            <a className="link-u" href="#example">See an example <Arrow dir="down" /></a>
+            <a className="pill pill--light" href="#how">How it works <Arrow dir="down" /></a>
+            <a className="link-u" href="/contact/">Talk to us <Arrow /></a>
           </div>
         </div>
 
@@ -207,7 +205,7 @@ export function Splash() {
               : <span className="dec-wait">The intelligence layer for modern water operations</span>}
           </p>
           <p className="splash__index">(01) Index</p>
-          <a className="splash__scroll" href="#example">Scroll <Arrow dir="down" /></a>
+          <a className="splash__scroll" href="#intro">Scroll <Arrow dir="down" /></a>
         </div>
       </div>
     </section>

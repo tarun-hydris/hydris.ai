@@ -6,7 +6,7 @@ import { Alive, Glide, Grain, ScrollLean } from '../ui/Motion.jsx';
 import Backdrop from '../ui/Backdrop.jsx';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import { EMAIL, FOOTER, NAV, PHONE } from '../../lib/content.js';
-import { reduced, setReady } from '../../lib/hooks.js';
+import { reduced, setReady, useMedia } from '../../lib/hooks.js';
 import { initScroll, lockScroll, scrollToHashWhenReady } from '../../lib/scroll.js';
 
 const session = {
@@ -18,6 +18,7 @@ const session = {
 export function Header({ page }) {
   const [hidden, setHidden] = useState(false);
   const [solid, setSolid] = useState(false);
+  const small = useMedia('(max-width: 640px)');
   useEffect(() => {
     let last = window.scrollY;
     let raf = 0;
@@ -36,7 +37,9 @@ export function Header({ page }) {
     return () => { window.removeEventListener('scroll', onScroll); cancelAnimationFrame(raf); };
   }, []);
   // On a phone the logo is the way home and Contact takes the place of the call to action
-  const items = NAV;
+  const items = small
+    ? [...NAV.filter((n) => n.key !== 'home'), { key: 'contact', label: 'Contact', href: '/contact/' }]
+    : NAV;
   return (
     <header className={`hdr ${hidden ? 'is-hidden' : ''} ${solid ? 'is-solid' : ''}`}>
       <a className="hdr__logo" href="/" aria-label="Hydris, home">
@@ -51,7 +54,7 @@ export function Header({ page }) {
           </span>
         ))}
       </nav>
-      <a className="hdr__cta" href="/contact/" aria-current={page === 'contact' ? 'page' : undefined}>Request a walkthrough <Arrow /></a>
+      <a className="hdr__cta" href="/contact/" aria-current={page === 'contact' ? 'page' : undefined}>Talk to us <Arrow /></a>
     </header>
   );
 }

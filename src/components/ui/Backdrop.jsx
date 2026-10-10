@@ -25,7 +25,7 @@ export default function Backdrop() {
       const splash = document.querySelector('.splash');
       const start = splash ? splash.offsetHeight - vh * 1.2 : vh * 0.15;
       const k = Math.min(1, Math.max(0, (window.scrollY - start) / (vh * 0.9)));
-      el.style.opacity = (0.8 * k * k * (3 - 2 * k)).toFixed(3);
+      el.style.opacity = (0.62 * k * k * (3 - 2 * k)).toFixed(3);
     };
     const on = () => { if (!raf) raf = requestAnimationFrame(update); };
     update();

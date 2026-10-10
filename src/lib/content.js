@@ -8,9 +8,10 @@ export const EMAIL_LEGAL = 'legal@hydris.ai';
 export const PHONE = '+1 (503) 442-7560';
 
 export const NAV = [
+  { key: 'home', label: 'Home', href: '/' },
   { key: 'platform', label: 'Platform', href: '/platform/' },
   { key: 'about', label: 'About', href: '/about/' },
-  { key: 'contact', label: 'Contact', href: '/contact/' },
+  { key: 'press', label: 'Press', href: '/press/' },
 ];
 
 /* ---------------------------------------------------------------- Home */
@@ -251,56 +252,10 @@ export const NOTE = {
 };
 
 export const START = {
-  eyebrow: 'Request a walkthrough',
-  title: 'Let’s talk about your plant.',
-  text: 'Bring us the operating question your team is trying to answer.',
-  textShort: 'Bring us the operating question your team is trying to answer.',
-};
-
-/* Home, in six parts (Hydris Website Copy, 9 October 2026) */
-export const HOME = {
-  // Editorial illustration, not a measured outcome or a product screenshot. Keep the label visible.
-  example: {
-    eyebrow: 'Product example',
-    title: 'From a change in the data to a clearer next step.',
-    lead: 'When a reading changes, your team needs context. Hydris brings relevant operating information together to help you investigate.',
-    label: 'Illustrative workflow. Not a live plant result.',
-    steps: [
-      { q: 'What changed?', a: 'Effluent ammonia is trending upward.' },
-      { q: 'What might explain it?', a: 'Review the trend alongside dissolved oxygen, incoming load, and recent operating changes. These are possible lines of investigation, not a confirmed diagnosis.' },
-      { q: 'What should we check next?', a: 'Confirm the reading and review the relevant measurements and shift notes before deciding on an operating change.' },
-    ],
-    decision: 'Your operator reviews the evidence and decides what to do.',
-    link: 'Explore the platform',
-  },
-  value: {
-    eyebrow: 'Everyday value',
-    title: 'Give every shift a clearer picture.',
-    items: [
-      { icon: 'search', title: 'Know where to look.', text: 'Bring operating trends and lab results into the same investigation.' },
-      { icon: 'flow', title: 'Understand the reasoning.', text: 'Review the information behind a recommendation before acting.' },
-      { icon: 'book', title: 'Keep experience available.', text: 'Bring plant procedures and operator knowledge into day-to-day decisions.' },
-    ],
-  },
-  how: {
-    eyebrow: 'How it works',
-    steps: [
-      { title: 'Share the context.', text: 'Start with the process, the operating challenge, and the data available to your team.' },
-      { title: 'Review the evidence.', text: 'Hydris helps connect changes in the data with relevant plant information.' },
-      { title: 'Decide the next step.', text: 'Your team reviews the explanation and suggested checks, then decides how to respond.' },
-    ],
-    link: 'See how Hydris works',
-  },
-  control: {
-    eyebrow: 'Operator control',
-    title: 'Your team stays in control.',
-    text: 'Hydris provides analysis and guidance. Your operators remain responsible for operating decisions and control changes.',
-  },
-  start: {
-    eyebrow: 'Getting started',
-    title: 'Start with a conversation.',
-    text: 'Tell us what you operate and what you want to improve. We’ll discuss your available data and walk through a relevant example. If there is a fit, we’ll agree the scope and data requirements for an assessment.',
-  },
+  eyebrow: 'Start here',
+  title: 'Send us thirty days of your plant data. We will tell you what we see.',
+  text: 'No demo script and no obligation. We run your own data through the engine and walk you through what it says about your plant, including the parts that look fine.',
+  textShort: 'We run your own data through the engine and walk you through what it says, including the parts that look fine.',
 };
 
 /* ------------------------------------------------------------ Platform */
@@ -543,13 +498,13 @@ export const IMAGERY = {
     kicker: 'Seen from above',
     title: 'Every plant is already a record of how it behaves.',
     tag: 'Clarifier, seen from above',
-    end: 'Hydris helps your team read it.',
-    endSmall: 'Operating trends, lab results and shift notes, in one investigation.',
+    end: 'Hydris reads the plant you already run, as one system.',
+    endSmall: 'Nothing new is installed. Nothing in the plant is changed.',
   },
   stages: {
     eyebrow: 'Across the plant',
-    title: 'Start with your plant and the information you already collect.',
-    lead: 'Every stage of a plant already records how it behaves.',
+    title: 'Every stage of the plant already produces the data.',
+    lead: 'Hydris reads it where it already lives. Nothing new is installed at any of them.',
     items: [
       { name: 'aeration', title: 'Aeration', reads: 'Dissolved oxygen, airflow and blower load.' },
       { name: 'clarifier-top', title: 'Clarification', reads: 'Sludge blanket, turbidity and the return rate.' },

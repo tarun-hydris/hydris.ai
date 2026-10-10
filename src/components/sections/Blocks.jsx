@@ -315,7 +315,7 @@ export function Cta({ short = false }) {
         <Reveal as="p" className="lead cta__text" delay={0.2}>{short ? START.textShort : START.text}</Reveal>
         <Reveal className="cta__actions" delay={0.3}>
           <Magnet padding={90} magnetStrength={3}>
-            <a className="round" href="/contact/"><span>Request a<br />walkthrough</span></a>
+            <a className="round" href="/contact/"><span>Talk<br />to us</span></a>
           </Magnet>
           <a className="link-u cta__mail" href={`mailto:${EMAIL}`}>{EMAIL} <Arrow /></a>
         </Reveal>
