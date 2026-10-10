@@ -15,7 +15,7 @@ export default function About() {
         {!reduced && (
           <div className="phero__bg" aria-hidden="true">
             <Visible>
-              <Threads color={[0, 0, 0]} amplitude={1.2} distance={0.1} enableMouseInteraction />
+              <Threads color={[0.16, 0.25, 0.28]} amplitude={1.2} distance={0.1} enableMouseInteraction />
             </Visible>
           </div>
         )}

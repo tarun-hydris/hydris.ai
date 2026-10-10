@@ -2,6 +2,8 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { Mark, Wordmark } from '../ui/Brand.jsx';
 import { Arrow } from '../ui/Icon.jsx';
 import { Analytics } from '@vercel/analytics/react';
+import { Alive, Glide, Grain, ScrollLean } from '../ui/Motion.jsx';
+import Backdrop from '../ui/Backdrop.jsx';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import { EMAIL, FOOTER, NAV, PHONE } from '../../lib/content.js';
 import { reduced, setReady, useMedia } from '../../lib/hooks.js';
@@ -167,11 +169,16 @@ export function Site({ page, children }) {
   return (
     <>
       <a className="skip" href="#main">Skip to content</a>
+      <Backdrop />
       {page === 'home' && <Preloader />}
       <ScrollBar />
       <Header page={page} />
       <main id="main">{children}</main>
       <Footer />
+      <ScrollLean />
+      <Glide />
+      <Alive />
+      <Grain />
       <Analytics />
       <SpeedInsights />
     </>
