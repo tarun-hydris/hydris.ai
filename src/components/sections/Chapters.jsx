@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import CineVideo from '../ui/CineVideo.jsx';
-import { Mark } from '../ui/Brand.jsx';
 import Icon, { Arrow } from '../ui/Icon.jsx';
 import { Frame, Photo } from '../ui/Photo.jsx';
 import { Reveal, Words } from '../ui/Primitives.jsx';
@@ -11,7 +10,7 @@ import { KnowledgeBase } from '../viz/KnowledgeBase.jsx';
 import { Readout } from '../viz/Readout.jsx';
 import { PHOTOS } from '../../lib/photos.js';
 import {
-  ABOUT, CHANGE, CTA, EMAIL, IMAGERY, INVITE, KNOWLEDGE, LOOKS, MATTERS, OPENING, OPERATOR, PEOPLE, PLATFORM,
+  ABOUT, CHANGE, CTA, EMAIL, INVITE, KNOWLEDGE, LOOKS, MATTERS, OPENING, OPERATOR, PEOPLE, PLATFORM,
   PRODUCT_STAGE, PRODUCTS, PROOF,
 } from '../../lib/content.js';
 import { useInView, useMedia, useMotionOff, useReady } from '../../lib/hooks.js';
@@ -43,7 +42,6 @@ export function Opening() {
       <div className="open__film" aria-hidden="true"><CineVideo className="open__vid" priority /></div>
       <div className="open__shade" aria-hidden="true" />
       <div className="open__inner grid">
-        <Mark className="open__mark" title="Hydris" />
         <p className="s-label open__label">{OPENING.label}</p>
         <Words as="h1" text={OPENING.title} className="open__title" delay={0.1} />
         <Reveal as="p" className="lead open__sub" delay={0.45}>{OPENING.sub}</Reveal>
@@ -52,40 +50,140 @@ export function Opening() {
           <a className="link-u open__example" href={CTA.exampleHref}>{CTA.example} <Arrow dir="down" /></a>
         </Reveal>
       </div>
-      <a className="open__scroll" href="#change" aria-label="Scroll to the next chapter">{OPENING.scroll} <Arrow dir="down" /></a>
+      <a className="open__scroll" href="#aperture" aria-label="Scroll to the next chapter">{OPENING.scroll} <Arrow dir="down" /></a>
     </section>
   );
 }
 
-/* A round crop of a photograph, positioned from circle coordinates measured on the picture, with an
-   instrument ring that draws itself around it. The clarifier in the photograph is the shape the next
-   graphic echoes. */
-function CircleCrop({ name, circle }) {
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const lerp = (a, b, t) => a + (b - a) * t;
+const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+
+/* ------------------------------------------------------------------------------------------------
+   The aperture. A full-bleed photograph that opens from one of its own circles: the clarifier is the
+   first thing you see, then the view widens to the whole plant as you scroll. Only the zoom, no
+   decoration. With motion paused the whole photograph is simply shown with its caption.
+   ------------------------------------------------------------------------------------------------ */
+export function Aperture({ name, circle, kicker, title, end, endSmall }) {
   const p = PHOTOS[name];
-  const d = 2 * circle.r;
-  const aspect = p.H / p.W;
-  const [ref, inView] = useInView({ rootMargin: '0px 0px -10% 0px', once: true });
-  const style = {
-    width: `${100 / d}%`,
-    left: `${(-(circle.x - circle.r) / d) * 100}%`,
-    top: `${-((circle.y * aspect) / d - 0.5) * 100}%`,
-  };
+  const off = useMotionOff();
+  const track = useRef(null);
+  const stage = useRef(null);
+  const clip = useRef(null);
+  const img = useRef(null);
+  const intro = useRef(null);
+  const outro = useRef(null);
+
+  useEffect(() => {
+    if (off || !track.current) return undefined;
+    let g = null;
+    let last = 0;
+
+    const measure = () => {
+      const w = stage.current.clientWidth;
+      const h = stage.current.clientHeight;
+      const s = Math.max(w / p.W, h / p.H);
+      const iw = p.W * s;
+      const ih = p.H * s;
+      const dx = (w - iw) / 2;
+      const dy = (h - ih) / 2;
+      const cx = dx + circle.x * iw;
+      const cy = dy + circle.y * ih;
+      const rImg = circle.r * iw;
+      const r0 = Math.min(rImg, 0.23 * Math.min(w, h) + 0.04 * Math.max(w, h));
+      const far = Math.max(Math.hypot(cx, cy), Math.hypot(w - cx, cy), Math.hypot(cx, h - cy), Math.hypot(w - cx, h - cy));
+      g = { w, h, dx, dy, iw, ih, cx, cy, rImg, r0, k0: r0 / rImg, far };
+      // The scaled layer is the whole photograph (not the screen), so on a portrait screen the cropped
+      // parts are still there to be revealed and its edge never shows inside the circle
+      const el = img.current.style;
+      el.inset = 'auto';
+      el.left = `${dx}px`; el.top = `${dy}px`; el.width = `${iw}px`; el.height = `${ih}px`;
+      el.transformOrigin = `${circle.x * iw}px ${circle.y * ih}px`;
+    };
+
+    const render = (prog) => {
+      last = prog;
+      if (!g) return;
+      const { w, h, dx, dy, iw, ih, cx, cy, r0, k0, far } = g;
+      const t = ease(clamp((prog - 0.08) / 0.74));
+      const k = lerp(k0, 1, clamp(t * 1.35));
+      let r = lerp(r0, far + 2, Math.pow(t, 1.35));
+      if (k < 1) {
+        // Never open past the edge of the (still scaled down) picture
+        const L = cx - (cx - dx) * k; const R = cx + (dx + iw - cx) * k;
+        const T = cy - (cy - dy) * k; const B = cy + (dy + ih - cy) * k;
+        let cap = Infinity;
+        if (L > 0) cap = Math.min(cap, cx - L);
+        if (R < w) cap = Math.min(cap, R - cx);
+        if (T > 0) cap = Math.min(cap, cy - T);
+        if (B < h) cap = Math.min(cap, B - cy);
+        r = Math.min(r, cap);
+      }
+      clip.current.style.clipPath = `circle(${r.toFixed(1)}px at ${cx.toFixed(1)}px ${cy.toFixed(1)}px)`;
+      img.current.style.transform = `scale(${k.toFixed(4)})`;
+
+      const io = clamp((prog - 0.06) / 0.22);
+      intro.current.style.opacity = 1 - io;
+      intro.current.style.transform = `translateY(${(-io * 40).toFixed(1)}px)`;
+      const oo = clamp((prog - 0.74) / 0.16);
+      outro.current.style.opacity = oo;
+      outro.current.style.transform = `translateY(${((1 - oo) * 30).toFixed(1)}px)`;
+      // The header follows what is under it: pale paper first, the dark photograph once it has opened
+      track.current.dataset.tone = t > 0.55 ? 'dark' : 'light';
+    };
+
+    measure();
+    render(0);
+    const st = ScrollTrigger.create({
+      trigger: track.current, start: 'top top', end: 'bottom bottom',
+      onRefresh: (self) => { measure(); render(self.progress); },
+      onUpdate: (self) => render(self.progress),
+    });
+    const ro = new ResizeObserver(() => { measure(); render(last); });
+    ro.observe(stage.current);
+    return () => { st.kill(); ro.disconnect(); };
+  }, [off, circle.r, circle.x, circle.y, p.H, p.W]);
+
+  if (off) {
+    return (
+      <section id="aperture" className="aperture aperture--static sec" data-tone="light" aria-label={kicker}>
+        <div className="aperture__still">
+          <Frame name={name} sizes="100vw" drift={0} ratio="16 / 9" />
+        </div>
+        <div className="aperture__static grid">
+          <p className="s-label">({kicker})</p>
+          <p className="t-s">{title}</p>
+          <p className="lead mute">{end} {endSmall}</p>
+        </div>
+      </section>
+    );
+  }
+
   return (
-    <div ref={ref} className={`ring ${inView ? 'is-in' : ''}`}>
-      <div className="ring__disc">
-        <Photo name={name} sizes="(min-width: 901px) 34vw, 80vw" className="ring__img" style={{ ...style, height: 'auto', position: 'absolute' }} alt={p.alt} />
+    <section id="aperture" className="aperture" ref={track} data-tone="light" aria-label={kicker}>
+      <div className="aperture__stage" ref={stage} style={{ '--bg': p.bg }}>
+        <div className="aperture__clip" ref={clip}>
+          <div className="aperture__img" ref={img} style={{ backgroundImage: `url("${p.lqip}")` }}>
+            <Photo name={name} sizes="100vw" alt={p.alt} />
+          </div>
+          <div className="aperture__veil" aria-hidden="true" />
+        </div>
+        <div className="aperture__intro grid" ref={intro}>
+          <p className="s-label aperture__kicker">({kicker})</p>
+          <p className="t-m aperture__title">{title}</p>
+        </div>
+        <div className="aperture__outro grid" ref={outro}>
+          <p className="t-m aperture__end">{end}</p>
+          <p className="lead aperture__small">{endSmall}</p>
+        </div>
       </div>
-      <svg className="ring__svg" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
-        <circle className="ring__ticks" cx="50" cy="50" r="49" />
-        <circle className="ring__line" cx="50" cy="50" r="46.5" pathLength="1" />
-      </svg>
-    </div>
+    </section>
   );
 }
 
 /* ------------------------------------------------------------------------------------------------
-   Chapter 2. The change. The plant is seen from above; its circle is echoed by the reading that
-   begins to move. One approved operating question, and the three questions every morning answers.
+   Chapter 2. The change. The reading that begins to move, one approved operating question, and the
+   three questions every morning answers.
    ------------------------------------------------------------------------------------------------ */
 export function Change({ index = '02' }) {
   const off = useMotionOff();
@@ -98,11 +196,6 @@ export function Change({ index = '02' }) {
       </div>
 
       <div className="change__row grid">
-        <div className="change__ring">
-          <CircleCrop {...{ name: IMAGERY.aperture.name, circle: IMAGERY.aperture.circle }} />
-          <Reveal as="p" className="s-label change__tag" delay={0.2}>{IMAGERY.aperture.tag}</Reveal>
-          <Reveal as="p" className="change__ringtext" delay={0.25}>{CHANGE.ring}</Reveal>
-        </div>
         <div className="change__readout">
           <Readout key={off ? 'still' : 'live'} />
           <Reveal as="p" className="body mute change__note" delay={0.2}>{LOOKS.lead}</Reveal>

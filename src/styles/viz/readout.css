@@ -37,7 +37,7 @@
 /* ---------- Header: live dot, plant, shift, window, clock ---------- */
 .vz-ro__head {
   display: flex; align-items: center; gap: 9px; min-width: 0;
-  padding: 13px 16px 12px; border-bottom: 1px solid var(--vz-hair);
+  padding: 15px var(--vz-pad) 14px; border-bottom: 1px solid var(--vz-hair);
   font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
   color: var(--vz-slate); white-space: nowrap;
 }
@@ -60,7 +60,7 @@
 .vz-ro__cols, .vz-ro__row, .vz-ro__axis {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr) 64px 120px;
-  column-gap: 14px; align-items: center; padding-inline: 16px;
+  column-gap: 14px; align-items: center; padding-inline: var(--vz-pad);
 }
 .vz-ro__cols {
   padding-block: 10px 8px;
@@ -240,7 +240,7 @@
 .vz-ro__scan::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: linear-gradient(90deg, rgba(42, 65, 72, 0), rgba(42, 65, 72, 0.32) 18%, rgba(42, 65, 72, 0.32) 82%, rgba(42, 65, 72, 0)); }
 
 /* ---------- Hydris note ---------- */
-.vz-ro__note { padding: 16px 16px 15px; border-top: 1px solid var(--vz-hair); background: rgba(111, 148, 147, 0.07); }
+.vz-ro__note { padding: 18px var(--vz-pad) 20px; border-top: 1px solid var(--vz-hair); background: rgba(111, 148, 147, 0.07); }
 .vz-ro__lbl {
   display: flex; align-items: center; gap: 8px; margin-bottom: 9px;
   font-family: var(--serif); font-size: 13px; color: var(--vz-slate);
@@ -306,10 +306,10 @@
 
 /* ---------- Card widths ---------- */
 @container vzro (max-width: 560px) {
-  .vz-ro__cols, .vz-ro__row, .vz-ro__axis { grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr) 58px 112px; column-gap: 12px; padding-inline: 14px; }
+  .vz-ro__cols, .vz-ro__row, .vz-ro__axis { grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr) 58px 112px; column-gap: 12px; padding-inline: var(--vz-pad); }
   .vz-ro__p { font-size: 13.5px; }
-  .vz-ro__head { padding-inline: 14px; }
-  .vz-ro__note { padding-inline: 14px; }
+  .vz-ro__head { padding-inline: var(--vz-pad); }
+  .vz-ro__note { padding-inline: var(--vz-pad); }
 }
 /* Narrow: stable rows drop their trace; the drifting row keeps a full-width chart */
 @container vzro (max-width: 480px) {
@@ -326,8 +326,8 @@
 @container vzro (max-width: 380px) {
   .vz-ro__trend.icon { display: none; }
   .vz-ro__pill { padding: 0 7px; gap: 5px; }
-  .vz-ro__cols, .vz-ro__row { column-gap: 10px; padding-inline: 12px; }
-  .vz-ro__head, .vz-ro__note { padding-inline: 12px; }
+  .vz-ro__cols, .vz-ro__row { column-gap: 10px; padding-inline: var(--vz-pad); }
+  .vz-ro__head, .vz-ro__note { padding-inline: var(--vz-pad); }
 }
 
 /* ---------- Reduced motion: the final, fully informative state, nothing moving ---------- */

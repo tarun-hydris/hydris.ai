@@ -23,7 +23,7 @@
 }
 .vz-lp p, .vz-lp ol, .vz-kb p, .vz-kb ol { margin: 0; padding: 0; list-style: none; }
 
-.vz-lp__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 42px; padding: 0 14px; border-bottom: 1px solid var(--vz-hair); }
+.vz-lp__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 42px; padding: 0 var(--vz-pad); border-bottom: 1px solid var(--vz-hair); }
 .vz-lp__title { font-weight: 500; font-size: 13.5px; letter-spacing: -0.01em; }
 .vz-lp__meta { display: inline-flex; align-items: center; gap: 5px; font-family: var(--mono); font-size: 11px; color: var(--mute, #55696f); white-space: nowrap; }
 
@@ -36,7 +36,7 @@
    01 Data: six sources are read, then sent into one place
    Row height (42px) and the wiring column (116px) match the numbers in DataIntake.jsx
    ========================================================================== */
-.vz-intake__body { display: grid; grid-template-columns: minmax(0, 1fr) 116px; padding: 6px 0 4px 14px; }
+.vz-intake__body { display: grid; grid-template-columns: minmax(0, 1fr) 116px; padding: 8px var(--vz-pad) 6px var(--vz-pad); }
 .vz-intake__rows { display: grid; }
 .vz-intake__row { position: relative; display: grid; grid-template-columns: 26px minmax(0, 1fr) 18px; align-items: center; gap: 10px; height: 42px; overflow: hidden; border-bottom: 1px solid var(--vz-hair); }
 .vz-intake__row:last-child { border-bottom: 0; }
@@ -85,7 +85,7 @@
 @keyframes vz-intake-ping { 0% { transform: scale(1); opacity: 0.7; } 100% { transform: scale(1.7); opacity: 0; } }
 .vz-intake.is-resetting .vz-intake__line, .vz-intake.is-resetting .vz-intake__port, .vz-intake.is-resetting .vz-intake__segs path.is-on { opacity: 0; transition: opacity 0.45s var(--vz-e); }
 
-.vz-intake__foot { padding: 6px 14px 14px; }
+.vz-intake__foot { padding: 8px var(--vz-pad) 18px; }
 .vz-intake__bar { display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; }
 .vz-intake__bar i { position: relative; display: block; height: 2px; background: var(--vz-hair); overflow: hidden; }
 .vz-intake__bar u { position: absolute; inset: 0; background: var(--vz-slate); transform: scaleX(0); transform-origin: left; text-decoration: none; transition: transform 0.6s var(--vz-eio); }
@@ -95,7 +95,7 @@
 /* ==========================================================================
    05 Learn: a ring of four stages, and the chart that rises once per lap
    ========================================================================== */
-.vz-learn__body { display: grid; grid-template-columns: 132px minmax(0, 1fr); gap: 18px; align-items: center; padding: 14px 16px 6px; }
+.vz-learn__body { display: grid; grid-template-columns: 132px minmax(0, 1fr); gap: 18px; align-items: center; padding: 16px var(--vz-pad) 8px; }
 .vz-learn__ring { position: relative; width: 132px; height: 132px; }
 .vz-learn__svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .vz-learn__ticks { fill: none; stroke: rgba(42, 65, 72, 0.22); stroke-width: 0.8; }
@@ -141,7 +141,7 @@
 .vz-learn__steps li.is-past .vz-learn__idx svg { stroke-dashoffset: 0; }
 .vz-learn__lbl { font-size: 13.5px; letter-spacing: -0.01em; }
 
-.vz-learn__chart { padding: 6px 14px 12px; }
+.vz-learn__chart { padding: 6px var(--vz-pad) 16px; }
 .vz-learn__cap { display: flex; justify-content: space-between; font-family: var(--serif); font-size: 11px; color: var(--mute, #55696f); padding-bottom: 2px; }
 .vz-learn__plotwrap { width: 100%; }
 .vz-learn__plot { display: block; width: 100%; height: 80px; overflow: visible; transition: opacity 0.5s var(--vz-e); }
@@ -174,7 +174,7 @@
 /* ==========================================================================
    Knowledge base: five layers fill, then complete together
    ========================================================================== */
-.vz-kb { width: 100%; padding: 4px 18px 16px; }
+.vz-kb { width: 100%; padding: 8px var(--vz-pad) 22px; }
 .vz-kb__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; min-height: 42px; border-bottom: 1px solid var(--vz-hair); font-family: var(--serif); font-size: 12px; color: var(--mute, #55696f); }
 .vz-kb__brand { display: inline-flex; align-items: center; gap: 8px; color: var(--vz-ink); font-family: var(--sans); font-weight: 500; font-size: 13px; }
 .vz-kb__mark { width: 16px; height: 16px; }
@@ -209,3 +209,9 @@
 html.motion-off .vz-lp *, html.motion-off .vz-kb * { animation: none !important; transition-duration: 0.001ms !important; transition-delay: 0s !important; }
 html.motion-off .vz-kb__fill { transform: none; }
 html.motion-off .vz-kb__name, html.motion-off .vz-kb__foot { opacity: 1; }
+
+/* Narrow screens: keep the names whole by dropping the small source icons */
+@media (max-width: 460px) {
+  .vz-intake__row { grid-template-columns: minmax(0, 1fr) 18px; }
+  .vz-intake__ico { display: none; }
+}

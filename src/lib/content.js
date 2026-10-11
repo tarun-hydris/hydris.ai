@@ -501,9 +501,9 @@ export const CONTACT = {
   lead: 'Different people arrive here for different reasons. Pick the one that fits and you will reach the right person rather than a queue.',
   transfer: 'Agree how plant data will be shared before you send it. Please do not put operating files or confidential plant data in this message.',
   routes: [
-    { key: 'plant', pick: 'I run a plant', who: 'If you run a plant', title: 'Send us thirty days of data', text: 'No demo script. We run your own plant data through the engine and walk you through what it says, including the parts that look fine. If Hydris is not the right fit we will tell you.', email: 'hello@hydris.ai' },
+    { key: 'plant', pick: 'Onboard my plant with Hydris', who: 'If you run a plant', title: 'Send us thirty days of data', text: 'No demo script. We run your own plant data through the engine and walk you through what it says, including the parts that look fine. If Hydris is not the right fit we will tell you.', email: 'hello@hydris.ai' },
     { key: 'press', pick: 'I am a journalist', who: 'If you are a journalist', title: 'Press and media', text: 'Assets, boilerplate and bios are on the press page, free to use, no form. We respond within one business day.', email: 'press@hydris.ai' },
-    { key: 'work', pick: 'I want to build this', who: 'If you want to build this', title: 'Working at Hydris', text: 'We are hiring engineers and water people. There is no jobs board yet. Write to us with what you have built and what you want to work on.', email: 'hello@hydris.ai' },
+    { key: 'work', pick: 'Work with Hydris', who: 'If you want to work with us', title: 'Working at Hydris', text: 'We are hiring engineers and water people. There is no jobs board yet. Write to us with what you have built and what you want to work on.', email: 'hello@hydris.ai' },
   ],
   details: [
     { h: 'Headquarters', lines: ['Hydris, Inc.', 'Portland, Oregon', 'United States'] },

@@ -28,11 +28,11 @@
 /* Snap back between loops: no transitions for one frame */
 .vz-rsn.is-snap, .vz-rsn.is-snap *, .vz-rsn.is-snap *::before, .vz-rsn.is-snap *::after { transition: none !important; animation: none !important; }
 
-.vz-rsn__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 42px; padding: 0 14px; border-bottom: 1px solid var(--vz-hair); }
+.vz-rsn__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 42px; padding: 0 var(--vz-pad); border-bottom: 1px solid var(--vz-hair); }
 .vz-rsn__title { font-weight: 500; font-size: 13.5px; letter-spacing: -0.01em; }
 .vz-rsn__meta { display: inline-flex; align-items: center; gap: 7px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.01em; color: var(--mute, #6f6f6f); white-space: nowrap; }
 .vz-rsn__lbl { font-family: var(--serif); font-size: 11.5px; color: var(--mute, #6f6f6f); letter-spacing: 0; }
-.vz-rsn__foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 7px 14px 8px; border-top: 1px solid var(--vz-hair); font-family: var(--serif); font-size: 11px; color: var(--mute, #6f6f6f); }
+.vz-rsn__foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 9px var(--vz-pad) 10px; border-top: 1px solid var(--vz-hair); font-family: var(--serif); font-size: 11px; color: var(--mute, #6f6f6f); }
 
 /* Live dot: a quiet breath, not a blink */
 .vz-rsn__live { position: relative; flex: none; width: 6px; height: 6px; border-radius: 50%; background: var(--vz-teal); }
@@ -58,7 +58,7 @@
 /* ==========================================================================
    02 Context: two ideas of normal on one pH axis
    ========================================================================== */
-.vz-ctx__body { display: grid; gap: 12px; padding: 14px; container-type: inline-size; }
+.vz-ctx__body { display: grid; gap: 12px; padding: 16px var(--vz-pad) 18px; container-type: inline-size; }
 .vz-ctx__read { display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 10px 14px; }
 .vz-ctx__val { display: flex; align-items: baseline; gap: 7px; }
 .vz-ctx__num { display: inline-block; min-width: 1.9ch; font-size: 40px; line-height: 0.9; letter-spacing: -0.04em; font-variant-numeric: tabular-nums; }
@@ -127,7 +127,7 @@
 .vz-trace .vz-rsn__meta { justify-items: end; }
 .vz-trace__m { display: inline-flex; align-items: center; justify-content: flex-end; gap: 7px; }
 .vz-trace__m--found { color: var(--vz-blue); }
-.vz-trace__body { padding: 14px 14px 12px; }
+.vz-trace__body { padding: 16px var(--vz-pad) 16px; }
 .vz-trace__chain { --ty: 39px; position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
 
 .vz-trace__line { position: absolute; z-index: 0; left: 16.667%; right: 16.667%; top: var(--ty); height: 1px; margin-top: -0.5px; background: rgba(42, 65, 72, 0.22); }
@@ -176,7 +176,7 @@
 .vz-trace.is-found .vz-trace__ev--origin { background: var(--vz-blue); }
 .vz-trace.is-fade .vz-trace__seg, .vz-trace.is-fade .vz-trace__gap { opacity: 0; }
 
-.vz-trace__cap { align-items: center; min-height: 40px; padding: 0 14px; border-top: 1px solid var(--vz-hair); font-size: 13px; }
+.vz-trace__cap { align-items: center; min-height: 40px; padding: 0 var(--vz-pad); border-top: 1px solid var(--vz-hair); font-size: 13px; }
 .vz-trace__c { display: flex; align-items: center; gap: 8px; }
 .vz-trace__c--found { font-weight: 500; }
 .vz-trace__c--found .vz-check path { stroke: var(--vz-blue); }
@@ -187,7 +187,7 @@
    ========================================================================== */
 .vz-rec__who { display: inline-flex; align-items: center; gap: 9px; }
 .vz-rec__mark { width: 16px; height: 16px; color: var(--vz-slate); }
-.vz-rec__body { padding: 13px 14px 14px; transition: opacity 0.45s var(--vz-eio); }
+.vz-rec__body { padding: 16px var(--vz-pad) 18px; transition: opacity 0.45s var(--vz-eio); }
 .vz-rec.is-fade .vz-rec__body { opacity: 0; }
 
 .vz-rec__say { margin-top: 5px; font-size: 17.5px; line-height: 1.22; letter-spacing: -0.022em; color: var(--vz-ink); text-wrap: pretty; }
@@ -211,7 +211,7 @@
 .vz-rec__chip:hover { border-color: rgba(42, 65, 72, 0.45); background: #fff; }
 .vz-rec__chip:hover .icon { transform: translate(1px, -1px); }
 
-.vz-rec__act { display: flex; align-items: center; gap: 8px; padding: 12px 14px; border-top: 1px solid var(--vz-hair); }
+.vz-rec__act { display: flex; align-items: center; gap: 8px; padding: 14px var(--vz-pad); border-top: 1px solid var(--vz-hair); }
 .vz-rec__btn { position: relative; display: inline-flex; align-items: center; justify-content: center; height: 30px; padding: 0 15px; font-size: 12.5px; letter-spacing: -0.005em; white-space: nowrap; color: var(--vz-ink); border: 1px solid var(--vz-ink); transition: color 0.35s var(--vz-e), border-color 0.35s var(--vz-e), background-color 0.35s var(--vz-e); }
 .vz-rec__btn--ghost { color: var(--mute, #6f6f6f); border-color: rgba(42, 65, 72, 0.24); }
 .vz-rec__btn--ghost:hover { color: var(--vz-ink); border-color: rgba(42, 65, 72, 0.5); }
@@ -236,7 +236,7 @@
 @keyframes vz-click { 0%, 100% { transform: translate(0, 0) scale(1); } 40% { transform: translate(0, 0) scale(0.84); } }
 
 /* Decision strip: awaiting, then decided, with a drawn check and a time */
-.vz-rec__dec { position: relative; align-items: center; min-height: 40px; padding: 0 14px; border-top: 1px solid var(--vz-hair); }
+.vz-rec__dec { position: relative; align-items: center; min-height: 40px; padding: 0 var(--vz-pad); border-top: 1px solid var(--vz-hair); }
 .vz-rec__dec::before { content: ''; position: absolute; left: -1px; top: -1px; bottom: 0; width: 2px; background: var(--vz-blue); transform: scaleY(0); transform-origin: bottom; transition: transform 0.6s var(--vz-e); }
 .vz-rec__dec::after { content: ''; position: absolute; inset: 0; background: rgba(23, 70, 228, 0.045); opacity: 0; transition: opacity 0.6s var(--vz-e); pointer-events: none; }
 .vz-rec__dec.is-in::before { transform: scaleY(1); }

@@ -24,11 +24,11 @@
 }
 .vz-days p { margin: 0; }
 
-.vz-days__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 42px; padding: 0 14px; border-bottom: 1px solid var(--vz-hair); }
+.vz-days__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 42px; padding: 0 var(--vz-pad); border-bottom: 1px solid var(--vz-hair); }
 .vz-days__title { font-weight: 500; font-size: 13.5px; letter-spacing: -0.01em; }
 .vz-days__meta { font-family: var(--mono); font-size: 11px; color: var(--mute, #55696f); }
 
-.vz-days__bar { display: flex; align-items: center; gap: 16px; padding: 10px 14px 4px; font-family: var(--serif); font-size: 11.5px; color: var(--mute, #55696f); }
+.vz-days__bar { display: flex; align-items: center; gap: 16px; padding: 10px var(--vz-pad) 4px; font-family: var(--serif); font-size: 11.5px; color: var(--mute, #55696f); }
 .vz-days__key { display: inline-flex; align-items: center; gap: 7px; }
 .vz-days__ramp { display: inline-flex; gap: 2px; }
 .vz-days__ramp span { width: 10px; height: 8px; background: var(--vz-slate); border-radius: 1px; }
@@ -41,7 +41,7 @@
 .vz-days__nowv.is-alarm { color: var(--vz-blue); }
 
 /* ---------- Plot ---------- */
-.vz-days__plot { position: relative; padding: 0 14px 8px; }
+.vz-days__plot { position: relative; padding: 0 var(--vz-pad) 12px; }
 .vz-days__axis { display: grid; grid-template-columns: var(--L) minmax(0, 1fr); height: var(--A); align-items: center; }
 .vz-days__ticks { display: grid; grid-template-columns: repeat(6, 1fr); }
 .vz-days__d { text-align: center; font-family: var(--mono); font-size: 10.5px; color: rgba(42, 65, 72, 0.4); transition: color 0.4s var(--vz-e); }
@@ -57,7 +57,7 @@
 .vz-days__row.is-alarm .vz-days__f { background: repeating-linear-gradient(45deg, var(--vz-blue) 0 3px, rgba(23, 70, 228, 0.4) 3px 6px); }
 
 /* Everything that is drawn over the cells: grid, trace, cursor */
-.vz-days__over { position: absolute; left: calc(14px + var(--L)); right: 14px; top: var(--A); bottom: 8px; pointer-events: none; }
+.vz-days__over { position: absolute; left: calc(var(--vz-pad) + var(--L)); right: var(--vz-pad); top: var(--A); bottom: 8px; pointer-events: none; }
 .vz-days__grid { position: absolute; inset: 0; background: linear-gradient(90deg, var(--vz-hair) 1px, transparent 1px) 0 0 / calc(100% / 6) 100%; }
 .vz-days__fx { position: absolute; inset: 0; }
 .vz-days__org { position: absolute; left: calc(100% / 12); top: calc(var(--R) / 2); width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: #fff; border: 2px solid var(--vz-blue); box-shadow: 0 0 0 4px rgba(23, 70, 228, 0.12); }
@@ -76,11 +76,11 @@
 .vz-days.is-static .vz-days__cur { display: none; }
 
 /* ---------- Lead time bracket and message ---------- */
-.vz-days__span { position: relative; margin: 0 14px 0 calc(14px + var(--L)); height: 30px; }
+.vz-days__span { position: relative; margin: 0 var(--vz-pad) 0 calc(var(--vz-pad) + var(--L)); height: 30px; }
 .vz-days__brace { display: block; width: 100%; height: 10px; overflow: visible; fill: none; stroke: var(--vz-slate); stroke-width: 1.4; stroke-linecap: square; }
 .vz-days__brace path { stroke-dasharray: 1; stroke-dashoffset: 0; }
 .vz-days__len { position: absolute; left: 50%; top: 0; transform: translate(-50%, -1px); padding: 0 8px; font-family: var(--mono); font-size: 11px; color: var(--vz-slate); background: rgba(255, 255, 255, 0.9); }
-.vz-days__msg { display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px 14px; border-top: 1px solid var(--vz-hair); font-size: 13px; line-height: 1.4; }
+.vz-days__msg { display: flex; align-items: flex-start; gap: 10px; padding: 14px var(--vz-pad) 18px; border-top: 1px solid var(--vz-hair); font-size: 13px; line-height: 1.4; }
 .vz-days__pin { flex: none; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: #fff; border: 1px solid var(--vz-line); }
 .vz-days__pinmark { width: 12px; height: 12px; color: var(--vz-ink); }
 .vz-days__msgt b { font-weight: 500; }
