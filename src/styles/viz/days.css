@@ -1,0 +1,92 @@
+/* ==========================================================================
+   Days: "one cause, five days". A heat strip with a cursor, drawn for Days.jsx.
+   Geometry the timeline relies on: a 78px label column, a 26px axis, four rows of 30px, six columns.
+   The default CSS state is the complete, annotated final picture (used when motion is off); the
+   GSAP timeline sets every starting state itself and animates transform, opacity, clip-path and
+   stroke-dashoffset only.
+   ========================================================================== */
+
+.vz-days {
+  --vz-ink: var(--ink, #07161b);
+  --vz-slate: var(--slate, #2a4148);
+  --vz-teal: var(--teal, #6f9493);
+  --vz-blue: var(--blue, #1746e4);
+  --vz-line: rgba(42, 65, 72, 0.16);
+  --vz-hair: rgba(42, 65, 72, 0.1);
+  --vz-e: var(--ease, cubic-bezier(0.22, 1, 0.36, 1));
+  --L: 78px; --A: 26px; --R: 30px;
+  position: relative; width: min(460px, 92%); color: var(--vz-ink); text-align: left;
+  background: rgba(255, 255, 255, 0.78); border: 1px solid var(--vz-line);
+  box-shadow: 0 30px 80px -40px rgba(42, 65, 72, 0.35);
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+  font-family: var(--sans); font-size: 14px; line-height: 1.3; letter-spacing: -0.005em;
+  font-variant-numeric: tabular-nums; -webkit-user-select: none; user-select: none;
+}
+.vz-days p { margin: 0; }
+
+.vz-days__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 42px; padding: 0 14px; border-bottom: 1px solid var(--vz-hair); }
+.vz-days__title { font-weight: 500; font-size: 13.5px; letter-spacing: -0.01em; }
+.vz-days__meta { font-family: var(--mono); font-size: 11px; color: var(--mute, #55696f); }
+
+.vz-days__bar { display: flex; align-items: center; gap: 16px; padding: 10px 14px 4px; font-family: var(--serif); font-size: 11.5px; color: var(--mute, #55696f); }
+.vz-days__key { display: inline-flex; align-items: center; gap: 7px; }
+.vz-days__ramp { display: inline-flex; gap: 2px; }
+.vz-days__ramp span { width: 10px; height: 8px; background: var(--vz-slate); border-radius: 1px; }
+.vz-days__ramp span:nth-child(1) { opacity: 0.3; } .vz-days__ramp span:nth-child(2) { opacity: 0.6; } .vz-days__ramp span:nth-child(3) { opacity: 0.92; }
+.vz-days__sw { width: 14px; height: 8px; border-radius: 1px; background: repeating-linear-gradient(45deg, var(--vz-blue) 0 2px, rgba(23, 70, 228, 0.35) 2px 4px); }
+.vz-days__now { margin-left: auto; display: inline-flex; align-items: center; gap: 7px; }
+.vz-days__live { width: 6px; height: 6px; border-radius: 50%; background: var(--vz-teal); }
+.vz-days__nowm { display: inline-block; height: 1.3em; overflow: hidden; vertical-align: bottom; }
+.vz-days__nowv { display: inline-block; min-width: 2.2ch; font-family: var(--mono); font-size: 12px; font-weight: 500; color: var(--vz-ink); }
+.vz-days__nowv.is-alarm { color: var(--vz-blue); }
+
+/* ---------- Plot ---------- */
+.vz-days__plot { position: relative; padding: 0 14px 8px; }
+.vz-days__axis { display: grid; grid-template-columns: var(--L) minmax(0, 1fr); height: var(--A); align-items: center; }
+.vz-days__ticks { display: grid; grid-template-columns: repeat(6, 1fr); }
+.vz-days__d { text-align: center; font-family: var(--mono); font-size: 10.5px; color: rgba(42, 65, 72, 0.4); transition: color 0.4s var(--vz-e); }
+.vz-days__d.is-on { color: var(--vz-slate); }
+.vz-days__d.is-alarm { color: var(--vz-blue); font-weight: 500; }
+.vz-days__row { display: grid; grid-template-columns: var(--L) minmax(0, 1fr); height: var(--R); align-items: center; border-top: 1px solid var(--vz-hair); }
+.vz-days__n { font-size: 12.5px; color: rgba(42, 65, 72, 0.5); transition: color 0.4s var(--vz-e); }
+.vz-days__n.is-on { color: var(--vz-ink); }
+.vz-days__row.is-alarm .vz-days__n.is-on { color: var(--vz-blue); }
+.vz-days__cells { display: grid; grid-template-columns: repeat(6, 1fr); height: 100%; }
+.vz-days__c { position: relative; }
+.vz-days__f { position: absolute; inset: 6px 7%; border-radius: 2px; background: rgba(42, 65, 72, var(--a, 0.6)); transform-origin: left center; }
+.vz-days__row.is-alarm .vz-days__f { background: repeating-linear-gradient(45deg, var(--vz-blue) 0 3px, rgba(23, 70, 228, 0.4) 3px 6px); }
+
+/* Everything that is drawn over the cells: grid, trace, cursor */
+.vz-days__over { position: absolute; left: calc(14px + var(--L)); right: 14px; top: var(--A); bottom: 8px; pointer-events: none; }
+.vz-days__grid { position: absolute; inset: 0; background: linear-gradient(90deg, var(--vz-hair) 1px, transparent 1px) 0 0 / calc(100% / 6) 100%; }
+.vz-days__fx { position: absolute; inset: 0; }
+.vz-days__org { position: absolute; left: calc(100% / 12); top: calc(var(--R) / 2); width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: #fff; border: 2px solid var(--vz-blue); box-shadow: 0 0 0 4px rgba(23, 70, 228, 0.12); }
+.vz-days__lv { position: absolute; left: calc(100% / 12); top: calc(var(--R) / 2); width: 1.5px; height: calc(var(--R) * 3); margin-left: -0.75px; background: var(--vz-blue); }
+.vz-days__lh { position: absolute; left: calc(100% / 12); top: calc(var(--R) * 3.5); width: calc(100% * 5 / 6); height: 1.5px; margin-top: -0.75px; background: var(--vz-blue); }
+.vz-days__tip { position: absolute; left: calc(100% * 11 / 12); top: calc(var(--R) * 3.5); width: 0; height: 0; }
+.vz-days__tip i { position: absolute; right: 0; top: -4px; width: 8px; height: 8px; border-top: 1.5px solid var(--vz-blue); border-right: 1.5px solid var(--vz-blue); transform: rotate(45deg); transform-origin: 100% 0; margin-right: 6px; }
+.vz-days__ping { position: absolute; left: calc(100% * 11 / 12); top: calc(var(--R) * 3.5); width: 0; height: 0; }
+.vz-days__ping i { position: absolute; left: -14px; top: -10px; width: 28px; height: 20px; border-radius: 3px; border: 1.5px solid var(--vz-blue); }
+.vz-days.is-on .vz-days__ping i { animation: vz-days-ping 2.2s var(--vz-e) infinite; }
+@keyframes vz-days-ping { 0% { transform: scale(1); opacity: 0.7; } 100% { transform: scale(1.6, 1.9); opacity: 0; } }
+.vz-days__scan { position: absolute; inset: 0; overflow: hidden; }
+.vz-days__cur { position: absolute; top: 0; bottom: 0; left: -100%; width: 100%; background: linear-gradient(90deg, rgba(23, 70, 228, 0), rgba(23, 70, 228, 0.07)); }
+.vz-days__cur i { position: absolute; right: 0; top: -2px; bottom: -2px; width: 1.5px; background: var(--vz-blue); box-shadow: 0 0 10px rgba(23, 70, 228, 0.5); }
+/* Without the timeline (motion off) the cursor is not shown */
+.vz-days.is-static .vz-days__cur { display: none; }
+
+/* ---------- Lead time bracket and message ---------- */
+.vz-days__span { position: relative; margin: 0 14px 0 calc(14px + var(--L)); height: 30px; }
+.vz-days__brace { display: block; width: 100%; height: 10px; overflow: visible; fill: none; stroke: var(--vz-slate); stroke-width: 1.4; stroke-linecap: square; }
+.vz-days__brace path { stroke-dasharray: 1; stroke-dashoffset: 0; }
+.vz-days__len { position: absolute; left: 50%; top: 0; transform: translate(-50%, -1px); padding: 0 8px; font-family: var(--mono); font-size: 11px; color: var(--vz-slate); background: rgba(255, 255, 255, 0.9); }
+.vz-days__msg { display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px 14px; border-top: 1px solid var(--vz-hair); font-size: 13px; line-height: 1.4; }
+.vz-days__pin { flex: none; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: #fff; border: 1px solid var(--vz-line); }
+.vz-days__pinmark { width: 12px; height: 12px; color: var(--vz-ink); }
+.vz-days__msgt b { font-weight: 500; }
+
+.vz-days:not(.is-on) .vz-days__live { animation: none; }
+.vz-days.is-on .vz-days__live { animation: vz-days-live 2.4s ease-in-out infinite; }
+@keyframes vz-days-live { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+@media (max-width: 420px) { .vz-days { --L: 66px; } .vz-days__bar { gap: 10px; } }
+html.motion-off .vz-days *, .vz-days.is-static * { animation: none !important; }

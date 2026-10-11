@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { PHOTOS } from '../../lib/photos.js';
-import { reduced, useInView, useReady } from '../../lib/hooks.js';
+import { useInView, useMotionOff, useReady } from '../../lib/hooks.js';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -51,7 +51,8 @@ export function Frame({
   const ready = useReady();
   const [ref, inView] = useInView({ rootMargin: '0px 0px -8% 0px', once: true });
   const move = useRef(null);
-  const d = reduced ? 0 : Math.min(drift, 0.2);
+  const off = useMotionOff();
+  const d = off ? 0 : Math.min(drift, 0.2);
 
   useEffect(() => {
     const el = move.current;

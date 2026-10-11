@@ -2,10 +2,8 @@ import { lazy, Suspense, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Site } from './components/layout/Layout.jsx';
-import './styles/global.css';
+import './styles/site.css';
 import './styles/imagery.css';
-import './styles/hybrid.css';
-import './styles/corporate.css';
 
 const pages = {
   home: lazy(() => import('./pages/Home.jsx')),

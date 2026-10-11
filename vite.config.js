@@ -14,8 +14,8 @@ export default defineConfig({
   optimizeDeps: {
     include: [
       'react', 'react-dom', 'react-dom/client', 'react/jsx-runtime',
-      'gsap', 'gsap/ScrollTrigger', 'gsap/InertiaPlugin', 'lenis', 'ogl',
-      'motion/react', '@vercel/analytics/react', '@vercel/speed-insights/react',
+      'gsap', 'gsap/ScrollTrigger', 'lenis',
+      '@vercel/analytics/react', '@vercel/speed-insights/react',
     ],
   },
   resolve: { dedupe: ['react', 'react-dom'] },
@@ -38,8 +38,6 @@ export default defineConfig({
           if (!id.includes('node_modules')) return undefined;
           if (/[\/](react|react-dom|scheduler)[\/]/.test(id)) return 'react';
           if (id.includes('gsap') || id.includes('lenis')) return 'scroll';
-          if (/[\/](motion|motion-dom|motion-utils|framer-motion)[\/]/.test(id)) return 'motion';
-          if (id.includes('ogl')) return 'ogl';
           return 'vendor';
         },
       },

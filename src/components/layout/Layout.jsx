@@ -1,67 +1,100 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Mark, Wordmark } from '../ui/Brand.jsx';
 import { Arrow } from '../ui/Icon.jsx';
 import { Analytics } from '@vercel/analytics/react';
-import { Alive, Glide, Grain, ScrollLean } from '../ui/Motion.jsx';
-import Backdrop from '../ui/Backdrop.jsx';
 import { SpeedInsights } from '@vercel/speed-insights/react';
-import { EMAIL, FOOTER, NAV, PHONE } from '../../lib/content.js';
-import { reduced, setReady, useMedia } from '../../lib/hooks.js';
-import { initScroll, lockScroll, scrollToHashWhenReady } from '../../lib/scroll.js';
+import { CTA, EMAIL, FOOTER, NAV, PHONE } from '../../lib/content.js';
+import { setPaused, setReady, useMedia, useMotionOff, usePaused, useSystemReduced } from '../../lib/hooks.js';
+import { initScroll, scrollToHashWhenReady } from '../../lib/scroll.js';
 
-const session = {
-  get(k) { try { return sessionStorage.getItem(k); } catch { return null; } },
-  set(k, v) { try { sessionStorage.setItem(k, v); } catch { /* storage unavailable */ } },
-};
+/* Stops every decorative system: video, loops, parallax, canvases and ambient animation.
+   Stage buttons and content keep working. The choice is remembered across pages. */
+export function PauseMotion({ className = '' }) {
+  const paused = usePaused();
+  const system = useSystemReduced();
+  const off = paused || system;
+  return (
+    <button
+      type="button"
+      className={`pausebtn ${off ? 'is-off' : ''} ${className}`}
+      aria-pressed={off}
+      disabled={system}
+      title={system ? 'Your system is set to reduce motion' : undefined}
+      onClick={() => setPaused(!paused)}
+    >
+      <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+        {off ? <path d="M5 3.4v9.2L12.4 8z" /> : <path d="M4.6 3.4h2.2v9.2H4.6zM9.2 3.4h2.2v9.2H9.2z" />}
+      </svg>
+      <span>Pause motion</span>
+    </button>
+  );
+}
 
-/* Fixed header. mix-blend-mode: difference keeps it legible on white, black and the animated hero. */
+/* Fixed header. Its colours follow the scene beneath it (data-tone on each scene), it stays in view
+   while anything inside it has keyboard focus, and the action is always one click away. */
 export function Header({ page }) {
+  const hdr = useRef(null);
   const [hidden, setHidden] = useState(false);
   const [solid, setSolid] = useState(false);
+  const [tone, setTone] = useState('light');
   const small = useMedia('(max-width: 640px)');
+
   useEffect(() => {
     let last = window.scrollY;
     let raf = 0;
-    const onScroll = () => {
-      if (raf) return;
-      raf = requestAnimationFrame(() => {
-        raf = 0;
-        const y = window.scrollY;
-        setSolid(y > 24);
-        if (y > last + 6 && y > 160) setHidden(true);
-        else if (y < last - 6 || y < 160) setHidden(false);
-        last = y;
-      });
+    const measure = () => {
+      raf = 0;
+      const y = window.scrollY;
+      setSolid(y > 24);
+      const focused = hdr.current && hdr.current.contains(document.activeElement);
+      if (focused) setHidden(false);
+      else if (y > last + 6 && y > 160) setHidden(true);
+      else if (y < last - 6 || y < 160) setHidden(false);
+      last = y;
+      // The scene directly under the header decides light or dark type
+      const under = document.elementsFromPoint(window.innerWidth / 2, 34).find((el) => el.closest('[data-tone]'));
+      const t = under ? under.closest('[data-tone]').dataset.tone : 'light';
+      setTone((v) => (v === t ? v : t));
     };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => { window.removeEventListener('scroll', onScroll); cancelAnimationFrame(raf); };
+    const on = () => { if (!raf) raf = requestAnimationFrame(measure); };
+    on();
+    window.addEventListener('scroll', on, { passive: true });
+    window.addEventListener('resize', on);
+    window.addEventListener('load', on);
+    // The page body is loaded lazily: measure again whenever the document changes size
+    const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(on) : null;
+    if (ro) ro.observe(document.body);
+    return () => {
+      window.removeEventListener('scroll', on); window.removeEventListener('resize', on); window.removeEventListener('load', on);
+      if (ro) ro.disconnect();
+      cancelAnimationFrame(raf);
+    };
   }, []);
-  // On a phone the logo is the way home and Contact takes the place of the call to action
-  const items = small
-    ? [...NAV.filter((n) => n.key !== 'home'), { key: 'contact', label: 'Contact', href: '/contact/' }]
-    : NAV;
+
+  const items = NAV.filter((n) => n.key !== 'home');
   return (
-    <header className={`hdr ${hidden ? 'is-hidden' : ''} ${solid ? 'is-solid' : ''}`}>
+    <header ref={hdr} className={`hdr hdr--${tone} ${hidden ? 'is-hidden' : ''} ${solid ? 'is-solid' : ''}`}>
       <a className="hdr__logo" href="/" aria-label="Hydris, home">
         <Mark className="hdr__mark" />
         <Wordmark className="hdr__word" />
       </a>
       <nav className="hdr__nav" aria-label="Primary">
-        {items.map((n, i) => (
-          <span key={n.key}>
-            <a href={n.href} aria-current={page === n.key ? 'page' : undefined}>{n.label}</a>
-            {i < items.length - 1 && <span aria-hidden="true">,&nbsp;</span>}
-          </span>
+        {items.map((n) => (
+          <a key={n.key} href={n.href} aria-current={page === n.key ? 'page' : undefined}>{n.label}</a>
         ))}
+        {!small && <a href="/contact/" aria-current={page === 'contact' ? 'page' : undefined}>Contact</a>}
       </nav>
-      <a className="hdr__cta" href="/contact/" aria-current={page === 'contact' ? 'page' : undefined}>Talk to us <Arrow /></a>
+      {!small && <PauseMotion className="hdr__pause" />}
+      <a className="hdr__cta" href={CTA.href} aria-label={CTA.label}>
+        {small ? CTA.short : CTA.label} <Arrow />
+      </a>
     </header>
   );
 }
 
 export function Footer() {
   return (
-    <footer className="ftr">
+    <footer className="ftr" data-tone="dark">
       <div className="ftr__top grid">
         <div className="ftr__brand">
           <Mark className="ftr__icon" />
@@ -84,17 +117,19 @@ export function Footer() {
       <div className="ftr__bottom">
         <span>{FOOTER.line} &copy; 2026</span>
         <span>{FOOTER.right}</span>
+        <PauseMotion className="ftr__pause" />
         <a href="#main" data-top="">Back to top <Arrow dir="up" /></a>
       </div>
     </footer>
   );
 }
 
-/* Hairline reading-progress bar along the top edge */
+/* Hairline reading-progress bar along the top edge (hidden while motion is paused) */
 export function ScrollBar() {
   const bar = useRef(null);
+  const off = useMotionOff();
   useEffect(() => {
-    if (reduced) return undefined;
+    if (off) return undefined;
     let raf = 0;
     const update = () => {
       raf = 0;
@@ -107,78 +142,25 @@ export function ScrollBar() {
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll);
     return () => { window.removeEventListener('scroll', onScroll); window.removeEventListener('resize', onScroll); cancelAnimationFrame(raf); };
-  }, []);
+  }, [off]);
+  if (off) return null;
   return <div className="sbar" aria-hidden="true"><i ref={bar} /></div>;
-}
-
-/* Counter preloader, shown once per session on the home page */
-export function Preloader() {
-  const skip = useMemo(() => reduced || session.get('hydris:intro') === '1', []);
-  const [p, setP] = useState(0);
-  const [done, setDone] = useState(false);
-  const [gone, setGone] = useState(skip);
-
-  useEffect(() => {
-    if (skip) { setReady(); scrollToHashWhenReady(); return undefined; }
-    lockScroll(true);
-    let fontsOk = false;
-    (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => { fontsOk = true; });
-    const t0 = performance.now();
-    const dur = 1100;
-    let raf;
-    const finish = () => {
-      setTimeout(() => {
-        setDone(true);
-        session.set('hydris:intro', '1');
-        setTimeout(() => { lockScroll(false); setReady(); scrollToHashWhenReady(); }, 380);
-        setTimeout(() => setGone(true), 1300);
-      }, 120);
-    };
-    const tick = (now) => {
-      const t = Math.min(1, (now - t0) / dur);
-      let v = 1 - Math.pow(1 - t, 3);
-      if (!fontsOk && now - t0 < 4000) v = Math.min(v, 0.92);
-      setP(Math.round(v * 100));
-      if (v < 1) raf = requestAnimationFrame(tick); else finish();
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [skip]);
-
-  if (gone) return null;
-  return (
-    <div className={`loader ${done ? 'is-done' : ''}`} aria-hidden="true">
-      <div className="loader__top">
-        <span className="loader__brand"><Mark className="loader__mark" /> Hydris</span>
-        <span>Operational water intelligence</span>
-      </div>
-      <div className="loader__bottom">
-        <span className="loader__count">{p}</span>
-        <span className="loader__note">Calibrating</span>
-      </div>
-      <div className="loader__line"><i style={{ transform: `scaleX(${p / 100})` }} /></div>
-    </div>
-  );
 }
 
 export function Site({ page, children }) {
   useEffect(() => {
-    initScroll();
-    if (page !== 'home') { setReady(); scrollToHashWhenReady(); }
+    setReady();
+    const stop = initScroll();
+    scrollToHashWhenReady();
+    return stop;
   }, [page]);
   return (
     <>
       <a className="skip" href="#main">Skip to content</a>
-      <Backdrop />
-      {page === 'home' && <Preloader />}
       <ScrollBar />
       <Header page={page} />
       <main id="main">{children}</main>
       <Footer />
-      <ScrollLean />
-      <Glide />
-      <Alive />
-      <Grain />
       <Analytics />
       <SpeedInsights />
     </>

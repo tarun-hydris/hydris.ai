@@ -14,6 +14,15 @@ export const NAV = [
   { key: 'press', label: 'Press', href: '/press/' },
 ];
 
+/* The one primary action, used by the header, the opening, the closing and every page that ends in an invitation */
+export const CTA = {
+  label: 'Request a walkthrough',
+  short: 'Walkthrough',
+  href: '/contact/#walkthrough',
+  example: 'See an example',
+  exampleHref: '#investigation',
+};
+
 /* ---------------------------------------------------------------- Home */
 
 export const HERO = {
@@ -251,6 +260,77 @@ export const START = {
   textShort: 'We run your own data through the engine and walk you through what it says, including the parts that look fine.',
 };
 
+/* The seven chapters of Home. Every sentence below already exists elsewhere in this file or on the
+   previous Home; the chapters only gather it into one story. */
+export const OPENING = {
+  label: 'Operational Water Intelligence',
+  title: 'The intelligence layer for industrial water.',
+  sub: 'Hydris turns the water data your plant already collects into decisions your team can act on.',
+  scroll: 'Scroll',
+};
+
+export const CHANGE = {
+  label: 'The change',
+  title: HERO.title,
+  lead: HERO.sub,
+  ring: 'Every plant is already a record of how it behaves.',
+  readoutNote: 'One operator, one night, one reading that is drifting inside its limits.',
+  questionsLabel: 'Three questions, every morning',
+};
+
+export const INVESTIGATION = {
+  label: 'The investigation',
+  title: 'From a drifting number to a decision.',
+  lead: HOW.lead,
+  skip: 'Skip example',
+  skipHref: '#products',
+  stagesLabel: 'Stages of the example',
+  caption: 'Illustrative example. Not live plant data.',
+  stages: [
+    { key: 'context', n: '01', name: 'Data and context', text: `${HOW.steps[0].text} ${HOW.steps[1].text}` },
+    { key: 'reason', n: '02', name: 'Expertise and reasoning', text: `${HOW.steps[2].text} ${KNOWLEDGE.text2}` },
+    { key: 'decide', n: '03', name: 'The next check, and the decision', text: `${HOW.steps[3].text} ${WHY.items[1].text}` },
+    { key: 'learn', n: '04', name: 'What the plant remembers', text: HOW.steps[4].text },
+  ],
+};
+
+export const PRODUCT_STAGE = {
+  label: 'The platform',
+  title: PLATFORM_HOME.title,
+  lead: PLATFORM_HOME.lead,
+  uses: 'What it uses',
+  gives: 'What it gives the team',
+  next: 'See how it works',
+  concept: 'Concept illustration',
+  items: [
+    { key: 'lite', uses: HOW.steps[0].text, gives: IMPL.steps[2].text },
+    { key: 'pulse', uses: HOW.steps[1].text, gives: HOW.steps[3].text },
+    { key: 'field', uses: 'What the operator sees and records on the round.', gives: LOOP.text },
+  ],
+};
+
+export const OPERATOR = {
+  label: 'The operator',
+  title: 'Your team stays in control',
+  lead: WHY.items[1].text,
+  line: 'The only thing that changes a setting in your plant is a person who decided to.',
+};
+
+export const PEOPLE = {
+  label: 'The people',
+  title: 'The people behind Hydris',
+  more: 'Read the Hydris story',
+  moreHref: '/about/',
+};
+
+export const INVITE = {
+  label: 'The invitation',
+  title: 'Let\u2019s talk about your plant',
+  text: START.textShort,
+  advice: 'We will agree how your data is shared before anything is sent. Please do not send operating files through the contact form.',
+  mail: 'Or write to',
+};
+
 /* ------------------------------------------------------------ Platform */
 
 export const PLATFORM = {
@@ -419,6 +499,7 @@ export const PRESS = {
 export const CONTACT = {
   title: 'If you run an industrial water plant, we would like to hear how it actually runs.',
   lead: 'Different people arrive here for different reasons. Pick the one that fits and you will reach the right person rather than a queue.',
+  transfer: 'Agree how plant data will be shared before you send it. Please do not put operating files or confidential plant data in this message.',
   routes: [
     { key: 'plant', pick: 'I run a plant', who: 'If you run a plant', title: 'Send us thirty days of data', text: 'No demo script. We run your own plant data through the engine and walk you through what it says, including the parts that look fine. If Hydris is not the right fit we will tell you.', email: 'hello@hydris.ai' },
     { key: 'press', pick: 'I am a journalist', who: 'If you are a journalist', title: 'Press and media', text: 'Assets, boilerplate and bios are on the press page, free to use, no form. We respond within one business day.', email: 'press@hydris.ai' },
@@ -472,7 +553,7 @@ export const TERMS = {
 export const FOOTER = {
   tag: 'Capture knowledge. Guide decisions. Strengthen operations.',
   cols: [
-    { h: 'Platform', links: [['How it works', '/#how'], ['Getting started', '/platform/#start']] },
+    { h: 'Platform', links: [['An example investigation', '/#investigation'], ['The products', '/platform/#products'], ['Getting started', '/platform/#start']] },
     { h: 'Company', links: [['About', '/about/'], ['Press', '/press/'], ['Contact', '/contact/']] },
     { h: 'Legal', links: [['Privacy', '/privacy/'], ['Terms', '/terms/']] },
   ],

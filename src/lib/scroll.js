@@ -1,27 +1,23 @@
 import Lenis from 'lenis';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { reduced, sleep } from './hooks.js';
+import { onMotionChange, reduced, sleep } from './hooks.js';
 
 gsap.registerPlugin(ScrollTrigger);
 
 let lenis = null;
+let tick = null;
+let started = false;
+let stopListeners = [];
 
 export function scrollToY(y, immediate = false) {
-  if (lenis) lenis.scrollTo(y, { immediate, force: true, duration: 1.4 });
-  else window.scrollTo({ top: y, behavior: immediate ? 'auto' : 'smooth' });
+  if (lenis) lenis.scrollTo(y, { immediate, force: true, duration: 1.2 });
+  else window.scrollTo({ top: y, behavior: immediate || reduced ? 'auto' : 'smooth' });
 }
 
 export function scrollToEl(el, immediate = false) {
   const y = el.getBoundingClientRect().top + window.scrollY - 16;
   scrollToY(Math.max(0, y), immediate);
-}
-
-let pendingLock = false;
-export function lockScroll(lock) {
-  pendingLock = lock;
-  document.documentElement.style.overflow = lock ? 'hidden' : '';
-  if (lenis) (lock ? lenis.stop() : lenis.start());
 }
 
 const samePage = (url) => {
@@ -35,22 +31,36 @@ const leavesPage = (a, url, e) =>
   && (!a.target || a.target === '_self') && !a.hasAttribute('download')
   && url.origin === location.origin && !samePage(url);
 
-/* Smooth scrolling (Lenis) kept in sync with GSAP ScrollTrigger, plus anchor handling */
+/* Smooth scrolling exists only while motion is allowed; ordinary document scrolling otherwise */
+function startLenis() {
+  if (lenis) return;
+  lenis = new Lenis({ lerp: 0.09, smoothWheel: true, wheelMultiplier: 0.95, touchMultiplier: 1.2 });
+  lenis.on('scroll', ScrollTrigger.update);
+  tick = (t) => lenis.raf(t * 1000);
+  gsap.ticker.add(tick);
+  gsap.ticker.lagSmoothing(0);
+  window.__lenis = lenis;
+}
+function stopLenis() {
+  if (!lenis) return;
+  gsap.ticker.remove(tick);
+  lenis.destroy();
+  lenis = null; tick = null;
+  delete window.__lenis;
+  ScrollTrigger.refresh();
+}
+
+/* Idempotent: calling it again does nothing; the returned function undoes everything it set up */
 export function initScroll() {
+  if (started) return () => {};
+  started = true;
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   if (!location.hash) window.scrollTo(0, 0);
 
-  if (!reduced) {
-    lenis = new Lenis({ lerp: 0.075, smoothWheel: true, wheelMultiplier: 0.9, touchMultiplier: 1.4 });
-    lenis.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add((t) => lenis.raf(t * 1000));
-    gsap.ticker.lagSmoothing(0);
-    if (!location.hash) lenis.scrollTo(0, { immediate: true, force: true });
-    if (pendingLock) lenis.stop(); // the preloader may have locked scrolling before Lenis existed
-    window.__lenis = lenis;
-  }
+  if (!reduced) startLenis();
+  stopListeners.push(onMotionChange(() => { if (reduced) stopLenis(); else startLenis(); }));
 
-  document.addEventListener('click', (e) => {
+  const onClick = (e) => {
     const a = e.target.closest('a[href]');
     if (!a) return;
     if (a.dataset.top !== undefined) { e.preventDefault(); scrollToY(0); return; }
@@ -58,7 +68,7 @@ export function initScroll() {
     if (!reduced && leavesPage(a, url, e)) {
       e.preventDefault();
       document.documentElement.classList.add('is-leaving');
-      setTimeout(() => { location.href = a.href; }, 380);
+      setTimeout(() => { location.href = a.href; }, 320);
       // If the navigation is cancelled, do not leave the page faded out
       setTimeout(() => document.documentElement.classList.remove('is-leaving'), 2500);
       return;
@@ -71,11 +81,25 @@ export function initScroll() {
     if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
     target.focus({ preventScroll: true });
     history.replaceState(null, '', url.hash);
+  };
+  const onLoad = () => ScrollTrigger.refresh();
+  // Coming back through the browser cache must not leave the page faded out
+  const onShow = (e) => { if (e.persisted) document.documentElement.classList.remove('is-leaving'); };
+  document.addEventListener('click', onClick);
+  window.addEventListener('load', onLoad);
+  window.addEventListener('pageshow', onShow);
+  stopListeners.push(() => {
+    document.removeEventListener('click', onClick);
+    window.removeEventListener('load', onLoad);
+    window.removeEventListener('pageshow', onShow);
   });
 
-  window.addEventListener('load', () => ScrollTrigger.refresh());
-  // Coming back through the browser cache must not leave the page faded out
-  window.addEventListener('pageshow', (e) => { if (e.persisted) document.documentElement.classList.remove('is-leaving'); });
+  return () => {
+    stopListeners.forEach((f) => f());
+    stopListeners = [];
+    stopLenis();
+    started = false;
+  };
 }
 
 /* After the page is ready: honour a #hash coming from another page */
