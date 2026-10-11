@@ -19,7 +19,7 @@ export const NAV = [
 export const HERO = {
   eyebrow: 'The operational intelligence layer for water',
   title: 'Water has digitised the plant. Hydris is digitising how the plant thinks.',
-  sub: 'Two decades of instrumentation gave industry a plant it can watch. It did not give industry a plant that can reason. Hydris turns the water data you already collect into decisions your team can act on, and turns the judgement that lives in a few heads into something the whole operation can use.',
+  sub: 'Hydris turns the water data you already collect into decisions your team can act on, and turns the judgement that lives in a few heads into something the whole operation can use.',
 };
 
 export const SHIFTS = [
@@ -44,16 +44,10 @@ export const SYSTEMS = ['Operators', 'Lab', 'Excel', 'SCADA', 'IoT', 'CMMS', 'ER
 export const PROBLEM = {
   eyebrow: 'The problem',
   title: 'Industrial water got digitised. It did not get intelligent.',
-  lede: 'Your plant has more data than it has ever had. Control system history, lab results, spreadsheets, procedures, shift logs. None of it tells an operator at two in the morning why the plant is behaving this way and what to do about it.',
+  lede: 'Your plant has more data than ever. None of it tells an operator at two in the morning why the plant is behaving this way, or what to do about it.',
   points: [
-    {
-      title: 'The operators are skilled. The system is blind.',
-      text: 'This is not a criticism of your team. The tools they were given were built to watch individual numbers against individual limits. Every reading can sit inside its limit while the plant is quietly heading somewhere it should not go, and no threshold alarm is designed to see that.',
-    },
-    {
-      title: 'The knowledge that runs a plant is walking out of the door.',
-      text: 'The person who can read the whole plant at a glance, the engineer who has seen this before and knows what it turned into last time, visits once a month or is a few years from retiring. That judgement is not in the manuals. It is in one head, and nobody is writing it down.',
-    },
+    { title: 'The operators are skilled. The system is blind.', text: 'The tools watch single numbers against single limits. Every reading can sit inside its limit while the plant quietly drifts somewhere it should not go.' },
+    { title: 'The knowledge that runs a plant is walking out of the door.', text: 'The judgement that reads a whole plant at a glance lives in a few heads, often a few years from retiring. It is not in the manuals, and nobody is writing it down.' },
   ],
   close: 'Measurement was never the constraint. Expertise is.',
 };
@@ -64,27 +58,27 @@ export const CATEGORY = {
   term: 'Definition',
   d1: 'The layer between the water a plant measures and the decisions its people make.',
   d2: [
-    'Monitoring tells you what happened. Analytics tells you what happened, more precisely. Neither tells you what to do, because that has always taken judgement, and judgement has only ever lived in people.',
-    'Operational Water Intelligence is that judgement, captured and made available to whoever is on shift. It is what AI is finally good enough to carry, and it is why this category can exist now and could not five years ago.',
+    'Monitoring tells you what happened. Analytics tells you more precisely. Neither tells you what to do, because that has always taken judgement.',
+    'Operational Water Intelligence is that judgement, captured and made available to whoever is on shift.',
   ],
   nots: [
     { x: 'Monitoring.', y: 'More numbers on a screen is the problem, not the answer.' },
-    { x: 'A sustainability dashboard.', y: 'This is an operations tool that happens to produce a better environmental outcome.' },
-    { x: 'A black box.', y: 'An answer nobody can question has no place in a plant you are accountable for.' },
-    { x: 'Automation.', y: 'Hydris never touches your controls. Your operator remains the only person who changes anything.' },
+    { x: 'A sustainability dashboard.', y: 'An operations tool that happens to produce a better environmental outcome.' },
+    { x: 'A black box.', y: 'An answer nobody can question has no place in your plant.' },
+    { x: 'Automation.', y: 'Hydris never touches your controls. Your operator decides.' },
   ],
 };
 
 export const HOW = {
   eyebrow: 'How it works',
   title: 'Five steps, running every day, on the plant you already have.',
-  lead: 'Nothing new to install. The loop starts with what your plant already produces and ends with the plant knowing more than it did yesterday.',
+  lead: 'Nothing new to install. It starts with what your plant already produces and ends with the plant knowing more than it did yesterday.',
   steps: [
-    { key: 'Data', title: 'Everything the plant knows', text: 'Control system history, lab results, spreadsheets, procedures, shift logs and what the operator saw, brought into one place.', widget: 'data' },
-    { key: 'Understand', title: 'Context, not just values', text: 'What this plant is, what it is making this week, and what normal actually looks like here rather than in a textbook.', widget: 'understand' },
-    { key: 'Reason', title: 'Why, traced to the source', text: 'Hydris works backwards to where the problem started rather than stopping at the place it happens to show.', widget: 'reason' },
-    { key: 'Act', title: 'The next step, in their hands', text: 'A clear recommendation in the words an operator already uses, with the reasoning attached so it can be checked or overruled.', widget: 'act' },
-    { key: 'Learn', title: 'The plant gets better at itself', text: 'What was decided and what happened next goes back in, so the intelligence sharpens on your plant instead of staying frozen at install.', widget: 'learn' },
+    { key: 'Data', title: 'Everything the plant knows', text: 'Control system history, lab results, spreadsheets, procedures and shift logs, in one place.', widget: 'data' },
+    { key: 'Understand', title: 'Context, not just values', text: 'What this plant is, what it makes this week, and what normal looks like here.', widget: 'understand' },
+    { key: 'Reason', title: 'Why, traced to the source', text: 'Hydris works backwards to where the problem started, not where it happens to show.', widget: 'reason' },
+    { key: 'Act', title: 'The next step, in their hands', text: 'A clear recommendation in the operator\'s own words, with the reasoning attached.', widget: 'act' },
+    { key: 'Learn', title: 'The plant gets better at itself', text: 'What was decided and what happened next goes back in, so the intelligence sharpens on your plant.', widget: 'learn' },
   ],
   result: ['Fewer surprises', 'Lower operating cost', 'Knowledge that stays with the plant'],
 };
@@ -94,7 +88,7 @@ export const KNOWLEDGE = {
   title: 'Powered by the Hydris curated expert knowledge base.',
   lead: 'Decades of water operating expertise, structured so a machine can use it.',
   text: 'Hydris does not learn your plant from scratch and it does not guess from history. Underneath the product sits a knowledge base built and curated by our own water engineers: process engineering practice, treatment chemistry, equipment behaviour, operating procedure and the field experience that usually never leaves the people who hold it.',
-  text2: 'That is why Hydris is useful on day one rather than after a year of watching. It arrives already knowing how plants like yours behave, then learns what makes yours different.',
+  text2: 'Built and curated by our own water engineers, so Hydris is useful on day one. It arrives knowing how plants like yours behave, then learns what makes yours different.',
   not: 'Not a model left to guess from history. Not a chatbot with your manual attached.',
   layers: ['Process engineering practice', 'Treatment chemistry', 'Equipment behaviour', 'Operating procedure', 'Field experience'],
 };
@@ -102,11 +96,11 @@ export const KNOWLEDGE = {
 export const WHY = {
   eyebrow: 'Why Hydris',
   title: 'Three things we hold to, whatever it costs us.',
-  lead: 'These are not features. They are the constraints we designed inside, and they are the reasons a process safety team and an operator can both say yes to the same tool.',
+  lead: 'The constraints we designed inside, and the reasons a process safety team and an operator can both say yes.',
   items: [
-    { icon: 'shield', title: 'Explainable, always', text: 'Every answer carries its reasoning and its source. Your engineer can agree with it or overrule it, and your auditor can follow it. Nothing is ever asked to be taken on trust.' },
-    { icon: 'hand', title: 'Your operator stays in control', text: 'Hydris only reads. It does not write to your control system and it cannot move equipment. The only thing that changes a setting in your plant is still a person who decided to.' },
-    { icon: 'trend', title: 'It gets better with time', text: 'Every plant makes the layer sharper, so what you have in three years is not what you bought this year. Very little software in this industry can say that.' },
+    { icon: 'shield', title: 'Explainable, always', text: 'Every answer carries its reasoning and its source. Your engineer can overrule it and your auditor can follow it.' },
+    { icon: 'hand', title: 'Your operator stays in control', text: 'Hydris only reads. It never writes to your control system and never moves equipment.' },
+    { icon: 'trend', title: 'It gets better with time', text: 'Every plant makes the layer sharper. What you have in three years is more than what you bought.' },
   ],
 };
 
@@ -133,10 +127,10 @@ export const IMPL = {
   title: 'A configuration exercise, not a capital project.',
   lead: 'Nothing is installed at your site. Nobody visits with a toolbox. There is no procurement cycle for hardware, because there is no hardware.',
   steps: [
-    { when: 'Week one', title: 'Send what you already have', text: 'Thirty days of the exports your plant already produces. Control system history, lab results, spreadsheets, procedures, logbooks. Nothing new to collect.' },
-    { when: 'Weeks two and three', title: 'We configure your plant with your team', text: "Your layout, your chemistry, your operating rules and your team's judgement mapped into the knowledge base. We do this with your people, not at them, because what we are capturing is theirs." },
-    { when: 'Go live', title: 'Lite starts producing a daily read', text: 'Your operators get a plant intelligence page every morning. Nothing connected to your controls, nothing that can change a setting.' },
-    { when: 'When you are ready', title: 'Add Pulse and Field', text: 'Same layer, same knowledge, no second implementation. Adding a product is a switch, and adding a site is a repeat of the same weeks.' },
+    { when: 'Week one', title: 'Send what you already have', text: 'Thirty days of the exports your plant already produces. Nothing new to collect.' },
+    { when: 'Weeks two and three', title: 'We configure your plant with your team', text: 'Your layout, chemistry, operating rules and judgement, mapped into the knowledge base with your people.' },
+    { when: 'Go live', title: 'Lite starts producing a daily read', text: 'A plant intelligence page every morning. Nothing connected to your controls.' },
+    { when: 'When you are ready', title: 'Add Pulse and Field', text: 'Same layer, same knowledge, no second implementation.' },
   ],
   close: ['No capital request. No new instrumentation. No change to your control system. ', 'The only thing your plant has to give us is data it is already producing.'],
 };
@@ -144,10 +138,10 @@ export const IMPL = {
 export const PROOF = {
   eyebrow: 'Where we are today',
   title: 'Running in operating plants, not in a lab.',
-  lead: 'Hydris is live in industrial treatment plants right now, working from the instrumentation those plants already had. Not one of them bought a sensor to work with us.',
+  lead: 'Live in industrial treatment plants today, on the instrumentation those plants already had. Not one of them bought a sensor to work with us.',
   big: 'Millions of litres',
   unit: 'of industrial water under Hydris management every day',
-  note: 'We are early, and we would rather say that plainly than dress it up. What we can show you is not a case study about somebody else. It is your own plant\'s data, read back to you, before you commit to anything.',
+  note: 'We are early, and we say so plainly. What we can show you is your own plant\'s data, read back to you, before you commit to anything.',
 };
 
 export const LOOKS = {
@@ -173,9 +167,8 @@ export const LOOKS = {
   alt: 'Example plant readout at two fourteen in the morning. Four readings shown as stable and one drifting for six hours. Hydris Pulse notes that the drift began after an evening feed change, that the same pattern preceded a settling problem in March, that the response then was to reduce rather than increase, and suggests checking the return rate before adjusting the blowers.',
   caption: 'Illustrative. Not live plant data.',
   copy: [
-    'That is one operator, on one night, with twenty five years of plant history standing behind them.',
-    'Hydris does not raise an alarm and leave. It says what it thinks is happening, why it thinks so, and what happened the last time the plant did this. Then it gets out of the way, because the operator is the one who decides.',
-    'Every answer shows its reasoning. If we cannot explain it, we do not ship it.',
+    'One operator, on one night, with twenty five years of plant history standing behind them.',
+    'Hydris does not raise an alarm and leave. It says what it thinks is happening, why, and what happened last time. Then the operator decides.',
   ],
 };
 
@@ -183,9 +176,9 @@ export const MATTERS = {
   eyebrow: 'Why it matters',
   title: 'What changes when a plant can think.',
   principles: [
-    { title: 'Cost', text: 'Plants run cautiously because caution is safer than being wrong. Knowing what is actually happening lets a team run the plant to its condition rather than to the worst case, and that is where the money has always been.' },
-    { title: 'Risk', text: 'Most expensive failures announce themselves quietly, days before anything alarms. Seeing them early is the difference between an adjustment and an incident.' },
-    { title: 'Knowledge', text: 'Experience stops leaving with the people who hold it. New operators become useful in months rather than years, and the plant keeps what it has learned.' },
+    { title: 'Cost', text: 'Run the plant to its actual condition rather than to the worst case. That is where the money has always been.' },
+    { title: 'Risk', text: 'Expensive failures announce themselves quietly, days before an alarm. Seeing them early turns an incident into an adjustment.' },
+    { title: 'Knowledge', text: 'Experience stops leaving with the people who hold it. New operators become useful in months, not years.' },
   ],
   levers: [
     { title: 'Chemicals', where: 'Largest controllable operating cost', text: 'Dosing to the condition the plant is actually in, rather than the condition it might be in.' },
@@ -221,11 +214,11 @@ export const AUDIENCE = {
   title: 'Built for operators. Valued by everyone above them.',
   lead: 'If it does not work for the person on shift at two in the morning, it does not work. Everything else follows from that.',
   rows: [
-    { icon: 'operator', title: 'Operators', text: 'Know what deserves attention this morning and what to do about it, without waiting for someone senior to be free.' },
-    { icon: 'manager', title: 'Plant managers', text: 'See the plant as one system rather than a wall of separate numbers, and know which problems are real before they become expensive.' },
-    { icon: 'engineer', title: 'Process engineers', text: 'Get the reasoning, not just the answer, and can agree with it or overrule it on the evidence.' },
-    { icon: 'leaf', title: 'Sustainability and compliance leads', text: 'Have the evidence already assembled when a customer, a brand programme or a regulator asks, because it was recorded as the work happened.' },
-    { icon: 'bars', title: 'Operations executives', text: 'Compare every site on the same basis, find the ones quietly at risk, and see where the cost actually sits across the portfolio.' },
+    { icon: 'operator', title: 'Operators', text: 'Know what deserves attention this morning, and what to do about it.' },
+    { icon: 'manager', title: 'Plant managers', text: 'See the plant as one system, and know which problems are real before they become expensive.' },
+    { icon: 'engineer', title: 'Process engineers', text: 'Get the reasoning, not just the answer, and overrule it on the evidence.' },
+    { icon: 'leaf', title: 'Sustainability and compliance leads', text: 'Have the evidence ready when a customer, a brand programme or a regulator asks.' },
+    { icon: 'bars', title: 'Operations executives', text: 'Compare every site on the same basis and find the ones quietly at risk.' },
   ],
   verticals: ['Food and beverage', 'Textiles', 'Pulp and paper', 'Chemicals'],
   note: 'Hydris is built for industrial operations, not municipal utility billing. Industrial plants change what they make, and the water system has to follow.',
@@ -233,17 +226,17 @@ export const AUDIENCE = {
 
 export const HOME_FAQ = [
   ['How would this improve my plant?',
-    'By telling your team what is happening and what to do about it, every day, instead of leaving them to work it out from a wall of numbers. Most plants find the first value in what they stop doing, which is dosing and running equipment defensively because nobody is certain what the plant actually needs.'],
+    'By telling your team what is happening and what to do about it, every day. Most plants find the first value in what they stop doing: dosing and running equipment defensively.'],
   ['Is it difficult to put in?',
-    'No, and this is the part people expect to be worse than it is. There is no hardware, no change to your control system and no capital request. We work from exports you already produce, so getting started is a configuration exercise measured in weeks rather than a project measured in quarters.'],
+    'No. There is no hardware, no change to your control system and no capital request. We work from exports you already produce, so it takes weeks, not quarters.'],
   ['Where does the intelligence come from?',
-    'From the Hydris curated expert knowledge base: process engineering practice, treatment chemistry, equipment behaviour and operating experience, structured by our own water engineers so the system can reason with it. It arrives knowing how plants like yours behave, then learns what makes yours different.'],
+    'From the Hydris curated expert knowledge base, structured by our own water engineers. It arrives knowing how plants like yours behave, then learns what makes yours different.'],
   ['Do my operators need to be technical?',
-    'No. Hydris talks in the language an operator already uses, and every answer comes with the reasoning behind it so anyone can check it rather than take it on trust. If a recommendation cannot be acted on before the end of a shift, we do not consider it finished.'],
+    'No. Hydris uses the language an operator already uses, and every answer shows its reasoning so anyone can check it.'],
   ['Will Hydris change anything in my plant on its own?',
-    'Never. Hydris only reads. It does not write to your control system and it does not move equipment. Your operator stays the only thing that changes a setting, which is how it should be and how your process safety people will want it.'],
+    'Never. Hydris only reads. It does not write to your control system and does not move equipment.'],
   ['What happens to my plant\'s data?',
-    'It stays in your own single tenancy and it is not pooled with anyone else\'s. What improves across plants is the understanding, not the data. Your IT team will ask about this early and deserves a straight answer rather than a badge, so write to us and we will tell you what is in place today and what is in progress.'],
+    'It stays in your own single tenancy and is never pooled. What improves across plants is the understanding, not the data. Write to us and we will tell you what is in place today.'],
 ];
 
 export const NOTE = {

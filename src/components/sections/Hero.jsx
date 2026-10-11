@@ -267,10 +267,6 @@ export default function Hero() {
         </p>
         <Words as="h2" text={HERO.title} className="hero__title" delay={0.15} />
         <Reveal as="p" className="lead hero__sub" delay={0.7}>{HERO.sub}</Reveal>
-        <Reveal className="hero__cta" delay={0.85}>
-          <a className="pill" href="#how">How it works <Arrow dir="down" /></a>
-          <a className="link-u hero__talk" href="/contact/">Talk to us <Arrow /></a>
-        </Reveal>
       </div>
 
       <div className="hero__shifts grid">

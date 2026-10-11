@@ -1,13 +1,10 @@
 import ScrollReveal from '../components/reactbits/ScrollReveal/ScrollReveal.jsx';
 import Hero, { Splash } from '../components/sections/Hero.jsx';
-import {
-  Cta, Definition, Faq, IconCards, Nots, Oneline, Process, Products, RowList, SystemsLoop, Timeline, Velocity,
-} from '../components/sections/Blocks.jsx';
-import { Capture, LayerStack, Proof, Readout, ResultStrip } from '../components/sections/Sections.jsx';
-import { Aperture, Band, Hotspots, Stages, Texture } from '../components/sections/Imagery.jsx';
-import { KnowledgeBase } from '../components/widgets/Widgets.jsx';
+import { Assurances, Cta, Definition, Faq, IconCards, Nots, Process, Products, RowList, Timeline } from '../components/sections/Blocks.jsx';
+import { Readout, ResultStrip } from '../components/sections/Sections.jsx';
+import { Aperture, Stages } from '../components/sections/Imagery.jsx';
 import { Frame } from '../components/ui/Photo.jsx';
-import { Arrow, Parallax, Reveal, SecHead } from '../components/ui/Primitives.jsx';
+import { Arrow, Parallax, Reveal, SecHead, Words } from '../components/ui/Primitives.jsx';
 import {
   AUDIENCE, CATEGORY, GET_IN, HOME_FAQ, HOW, IMAGERY, IMPL, KNOWLEDGE, LOOKS, MATTERS, MISSING, PLATFORM_HOME,
   PRODUCTS, PROBLEM, PROOF, WHY,
@@ -15,32 +12,18 @@ import {
 
 const IMG = IMAGERY;
 
+/* Ten parts, one idea each: the problem, the category, the plant, how it works, what it looks like,
+   the platform, why it matters, how you get it in, who it is for, and questions. */
 export default function Home() {
   return (
     <>
       <Splash />
       <Hero />
-
-      {/* The plant, from above: the clarifier opens out into the whole site */}
       <Aperture {...IMG.aperture} />
 
-      {/* 01 Get Hydris in your plant */}
-      <section className="sec" id="start">
-        <SecHead index="01" label="Get started" title={GET_IN.title} text={GET_IN.lead} />
-        <IconCards items={GET_IN.items} cols={4} variant="icards--four" />
-        <Reveal className="sec__action" delay={0.1}>
-          <a className="pill" href="/contact/">Talk to us <Arrow /></a>
-        </Reveal>
-      </section>
-
-      <SystemsLoop />
-
-      {/* 02 Across the plant */}
-      <Stages index="02" {...IMG.stages} />
-
-      {/* 03 The problem */}
+      {/* 01 The problem */}
       <section className="sec problem" id="problem">
-        <SecHead index="03" label={PROBLEM.eyebrow} title={PROBLEM.title} />
+        <SecHead index="01" label={PROBLEM.eyebrow} title={PROBLEM.title} />
         <div className="problem__body grid">
           <Reveal as="p" className="lead problem__lede" delay={0.05}>{PROBLEM.lede}</Reveal>
           {PROBLEM.points.map((p, i) => (
@@ -61,88 +44,68 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 04 The category */}
+      {/* 02 The category */}
       <section className="sec alt" id="category">
-        <SecHead index="04" label={CATEGORY.eyebrow} title={CATEGORY.title} />
+        <SecHead index="02" label={CATEGORY.eyebrow} title={CATEGORY.title} />
         <div className="wide">
           <Definition term={CATEGORY.term} d1={CATEGORY.d1} d2={CATEGORY.d2} />
           <Nots items={CATEGORY.nots} />
         </div>
       </section>
 
-      <Velocity texts={['Capture knowledge · Guide decisions · Strengthen operations ·', 'Data · Understand · Reason · Act · Learn ·']} />
+      {/* 03 Across the plant */}
+      <Stages index="03" {...IMG.stages} />
 
-      {/* 05 How it works */}
+      {/* 04 How it works, and what it runs on */}
       <section className="sec sec--process" id="how">
-        <SecHead index="05" label={HOW.eyebrow} title={HOW.title} text={HOW.lead} />
+        <SecHead index="04" label={HOW.eyebrow} title={HOW.title} text={HOW.lead} />
         <Process steps={HOW.steps} />
         <ResultStrip items={HOW.result} />
-      </section>
-
-      {/* 06 What it runs on */}
-      <section className="sec alt kbsec" id="knowledge">
-        <SecHead index="06" label={KNOWLEDGE.eyebrow} title={KNOWLEDGE.title} />
-        <div className="kbsec__grid grid">
-          <div className="kbsec__text">
-            <Reveal as="h3" className="t-s" delay={0.05}>{KNOWLEDGE.lead}</Reveal>
-            <Reveal as="p" className="body mute" delay={0.12}>{KNOWLEDGE.text}</Reveal>
-            <Reveal as="p" className="body mute" delay={0.18}>{KNOWLEDGE.text2}</Reveal>
-            <Reveal as="p" className="body kbsec__not" delay={0.24}>{KNOWLEDGE.not}</Reveal>
+        <div className="kbline grid">
+          <Reveal as="p" className="s-label kbline__label">{KNOWLEDGE.eyebrow}</Reveal>
+          <div className="kbline__main">
+            <Reveal as="h3" className="t-s">{KNOWLEDGE.title}</Reveal>
+            <Reveal as="p" className="body mute" delay={0.1}>{KNOWLEDGE.text2}</Reveal>
+            <div className="kbline__chips">
+              {KNOWLEDGE.layers.map((l, i) => <Reveal as="span" className="chip" key={l} delay={0.15 + i * 0.06}>{l}</Reveal>)}
+            </div>
           </div>
-          <Reveal className="kbsec__viz" delay={0.1}><KnowledgeBase layers={KNOWLEDGE.layers} /></Reveal>
         </div>
       </section>
 
-      {/* 07 Why Hydris */}
-      <section className="sec" id="why">
-        <SecHead index="07" label={WHY.eyebrow} title={WHY.title} text={WHY.lead} />
-        <Band {...IMG.control} ratio="21 / 8" position="50% 42%" className="band--inset" />
-        <IconCards items={WHY.items} cols={3} />
-      </section>
-
-      {/* 08 The platform */}
-      <section className="sec alt" id="platform">
-        <SecHead index="08" label={PLATFORM_HOME.eyebrow} title={PLATFORM_HOME.title} text={PLATFORM_HOME.lead} />
-        <div className="wide">
-          <Products items={PRODUCTS} />
-          <Reveal className="sec__action sec__action--start" delay={0.1}>
-            <a className="link-u" href="/platform/">See the platform <Arrow /></a>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* 09 How you get it in */}
-      <section className="sec" id="implementation">
-        <SecHead index="09" label={IMPL.eyebrow} title={IMPL.title} text={IMPL.lead} />
-        <div className="wide">
-          <Timeline steps={IMPL.steps} />
-          <Oneline parts={IMPL.close} />
-        </div>
-      </section>
-
-      {/* 10 Where we are today */}
-      <section className="sec alt sec--proof" id="proof">
-        <SecHead index="10" label={PROOF.eyebrow} title={PROOF.title} text={PROOF.lead} />
-        <Proof big={PROOF.big} unit={PROOF.unit} note={PROOF.note} sweep={IMG.sweep} />
-      </section>
-
-      {/* 11 What it looks like */}
-      <section className="sec" id="looks">
-        <SecHead index="11" label={LOOKS.eyebrow} title={LOOKS.title} text={LOOKS.lead} />
-        <Hotspots name={IMG.spots.name} items={IMG.spots.items} caption={IMG.spots.caption} />
-        <div className="looks looks--overlap grid">
+      {/* 05 What it looks like, and the rules it keeps */}
+      <section className="sec alt" id="looks">
+        <SecHead index="05" label={LOOKS.eyebrow} title={LOOKS.title} text={LOOKS.lead} />
+        <div className="looks grid">
           <Parallax amount={18} className="looks__card"><Readout /></Parallax>
           <div className="looks__copy">
             {LOOKS.copy.map((t, i) => (
-              <Reveal as="p" className={i === 0 ? 'lead' : i === 2 ? 'body mute' : 'body'} key={i} delay={0.1 + i * 0.12}>{t}</Reveal>
+              <Reveal as="p" className={i === 0 ? 'lead' : 'body mute'} key={i} delay={0.1 + i * 0.12}>{t}</Reveal>
             ))}
+          </div>
+        </div>
+        <div className="subhead grid">
+          <Reveal as="p" className="s-label subhead__label">{WHY.eyebrow}</Reveal>
+          <Reveal as="h3" className="t-s subhead__title" delay={0.05}>{WHY.title}</Reveal>
+        </div>
+        <IconCards items={WHY.items} cols={3} />
+      </section>
+
+      {/* 06 The platform */}
+      <section className="sec" id="platform">
+        <SecHead index="06" label={PLATFORM_HOME.eyebrow} title={PLATFORM_HOME.title} text={MISSING.title} />
+        <div className="wide">
+          <Products items={PRODUCTS} />
+          <div className="platline">
+            <Reveal as="p" className="body mute">{MISSING.foot}</Reveal>
+            <Reveal delay={0.1}><a className="link-u" href="/platform/">See the platform <Arrow /></a></Reveal>
           </div>
         </div>
       </section>
 
-      {/* 12 Why it matters */}
+      {/* 07 Why it matters */}
       <section className="sec alt" id="matters">
-        <SecHead index="12" label={MATTERS.eyebrow} title={MATTERS.title} />
+        <SecHead index="07" label={MATTERS.eyebrow} title={MATTERS.title} />
         <div className="matters grid">
           {MATTERS.principles.map((p, i) => (
             <Reveal className="matters__col hl" key={p.title} delay={i * 0.1}>
@@ -152,27 +115,38 @@ export default function Home() {
             </Reveal>
           ))}
         </div>
-        <RowList rows={MATTERS.levers.map((l, i) => ({ ...l, a: String(i + 1).padStart(2, '0') }))} />
-        <div className="matters__notes grid">
-          <Reveal as="p" className="body mute matters__note">{MATTERS.note}</Reveal>
-          <Reveal as="p" className="lead matters__strong" delay={0.1}>{MATTERS.strong}</Reveal>
+        <div className="levers grid">
+          <Reveal as="p" className="s-label levers__label">Where it shows</Reveal>
+          <div className="levers__list">
+            {MATTERS.levers.map((l, i) => (
+              <Reveal className="lever" key={l.title} delay={i * 0.07}>
+                <span className="lever__t">{l.title}</span>
+                <span className="lever__w">{l.where}</span>
+              </Reveal>
+            ))}
+          </div>
+          <Reveal as="p" className="body mute levers__note" delay={0.2}>{MATTERS.note}</Reveal>
         </div>
       </section>
 
-      {/* 13 The missing layer */}
-      <section className="sec dark" id="layer">
-        <Texture name="water-caustic-light" className="tex--soft" />
-        <SecHead index="13" label={MISSING.eyebrow} title={MISSING.title} text={MISSING.lead} tone="dark" />
-        <div className="wide">
-          <LayerStack items={MISSING.stack} />
-          <Reveal as="p" className="s-label layer__note">{MISSING.note}</Reveal>
-          <Reveal as="p" className="t-s layer__foot" delay={0.1}>{MISSING.foot}</Reveal>
+      {/* 08 Getting started, and where we are today */}
+      <section className="sec" id="start">
+        <SecHead index="08" label={IMPL.eyebrow} title={GET_IN.title} text={GET_IN.lead} />
+        <Assurances items={GET_IN.items} />
+        <div className="wide"><Timeline steps={IMPL.steps} /></div>
+        <div className="today grid">
+          <Reveal as="p" className="s-label today__label">{PROOF.eyebrow}</Reveal>
+          <div className="today__main">
+            <Words as="p" text={PROOF.big} className="t-l today__big" />
+            <Reveal as="p" className="lead today__unit" delay={0.2}>{PROOF.unit}</Reveal>
+            <Reveal as="p" className="body mute" delay={0.3}>{PROOF.lead}</Reveal>
+          </div>
         </div>
       </section>
 
-      {/* 14 Who it is for */}
-      <section className="sec" id="audience">
-        <SecHead index="14" label={AUDIENCE.eyebrow} title={AUDIENCE.title} text={AUDIENCE.lead} />
+      {/* 09 Who it is for */}
+      <section className="sec alt" id="audience">
+        <SecHead index="09" label={AUDIENCE.eyebrow} title={AUDIENCE.title} text={AUDIENCE.lead} />
         <RowList rows={AUDIENCE.rows} variant="rows--icons" />
         <div className="verts grid">
           <div className="verts__chips">
@@ -182,8 +156,7 @@ export default function Home() {
         </div>
       </section>
 
-      <Faq index="15" items={HOME_FAQ} />
-      <Capture />
+      <Faq index="10" items={HOME_FAQ} />
       <Cta />
     </>
   );

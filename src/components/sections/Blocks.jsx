@@ -323,3 +323,22 @@ export function Cta({ short = false }) {
     </section>
   );
 }
+
+/* Four plain promises, each ticked off as it arrives */
+export function Assurances({ items }) {
+  const [ref, inView] = useInView({ threshold: 0.3, once: true });
+  return (
+    <ul ref={ref} className={`assure grid ${inView ? 'is-in' : ''}`}>
+      {items.map((c, i) => (
+        <li className="assure__item" key={c.title} style={{ '--i': i }}>
+          <svg className="assure__tick" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="10.5" pathLength="1" />
+            <path d="M7.4 12.4l3 3 6.2-6.6" pathLength="1" />
+          </svg>
+          <h3 className="assure__t">{c.title}</h3>
+          <p className="assure__p">{c.text}</p>
+        </li>
+      ))}
+    </ul>
+  );
+}

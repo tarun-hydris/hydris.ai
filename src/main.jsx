@@ -5,6 +5,7 @@ import { Site } from './components/layout/Layout.jsx';
 import './styles/global.css';
 import './styles/imagery.css';
 import './styles/hybrid.css';
+import './styles/corporate.css';
 
 const pages = {
   home: lazy(() => import('./pages/Home.jsx')),
