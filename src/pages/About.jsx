@@ -2,13 +2,14 @@ import ScrollReveal from '../components/reactbits/ScrollReveal/ScrollReveal.jsx'
 import { Quote } from '../components/sections/Blocks.jsx';
 import { Invitation } from '../components/sections/Chapters.jsx';
 import { Band } from '../components/sections/Imagery.jsx';
+import FounderPortrait from '../components/ui/FounderPortrait.jsx';
 import { Frame } from '../components/ui/Photo.jsx';
 import { Reveal, SecHead, Words } from '../components/ui/Primitives.jsx';
 import { ABOUT, IMAGERY } from '../lib/content.js';
 
 /* The company, told as one editorial story: the problem, why Vetri started Hydris, what is being
-   protected, how the team works. No founder portrait or team photograph has been supplied yet, so the
-   founder's account is typographic; nothing here is invented. */
+   protected, how the team works. The founder's portrait is a short sequence of photographs that plays as
+   the cursor comes near; no team photograph has been supplied yet. Nothing here is invented. */
 export default function About() {
   const A = ABOUT;
   return (
@@ -37,12 +38,17 @@ export default function About() {
       <section className="sec alt founder" id="founder">
         <SecHead index="02" label={A.founder.eyebrow} title={A.founder.title} />
         <div className="founder__grid grid">
-          <Reveal as="figure" className="founder__quote" delay={0.05}>
-            <blockquote>{A.founder.quote}</blockquote>
-            <figcaption className="s-label">{A.founder.cite}</figcaption>
+          <Reveal className="founder__portrait" delay={0.05}>
+            <FounderPortrait alt={`Portrait of ${A.founder.cite}, founder and chief executive of Hydris`} />
           </Reveal>
-          <div className="founder__paras">
-            {A.founder.paras.map((t, i) => <Reveal as="p" className={i === 0 ? 'lead' : 'body mute'} key={i} delay={0.06 + i * 0.08}>{t}</Reveal>)}
+          <div className="founder__text">
+            <Reveal as="figure" className="founder__quote" delay={0.05}>
+              <blockquote>{A.founder.quote}</blockquote>
+              <figcaption className="s-label">{A.founder.cite}</figcaption>
+            </Reveal>
+            <div className="founder__paras">
+              {A.founder.paras.map((t, i) => <Reveal as="p" className={i === 0 ? 'lead' : 'body mute'} key={i} delay={0.06 + i * 0.08}>{t}</Reveal>)}
+            </div>
           </div>
         </div>
       </section>

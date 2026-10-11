@@ -557,10 +557,21 @@ html.is-leaving .hdr { opacity: 0; }
 .quote__t { grid-column: 5 / span 8; font-family: var(--serif); font-size: clamp(26px, 3vw, 48px); line-height: 1.1; letter-spacing: -0.025em; }
 .quote__c { grid-column: 5 / span 8; margin-top: 22px; color: var(--mute); }
 .founder__grid { margin-top: clamp(50px, 7vw, 100px); row-gap: 40px; align-items: start; }
-.founder__quote { grid-column: 1 / span 7; display: grid; gap: 22px; align-content: start; }
-.founder__quote blockquote { font-family: var(--serif); font-size: clamp(34px, 4.8vw, 80px); line-height: 1.03; letter-spacing: -0.034em; }
+.founder__portrait { grid-column: 1 / span 5; align-self: start; position: sticky; top: calc(var(--hdr) + 28px); }
+.founder__text { grid-column: 7 / span 6; display: grid; gap: clamp(32px, 4vw, 56px); align-content: start; }
+.founder__quote { display: grid; gap: 22px; align-content: start; }
+.founder__quote blockquote { font-family: var(--serif); font-size: clamp(30px, 3.5vw, 58px); line-height: 1.05; letter-spacing: -0.032em; }
 .founder__quote figcaption { color: var(--mute); }
-.founder__paras { grid-column: 9 / span 4; display: grid; gap: 18px; align-content: start; }
+.founder__paras { display: grid; gap: 18px; align-content: start; max-width: 56ch; }
+
+/* The founder portrait: a dark studio frame that plays as the cursor comes near */
+.fp { position: relative; width: 100%; }
+.fp__frame { position: relative; aspect-ratio: 4 / 5; overflow: hidden; isolation: isolate; background: var(--fp-bg, #1f1f1f) var(--fp-lq) center / cover no-repeat; box-shadow: 0 40px 90px -50px rgba(7, 22, 27, 0.55); }
+.fp__stack { position: absolute; inset: 0; transform-origin: 50% 26%; will-change: transform; }
+.fp__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; -webkit-user-drag: none; user-select: none; }
+.fp__railwrap { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: rgba(251, 251, 247, 0.14); pointer-events: none; }
+.fp__railwrap i { position: absolute; inset: 0; background: rgba(251, 251, 247, 0.85); transform: scaleX(0); transform-origin: left; }
+.fp--tap .fp__frame { cursor: pointer; }
 .info { padding-top: clamp(40px, 5vw, 80px); }
 .info__label { grid-column: 1 / span 3; color: var(--mute); }
 .info__main { grid-column: 5 / span 8; }
@@ -714,7 +725,8 @@ html.is-leaving .hdr { opacity: 0; }
   .phero__title, .phero__lead { grid-column: 1 / -1; }
   .story__lede, .story__paras, .team__places, .quote__t, .quote__c, .info__label, .info__main { grid-column: 1 / -1; }
   .info__main { margin-top: 30px; }
-  .founder__quote, .founder__paras { grid-column: 1 / -1; }
+  .founder__portrait { grid-column: 1 / -1; position: static; max-width: 560px; }
+  .founder__text { grid-column: 1 / -1; }
   .vgrid { grid-template-columns: 1fr; }
   .vcell, .vcell:nth-child(even) { padding: 30px 0 40px; border-left: 0; }
   .contact__intro { grid-column: 1 / -1; position: static; }
