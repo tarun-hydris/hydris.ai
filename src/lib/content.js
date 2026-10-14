@@ -264,7 +264,7 @@ export const START = {
    previous Home; the chapters only gather it into one story. */
 export const OPENING = {
   label: 'Operational Water Intelligence',
-  title: 'The intelligence layer for industrial water.',
+  title: 'The Intelligence Layer For Water',
   sub: 'Hydris turns the water data your plant already collects into decisions your team can act on.',
   scroll: 'Scroll',
 };
