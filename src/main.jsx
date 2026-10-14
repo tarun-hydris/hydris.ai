@@ -4,10 +4,12 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Site } from './components/layout/Layout.jsx';
 import './styles/site.css';
 import './styles/imagery.css';
+import './styles/story.css';
 
 const pages = {
   home: lazy(() => import('./pages/Home.jsx')),
   platform: lazy(() => import('./pages/Platform.jsx')),
+  demo: lazy(() => import('./pages/Demo.jsx')),
   about: lazy(() => import('./pages/About.jsx')),
   press: lazy(() => import('./pages/Press.jsx')),
   contact: lazy(() => import('./pages/Contact.jsx')),

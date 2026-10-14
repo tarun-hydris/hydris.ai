@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Mark, Wordmark } from '../ui/Brand.jsx';
 import { Arrow } from '../ui/Icon.jsx';
+import { FilmDialog } from '../ui/Film.jsx';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import { CTA, EMAIL, FOOTER, NAV, PHONE } from '../../lib/content.js';
@@ -71,7 +72,8 @@ export function Header({ page }) {
     };
   }, []);
 
-  const items = NAV.filter((n) => n.key !== 'home');
+  // On a phone the header keeps Platform, Demo and About; Press and Contact live in the footer
+  const items = NAV.filter((n) => n.key !== 'home' && !(small && n.key === 'press'));
   return (
     <header ref={hdr} className={`hdr hdr--${tone} ${hidden ? 'is-hidden' : ''} ${solid ? 'is-solid' : ''}`}>
       <a className="hdr__logo" href="/" aria-label="Hydris, home">
@@ -161,6 +163,7 @@ export function Site({ page, children }) {
       <Header page={page} />
       <main id="main">{children}</main>
       <Footer />
+      <FilmDialog />
       <Analytics />
       <SpeedInsights />
     </>

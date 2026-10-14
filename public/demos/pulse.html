@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Hydris Pulse demo</title>
+<style>
+html,body{margin:0;background:#FFFFFF}
+</style>
+</head>
+<body>
+<!-- Hydris Pulse demo. Sample plant, sample answers and example sources only. All CSS is scoped under .hp-demo. -->
+<div class="hp-demo" id="hp-demo">
+<style>
+.hp-demo{--hp-blue:#2563eb;--hp-line:rgba(136,136,136,.27);--hp-line2:rgba(136,136,136,.5);--hp-mute:#777;--hp-bubble:rgba(136,136,136,.27);--hp-amber:#92400e;--hp-warn:#b45309;--hp-red:#b91c1c;--hp-green:#15803d;--hp-soft:#f5f6f8;
+container-type:inline-size;font:16px/1.45 system-ui,'Segoe UI',Roboto,sans-serif;color:#111;color-scheme:light;max-width:1180px;margin:0 auto;text-align:left}
+.hp-demo *,.hp-demo *::before,.hp-demo *::after{box-sizing:border-box}
+.hp-demo button{font:inherit;color:inherit;cursor:pointer}
+.hp-win{display:flex;flex-direction:column;height:680px;background:#fff;border:1px solid var(--hp-line2);border-radius:12px;overflow:hidden}
+.hp-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 12px;border-bottom:1px solid var(--hp-line);flex:0 0 auto}
+.hp-head strong{display:flex;align-items:center;gap:8px}
+.hp-head .hp-ctx{font-size:13px;color:var(--hp-mute);font-weight:400}
+.hp-demotag{display:inline-flex;align-items:center;padding:0 8px;border:1px solid var(--hp-line2);border-radius:10px;background:var(--hp-soft);color:#555;font-size:11px;font-weight:500;line-height:18px;white-space:nowrap}
+.hp-btn{min-height:36px;padding:4px 12px;border:1px solid #767676;border-radius:4px;background:#efefef;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+.hp-btn:hover:not(:disabled){background:#e5e5e5}
+.hp-demo button:focus-visible{outline:2px solid var(--hp-blue);outline-offset:1px}
+.hp-main{flex:1;min-height:0;display:grid;grid-template-columns:215px minmax(0,1fr) 330px}
+.hp-pane{min-height:0;min-width:0;display:flex;flex-direction:column}
+.hp-pane+.hp-pane{border-left:1px solid var(--hp-line)}
+.hp-title{font-size:13px;color:var(--hp-mute);padding:6px 12px;border-bottom:1px solid var(--hp-line);display:flex;justify-content:space-between;gap:8px;flex:0 0 auto}
+.hp-scroll{flex:1;min-height:0;overflow:auto;padding:12px;display:flex;flex-direction:column;gap:10px}
+.hp-tree{list-style:none;margin:0;padding:6px 6px 0}
+.hp-tree ul{list-style:none;margin:0;padding-left:8px;border-left:1px dashed var(--hp-line2);margin-left:14px}
+.hp-node{display:flex;align-items:center;gap:7px;width:100%;text-align:left;border:0;background:none;padding:6px 8px;border-radius:6px;font-size:14px}
+.hp-node:hover{background:var(--hp-soft)}
+.hp-node[aria-selected=true]{background:#e8effd;box-shadow:inset 3px 0 0 var(--hp-blue);font-weight:600}
+.hp-dot{width:9px;height:9px;border-radius:50%;flex:0 0 auto;background:#16a34a}
+.hp-dot.w{background:#f59e0b}.hp-dot.b{background:#dc2626}
+.hp-unit{padding:10px 12px;border-top:1px solid var(--hp-line);font-size:13px;margin-top:auto;background:var(--hp-soft)}
+.hp-unit h4{margin:0 0 6px;font-size:13px}
+.hp-kv{display:flex;justify-content:space-between;gap:8px;padding:2px 0}
+.hp-kv b{font-variant-numeric:tabular-nums}
+.hp-kv b.b{color:var(--hp-red)}.hp-kv b.w{color:var(--hp-warn)}
+.hp-msg{display:flex}.hp-msg.u{justify-content:flex-end}
+.hp-bub{max-width:88%;padding:8px 12px;border-radius:12px;background:var(--hp-bubble);white-space:pre-wrap}
+.hp-msg.u .hp-bub{background:var(--hp-blue);color:#fff}
+.hp-cur::after{content:" \258D"}
+.hp-tool{display:flex;align-items:center;gap:6px;font-size:13px;color:#777;padding:2px 0}
+.hp-tool code{font:12px ui-monospace,Consolas,monospace;background:var(--hp-soft);padding:1px 5px;border-radius:4px;color:#444}
+.hp-cite{display:inline-block;margin:0 1px;padding:0 6px;border:1px solid #93b4f5;background:#eef3fe;color:#1d4ed8;border-radius:9px;font-size:12px;line-height:18px;vertical-align:1px}
+.hp-cite:hover,.hp-cite[aria-expanded=true]{background:var(--hp-blue);color:#fff;border-color:var(--hp-blue)}
+.hp-src{margin:8px 0 0;padding:8px 10px;border-left:3px solid var(--hp-blue);background:#f4f7fe;border-radius:0 6px 6px 0;font-size:13px;color:#333;white-space:normal}
+.hp-src b{display:block;font-size:12px;color:var(--hp-mute);font-weight:600;margin-bottom:2px}
+.hp-src .hp-x{float:right;border:0;background:none;color:var(--hp-mute);font-size:16px;line-height:1;padding:0 2px}
+.hp-card{border:1px solid var(--hp-line);border-radius:8px;padding:12px;display:flex;flex-direction:column;gap:10px;background:#fff}
+.hp-card p{margin:0}.hp-card .r{font-size:13px;color:#777}.hp-card .q{font-weight:600}
+.hp-card .opts{display:flex;flex-direction:column;gap:8px}
+.hp-card .opts .hp-btn{justify-content:flex-start;min-height:44px}
+.hp-card .foot{display:flex;gap:8px;border-top:1px solid var(--hp-line);padding-top:10px}
+.hp-card .foot .hp-btn{flex:1 1 auto;min-height:44px;font-size:14px}
+.hp-card.done{opacity:.75}.hp-card .ans{font-size:13px;color:var(--hp-green)}
+.hp-sugg{padding:8px 10px 0;border-top:1px solid var(--hp-line);display:flex;flex-direction:column;gap:6px;flex:0 0 auto}
+.hp-sugg>span{font-size:12px;color:var(--hp-mute)}
+.hp-chips{display:flex;flex-wrap:wrap;gap:6px}
+.hp-chip{border:1px solid #93b4f5;background:#fff;color:#1d4ed8;border-radius:16px;padding:5px 12px;font-size:13px;min-height:32px}
+.hp-chip:hover:not(:disabled){background:#eef3fe}
+.hp-chip:disabled{opacity:.45;cursor:default}.hp-chip.used{border-style:dashed}
+.hp-comp{display:flex;gap:8px;padding:8px;flex:0 0 auto;margin:0}
+.hp-comp input{flex:1;min-width:0;min-height:44px;padding:8px 10px;font:inherit;border:1px solid #767676;border-radius:4px;background:#fafafa}
+.hp-comp .hp-btn{min-height:44px}
+.hp-tabs{display:flex;border-bottom:1px solid var(--hp-line);flex:0 0 auto}
+.hp-tab{flex:1;border:0;background:none;padding:9px 6px;font-size:14px;border-bottom:2px solid transparent;margin-bottom:-1px}
+.hp-tab[aria-selected=true]{border-color:var(--hp-blue);color:var(--hp-blue);font-weight:600}
+.hp-cov{padding:8px 12px;border-bottom:1px solid var(--hp-line);font-size:12px;color:#555;flex:0 0 auto}
+.hp-cov div{display:flex;justify-content:space-between;margin-bottom:3px}
+.hp-bar{height:6px;border-radius:3px;background:rgba(136,136,136,.25);overflow:hidden;margin-bottom:6px}
+.hp-bar i{display:block;height:100%;background:var(--hp-blue);transition:width .5s}
+.hp-bar.g i{background:var(--hp-green)}
+.hp-hyp{border:1px solid var(--hp-line);border-radius:8px;overflow:hidden;background:#fff}
+.hp-hyp>button{display:flex;gap:8px;align-items:flex-start;width:100%;text-align:left;border:0;background:none;padding:10px;font-size:14px}
+.hp-rank{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:#1f2937;color:#fff;font-size:12px;display:grid;place-items:center;margin-top:1px}
+.hp-hyp .t{flex:1;min-width:0}.hp-hyp .t b{display:block;font-weight:600}
+.hp-hyp .t small{color:var(--hp-mute);font-size:12px}
+.hp-tier{flex:0 0 auto;font-size:11px;font-weight:700;letter-spacing:.04em;padding:2px 7px;border-radius:4px;border:1px solid}
+.hp-tier.HIGH{color:#166534;background:#dcfce7;border-color:#86efac}
+.hp-tier.MEDIUM{color:#92400e;background:#fef3c7;border-color:#fcd34d}
+.hp-tier.LOW{color:#555;background:#f1f1f1;border-color:#ccc}
+.hp-chev{transition:transform .2s;color:#888;margin-top:2px}.hp-hyp.open .hp-chev{transform:rotate(90deg)}
+.hp-det{display:none;padding:0 10px 10px 40px;font-size:13px}.hp-hyp.open .hp-det{display:block}
+.hp-det h5{margin:8px 0 3px;font-size:12px;color:var(--hp-mute);font-weight:600}
+.hp-det ul{margin:0;padding:0;list-style:none}
+.hp-det li{padding:2px 0 2px 16px;position:relative}
+.hp-det li::before{position:absolute;left:0;font-weight:700}
+.hp-det .s li::before{content:"+";color:var(--hp-green)}
+.hp-det .c li::before{content:"\2212";color:var(--hp-red)}
+.hp-det .d li::before{content:"?";color:var(--hp-blue)}
+.hp-ev{border:1px solid var(--hp-line);border-radius:8px;padding:8px 10px;font-size:13px;background:#fff}
+.hp-ev .top{display:flex;justify-content:space-between;gap:8px;margin-bottom:2px}
+.hp-ev .top b{font-weight:600}
+.hp-ev .m{color:var(--hp-mute);font-size:12px;display:flex;flex-wrap:wrap;gap:4px 10px}
+.hp-rel{font-size:11px;border-radius:4px;padding:1px 6px;background:#e0f2fe;color:#075985}
+.hp-rel.op{background:#fef3c7;color:#92400e}.hp-rel.bad{background:#fee2e2;color:#991b1b}
+.hp-new{animation:hpflash 1.6s}
+@keyframes hpflash{from{background:#fff7d6}to{background:#fff}}
+.hp-plan{border:1px solid var(--hp-line);border-radius:8px;padding:10px;font-size:13px;background:#fff}
+.hp-plan h4{margin:0 0 4px;font-size:14px;display:flex;justify-content:space-between;gap:6px}
+.hp-plan p{margin:4px 0}
+.hp-safe{border-color:#fcd34d;background:#fffbeb;color:#78350f}
+.hp-ver{border-color:#93b4f5;background:#f4f7fe}
+.hp-empty{color:var(--hp-mute);font-size:13px;padding:8px 2px;margin:0}
+.hp-act{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 12px 10px;border-top:2px solid rgba(136,136,136,.53);flex:0 0 auto;background:#fff}
+.hp-adv{flex:1;margin:0;display:flex;align-items:center;gap:6px;font-size:13px;color:var(--hp-amber)}
+.hp-mob{display:none}
+.hp-note{font-size:12px;color:var(--hp-mute);margin:8px 2px 0;text-align:center}
+@container (max-width:900px){.hp-main{grid-template-columns:190px minmax(0,1fr) 290px}}
+@container (max-width:760px){
+ .hp-win{height:720px}
+ .hp-main{grid-template-columns:1fr}
+ .hp-pane+.hp-pane{border-left:0}
+ .hp-mob{display:flex;border-bottom:1px solid var(--hp-line);flex:0 0 auto}
+ .hp-main>.hp-pane{display:none}
+ .hp-main[data-v=tree]>.p-tree,.hp-main[data-v=chat]>.p-chat,.hp-main[data-v=dx]>.p-dx{display:flex}
+ .hp-head .hp-ctx{display:none}
+ .hp-bub{max-width:94%}
+}
+@container (max-width:480px){
+ .hp-head{flex-wrap:wrap;row-gap:6px;padding:8px 10px}
+ .hp-head strong{gap:6px;font-size:15px}
+ .hp-head .hp-btn{padding:4px 9px;font-size:14px}
+ .hp-demotag{font-size:10px;padding:0 6px}
+}
+@media (prefers-reduced-motion:reduce){.hp-demo *{animation:none!important;transition:none!important}}
+</style>
+
+<div class="hp-win" role="application" aria-label="Hydris Pulse interactive demo">
+ <header class="hp-head">
+  <strong>
+   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#2563eb"/><path d="M3 13h4l2-5 3.5 9 2.5-6 1.5 2H21" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+   Hydris Pulse <span class="hp-ctx">&middot; MBR-01 Effluent Plant &middot; Case #1042</span> <span class="hp-demotag">Demo &middot; sample data</span></strong>
+  <span><span class="hp-ctx" style="margin-right:8px">Demo operator &middot;</span><button class="hp-btn" type="button" data-act="reset">Restart demo</button></span>
+ </header>
+ <nav class="hp-mob" aria-label="Demo sections">
+  <button class="hp-tab" type="button" data-v="tree" aria-selected="false">Plant</button>
+  <button class="hp-tab" type="button" data-v="chat" aria-selected="true">Diagnosis</button>
+  <button class="hp-tab" type="button" data-v="dx" aria-selected="false">Reasoning</button>
+ </nav>
+ <div class="hp-main" data-v="chat">
+  <section class="hp-pane p-tree" aria-label="Plant topology">
+   <div class="hp-title"><span>Plant topology</span><span>6 units</span></div>
+   <div style="overflow:auto;flex:1;min-height:0;display:flex;flex-direction:column">
+    <ul class="hp-tree" role="tree" id="hp-tree"></ul>
+    <div class="hp-unit" id="hp-unit" aria-live="polite"></div>
+   </div>
+  </section>
+  <section class="hp-pane p-chat" aria-label="Diagnosis chat">
+   <div class="hp-title"><span>Session: <b id="hp-status" style="font-weight:600">awaiting_operator</b></span><span>opened from Lite alert 06:42</span></div>
+   <div class="hp-scroll" id="hp-log" aria-live="polite"></div>
+   <div class="hp-sugg"><span>Try a question</span><div class="hp-chips" id="hp-chips"></div></div>
+   <form class="hp-comp" onsubmit="return false"><input disabled placeholder="Describe what you're seeing&hellip; (demo: use the questions above)" aria-label="Message (disabled in demo)"><button class="hp-btn" type="button" disabled>Send</button></form>
+  </section>
+  <section class="hp-pane p-dx" aria-label="Reasoning">
+   <div class="hp-tabs" role="tablist">
+    <button class="hp-tab" type="button" role="tab" data-t="hyp" aria-selected="true">Hypotheses</button>
+    <button class="hp-tab" type="button" role="tab" data-t="ev" aria-selected="false">Evidence</button>
+    <button class="hp-tab" type="button" role="tab" data-t="plan" aria-selected="false">Plan</button>
+   </div>
+   <div class="hp-cov" id="hp-cov"></div>
+   <div class="hp-scroll" id="hp-dx"></div>
+  </section>
+ </div>
+ <footer class="hp-act">
+  <p class="hp-adv" role="note"><span aria-hidden="true">&#9888;</span><span>This is advisory: verify before acting.</span></p>
+  <span id="hp-esc"></span>
+ </footer>
+</div>
+<p class="hp-note">Sample plant and sample answers for demonstration. Citations are examples of how Pulse links every recommendation to its source.</p>
+
+<script>
+(function(){
+var root=document.getElementById('hp-demo'),$=function(s){return root.querySelector(s)};
+var log=$('#hp-log'),chips=$('#hp-chips'),dx=$('#hp-dx'),status=$('#hp-status');
+var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function wait(ms){return new Promise(function(r){setTimeout(r,reduce?0:ms)})}
+var gen=0;
+
+var SRC={
+ 1:{t:'MBR design handbook, Ch. 5',x:'Loss of permeability with rising TMP under oxygen-limited conditions is associated with deflocculation and release of soluble microbial products (SMP) that load the membrane surface.'},
+ 2:{t:'Membrane filtration guidance manual, Sec. 4',x:'A sudden rise in filtrate turbidity with stable or falling TMP indicates compromised integrity; confirm with a direct integrity test (pressure decay) before taking the unit out of service.'},
+ 3:{t:'Wastewater engineering textbook, Sec. 8-6',x:'Activated sludge held below about 1.0 mg/L dissolved oxygen shows poor floc formation and enhanced filament growth; restore 2.0 mg/L or higher before assessing downstream effects.'},
+ 4:{t:'Turbidity test method, nephelometric',x:'Nephelometric readings drift with optics fouling; verify against a formazin or stabilised standard when calibration is overdue.'},
+ 5:{t:'Membrane vendor O&M manual, Sec. 6.3: Cleaning',x:'Recovery cleaning is indicated when TMP exceeds 55 kPa at normal flux. Do not clean before restoring normal biology: cake layers re-form within hours.'},
+ 6:{t:'Site SOP-ETP-014: Blower changeover',x:'On duty blower trip, start the standby blower after lockout/tagout of the tripped unit. Log changeover time in Lite.'}
+};
+var TREE=[
+ {id:'eq',n:'Equalisation tank',s:'g',kv:[['Level','2.1 m'],['pH','7.3'],['Inflow','184 m3/h']]},
+ {id:'ax',n:'Anoxic tank',s:'g',kv:[['ORP','-142 mV'],['MLSS','8.4 g/L'],['Recycle','3.0 Q']]},
+ {id:'at',n:'Aeration tank AT-1',s:'b',kv:[['DO','0.4 mg/L','b'],['Blower B-2','TRIPPED 06:10','b'],['MLSS','8.9 g/L'],['Temp','31.2 C']]},
+ {id:'t1',n:'MBR Train 1',s:'g',kv:[['TMP','36 kPa'],['Flux','21 LMH'],['Permeate turb.','0.3 NTU']]},
+ {id:'t2',n:'MBR Train 2',s:'w',kv:[['TMP','61 kPa','b'],['Flux','21 LMH'],['Permeate turb.','4.8 NTU','b'],['Last CIP','27 d ago']]},
+ {id:'ef',n:'Treated effluent',s:'w',kv:[['Turbidity','2.6 NTU','w'],['Limit','1.0 NTU'],['COD','34 mg/L'],['pH','7.2']]}
+];
+function H0(){return[
+ {id:'h2',n:'Low DO degraded the sludge and fouled the membrane',sub:'Blower B-2 trip at 06:10',tier:'LOW',sup:['DO in AT-1 at 0.4 mg/L since 06:10 (instrument, valid)','Blower B-2 trip alarm 06:10 (event log)','TMP on Train 2 rose 38 to 61 kPa in 4 h (instrument, valid)'],con:['Turbidity jump is sudden; fouling alone usually raises TMP, not permeate turbidity'],chk:['Observe permeate appearance at sample tap (operator)','Check floc structure and foam on AT-1 (operator)']},
+ {id:'h1',n:'Membrane integrity breach on Train 2',sub:'Fibre break or seal leak',tier:'LOW',sup:['Permeate turbidity 0.3 to 4.8 NTU in minutes, Train 2 only'],con:['TMP is rising, not falling; a breach normally relieves TMP'],chk:['Pressure decay test on Train 2 (needs unit isolation)']},
+ {id:'h3',n:'Turbidimeter PT-201 drift or fouled optics',sub:'Instrument / data hypothesis',tier:'LOW',sup:['Calibration overdue 41 days (Lite metadata)'],con:['Train 1 and the effluent composite also trend upward'],chk:['Grab sample read on bench turbidimeter (SMWW 2130 B)']}
+]}
+var EV0=[
+ {t:'DO, AT-1',v:'0.4 mg/L',src:'Instrument DO-101',q:'ok',r:'Valid, calibrated 12 d ago',when:'since 06:10'},
+ {t:'Blower B-2 status',v:'Tripped',src:'Lite event log',q:'ok',r:'Valid, exact time',when:'06:10'},
+ {t:'TMP, Train 2',v:'38 to 61 kPa',src:'Instrument PT-T2',q:'ok',r:'Valid, calibrated 30 d ago',when:'06:00-10:00'},
+ {t:'Permeate turbidity, Train 2',v:'4.8 NTU',src:'Instrument PT-201',q:'bad',r:'Calibration overdue 41 d, caps trust',when:'06:40'}
+];
+var HYP,EV,PLAN,COV,asked,answered,used,busy,openH,sel,tab;
+
+var treeEl=$('#hp-tree');
+function drawTree(){
+ var h='';TREE.forEach(function(n){
+  h+='<li role="treeitem"><button class="hp-node" type="button" data-n="'+n.id+'" aria-selected="'+(n.id===sel)+'"><span class="hp-dot '+n.s+'"></span>'+esc(n.n)+'</button></li>';
+ });
+ treeEl.innerHTML='<li role="none"><div class="hp-node" style="font-weight:600">MBR-01 plant</div><ul role="group">'+h+'</ul></li>';
+ var n=TREE.filter(function(x){return x.id===sel})[0],u='<h4>'+esc(n.n)+'</h4>';
+ n.kv.forEach(function(k){u+='<div class="hp-kv"><span>'+esc(k[0])+'</span><b class="'+(k[2]||'')+'">'+esc(k[1])+'</b></div>'});
+ $('#hp-unit').innerHTML=u;
+}
+treeEl.addEventListener('click',function(e){var b=e.target.closest('[data-n]');if(!b)return;sel=b.getAttribute('data-n');drawTree()});
+
+function scrl(){log.scrollTop=log.scrollHeight}
+function bubble(role,html,stream,g){
+ var m=document.createElement('div');m.className='hp-msg '+(role==='u'?'u':'a');
+ m.innerHTML='<div class="hp-bub"></div>';log.appendChild(m);var b=m.firstChild;
+ if(!stream){b.innerHTML=html;scrl();return Promise.resolve(b)}
+ var parts=html.match(/<button[\s\S]*?<\/button>|\s+|[^\s<]+/g)||[],i=0;b.classList.add('hp-cur');
+ return new Promise(function(res){(function tick(){
+  if(g!==gen)return res(b);
+  if(i>=parts.length){b.classList.remove('hp-cur');return res(b)}
+  var chunk='';for(var k=0;k<3&&i<parts.length;k++)chunk+=parts[i++];
+  b.insertAdjacentHTML('beforeend',chunk);scrl();setTimeout(tick,reduce?0:45);
+ })()});
+}
+function tool(name,args,g){
+ var d=document.createElement('div');d.className='hp-tool';
+ d.innerHTML='<span aria-hidden="true">⏳</span><span>Running <code>'+esc(name)+'</code>&hellip;</span>';log.appendChild(d);scrl();
+ return wait(600).then(function(){if(g!==gen)return;d.innerHTML='<span aria-hidden="true" style="color:#15803d">✓</span><span><code>'+esc(name)+'</code> completed'+(args?' <span style="color:#999">· '+esc(args)+'</span>':'')+'</span>'});
+}
+function c(n){return '<button class="hp-cite" type="button" data-c="'+n+'" aria-expanded="false" aria-label="Example source '+n+'" title="Example source '+n+'">'+n+'</button>'}
+log.addEventListener('click',function(e){
+ var x=e.target.closest('.hp-x');
+ if(x){var s=x.parentNode,bb=s.parentNode;s.remove();bb.querySelectorAll('.hp-cite').forEach(function(q){q.setAttribute('aria-expanded','false')});return}
+ var b=e.target.closest('.hp-cite');if(!b)return;
+ var bub=b.closest('.hp-bub'),n=b.getAttribute('data-c'),ex=bub.querySelector('.hp-src[data-c="'+n+'"]');
+ bub.querySelectorAll('.hp-src').forEach(function(s){s.remove()});
+ bub.querySelectorAll('.hp-cite').forEach(function(q){q.setAttribute('aria-expanded','false')});
+ if(ex)return;var s=document.createElement('div');s.className='hp-src';s.setAttribute('data-c',n);
+ s.innerHTML='<button class="hp-x" type="button" aria-label="Close source">×</button><b>['+n+'] Example source: '+esc(SRC[n].t)+'</b>“'+esc(SRC[n].x)+'”';
+ bub.appendChild(s);b.setAttribute('aria-expanded','true');scrl();
+});
+function setStatus(s){status.textContent=s}
+
+function drawCov(){
+ $('#hp-cov').innerHTML='<div><span>Coverage addressed</span><b>'+COV[0]+'/'+COV[1]+'</b></div><div class="hp-bar"><i style="width:'+COV[0]*10+'%"></i></div><div><span>Applicable checks satisfied</span><b>'+COV[2]+'/'+COV[3]+'</b></div><div class="hp-bar g" style="margin-bottom:0"><i style="width:'+(COV[2]/COV[3]*100)+'%"></i></div>';
+}
+function drawDx(flash){
+ var h='';
+ if(tab==='hyp'){
+  HYP.forEach(function(x,i){
+   var o=openH[x.id]?' open':'';
+   h+='<div class="hp-hyp'+o+(flash===x.id?' hp-new':'')+'" data-h="'+x.id+'"><button type="button" aria-expanded="'+!!openH[x.id]+'"><span class="hp-rank">'+(i+1)+'</span><span class="t"><b>'+esc(x.n)+'</b><small>'+esc(x.sub)+'</small></span><span class="hp-tier '+x.tier+'">'+x.tier+'</span><span class="hp-chev" aria-hidden="true">›</span></button><div class="hp-det"><h5>SUPPORTING EVIDENCE</h5><ul class="s">'+x.sup.map(function(s){return'<li>'+esc(s)+'</li>'}).join('')+'</ul><h5>CONTRADICTING</h5><ul class="c">'+x.con.map(function(s){return'<li>'+esc(s)+'</li>'}).join('')+'</ul><h5>CHECKS THAT WOULD SEPARATE IT</h5><ul class="d">'+x.chk.map(function(s){return'<li>'+esc(s)+'</li>'}).join('')+'</ul></div></div>';
+  });
+  h+='<p class="hp-empty">Confidence is computed from evidence, never self-reported by the model, and is capped by the reliability of what it relies on.</p>';
+ }else if(tab==='ev'){
+  EV.forEach(function(e){
+   h+='<div class="hp-ev'+(e.fresh?' hp-new':'')+'"><div class="top"><b>'+esc(e.t)+'</b><span>'+esc(e.v)+'</span></div><div class="m"><span>'+esc(e.src)+'</span><span>'+esc(e.when)+'</span><span class="hp-rel '+(e.q==='bad'?'bad':e.q==='op'?'op':'')+'">'+esc(e.r)+'</span></div></div>';e.fresh=false;
+  });
+ }else{
+  h=PLAN.length?PLAN.join(''):'<p class="hp-empty">No plan released yet. Ask &ldquo;What should I do first?&rdquo; Pulse only releases actions its evidence and the plant’s own SOPs support.</p>';
+ }
+ dx.innerHTML=h;
+ root.querySelectorAll('.hp-tabs .hp-tab').forEach(function(b){b.setAttribute('aria-selected',String(b.getAttribute('data-t')===tab))});
+ drawCov();
+}
+dx.addEventListener('click',function(e){var b=e.target.closest('.hp-hyp>button');if(!b)return;var p=b.parentNode,id=p.getAttribute('data-h');openH[id]=!openH[id];p.classList.toggle('open',!!openH[id]);b.setAttribute('aria-expanded',String(!!openH[id]))});
+root.querySelector('.hp-tabs').addEventListener('click',function(e){var b=e.target.closest('[data-t]');if(!b)return;tab=b.getAttribute('data-t');drawDx()});
+function setTab(t){tab=t;drawDx()}
+
+var QS=[
+ {id:'q1',t:'Why is effluent turbidity high?'},
+ {id:'q2',t:'Is the low DO the cause?'},
+ {id:'q3',t:'What should I do first?'},
+ {id:'q4',t:'How sure are you?'}
+];
+function drawChips(){
+ chips.innerHTML=QS.map(function(q){return'<button class="hp-chip'+(used[q.id]?' used':'')+'" type="button" data-q="'+q.id+'"'+(busy?' disabled':'')+'>'+esc(q.t)+'</button>'}).join('');
+}
+chips.addEventListener('click',function(e){var b=e.target.closest('[data-q]');if(!b||busy)return;run(b.getAttribute('data-q'))});
+
+var CARDQ='<p class="r">to separate a membrane breach from a sludge problem: no instrument sees this</p><p class="q">At the Train 2 permeate sample tap, how does the water look?</p>';
+function card(g){
+ var d=document.createElement('div');d.className='hp-card';d.setAttribute('role','group');
+ d.innerHTML=CARDQ+'<div class="opts"><button class="hp-btn" type="button" data-a="clear">Clear, looks normal</button><button class="hp-btn" type="button" data-a="hazy">Slightly hazy</button><button class="hp-btn" type="button" data-a="cloudy">Visibly cloudy</button></div><div class="foot"><button class="hp-btn" type="button" data-a="unk">I don’t know</button><button class="hp-btn" type="button" data-a="skip" style="color:#777">Skip</button></div>';
+ log.appendChild(d);scrl();setStatus('awaiting_operator');
+ d.addEventListener('click',function(e){var b=e.target.closest('[data-a]');if(!b||answered!==null)return;var a=b.getAttribute('data-a');
+  var lab={clear:'Clear, looks normal',hazy:'Slightly hazy',cloudy:'Visibly cloudy',unk:'Don’t know',skip:'Skipped'}[a];
+  d.className='hp-card done';d.innerHTML=CARDQ+'<p class="ans">'+(a==='skip'?'Skipped':'Answered: '+lab)+'</p>';
+  answered=a;followUp(a,gen);
+ });
+}
+function setHyp(order,tiers){
+ var by={};HYP.forEach(function(x){by[x.id]=x});
+ HYP=order.map(function(id){var x=by[id];x.tier=tiers[id];return x});
+}
+async function followUp(a,g){
+ busy=true;drawChips();setStatus('agent_working');
+ await tool('record_operator_observation','permeate appearance, T2',g);
+ if(g!==gen)return;
+ var op=a==='unk'||a==='skip',text,lab=a==='hazy'?'slightly hazy':'visibly cloudy';
+ if(!op){EV.push({t:'Permeate appearance, Train 2',v:a==='clear'?'Clear':a==='hazy'?'Slightly hazy':'Visibly cloudy',src:'Operator observation',q:'op',r:'Fairly sure, recalled now',when:'10:12',fresh:true});COV=[5,10,3,8]}
+ if(a==='clear'){
+  setHyp(['h3','h2','h1'],{h3:'MEDIUM',h2:'LOW',h1:'LOW'});HYP[0].sup.push('Operator sees clear water while the meter reads 4.8 NTU');
+  text='A clear sample next to a 4.8 NTU reading points at the instrument. I’ve moved PT-201 drift to the top and flagged its overdue calibration '+c(4)+'. The low DO still needs fixing, but I would not treat a membrane breach as likely until a bench grab sample confirms it '+c(2)+'.';
+ }else if(op){
+  text='Understood. I’ve left that as an explicit unknown rather than guessing, so confidence stays LOW on all three hypotheses. A grab sample read on the bench turbidimeter would settle the instrument question '+c(4)+'.';
+ }else{
+  setHyp(['h2','h1','h3'],{h2:'MEDIUM',h1:'LOW',h3:'LOW'});HYP[0].sup.push('Operator: permeate '+lab+' (fairly sure)');
+  HYP[2].con.push('Water is visibly hazy, so the reading is likely real');
+  text='Thanks. '+(a==='hazy'?'Slightly hazy':'Visibly cloudy')+' water means the meter is probably right. With TMP still climbing, a fibre breach is less likely than the sludge pathway: DO fell to 0.4 mg/L at 06:10, floc broke up, and fines pass through while the cake layer builds '+c(1)+c(3)+'. I’ve ranked low-DO deflocculation first (MEDIUM, capped by your “fairly sure”) and kept the breach open until a pressure decay test can rule it in or out '+c(2)+'.';
+ }
+ await bubble('a',text,true,g);
+ if(g!==gen)return;
+ setTab('hyp');openH[HYP[0].id]=true;drawDx(HYP[0].id);
+ busy=false;setStatus('awaiting_operator');drawChips();
+}
+function bump(a,b){COV=[Math.max(COV[0],a),10,Math.max(COV[2],b),8]}
+async function run(id){
+ var g=gen,q=QS.filter(function(x){return x.id===id})[0];used[id]=true;busy=true;drawChips();setStatus('agent_working');
+ bubble('u',esc(q.t));
+ if(id==='q1'){
+  await tool('get_measurements','PT-201 turbidity, 24 h',g);
+  await tool('get_unit_topology','AT-1 to MBR-T2 to effluent',g);
+  await tool('get_measurement_coverage','what instruments cannot see',g);
+  await bubble('a','Permeate turbidity on Train 2 jumped from 0.3 to 4.8 NTU at 06:40 against a consent limit of 1.0 NTU. Two things moved first: dissolved oxygen in AT-1 fell to 0.4 mg/L after blower B-2 tripped at 06:10, and TMP on Train 2 climbed from 38 to 61 kPa '+c(1)+'.\n\nInstruments alone can’t separate a membrane breach from a sludge problem '+c(2)+', so I need one thing from you.',true,g);
+  if(g!==gen)return;
+  if(!asked){asked=true;card(g)}
+  bump(4,2);
+ }else if(id==='q2'){
+  await tool('search_knowledge','low DO, MBR fouling',g);
+  await tool('get_measurements','DO-101, 12 h trend',g);
+  await bubble('a','Very likely contributing, but not yet proven the sole cause. AT-1 has sat at 0.4 mg/L for four hours, well under the 2.0 mg/L the biology needs '+c(3)+'. Oxygen-limited sludge releases SMP and loses floc strength, which explains the TMP climb on Train 2 '+c(1)+'.\n\nWhat low DO does not explain is a sudden permeate turbidity step. That is why the breach hypothesis stays open with a discriminating check: a pressure decay test.',true,g);
+  if(g!==gen)return;
+  bump(5,3);setTab('hyp');openH.h2=true;drawDx('h2');
+ }else if(id==='q3'){
+  await tool('retrieve_sop','SOP-ETP-014 blower changeover',g);
+  await tool('check_action_safety','lockout / tagout required',g);
+  await bubble('a','In this order:\n1. Start standby blower B-3 and restore DO above 2.0 mg/L, after lockout/tagout on B-2 '+c(6)+'.\n2. Run a pressure decay test on Train 2 to rule a breach in or out '+c(2)+'.\n3. Hold the chemical clean. Cleaning before the biology recovers wastes chemical, because the cake layer re-forms '+c(5)+'.\n\nThe Plan tab has these steps and the check I’ll use to verify they worked.',true,g);
+  if(g!==gen)return;
+  PLAN=[
+   '<div class="hp-plan hp-safe"><h4>Safety gate <span>required</span></h4><p>Lockout/tagout B-2 before any inspection. Pulse never asks anyone to approach moving equipment to answer a question.</p></div>',
+   '<div class="hp-plan"><h4>1. Start standby blower B-3 <span class="hp-tier MEDIUM">MEDIUM</span></h4><p>Restore AT-1 DO to 2.0 mg/L or more. Example sources: SOP-ETP-014 [6], wastewater engineering textbook [3].</p></div>',
+   '<div class="hp-plan"><h4>2. Pressure decay test, Train 2 <span class="hp-tier LOW">LOW</span></h4><p>Isolate Train 2 and test integrity. Example source: membrane filtration guidance manual [2].</p></div>',
+   '<div class="hp-plan"><h4>3. Defer recovery clean <span class="hp-tier MEDIUM">MEDIUM</span></h4><p>Re-evaluate if TMP stays above 55 kPa after DO recovery. Example source: vendor O&amp;M manual [5].</p></div>',
+   '<div class="hp-plan hp-ver"><h4>Verification <span>self-check</span></h4><p>2 h after changeover: DO &ge; 2.0 mg/L, TMP trending down, permeate turbidity &lt; 1.0 NTU. If not, Pulse reopens the case and lowers the confidence tier.</p></div>'
+  ];
+  bump(7,4);setTab('plan');
+ }else{
+  await tool('compute_assessment','confidence tier and caps',g);
+  await bubble('a','Currently '+HYP[0].tier+' for the leading hypothesis, and that tier is computed from the evidence, not from my opinion. Three things hold it down:\n• Your observation is “fairly sure”, which caps the tier at MEDIUM.\n• The turbidity reading comes from an instrument whose calibration is 41 days overdue '+c(4)+'.\n• The breach hypothesis has not been tested; a pressure decay test would settle it '+c(2)+'.\n\nIf the post-fix verification passes, the tier rises. If it fails, I reopen the case.',true,g);
+  if(g!==gen)return;
+  bump(7,4);EV.push({t:'Verification: post-fix recheck',v:'Scheduled, +2 h',src:'Pulse check-in',q:'op',r:'Pending, not yet evidence',when:'12:15',fresh:true});setTab('ev');
+ }
+ busy=false;setStatus('awaiting_operator');drawChips();drawDx();
+}
+
+function boot(){
+ gen++;log.innerHTML='';HYP=H0();EV=EV0.slice();PLAN=[];COV=[4,10,2,8];asked=false;answered=null;used={};busy=false;openH={};sel='at';tab='hyp';
+ setStatus('awaiting_operator');drawTree();drawChips();drawDx();
+ var a=document.createElement('div');a.className='hp-card';a.style.borderColor='#fcd34d';a.style.background='#fffbeb';
+ a.innerHTML='<p style="font-weight:600;font-size:14px">Lite alert · 06:42 · MBR Train 2 permeate turbidity</p><p class="r" style="color:#78350f">4.8 NTU (limit 1.0). Pulse opened this case and pulled plant context from Lite before asking you anything.</p>';
+ log.appendChild(a);
+ var t=document.createElement('div');t.className='hp-tool';t.innerHTML='<span style="color:#15803d">✓</span><span><code>get_plant_context</code> completed <span style="color:#999">· MBR-01, 6 units, 31 signals</span></span>';log.appendChild(t);
+ bubble('a','Hi. I’ve looked at the alert and the plant data. Pick a question below, starting with “Why is effluent turbidity high?”');
+ $('#hp-esc').innerHTML='<button class="hp-btn" type="button" data-act="esc">Escalate</button>';
+}
+root.addEventListener('click',function(e){
+ var b=e.target.closest('[data-act]');
+ if(b){var a=b.getAttribute('data-act');
+  if(a==='reset')boot();
+  if(a==='esc')$('#hp-esc').innerHTML='<span role="status" style="font-size:13px;color:#15803d;white-space:nowrap">✓ Escalation requested</span>';
+ }
+ var v=e.target.closest('.hp-mob [data-v]');
+ if(v){root.querySelectorAll('.hp-mob .hp-tab').forEach(function(x){x.setAttribute('aria-selected',String(x===v))});$('.hp-main').setAttribute('data-v',v.getAttribute('data-v'))}
+});
+boot();
+})();
+</script>
+</div>
+
+<script>
+/* Embedding: report this document's height to the host page so it can size the iframe. */
+(function(){
+  var DEMO='pulse',raf=0;
+  if(window.parent===window)return;
+  function height(){
+    var b=document.body,d=document.documentElement;
+    /* body height, not documentElement.scrollHeight alone: the root can never report less than the current iframe height */
+    return Math.ceil(Math.max(b.scrollHeight,b.getBoundingClientRect().height))||d.scrollHeight;
+  }
+  function post(){raf=0;try{window.parent.postMessage({type:'hydris-demo-height',demo:DEMO,height:height()},'*')}catch(e){}}
+  function schedule(){if(!raf)raf=window.requestAnimationFrame(post)}
+  window.addEventListener('load',schedule);
+  window.addEventListener('resize',schedule);
+  if(window.ResizeObserver){try{new ResizeObserver(schedule).observe(document.body)}catch(e){}}
+  schedule();
+})();
+</script>
+</body>
+</html>

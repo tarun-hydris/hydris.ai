@@ -10,6 +10,7 @@ export const PHONE = '+1 (503) 442-7560';
 export const NAV = [
   { key: 'home', label: 'Home', href: '/' },
   { key: 'platform', label: 'Platform', href: '/platform/' },
+  { key: 'demo', label: 'Demo', href: '/demo/' },
   { key: 'about', label: 'About', href: '/about/' },
   { key: 'press', label: 'Press', href: '/press/' },
 ];
@@ -20,7 +21,10 @@ export const CTA = {
   short: 'Walkthrough',
   href: '/contact/#walkthrough',
   example: 'See an example',
-  exampleHref: '#investigation',
+  exampleHref: '#knowledge',
+  demo: 'Try the demos',
+  demoHref: '/demo/',
+  film: 'Watch the film',
 };
 
 /* ---------------------------------------------------------------- Home */
@@ -263,9 +267,11 @@ export const START = {
 /* The seven chapters of Home. Every sentence below already exists elsewhere in this file or on the
    previous Home; the chapters only gather it into one story. */
 export const OPENING = {
-  label: 'Operational Water Intelligence',
-  title: 'The Intelligence Layer For Water',
-  sub: 'Hydris turns the water data your plant already collects into decisions your team can act on.',
+  label: 'The intelligence layer for water',
+  title: 'Every drop depends on what we know.',
+  sub: 'Hydris brings plant data, water science and the experience of your team together, so the people who run water systems can see what is changing and decide what to check next.',
+  explore: 'Explore Hydris',
+  exploreHref: '#knowledge',
   scroll: 'Scroll',
 };
 
@@ -329,6 +335,143 @@ export const INVITE = {
   text: START.textShort,
   advice: 'We will agree how your data is shared before anything is sent. Please do not send operating files through the contact form.',
   mail: 'Or write to',
+};
+
+/* ----------------------------------------------------------------------------------------------
+   The Home story, in the order of the Hydris platform film: why water matters, why knowledge is the
+   problem, what Hydris is, the three products, the knowledge a plant keeps, the reach beyond one plant,
+   and the people it is for. Screens shown are from the film and use sample data.
+   ---------------------------------------------------------------------------------------------- */
+export const STORY = {
+  knowledge: {
+    label: 'The problem',
+    title: 'The problem is not only water. It is knowledge.',
+    questions: ['What changed?', 'What should we check next?'],
+    lead: 'Two questions every shift asks. The answers are often spread across systems, logbooks and the memory of a few people.',
+    fragments: ['Control system history', 'Lab results', 'Shift logbook', 'Spreadsheets', 'Procedures', 'What the operator remembers'],
+    together: 'One picture of the plant',
+    realities: [
+      'Plant information sits in different systems and records.',
+      'An unusual trend needs context before anyone can read it.',
+      'Knowing what happened is not the same as knowing why it matters.',
+      'What one shift learns should still be useful to the next.',
+      'Experience should not leave when experienced people do.',
+    ],
+    stat: { n: '1 in 3', text: 'US water sector workers are eligible to retire within the next decade.', source: 'Source: US EPA' },
+  },
+  hydris: {
+    label: 'Hydris',
+    title: 'Plant data, water science and your team\u2019s experience, in one place.',
+    lead: 'Hydris is an operational water intelligence platform. It supports the people who run the plant. It does not replace them.',
+    steps: [
+      { verb: 'See', what: 'what is happening', product: 'Hydris Lite', href: '#lite' },
+      { verb: 'Understand', what: 'what it means', product: 'Hydris Pulse', href: '#pulse' },
+      { verb: 'Act', what: 'with better guidance', product: 'Hydris Field', href: '#field' },
+    ],
+  },
+  products: {
+    label: 'Three products, one workflow',
+    title: 'See. Understand. Act.',
+    caption: 'From the Hydris platform film. Sample data.',
+    tryLabel: 'Try the demo',
+    moreLabel: 'How it works',
+    items: [
+      {
+        key: 'lite', name: 'Hydris Lite', verb: 'See', still: 'lite',
+        alt: 'The Hydris Lite dashboard with plant health, stability, compliance readiness and data confidence scores, marked as sample data',
+        title: 'See how your plant is running today.',
+        text: 'Lite brings readings, lab results and operating records into one view, so a team can move from separate signals to a shared picture of the plant.',
+        points: ['Plant health and stability', 'Compliance readiness', 'Data confidence', 'Trends and what needs attention'],
+        note: 'Scores are a guide for the team, not a compliance guarantee.',
+      },
+      {
+        key: 'pulse', name: 'Hydris Pulse', verb: 'Understand', still: 'pulse',
+        alt: 'An operator asks Hydris Pulse why suspended solids are drifting in the plant effluent; Pulse shows the most likely cause with the sensor trend, plant procedure and shift log it used',
+        title: 'Move from seeing a change to understanding what may be causing it.',
+        text: 'Ask in plain words, for example why suspended solids are drifting in the effluent. Pulse brings plant context, operating history and the available evidence together, ranks the possible causes and shows what each one rests on.',
+        points: ['Possible causes, ranked', 'The evidence behind each one', 'A plan of checks to confirm'],
+        note: 'Decision support, not a diagnosis. Your team verifies before acting.',
+      },
+      {
+        key: 'field', name: 'Hydris Field', verb: 'Act', still: 'field',
+        alt: 'The Hydris Field view in smart glasses: a pressure gauge reading of 4.2 bar is captured and added to the shift record',
+        title: 'Bring guidance from the control room to the plant floor.',
+        text: 'Field puts the next step in front of the operator on the round: equipment context, guided inspection steps and readings captured as they are taken.',
+        points: ['Guided inspection steps', 'Equipment-specific context', 'Readings recorded for the next shift'],
+        note: 'The glasses view is from the film. The demo shows the Field app on a phone.',
+      },
+    ],
+  },
+  memory: {
+    label: 'Knowledge that remains',
+    title: 'Hydris keeps what a plant knows.',
+    sub: 'Every shift starts with what the last one learned.',
+    text: 'A plant learns through every round, repair, incident and decision. Hydris is designed to keep that learning with the plant, connected to the readings and records it came from.',
+    steps: [
+      { k: 'Observation', v: 'Pump P-2 sounds rougher than usual on the 10:42 round.' },
+      { k: 'Evidence', v: 'The gauge reads 4.2 bar. The vibration trend and last service note are attached.' },
+      { k: 'Decision', v: 'Check coupling alignment before the next start.' },
+      { k: 'Record', v: 'The reading, the step and the outcome go into the shift record.' },
+      { k: 'Next shift', v: 'The next operator starts with the note, the reading and what was done.' },
+    ],
+    caption: 'Illustrative example.',
+  },
+  beyond: {
+    label: 'Beyond the plant',
+    title: 'From one plant to every site that depends on water.',
+    lead: 'The same understanding can support decisions made above a single plant.',
+    items: [
+      {
+        name: 'Hydris Stewardship', still: 'stewardship',
+        alt: 'A brand manager reviews supplier water performance on a tablet beside a bottling line',
+        text: 'For brands: how water is managed in the factories that make their products.',
+        points: ['Factory-level water visibility', 'Evidence for stewardship decisions', 'Water reuse'],
+      },
+      {
+        name: 'Hydris Portfolio', still: 'portfolio',
+        alt: 'Two executives study a map of many sites with risk markers on a large screen',
+        text: 'For companies with many sites: where the risk is, and where to invest first.',
+        points: ['Oversight across sites', 'Comparative operational risk', 'Where attention and investment matter most'],
+      },
+    ],
+    note: 'Stewardship and Portfolio are solution areas built on the same platform. Ask us what is available today.',
+  },
+  close: {
+    label: 'Built for every drop',
+    title: 'Built for every drop. Designed for the people behind it.',
+    text: 'Software alone will not solve water scarcity. Better understanding can help the people responsible for water systems do their work well, from the plant to the watershed.',
+    alt: 'A family walks along a riverbank at sunset while children play in the water',
+  },
+};
+
+/* The product demos: real interfaces, simplified, running in the browser on a sample plant */
+export const DEMO = {
+  label: 'Demo',
+  title: 'Try Hydris on a sample plant.',
+  lead: 'Lite, Pulse and Field, running in your browser. Everything uses sample data, and nothing you enter leaves this page.',
+  note: 'These demos are simplified from the products and use an example plant. Answers, sources and scores are illustrative.',
+  open: 'Open full screen',
+  items: [
+    {
+      key: 'lite', name: 'Hydris Lite', verb: 'See', src: '/demos/lite.html', height: 760,
+      line: 'How the plant is running today, in one view.',
+      tries: ['Click a score to see what drives it', 'Switch the chart between 7, 30 and 90 days', 'Open Alerts and acknowledge one'],
+    },
+    {
+      key: 'pulse', name: 'Hydris Pulse', verb: 'Understand', src: '/demos/pulse.html', height: 700,
+      line: 'From a change in the data to the likely causes.',
+      tries: ['Ask about the drifting reading', 'Compare the ranked hypotheses and their evidence', 'Answer the follow-up question and watch the ranking change'],
+    },
+    {
+      key: 'field', name: 'Hydris Field', verb: 'Act', src: '/demos/field.html', height: 860,
+      line: 'Guidance and records on the round.',
+      tries: ['Open a visit', 'Enter readings and watch them checked against limits', 'Complete the checklist and submit the report'],
+    },
+  ],
+  after: {
+    title: 'See it on your own plant.',
+    text: 'In a walkthrough we use your process and your questions, not a sample plant.',
+  },
 };
 
 /* ------------------------------------------------------------ Platform */
@@ -553,7 +696,7 @@ export const TERMS = {
 export const FOOTER = {
   tag: 'Capture knowledge. Guide decisions. Strengthen operations.',
   cols: [
-    { h: 'Platform', links: [['An example investigation', '/#investigation'], ['The products', '/platform/#products'], ['Getting started', '/platform/#start']] },
+    { h: 'Platform', links: [['The products', '/#products'], ['Try the demos', '/demo/'], ['Watch the film', '/#film'], ['Getting started', '/platform/#start']] },
     { h: 'Company', links: [['About', '/about/'], ['Press', '/press/'], ['Contact', '/contact/']] },
     { h: 'Legal', links: [['Privacy', '/privacy/'], ['Terms', '/terms/']] },
   ],
@@ -569,11 +712,11 @@ export const IMAGERY = {
   aperture: {
     name: 'clarifier-snow',
     circle: { x: 0.531, y: 0.491, r: 0.21 },
-    kicker: 'Seen from above',
-    title: 'Every plant is already a record of how it behaves.',
+    kicker: 'Why water',
+    title: 'Public health, industry and everyday life all run on working water systems.',
     tag: 'Clarifier, seen from above',
-    end: 'Hydris reads the plant you already run, as one system.',
-    endSmall: 'Nothing new is installed. Nothing in the plant is changed.',
+    end: 'We must protect the water systems already serving us.',
+    endSmall: '2.1 billion people still lack safely managed drinking water. Source: WHO and UNICEF, 2025.',
   },
   stages: {
     eyebrow: 'Across the plant',

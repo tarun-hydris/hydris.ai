@@ -25,10 +25,10 @@
   --slate: #2a4148;
   --teal: #6f9493;
   --mist: #8ea4ad;
-  /* Mineral ground */
-  --mineral: #f3f3ec;
-  --mineral-2: #ebebe2;
-  --paper: #fbfbf7;
+  /* Ground: pure white, with one cool neutral for the occasional alternate band (no warm tints) */
+  --mineral: #ffffff;
+  --mineral-2: #f4f6f7;
+  --paper: #ffffff;
   --white: #fff;
   /* The signal */
   --blue: #1746e4;
@@ -39,7 +39,7 @@
   --line: rgba(7, 22, 27, 0.14);
   --line-2: rgba(7, 22, 27, 0.08);
   /* On dark */
-  --line-inv: rgba(243, 243, 236, 0.18);
+  --line-inv: rgba(255, 255, 255, 0.18);
   --mute-inv: #9db1b8;
   --err: #a32020;
 
@@ -156,7 +156,7 @@ html.is-leaving .hdr { opacity: 0; }
 .hdr { position: fixed; inset: 0 0 auto; z-index: 50; height: var(--hdr); display: flex; align-items: center; gap: 24px; padding: 0 max(var(--pad), env(safe-area-inset-right)) 0 max(var(--pad), env(safe-area-inset-left)); font-size: 14px; line-height: 1; transition: transform 0.4s var(--ease), background-color 0.3s, color 0.3s; }
 .hdr--light { color: var(--ink); }
 .hdr--dark { color: var(--paper); }
-.hdr.is-solid.hdr--light { background: rgba(243, 243, 236, 0.84); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); box-shadow: 0 1px 0 var(--line-2); }
+.hdr.is-solid.hdr--light { background: rgba(255, 255, 255, 0.84); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); box-shadow: 0 1px 0 var(--line-2); }
 .hdr.is-solid.hdr--dark { background: rgba(7, 22, 27, 0.62); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); box-shadow: 0 1px 0 var(--line-inv); }
 .hdr.is-hidden { transform: translateY(-110%); }
 .hdr__logo { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; }
@@ -215,12 +215,12 @@ html.is-leaving .hdr { opacity: 0; }
 .open.is-in .open__vid { transform: none; }
 .open__shade { position: absolute; inset: 0; z-index: -1; background: linear-gradient(0deg, rgba(7, 22, 27, 0.88) 0%, rgba(7, 22, 27, 0.4) 46%, rgba(7, 22, 27, 0.5) 100%), linear-gradient(90deg, rgba(7, 22, 27, 0.55) 0%, rgba(7, 22, 27, 0) 62%); }
 .open__inner { padding-top: calc(var(--hdr) + 40px); padding-bottom: clamp(60px, 8vw, 116px); row-gap: 24px; align-items: start; will-change: transform, opacity; }
-.open__label { grid-column: 1 / -1; color: rgba(251, 251, 247, 0.78); }
+.open__label { grid-column: 1 / -1; color: rgba(255, 255, 255, 0.78); }
 .open__title { grid-column: 1 / span 9; font-size: clamp(46px, 7.4vw, 118px); line-height: 0.94; letter-spacing: -0.045em; max-width: 12.5em; }
-.open__sub { grid-column: 1 / span 6; max-width: 560px; color: rgba(251, 251, 247, 0.88); }
+.open__sub { grid-column: 1 / span 6; max-width: 560px; color: rgba(255, 255, 255, 0.88); }
 .open__cta { grid-column: 1 / -1; display: flex; align-items: center; gap: 12px 30px; flex-wrap: wrap; margin-top: 6px; }
 .open__example { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; }
-.open__scroll { position: absolute; right: var(--pad); bottom: 26px; z-index: 3; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-size: 14px; color: rgba(251, 251, 247, 0.85); }
+.open__scroll { position: absolute; right: var(--pad); bottom: 26px; z-index: 3; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-size: 14px; color: rgba(255, 255, 255, 0.85); }
 .open__scroll .arrow { animation: nudge 2.4s var(--ease-io) infinite; }
 
 /* The splash: the mark filled with water, then the dive into it. The sheet over the film is a flat
@@ -261,7 +261,7 @@ html.is-leaving .hdr { opacity: 0; }
 .aperture__title { grid-column: 1 / span 5; align-self: end; max-width: 680px; font-size: clamp(30px, 3.6vw, 56px); line-height: 1; letter-spacing: -0.035em; color: var(--ink); }
 .aperture__outro { position: absolute; left: 0; right: 0; bottom: 0; color: var(--paper); row-gap: 14px; align-items: end; padding-bottom: clamp(32px, 7vh, 80px); opacity: 0; pointer-events: none; will-change: transform, opacity; }
 .aperture__end { grid-column: 1 / span 8; max-width: 980px; font-size: clamp(30px, 3.6vw, 56px); line-height: 1; letter-spacing: -0.035em; }
-.aperture__small { grid-column: 9 / span 4; color: rgba(251, 251, 247, 0.84); max-width: 380px; }
+.aperture__small { grid-column: 9 / span 4; color: rgba(255, 255, 255, 0.84); max-width: 380px; }
 .aperture--static { height: auto; }
 .aperture__still { padding: 0 var(--pad); }
 .aperture__static { margin-top: 24px; row-gap: 14px; }
@@ -362,7 +362,7 @@ html.is-leaving .hdr { opacity: 0; }
 .prod__viz .vz-kb, .prod__viz .vz-days { width: 100%; }
 .prod__concept { position: absolute; left: clamp(22px, 3.2vw, 48px); bottom: 20px; font-family: var(--serif); font-size: 13px; color: var(--mute); }
 .concept { position: relative; width: min(100%, 340px); }
-.concept__card { position: absolute; right: -18px; bottom: 26px; width: 170px; padding: 12px 14px; background: rgba(251, 251, 247, 0.94); border: 1px solid var(--line); box-shadow: 0 20px 40px -24px rgba(7, 22, 27, 0.5); }
+.concept__card { position: absolute; right: -18px; bottom: 26px; width: 170px; padding: 12px 14px; background: rgba(255, 255, 255, 0.94); border: 1px solid var(--line); box-shadow: 0 20px 40px -24px rgba(7, 22, 27, 0.5); }
 .concept__tag { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue); margin-bottom: 8px; }
 .concept__card ul { display: grid; gap: 6px; font-size: 14px; }
 .concept__card li span { font-family: var(--mono); font-size: 11px; color: var(--mute); margin-right: 8px; }
@@ -375,15 +375,15 @@ html.is-leaving .hdr { opacity: 0; }
 .operator__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .operator__shade { position: absolute; inset: 0; z-index: -1; background: linear-gradient(0deg, rgba(7, 22, 27, 0.94) 0%, rgba(7, 22, 27, 0.8) 45%, rgba(7, 22, 27, 0.5) 100%), linear-gradient(90deg, rgba(7, 22, 27, 0.55) 0%, rgba(7, 22, 27, 0) 70%); }
 .operator__inner { padding-top: calc(var(--hdr) + 80px); padding-bottom: clamp(56px, 7vw, 100px); row-gap: 24px; align-items: start; }
-.operator__label { grid-column: 1 / -1; color: rgba(251, 251, 247, 0.78); }
+.operator__label { grid-column: 1 / -1; color: rgba(255, 255, 255, 0.78); }
 .operator__title { grid-column: 1 / span 9; max-width: 11em; }
-.operator__lead { grid-column: 1 / span 5; max-width: 480px; color: rgba(251, 251, 247, 0.9); }
+.operator__lead { grid-column: 1 / span 5; max-width: 480px; color: rgba(255, 255, 255, 0.9); }
 .operator__line { grid-column: 7 / span 6; align-self: end; font-family: var(--serif); font-size: clamp(22px, 2.4vw, 38px); line-height: 1.12; letter-spacing: -0.022em; max-width: 20em; }
 .operator__cols { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); margin-top: clamp(30px, 5vw, 70px); }
 .operator__col { display: grid; gap: 10px; align-content: start; padding-top: 22px; }
 .operator__col.hl::before { background: var(--line-inv); }
 .operator__n { font-family: var(--mono); font-size: 12px; color: var(--blue-soft); }
-.operator__col .body { color: rgba(251, 251, 247, 0.82); max-width: 34ch; font-size: 16px; }
+.operator__col .body { color: rgba(255, 255, 255, 0.82); max-width: 34ch; font-size: 16px; }
 
 /* ==========================================================================
    Chapter 6. The people
@@ -410,7 +410,7 @@ html.is-leaving .hdr { opacity: 0; }
 .invite__shade { position: absolute; inset: 0; z-index: -1; background: radial-gradient(70% 70% at 50% 50%, rgba(7, 22, 27, 0.72), rgba(7, 22, 27, 0.9)); }
 .invite__inner { display: grid; justify-items: center; gap: 26px; text-align: center; max-width: 920px; }
 .invite__label { color: var(--mute-inv); }
-.invite__text { max-width: 560px; color: rgba(251, 251, 247, 0.9); }
+.invite__text { max-width: 560px; color: rgba(255, 255, 255, 0.9); }
 .invite__cta { display: flex; align-items: center; justify-content: center; gap: 14px 30px; flex-wrap: wrap; }
 .invite__cta .link-u { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; }
 .invite__advice { font-size: 14px; color: var(--mute-inv); max-width: 560px; }
@@ -583,8 +583,8 @@ html.is-leaving .hdr { opacity: 0; }
 .fp__frame { position: relative; aspect-ratio: 4 / 5; overflow: hidden; isolation: isolate; background: var(--fp-bg, #1f1f1f) var(--fp-lq) center / cover no-repeat; box-shadow: 0 40px 90px -50px rgba(7, 22, 27, 0.55); }
 .fp__stack { position: absolute; inset: 0; transform-origin: 50% 26%; will-change: transform; }
 .fp__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; -webkit-user-drag: none; user-select: none; }
-.fp__railwrap { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: rgba(251, 251, 247, 0.14); pointer-events: none; }
-.fp__railwrap i { position: absolute; inset: 0; background: rgba(251, 251, 247, 0.85); transform: scaleX(0); transform-origin: left; }
+.fp__railwrap { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: rgba(255, 255, 255, 0.14); pointer-events: none; }
+.fp__railwrap i { position: absolute; inset: 0; background: rgba(255, 255, 255, 0.85); transform: scaleX(0); transform-origin: left; }
 .fp--tap .fp__frame { cursor: pointer; }
 .info { padding-top: clamp(40px, 5vw, 80px); }
 .info__label { grid-column: 1 / span 3; color: var(--mute); }

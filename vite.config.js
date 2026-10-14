@@ -25,6 +25,7 @@ export default defineConfig({
       input: {
         main: r('./index.html'),
         platform: r('./platform/index.html'),
+        demo: r('./demo/index.html'),
         about: r('./about/index.html'),
         press: r('./press/index.html'),
         contact: r('./contact/index.html'),

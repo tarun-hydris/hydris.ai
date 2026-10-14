@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import CineVideo from '../ui/CineVideo.jsx';
+import { FilmButton } from '../ui/Film.jsx';
 import Icon, { Arrow } from '../ui/Icon.jsx';
 import { Frame, Photo } from '../ui/Photo.jsx';
 import { Reveal, Words } from '../ui/Primitives.jsx';
@@ -47,8 +48,8 @@ export function Opening() {
         <Words as="h1" text={OPENING.title} className="open__title" delay={0.1} />
         <Reveal as="p" className="lead open__sub" delay={0.45}>{OPENING.sub}</Reveal>
         <Reveal className="open__cta" delay={0.6}>
-          <a className="pill pill--light" href={CTA.href}>{CTA.label} <Arrow /></a>
-          <a className="link-u open__example" href={CTA.exampleHref}>{CTA.example} <Arrow dir="down" /></a>
+          <a className="pill pill--light" href={OPENING.exploreHref}>{OPENING.explore} <Arrow dir="down" /></a>
+          <FilmButton className="filmbtn filmbtn--light">{CTA.film}</FilmButton>
         </Reveal>
       </div>
       <a className="open__scroll" href="#aperture" aria-label="Scroll to the next chapter">{OPENING.scroll} <Arrow dir="down" /></a>
@@ -173,8 +174,8 @@ function SplashLive() {
           </h1>
           <p className="lead open__sub splash__sub">{OPENING.sub}</p>
           <div className="open__cta splash__cta">
-            <a className="pill pill--light" href={CTA.href}>{CTA.label} <Arrow /></a>
-            <a className="link-u open__example" href={CTA.exampleHref}>{CTA.example} <Arrow dir="down" /></a>
+            <a className="pill pill--light" href={OPENING.exploreHref}>{OPENING.explore} <Arrow dir="down" /></a>
+            <FilmButton className="filmbtn filmbtn--light">{CTA.film}</FilmButton>
           </div>
         </div>
         <p className="splash__hint" aria-hidden="true">{OPENING.scroll} <Arrow dir="down" /></p>
@@ -382,7 +383,7 @@ function ProductPanel({ i, active }) {
           <div><dt className="s-label">{PRODUCT_STAGE.uses}</dt><dd>{s.uses}</dd></div>
           <div><dt className="s-label">{PRODUCT_STAGE.gives}</dt><dd>{s.gives}</dd></div>
         </dl>
-        <a className="link-u prod__next" href={`/platform/#${s.key}`}>{PRODUCT_STAGE.next}: {p.name} <Arrow /></a>
+        <a className="link-u prod__next" href={`/demo/#${s.key}`}>Try the demo: {p.name} <Arrow /></a>
       </div>
       <div className="prod__viz" aria-hidden="true">
         <ProductVisual k={s.key} active={active} />
