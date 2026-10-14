@@ -8,6 +8,7 @@ import { Reveal, Words } from '../ui/Primitives.jsx';
 import { Days } from '../viz/Days.jsx';
 import { KnowledgeBase } from '../viz/KnowledgeBase.jsx';
 import { Readout } from '../viz/Readout.jsx';
+import { MARK_D, MARK_H, MARK_W } from '../../lib/markPath.js';
 import { PHOTOS } from '../../lib/photos.js';
 import {
   ABOUT, CHANGE, CTA, EMAIL, INVITE, KNOWLEDGE, LOOKS, MATTERS, OPENING, OPERATOR, PEOPLE, PLATFORM,
@@ -58,6 +59,129 @@ export function Opening() {
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 const lerp = (a, b, t) => a + (b - a) * t;
 const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+const smooth = (t) => t * t * (3 - 2 * t);
+
+/* ------------------------------------------------------------------------------------------------
+   The splash. The Hydris mark, filled with the water film. Scroll and the camera dives into the mark
+   until water fills the whole view; then the line arrives over it and the page carries on.
+
+   Built to stay smooth: the film is never masked or resized. A flat page-coloured sheet with the mark
+   cut out of it lies over the film, and the only thing that changes per frame is one SVG transform on
+   that sheet (a vector, so the edge stays sharp however far in you go). Everything else is transform
+   and opacity. With motion paused it is the still opening below.
+   ------------------------------------------------------------------------------------------------ */
+const AX = 0.542; // the point the camera dives toward: the centre of the largest solid circle in the
+const AY = 0.859; // mark's lower bar (radius 0.1437 of the mark's width, measured on the path)
+const BAR = 0.138;  // that radius, with a little margin
+
+export function Splash() {
+  const off = useMotionOff();
+  return off ? <Opening /> : <SplashLive />;
+}
+
+function SplashLive() {
+  const root = useRef(null);
+
+  useEffect(() => {
+    const el = root.current;
+    if (!el) return undefined;
+    const stage = el.querySelector('.splash__stage');
+    const group = el.querySelector('.splash__g');
+    const sheet = el.querySelector('.splash__sheet');
+    const ax = AX * MARK_W;
+    const ay = AY * MARK_H;
+    const st = { z: 0 };
+    let g = null;
+    let tone = 'light';
+
+    const measure = () => {
+      const w = stage.clientWidth;
+      const h = stage.clientHeight;
+      const s0 = w > 900 ? clamp(w * 0.25, 220, 380) : w * 0.58;       // the mark's width at rest, in px
+      const far = Math.hypot(w / 2, h / 2) * 1.25;
+      const zmax = Math.max(8, far / (BAR * s0));                         // grow until that solid circle covers every corner
+      sheet.setAttribute('viewBox', `0 0 ${w} ${h}`);
+      g = { w, h, s0, zmax, hs: (s0 * MARK_H) / MARK_W };
+    };
+
+    const render = () => {
+      if (!g) return;
+      const { w, h, s0, zmax, hs } = g;
+      const e = smooth(st.z);                                             // zoom speed rises and falls gently: no creep, no rush
+      const size = s0 * Math.pow(zmax, e);                                // exponential growth reads as an even zoom
+      const S = size / MARK_W;
+      const sx = w / 2 - s0 / 2 + AX * s0;                                // where the anchor sits at rest
+      const sy = h / 2 - hs / 2 + AY * hs;
+      const k = smooth(Math.min(1, e * 1.4));                             // and where it drifts to: the centre
+      const px = sx + (w / 2 - sx) * k;
+      const py = sy + (h / 2 - sy) * k;
+      group.setAttribute('transform', `translate(${(px - ax * S).toFixed(2)} ${(py - ay * S).toFixed(2)}) scale(${S.toFixed(5)})`);
+      sheet.style.visibility = st.z >= 0.999 ? 'hidden' : 'visible';
+      const t = st.z > 0.55 ? 'dark' : 'light';                           // the header follows what is under it
+      if (t !== tone) { tone = t; el.dataset.tone = t; }
+    };
+
+    measure();
+    render();
+    const ctx = gsap.context(() => {
+      // Starting states, set outright: tweens that begin later in the timeline do not apply theirs on their own
+      gsap.set('.splash__sub, .splash__cta, .splash__label', { autoAlpha: 0 });
+      gsap.set('.splash__w', { yPercent: 112, opacity: 0 });
+      gsap.set('.splash__sub', { y: 18 });
+      gsap.set('.splash__cta', { y: 14 });
+      const tl = gsap.timeline({
+        defaults: { ease: 'none' },
+        scrollTrigger: {
+          trigger: el, start: 'top top', end: 'bottom bottom', scrub: true, invalidateOnRefresh: true,
+          onRefresh: () => { measure(); render(); },
+        },
+      });
+      tl.to(st, { z: 1, duration: 0.5, ease: 'none', onUpdate: render }, 0)
+        // Start framed on the brightest water (to the right of the film's dark centre), settle to centred
+        .fromTo('.splash__film', { scale: () => (g.w > g.h ? 1.6 : 1.3), xPercent: () => (g.w > g.h ? -27 : 0) }, { scale: 1, xPercent: 0, duration: 0.55, ease: 'power1.out' }, 0)
+        .to('.splash__hint', { autoAlpha: 0, y: -10, duration: 0.07 }, 0)
+        .fromTo('.splash__shade', { opacity: 0 }, { opacity: 1, duration: 0.2 }, 0.46)
+        .to('.splash__label', { autoAlpha: 1, duration: 0.08 }, 0.52)
+        .fromTo('.splash__w', { yPercent: 112, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.2, stagger: 0.025, ease: 'power3.out' }, 0.54)
+        .fromTo('.splash__sub', { y: 18 }, { y: 0, autoAlpha: 1, duration: 0.12 }, 0.74)
+        .fromTo('.splash__cta', { y: 14 }, { y: 0, autoAlpha: 1, duration: 0.1 }, 0.8)
+        .to({}, { duration: 0.1 });
+    }, el);
+
+    const onResize = () => { measure(); render(); };
+    window.addEventListener('resize', onResize);
+    return () => { ctx.revert(); window.removeEventListener('resize', onResize); };
+  }, []);
+
+  const words = OPENING.title.split(' ');
+  return (
+    <section ref={root} className="splash" data-tone="light" aria-label="Hydris">
+      <div className="splash__stage">
+        <div className="splash__film" aria-hidden="true"><CineVideo className="splash__vid" priority /></div>
+        <svg className="splash__sheet" viewBox="0 0 1600 900" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+          <g className="splash__g">
+            <path fillRule="evenodd" d={`M-6000 -6000H7000V7000H-6000Z ${MARK_D}`} />
+          </g>
+        </svg>
+        <div className="splash__shade" aria-hidden="true" />
+        <div className="splash__say open__inner grid">
+          <p className="s-label open__label splash__label">{OPENING.label}</p>
+          <h1 className="open__title splash__title">
+            {words.map((w, i) => (
+              <span key={i}><span className="splash__wm"><span className="splash__w">{w}</span></span>{i < words.length - 1 && ' '}</span>
+            ))}
+          </h1>
+          <p className="lead open__sub splash__sub">{OPENING.sub}</p>
+          <div className="open__cta splash__cta">
+            <a className="pill pill--light" href={CTA.href}>{CTA.label} <Arrow /></a>
+            <a className="link-u open__example" href={CTA.exampleHref}>{CTA.example} <Arrow dir="down" /></a>
+          </div>
+        </div>
+        <p className="splash__hint" aria-hidden="true">{OPENING.scroll} <Arrow dir="down" /></p>
+      </div>
+    </section>
+  );
+}
 
 /* ------------------------------------------------------------------------------------------------
    The aperture. A full-bleed photograph that opens from one of its own circles: the clarifier is the

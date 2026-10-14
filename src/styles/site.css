@@ -223,6 +223,20 @@ html.is-leaving .hdr { opacity: 0; }
 .open__scroll { position: absolute; right: var(--pad); bottom: 26px; z-index: 3; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-size: 14px; color: rgba(251, 251, 247, 0.85); }
 .open__scroll .arrow { animation: nudge 2.4s var(--ease-io) infinite; }
 
+/* The splash: the mark filled with water, then the dive into it. The sheet over the film is a flat
+   page-coloured vector with the mark cut out; only its transform changes as you scroll. */
+.splash { position: relative; height: 300vh; background: var(--mineral); }
+.splash__stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; isolation: isolate; background: var(--mineral); color: var(--paper); }
+.splash__film { position: absolute; inset: 0; z-index: 0; transform-origin: 50% 50%; will-change: transform; }
+.splash__film .cine { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 66% 50%; }
+.splash__sheet { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; display: block; pointer-events: none; fill: var(--mineral); overflow: hidden; }
+.splash__shade { position: absolute; inset: 0; z-index: 2; opacity: 0; pointer-events: none; background: linear-gradient(0deg, rgba(7, 22, 27, 0.88) 0%, rgba(7, 22, 27, 0.4) 46%, rgba(7, 22, 27, 0.5) 100%), linear-gradient(90deg, rgba(7, 22, 27, 0.55) 0%, rgba(7, 22, 27, 0) 62%); }
+.splash__say { position: absolute; inset: 0; z-index: 3; align-content: end; }
+.splash__wm { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.08em; margin-bottom: -0.08em; }
+.splash__w { display: inline-block; will-change: transform, opacity; }
+.splash__hint { position: absolute; left: 50%; bottom: calc(26px + env(safe-area-inset-bottom)); z-index: 3; transform: translateX(-50%); display: inline-flex; align-items: center; gap: 8px; margin: 0; font-size: 14px; color: var(--ink); opacity: 0.7; }
+.splash__hint .arrow { animation: nudge 2.4s var(--ease-io) infinite; }
+
 /* ==========================================================================
    Chapter 2. The change
    ========================================================================== */
@@ -762,6 +776,7 @@ html.motion-off .wm__i { transform: none; }
 html.motion-off .hl::before { transform: none; }
 html.motion-off .icon--draw * { stroke-dashoffset: 0; opacity: 1; }
 html.motion-off .open__vid, html.motion-off .cine { transform: none; }
+html.motion-off .splash { height: auto; }
 html.motion-off .frame--reveal .frame__clip { clip-path: none; }
 html.motion-off .frame--reveal .frame__zoom { transform: none; }
 html.motion-off .assure__item, html.motion-off .lbar { opacity: 1; transform: none; }

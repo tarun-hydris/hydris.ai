@@ -1,4 +1,4 @@
-import { Aperture, Change, Invitation, Opening, Operator, People, ProductStage } from '../components/sections/Chapters.jsx';
+import { Aperture, Change, Invitation, Operator, People, Splash, ProductStage } from '../components/sections/Chapters.jsx';
 import Investigation from '../components/sections/Investigation.jsx';
 import { IMAGERY } from '../lib/content.js';
 
@@ -8,7 +8,7 @@ import { IMAGERY } from '../lib/content.js';
 export default function Home() {
   return (
     <>
-      <Opening />
+      <Splash />
       <Aperture {...IMAGERY.aperture} />
       <Change index="02" />
       <Investigation index="03" />
