@@ -93,7 +93,7 @@ export default function About() {
             <span className="chip">United States</span>
             <span className="chip">India</span>
           </Reveal>
-          <Reveal className="team__fig" delay={0.1}><Infographic name="us-india" sizes="100vw" /></Reveal>
+          <Reveal className="team__fig" delay={0.1}><Infographic name="us-india" /></Reveal>
         </div>
       </section>
 

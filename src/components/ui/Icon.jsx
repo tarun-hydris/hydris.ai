@@ -1,6 +1,7 @@
 import { Children, Fragment, cloneElement } from 'react';
 
 // Thin line icons on a 24px grid, drawn for this site.
+export const ICON_PATHS = {}; // filled below
 const P = {
   arrow: <path d="M7 17L17 7M9 7h8v8" />,
   down: <path d="M12 5v14M6 13l6 6 6-6" />,
@@ -53,6 +54,8 @@ const P = {
   phone: <path d="M5 4h4l1.5 4-2.2 1.4a11 11 0 0 0 5.3 5.3L15 12.5l4 1.5v4a1.5 1.5 0 0 1-1.6 1.5C10.7 19.2 4.8 13.3 4.5 5.6A1.5 1.5 0 0 1 5 4z" />,
   refresh: <path d="M20 11a8 8 0 0 0-14.7-4.4L4 8M4 3.5V8h4.5M4 13a8 8 0 0 0 14.7 4.4L20 16M20 20.5V16h-4.5" />,
 };
+
+Object.assign(ICON_PATHS, P);
 
 /* pathLength=1 on every shape lets CSS draw any icon with stroke-dashoffset (see .icon--draw) */
 const normalise = (node) => (node.type === Fragment

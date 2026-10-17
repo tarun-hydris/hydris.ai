@@ -137,7 +137,7 @@ export function Hydris({ index = '03' }) {
         <Label index={index}>{H.label}</Label>
         <Words as="h2" text={H.title} className="t-l hyd__title" />
         <Reveal as="p" className="lead hyd__lead" delay={0.15}>{H.lead}</Reveal>
-        <Reveal className="hyd__fig" delay={0.1}><Infographic name="venn-hydris" sizes="(min-width: 901px) 32vw, 90vw" /></Reveal>
+        <Reveal className="hyd__fig" delay={0.1}><Infographic name="venn-hydris" /></Reveal>
       </div>
       <ol className="hyd__steps grid">
         {H.steps.map((s, i) => (
@@ -245,7 +245,7 @@ export function Memory({ index = '05' }) {
           <Reveal as="p" className="body mute mem__body" delay={0.2}>{M.text}</Reveal>
         </div>
         <Reveal className="mem__media" delay={0.1}>
-          <div className="mem__frame"><Infographic name="shift-memory" bare sizes="(min-width: 901px) 45vw, 100vw" /></div>
+          <div className="mem__frame"><Infographic name="shift-memory" bare /></div>
         </Reveal>
       </div>
 
@@ -281,7 +281,7 @@ export function Beyond({ index = '06' }) {
       <div className="beyond__cards grid">
         {B.items.map((c, i) => (
           <Reveal as="article" key={c.name} className="bcard" delay={i * 0.12}>
-            <div className="bcard__frame"><Infographic name={c.ig} bare sizes="(min-width: 901px) 46vw, 100vw" /></div>
+            <div className="bcard__frame"><Infographic name={c.ig} bare /></div>
             <h3 className="t-s bcard__name">{c.name}</h3>
             <p className="body bcard__text">{c.text}</p>
             <ul className="bcard__points">{c.points.map((t) => <li key={t}>{t}</li>)}</ul>
@@ -299,8 +299,8 @@ export function Beyond({ index = '06' }) {
 export function Close() {
   const C = STORY.close;
   return (
-    <section className="close" data-tone="dark" aria-label={C.label}>
-      <div className="close__bg" aria-hidden="true"><img className="still" src="/ig/every-drop-1600.webp" srcSet="/ig/every-drop-900.webp 900w, /ig/every-drop-1600.webp 1600w" sizes="100vw" alt="" loading="lazy" decoding="async" /></div>
+    <section className="close close--light" data-tone="light" aria-label={C.label}>
+      <div className="close__bg" aria-hidden="true"><Infographic name="every-drop" /></div>
       <div className="close__shade" aria-hidden="true" />
       <div className="close__inner grid">
         <Reveal as="p" className="s-label close__label">{C.label}</Reveal>

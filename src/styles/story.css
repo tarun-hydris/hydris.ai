@@ -260,54 +260,81 @@ html.motion-off .demo__stage, html.motion-off .film[open] { animation: none; }
 html.motion-off .demo__wait { animation: none; }
 
 /* ==========================================================================
-   Infographics: dark glass illustrations with their labels set as real text.
-   Wide: labels sit on the plates. Narrow: numbered dots on the image, a key below.
+   Infographics: vector drawings on the white page (components/viz/ig), labels as real text.
    ========================================================================== */
 .ig { margin: 0; container-type: inline-size; }
-.ig__frame { position: relative; overflow: hidden; border-radius: 16px; background: #0b1a20; box-shadow: 0 50px 90px -60px rgba(7, 22, 27, 0.55); }
-.ig--bare .ig__frame { border-radius: 0; box-shadow: none; background: transparent; }
-.ig__img { display: block; width: 100%; height: auto; }
+.ig__frame { position: relative; width: 100%; }
+.ig__svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .ig__labels { position: absolute; inset: 0; pointer-events: none; }
-.ig__l { position: absolute; transform: translate(-50%, -50%); color: #eaf3f4; font-size: clamp(10px, 1.45cqw, 15px); line-height: 1.2; letter-spacing: -0.005em; white-space: nowrap; opacity: 0; transition: opacity 0.6s var(--ease), transform 0.7s var(--ease); transition-delay: calc(0.35s + var(--i) * 0.08s); }
-.ig__l--plate { width: var(--w); text-align: center; white-space: normal; }
-.ig__l--tag { padding: 5px 10px; border-radius: 999px; background: rgba(7, 22, 27, 0.62); border: 1px solid rgba(200, 230, 233, 0.22); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
-.ig__l.is-strong { font-weight: 500; color: #fff; }
-.ig__l.is-q { text-align: left; font-family: var(--serif); font-size: clamp(11px, 1.6cqw, 17px); }
+.ig__l { position: absolute; transform: translate(-50%, -50%); display: flex; align-items: center; gap: 6px; white-space: nowrap; color: var(--ink);
+  font-size: clamp(11px, 1.35cqw, 15px); line-height: 1.2; letter-spacing: -0.005em;
+  opacity: 0; transition: opacity 0.6s var(--ease), translate 0.7s var(--ease); translate: 0 6px; transition-delay: calc(0.3s + var(--i) * 0.07s); }
+.ig.is-in .ig__l { opacity: 1; translate: 0 0; }
+.ig__l.is-left { transform: translate(0, -50%); }
+.ig__l--tag .ig__t { padding: 6px 12px; border-radius: 999px; background: rgba(255, 255, 255, 0.92); border: 1px solid #c9d9d7; box-shadow: 0 8px 20px -14px rgba(29, 43, 53, 0.45); }
+.ig__l--plain .ig__t { font-size: 1.08em; color: #1d2b35; }
+.ig__l--strong .ig__t { font-size: 1.5em; font-weight: 500; letter-spacing: -0.02em; color: #1d2b35; }
+.ig__l--small .ig__t { font-size: 0.86em; color: #3f697b; }
+.ig__l--axis { transform: translate(-50%, -50%) rotate(-90deg); }
+.ig__l--axis .ig__t { font-size: 0.8em; color: #608c92; }
+.ig__l--value .ig__t { font-size: 1.7em; font-weight: 500; letter-spacing: -0.03em; color: #1d2b35; }
+.ig__l--q { transform: translate(0, -50%); white-space: normal; }
+.ig__l--q .ig__t { font-family: var(--serif); font-size: 1.12em; line-height: 1.3; color: #1d2b35; }
+.ig__l--step { transform: translate(-50%, 0); }
+.ig__l--step .ig__t { display: grid; justify-items: center; gap: 2px; text-align: center; }
+.ig__l--step .ig__t { font-size: 0.86em; color: #3f697b; }
+.ig__l--step small { font-size: 1.2em; color: #1d2b35; }
 .ig__n { display: none; }
-.reveal.is-in .ig__l, .ig.is-in .ig__l, .is-in .ig__l { opacity: 1; }
-.ig__cap { margin-top: 12px; }
+.ig__cap { margin-top: 10px; }
 .ig__key { display: none; }
 .ig__note { font-size: 13px; color: var(--mute); }
 
-@container (max-width: 460px) {
-  .ig__l { font-size: 0; padding: 0; width: auto; border: 0; background: none; }
-  .ig__n { display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: rgba(7, 22, 27, 0.72); border: 1px solid rgba(200, 230, 233, 0.4); color: #fff; font-size: 11px; }
-}
-@container (max-width: 460px) {
-  .ig__key { display: grid; gap: 6px; margin-bottom: 8px; font-size: 14px; }
+/* Gentle life in the drawings: dashes flow along their paths, the focal node breathes */
+.igv-flow { animation: igflow 1.6s linear infinite; }
+@keyframes igflow { to { stroke-dashoffset: -28; } }
+.igv-pulse { transform-box: fill-box; transform-origin: center; animation: igpulse 2.8s var(--ease-io) infinite; }
+@keyframes igpulse { 0% { opacity: 0.7; transform: scale(0.8); } 70%, 100% { opacity: 0; transform: scale(1.6); } }
+.igv-grow { stroke-dashoffset: 76; transition: stroke-dashoffset 1.6s var(--ease) 0.4s; }
+.ig.is-in .igv-grow { stroke-dashoffset: 0; }
+html.motion-off .igv-flow, html.motion-off .igv-pulse { animation: none; }
+html.motion-off .igv-grow { stroke-dashoffset: 0; transition: none; }
+html.motion-off .ig__l { opacity: 1; translate: none; transition: none; }
+
+/* When the drawing is narrow, labels become numbered markers with a key below */
+@container (max-width: 520px) {
+  .ig:not(.ig--venn-hydris) .ig__l .ig__t { display: none; }
+  .ig:not(.ig--venn-hydris) .ig__l .ig__n { display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: #fff; border: 1px solid #89b4b4; color: #1d2b35; font-size: 11px; }
+  .ig:not(.ig--venn-hydris) .ig__key { display: grid; gap: 6px; font-size: 14px; }
   .ig__key li { display: grid; grid-template-columns: 24px 1fr; align-items: baseline; }
   .ig__key span { color: var(--mute); font-size: 12px; }
 }
-html.motion-off .ig__l { opacity: 1; transition: none; }
 
-/* Act III: the overlap diagram beside the title */
-.hyd__fig { grid-column: 9 / span 4; grid-row: 1 / span 3; align-self: start; }
-.hyd__head:has(.hyd__fig) .hyd__title { grid-column: 4 / span 5; }
-.hyd__head:has(.hyd__fig) .hyd__lead { grid-column: 4 / span 5; }
-/* Platform: a figure above the rows or the timeline */
-.pfig { margin-top: clamp(48px, 6vw, 90px); }
-.pfig .ig { grid-column: 1 / -1; }
+/* Placement */
+.hyd__fig { grid-column: 9 / span 4; grid-row: 1 / span 3; align-self: center; }
+.hyd__head:has(.hyd__fig) .hyd__title, .hyd__head:has(.hyd__fig) .hyd__lead { grid-column: 4 / span 5; }
+.prow__frame--ig { background: none; border: 0; box-shadow: none; border-radius: 0; overflow: visible; }
+.prow__media.reveal .prow__frame--ig { clip-path: none; }
+.mem__frame:has(.ig) { background: none; box-shadow: none; overflow: visible; border-radius: 0; }
+.bcard__frame:has(.ig) { aspect-ratio: auto; background: none; overflow: visible; border-radius: 0; }
+.ig-wrap { grid-column: 1 / -1; }
+.pfig { margin-top: clamp(40px, 5vw, 80px); }
 .team__fig { grid-column: 1 / -1; margin-top: clamp(40px, 5vw, 70px); }
 @media (max-width: 900px) {
   .hyd__fig, .hyd__head:has(.hyd__fig) .hyd__title, .hyd__head:has(.hyd__fig) .hyd__lead { grid-column: 1 / -1; grid-row: auto; }
-  .hyd__fig { max-width: 440px; }
+  .hyd__fig { max-width: 460px; }
 }
-.ig-wrap { grid-column: 1 / -1; }
-.prow__frame--ig, .bcard__frame:has(.ig) { background: #0b1a20; }
-.bcard__frame:has(.ig) { aspect-ratio: auto; }
-.mem__frame .ig__frame, .prow__frame .ig__frame, .bcard__frame .ig__frame { border-radius: 0; }
-.prow__frame .ig__cap, .mem__frame .ig__cap, .bcard__frame .ig__cap { margin: 0; padding: 0 14px; background: #fff; }
-.prow__frame .ig__cap:has(.ig__key) { padding: 12px 14px 4px; }
-.ig--bare .ig__cap { display: none; }
-@container (max-width: 460px) { .ig--bare .ig__cap { display: block; } }
-@container (max-width: 460px) { .ig__l.is-q, .ig__l.is-strong { font-size: 0; } }
+
+/* Closing, now on the white ground: words on the left, the watershed drawing to the right */
+.close--light { background: var(--white); color: var(--ink); min-height: 0; align-items: center; }
+.close--light .close__shade { display: none; }
+.close--light .close__bg { position: absolute; inset: auto 0 0 0; top: 0; z-index: -1; }
+.close--light .close__bg .ig, .close--light .close__bg .ig__frame { height: 100%; }
+.close--light .close__bg .ig__frame { aspect-ratio: auto !important; }
+.close--light .close__bg .ig__svg { inset: 0; width: 100%; height: 100%; }
+.close--light .close__label { color: var(--mute); }
+.close--light .close__text { color: #3a4c52; }
+.close--light .filmbtn--light { color: var(--ink); border-color: rgba(7, 22, 27, 0.35); }
+.close--light .filmbtn--light:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+.close--light .pill--light { background: var(--ink); color: #fff; }
+.close--light .pill--light:hover { background: var(--blue); }
+@media (max-width: 900px) { .close--light .close__bg { opacity: 0.55; } }
