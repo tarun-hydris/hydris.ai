@@ -1,4 +1,4 @@
-import { Block, C, Dash, Defs, Float, Glyph, IsoRing, Mist, Node, Rise, Signal, Slab, Traveller, iso, rng } from './kit.jsx';
+import { Block, C, Converge, Dash, Defs, Float, Glyph, IsoRing, Mist, Node, Pop, Rise, Signal, Slab, Traveller, Visit, iso, rng } from './kit.jsx';
 import { WORLD_DOTS } from '../../../lib/worlddots.js';
 
 /* ------------------------------------------------------------------------------------------------
@@ -36,13 +36,13 @@ function venn() {
         </defs>
         <Mist id={id} cx={500} cy={450} rx={480} ry={420} />
         {c.map(([x, y], i) => (
-          <Rise key={i} i={i}>
+          <Converge key={i} i={i} dx={[0, -70, 70][i]} dy={[-60, 40, 40][i]}>
             <circle cx={x} cy={y + 10} r={R} fill={C.ink} opacity="0.06" filter={`url(#${id}-shadow)`} />
             <circle cx={x} cy={y} r={R} fill="url(#vn-fill)" fillOpacity="0.8" stroke={C.edge} strokeWidth="1.3" />
             <circle cx={x} cy={y} r={R + 12} fill="none" stroke={C.mist} strokeWidth="1" strokeDasharray="2 7" />
-          </Rise>
+          </Converge>
         ))}
-        <Rise i={3}>
+        <Rise i={8}>
           <Float>
             <g clipPath="url(#vn-a)"><g clipPath="url(#vn-b)">
               <circle cx={c[2][0]} cy={c[2][1]} r={R} fill={`url(#${id}-topOn)`} stroke={C.ink} strokeWidth="1.4" />
@@ -82,6 +82,8 @@ function liteSee() {
           return <Dash key={i} d={`M${p0[0]} ${p0[1]} L${p3[0]} ${p3[1]}`} color={C.mist} dash="2 6" />;
         })}
         <Traveller d={rise} dur={5} r={4} />
+        {Array.from({ length: 14 }, (_, k) => { const [X, Y] = P(30 + (k * 97) % 240, 40 + (k * 61) % 220, top(0)); return (
+          <circle key={`p${k}`} className="igv-ascend" cx={X} cy={Y} r="2.6" fill={C.ink} style={{ '--d': `${(k * 0.43) % 6}s`, '--rise': `${-gap * 3}px` }} />); })}
         {[0, 1, 2, 3].map((i) => {
           const layer = (
             <g>
@@ -143,12 +145,12 @@ function pulseUnderstand() {
             <Dash d={`M392 296 C 430 296, 432 ${y}, 470 ${y}`} color={i === 0 ? C.slate : C.line} flow={i === 0} />
             <rect x="480" y={y - 25} width="320" height="50" rx="14" fill={`url(#${id}-top)`} stroke={i === 0 ? C.ink : C.edge} strokeWidth={i === 0 ? 1.5 : 1.1} />
             <rect x="496" y={y + 34} width="288" height="4" rx="2" fill={C.pale} />
-            <rect x="496" y={y + 34} width={288 * conf[i]} height="4" rx="2" fill={i === 0 ? C.ink : C.steel} className="igv-grow-x" />
+            <rect x="496" y={y + 34} width={288 * conf[i]} height="4" rx="2" fill={i === 0 ? C.ink : C.steel} className="igv-grow-x" style={{ '--d': `${1.1 + i * 0.35}s` }} />
             {icons[i].map((g, k) => (
-              <g key={g + k}>
+              <Pop key={g + k} i={4 + i * 2 + k}>
                 <rect x={716 + k * 40} y={y - 16} width="32" height="32" rx="8" fill={`url(#${id}-token)`} stroke={C.edge} />
                 <Glyph id={id} name={g} x={732 + k * 40} y={y + 9} size={18} token={false} width={1.6} />
-              </g>
+              </Pop>
             ))}
             <Dash d={`M800 ${y} C 880 ${y}, 900 260, 958 260`} color={C.line} opacity={i === 0 ? 1 : 0.55} />
           </Rise>
@@ -158,6 +160,7 @@ function pulseUnderstand() {
           <rect x="960" y="206" width="170" height="108" rx="16" fill={`url(#${id}-top)`} stroke={C.edge} />
           {[0, 1].map((k) => (
             <g key={k}><circle cx="984" cy={262 + k * 26} r="7" fill="none" stroke={C.steel} strokeWidth="1.4" />
+              <path d={`M980 ${262 + k * 26} l3 3 l5 -6`} fill="none" stroke={C.ink} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" pathLength="1" className="igv-draw" style={{ '--d': `${2 + k * 0.4}s` }} />
               <rect x="998" y={258 + k * 26} width={k ? 70 : 100} height="8" rx="4" fill={C.pale} /></g>
           ))}
         </Rise>
@@ -165,7 +168,7 @@ function pulseUnderstand() {
         <Dash d="M1045 314 V398" color={C.slate} dash="3 5" flow />
         <Rise i={5}>
           <circle cx="1045" cy="440" r="36" fill={`url(#${id}-tokenOn)`} stroke={C.ink} />
-          <path d="M1029 441 L1041 453 L1063 428" fill="none" stroke={C.pale} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M1029 441 L1041 453 L1063 428" fill="none" stroke={C.pale} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" pathLength="1" className="igv-draw" style={{ '--d': '2.9s' }} />
         </Rise>
         <Traveller d={path} dur={8} r={4} />
       </>
@@ -207,7 +210,7 @@ function fieldAct() {
         {T.map(([X, Y], i) => (
           <Rise key={i} i={i}>
             <Tile P={P} id={id} ox={ox} oy={oy} X={X} Y={Y} w={118} on={i === 2} />
-            {i !== 2 && <Glyph id={id} name={['pin', 'engineer', '', 'doc'][i]} x={X} y={Y - 16} size={28} />}
+            {i !== 2 && <Visit cyc={9} at={[0, 2.1, 0, 6.3][i]}><Glyph id={id} name={['pin', 'engineer', '', 'doc'][i]} x={X} y={Y - 16} size={28} /></Visit>}
           </Rise>
         ))}
         {/* the gauge, standing on the focal tile */}
@@ -239,7 +242,7 @@ function fieldAct() {
         {/* the shift record */}
         <Rise i={5}>
           <Tile P={P} id={id} ox={ox} oy={oy} X={1080} Y={210} w={78} h={10} />
-          <Glyph id={id} name="book" x={1080} y={196} size={24} />
+          <Visit cyc={9} at={8.3}><Glyph id={id} name="book" x={1080} y={196} size={24} /></Visit>
         </Rise>
         <Traveller d={route} dur={9} r={4.5} />
       </>
@@ -286,7 +289,7 @@ function shiftMemory() {
             <IsoRing cx={x} cy={y + 9} r={30} fill={C.ink} opacity="0.1" filter={`url(#${id}-shadow)`} />
             <IsoRing cx={x} cy={y + 6} r={28} fill={`url(#${id}-sideR${i === 4 ? 'On' : ''})`} stroke={i === 4 ? C.ink : C.edge} />
             <IsoRing cx={x} cy={y} r={28} fill={`url(#${id}-top${i === 4 ? 'On' : ''})`} stroke={i === 4 ? C.ink : C.edge} strokeWidth="1.2" />
-            <circle cx={x} cy={y} r="3.5" fill={i === 4 ? C.pale : C.steel} />
+            <Visit cyc={7} at={1.6 + i * 1.1}><circle cx={x} cy={y} r="5" fill={i === 4 ? C.pale : C.ink} /></Visit>
           </Rise>
         ))}
         <Traveller d={chain} dur={7} r={4} />
@@ -384,7 +387,7 @@ function portfolio() {
         {sites.map(([x, y], i) => <path key={`a${i}`} d={arc(x, y)} fill="none" stroke={flag.includes(i) ? C.slate : C.line} strokeWidth="1" strokeDasharray="3 6" opacity={flag.includes(i) ? 0.9 : 0.5} />)}
         {sites.map(([x, y], i) => (flag.includes(i)
           ? <Rise key={i} i={flag.indexOf(i) + 1}><IsoRing cx={x} cy={y} r={18} fill="none" stroke={C.ink} strokeWidth="1.3" /><line x1={x} y1={y} x2={x} y2={y - 52} stroke={C.ink} strokeWidth="2" /><Node id={id} x={x} y={y - 56} r={7} on /></Rise>
-          : <Node key={i} id={id} x={x} y={y} r={4.5} />))}
+          : <Pop key={i} i={i}><Node id={id} x={x} y={y} r={4.5} /></Pop>))}
         <Node id={id} x={cx} y={cy} r={10} on />
         {flag.map((s, i) => <Traveller key={s} d={arc(sites[s][0], sites[s][1])} dur={4} delay={-i * 1.3} r={3.5} />)}
         {/* the decision card: light glass, the place to act first in ink */}
@@ -440,7 +443,7 @@ function everyDrop() {
           {[[10, 90], [70, 90], [40, 140]].map(([a, b], i) => { const [X, Y] = P(a, b, 6); return (
             <g key={i}><IsoRing cx={X} cy={Y - 6} r={18} fill={`url(#${id}-sideR)`} stroke={C.edge} /><IsoRing cx={X} cy={Y - 12} r={18} fill={`url(#${id}-top)`} stroke={C.ink2} strokeWidth="1.2" /></g>); })}
         </Rise>
-        {towns.map(([x, y], i) => <Node key={i} id={id} x={x} y={y} r={i % 3 === 0 ? 6 : 4} on={i === 4} />)}
+        {towns.map(([x, y], i) => <Visit key={i} cyc={6} at={(x - 1100) / 120}><Node id={id} x={x} y={y} r={i % 3 === 0 ? 6 : 4} on={i === 4} /></Visit>)}
         <Rise i={2}><Float>
           <g transform="translate(1270 150)">
             <circle r="90" fill="none" stroke={C.mist} strokeDasharray="2 7" />
@@ -479,7 +482,7 @@ function fiveStepLoop() {
         {pos.map(([X, Y], i) => (
           <Rise key={i} i={i}>
             <Tile P={P} id={id} ox={ox} oy={oy} X={X} Y={Y - 14} w={120} h={16} on={i === 0} />
-            <Glyph id={id} name={names[i]} x={X} y={Y - 36} size={30} on={i === 0} />
+            <Visit cyc={14} at={[0, 2.8, 5.6, 8.4, 11.2][i]}><Glyph id={id} name={names[i]} x={X} y={Y - 36} size={30} on={i === 0} /></Visit>
           </Rise>
         ))}
         <Traveller d={loop} dur={14} r={5} />
@@ -504,7 +507,7 @@ function onboarding() {
         {T.map(([X, Y], i) => (
           <Rise key={i} i={i}>
             {i < 3 && <Tile P={P} id={id} ox={ox} oy={oy} X={X} Y={Y} w={150} h={18} on={i === 2} />}
-            {i < 3 && <Glyph id={id} name={['send', 'engineer', 'doc'][i]} x={X} y={Y - 18} size={30} on={i === 2} />}
+            {i < 3 && <Visit cyc={6} at={i * 2}><Glyph id={id} name={['send', 'engineer', 'doc'][i]} x={X} y={Y - 18} size={30} on={i === 2} /></Visit>}
             {i === 3 && (
               <g>
                 <Tile P={P} id={id} ox={ox} oy={oy} X={X} Y={Y} w={150} h={18} />

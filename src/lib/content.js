@@ -398,7 +398,7 @@ export const STORY = {
         title: 'Bring guidance from the control room to the plant floor.',
         text: 'Field puts the next step in the operator’s view through smart glasses, hands free on the round: equipment context, guided inspection steps and readings captured by voice as they are taken.',
         points: ['Guided inspection steps', 'Equipment-specific context', 'Readings recorded for the next shift'],
-        note: 'Field runs on smart glasses, hands free. The demo shows the view through them.',
+        note: 'Field runs on smart glasses, hands free. The demo shows the Field workflow.',
       },
     ],
   },
@@ -463,9 +463,9 @@ export const DEMO = {
       tries: ['Open the investigation for the drifting reading', 'Compare the ranked causes and the evidence behind each', 'Answer the guided check and watch the ranking change'],
     },
     {
-      key: 'field', name: 'Hydris Field', verb: 'Act', src: '/demos/field.html', height: 620,
-      line: 'The view through the glasses on a round, hands free.',
-      tries: ['Say “next” (or press N) to walk to Pump P-2', 'Capture the gauge reading with your voice (C)', 'Add a note and watch the shift record build'],
+      key: 'field', name: 'Hydris Field', verb: 'Act', src: '/demos/field.html', height: 800,
+      line: 'Guidance and records on the round.',
+      tries: ['Open a visit', 'Enter readings and watch them checked against limits', 'Complete the checklist and submit the report'],
     },
   ],
   after: {

@@ -168,6 +168,13 @@ export const IsoRing = ({ cx, cy, r, ...rest }) => <ellipse cx={cx} cy={cy} rx={
 export const Rise = ({ i = 0, children }) => <g className="igv-rise" style={{ '--d': `${0.15 + i * 0.12}s` }}>{children}</g>;
 export const Float = ({ children }) => <g className="igv-float">{children}</g>;
 
+/* Story helpers.
+   Visit: lights up when the travelling dot reaches it, every cycle (--cyc), at its moment (--at).
+   Pop: appears once, in order. Converge: slides in from an offset and settles. */
+export const Visit = ({ cyc, at, children }) => <g className="igv-visit" style={{ '--cyc': `${cyc}s`, '--at': `${at}s` }}>{children}</g>;
+export const Pop = ({ i = 0, children }) => <g className="igv-pop" style={{ '--d': `${0.3 + i * 0.09}s` }}>{children}</g>;
+export const Converge = ({ dx = 0, dy = 0, i = 0, children }) => <g className="igv-converge" style={{ '--tx': `${dx}px`, '--ty': `${dy}px`, '--d': `${0.1 + i * 0.12}s` }}>{children}</g>;
+
 /* A deterministic pseudo-random sequence, so drawings never change between renders */
 export function rng(seed) {
   let s = seed >>> 0;
