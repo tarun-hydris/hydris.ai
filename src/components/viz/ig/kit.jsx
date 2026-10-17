@@ -11,9 +11,12 @@ import { ICON_PATHS } from '../../ui/Icon.jsx';
    Isometric projection: x runs down-right, y runs down-left, z is up.
    ------------------------------------------------------------------------------------------------ */
 export const C = {
-  clear: '#76AFBA', steel: '#5191A5', glacial: '#3F697B', ice: '#AFCAC9', pale: '#C9D9D7',
-  waterlight: '#89B4B4', mist: '#ADB9BD', seaglass: '#6D8889', deep: '#1D2B35', lagoon: '#608C92',
-  face: '#F6FAFA', side1: '#DCE8E7', side2: '#CADBDA', line: '#9DBDBD',
+  // White page, dark objects. Every dark tone is sampled from the opening water film:
+  // ink #07161B, #141D1B, #1A2627, #20333B, #2C4249, slate #315260, #47656B, #56797F,
+  // with the film's silvery highlights #88A1A3 and #D1D9D6 for edges, glints and the signal.
+  clear: '#88A1A3', steel: '#56797F', glacial: '#20333B', ice: '#47656B', pale: '#D1D9D6',
+  waterlight: '#2C4249', mist: '#A9B7B8', seaglass: '#56797F', deep: '#07161B', lagoon: '#47656B',
+  face: '#1A2627', side1: '#141D1B', side2: '#0E1412', line: '#88A1A3',
 };
 
 const K = 0.8660254;
@@ -26,25 +29,28 @@ export function Defs({ id }) {
   return (
     <defs>
       <linearGradient id={`${id}-top`} x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stopColor="#FFFFFF" /><stop offset="1" stopColor="#E8F1F1" />
+        <stop offset="0" stopColor="#315260" /><stop offset="0.55" stopColor="#20333B" /><stop offset="1" stopColor="#07161B" />
       </linearGradient>
       <linearGradient id={`${id}-topOn`} x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stopColor="#FFFFFF" /><stop offset="1" stopColor="#CFE6E9" />
+        <stop offset="0" stopColor="#47656B" /><stop offset="0.5" stopColor="#2C4249" /><stop offset="1" stopColor="#07161B" />
       </linearGradient>
       <linearGradient id={`${id}-sideL`} x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stopColor="#E3EEEE" /><stop offset="1" stopColor="#D2E2E1" />
+        <stop offset="0" stopColor="#1A2627" /><stop offset="1" stopColor="#0E1412" />
       </linearGradient>
       <linearGradient id={`${id}-sideR`} x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stopColor="#D4E4E3" /><stop offset="1" stopColor="#BFD3D2" />
+        <stop offset="0" stopColor="#141D1B" /><stop offset="1" stopColor="#07161B" />
       </linearGradient>
       <radialGradient id={`${id}-node`} cx="0.35" cy="0.3" r="0.8">
-        <stop offset="0" stopColor="#FFFFFF" /><stop offset="0.55" stopColor="#CFE5E8" /><stop offset="1" stopColor={C.clear} />
+        <stop offset="0" stopColor="#D1D9D6" /><stop offset="0.45" stopColor="#56797F" /><stop offset="1" stopColor="#07161B" />
       </radialGradient>
       <radialGradient id={`${id}-glow`} cx="0.5" cy="0.5" r="0.5">
-        <stop offset="0" stopColor={C.clear} stopOpacity="0.38" /><stop offset="1" stopColor={C.clear} stopOpacity="0" />
+        <stop offset="0" stopColor="#56797F" stopOpacity="0.35" /><stop offset="1" stopColor="#56797F" stopOpacity="0" />
       </radialGradient>
       <radialGradient id={`${id}-mist`} cx="0.5" cy="0.5" r="0.5">
-        <stop offset="0" stopColor="#E3EFEF" stopOpacity="0.9" /><stop offset="1" stopColor="#FFFFFF" stopOpacity="0" />
+        <stop offset="0" stopColor="#E6ECEC" stopOpacity="0.9" /><stop offset="1" stopColor="#FFFFFF" stopOpacity="0" />
+      </radialGradient>
+      <radialGradient id="glyph-token" cx="0.35" cy="0.3" r="0.85">
+        <stop offset="0" stopColor="#47656B" /><stop offset="0.6" stopColor="#20333B" /><stop offset="1" stopColor="#07161B" />
       </radialGradient>
       <filter id={`${id}-shadow`} x="-30%" y="-30%" width="160%" height="180%">
         <feGaussianBlur stdDeviation="9" />
@@ -70,13 +76,13 @@ export function Slab({ P, id, x, y, w, d, z = 0, h = 10, on = false, shadow = tr
     <g opacity={opacity}>
       {shadow && (
         <polygon points={pts([[g[0], g[1] + 6], [g3[0] + 8, g3[1] + 6], [g2[0], g2[1] + 14], [g4[0] - 8, g4[1] + 6]])}
-          fill={C.deep} opacity={z > 0 ? 0.06 : 0.1} filter={`url(#${id}-shadow)`} />
+          fill={C.deep} opacity={z > 0 ? 0.12 : 0.24} filter={`url(#${id}-shadow)`} />
       )}
       {on && <ellipse cx={(A[0] + Cc[0]) / 2} cy={(A[1] + Cc[1]) / 2} rx={w * 1.05} ry={d * 0.6} fill={`url(#${id}-glow)`} />}
       <polygon points={pts([D, Cc, Cb, Db])} fillOpacity={alpha < 1 ? 0.85 : 1} fill={`url(#${id}-sideL)`} stroke={C.pale} strokeWidth="1" strokeLinejoin="round" />
       <polygon points={pts([Cc, B, Bb, Cb])} fill={`url(#${id}-sideR)`} stroke={C.pale} strokeWidth="1" strokeLinejoin="round" />
-      <polygon points={pts([A, B, Cc, D])} fill={`url(#${id}-${on ? 'topOn' : 'top'})`} fillOpacity={alpha} stroke={on ? C.clear : C.ice} strokeWidth={on ? 1.6 : 1.2} strokeLinejoin="round" />
-      <polyline points={pts([D, Cc, B])} fill="none" stroke="#FFFFFF" strokeWidth="1.4" opacity="0.9" />
+      <polygon points={pts([A, B, Cc, D])} fill={`url(#${id}-${on ? 'topOn' : 'top'})`} fillOpacity={alpha} stroke={on ? C.clear : C.ice} strokeWidth={on ? 1.6 : 1.1} strokeLinejoin="round" />
+      <polyline points={pts([D, Cc, B])} fill="none" stroke="#88A1A3" strokeWidth="1.2" opacity={on ? 0.95 : 0.55} />
     </g>
   );
 }
@@ -89,18 +95,29 @@ export function Block({ P, id, x, y, w, d, z = 0, h, on = false, layers = 0 }) {
       {Array.from({ length: layers }, (_, i) => {
         const zz = z + (h * (i + 1)) / (layers + 1);
         const a = P(x + 2, y + 2, zz); const b = P(x + w - 2, y + 2, zz); const c = P(x + w - 2, y + d - 2, zz); const dd = P(x + 2, y + d - 2, zz);
-        return <polygon key={i} points={pts([a, b, c, dd])} fill="#FFFFFF" fillOpacity={0.25 + (i / layers) * 0.35} stroke={i > layers - 3 ? C.clear : C.pale} strokeWidth="0.8" />;
+        return <polygon key={i} points={pts([a, b, c, dd])} fill="#88A1A3" fillOpacity={0.05 + (i / layers) * 0.16} stroke={i > layers - 3 ? C.clear : C.pale} strokeWidth="0.8" />;
       })}
     </g>
   );
 }
 
 /* A line icon from the site set, standing upright on a point (like the glass objects in the set) */
-export function Glyph({ name, x, y, size = 34, color = C.glacial, width = 1.5, float = 0 }) {
+export function Glyph({ name, x, y, size = 34, color = '#D1D9D6', width = 1.5, float = 0, token = true }) {
+  const cx = x; const cy = y - size / 2 - float;
+  const r = size * 0.78;
   return (
-    <g transform={`translate(${(x - size / 2).toFixed(1)} ${(y - size - float).toFixed(1)}) scale(${(size / 24).toFixed(3)})`}
-      fill="none" stroke={color} strokeWidth={(width * 24) / size} strokeLinecap="round" strokeLinejoin="round">
-      {ICON_PATHS[name]}
+    <g>
+      {token && (
+        <g>
+          <ellipse cx={cx} cy={cy + r + 4} rx={r * 0.8} ry={r * 0.22} fill="#07161B" opacity="0.18" />
+          <circle cx={cx} cy={cy} r={r} fill="url(#glyph-token)" stroke="#88A1A3" strokeWidth="1.2" />
+          <path d={`M${cx - r * 0.62} ${cy - r * 0.55} A ${r} ${r} 0 0 1 ${cx + r * 0.55} ${cy - r * 0.68}`} fill="none" stroke="#D1D9D6" strokeWidth="1" opacity="0.5" />
+        </g>
+      )}
+      <g transform={`translate(${(cx - size / 2).toFixed(1)} ${(cy - size / 2).toFixed(1)}) scale(${(size / 24).toFixed(3)})`}
+        fill="none" stroke={color} strokeWidth={(width * 24) / size} strokeLinecap="round" strokeLinejoin="round">
+        {ICON_PATHS[name]}
+      </g>
     </g>
   );
 }

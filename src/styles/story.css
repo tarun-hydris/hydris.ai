@@ -338,3 +338,32 @@ html.motion-off .ig__l { opacity: 1; translate: none; transition: none; }
 .close--light .pill--light { background: var(--ink); color: #fff; }
 .close--light .pill--light:hover { background: var(--blue); }
 @media (max-width: 900px) { .close--light .close__bg { opacity: 0.55; } }
+
+/* ==========================================================================
+   Infographics: white page, dark objects in the film's water tones. Tags are ink pills;
+   words that sit on a dark shape turn light.
+   ========================================================================== */
+.ig__l--tag .ig__t { background: #07161b; border-color: #07161b; color: #e7ecec; box-shadow: 0 10px 22px -14px rgba(7, 22, 27, 0.6); }
+.ig__l--plain .ig__t, .ig__l--strong .ig__t, .ig__l--value .ig__t, .ig__l--q .ig__t, .ig__l--step small { color: #07161b; }
+.ig__l--small .ig__t, .ig__l--step .ig__t, .ig__l--axis .ig__t { color: #47656b; }
+.ig__l.is-on .ig__t { color: #e7ecec; }
+.ig__l.is-on.ig__l--small .ig__t, .ig__l.is-on.ig__l--axis .ig__t { color: #a9b7b8; }
+@container (max-width: 520px) {
+  .ig:not(.ig--venn-hydris) .ig__l .ig__n { background: #07161b; border-color: #07161b; color: #e7ecec; }
+}
+
+/* ---------- Act II records panel in the same dark-object system ---------- */
+.frag { border: 0; background: radial-gradient(90% 70% at 50% 40%, #eef3f3 0%, rgba(255, 255, 255, 0) 75%); box-shadow: none; padding: 34px 30px 30px 58px; }
+.frag__rail { left: 30px; width: 2px; background: linear-gradient(#88a1a3, #2c4249); }
+.frag__item { position: relative; gap: 14px; padding: 14px 18px 14px 14px; border: 1px solid #47656b; border-radius: 14px; color: #e7ecec; font-size: 15px;
+  background: linear-gradient(135deg, #315260 0%, #20333b 45%, #07161b 100%);
+  box-shadow: 0 14px 28px -18px rgba(7, 22, 27, 0.75), inset 0 1px 0 rgba(209, 217, 214, 0.22); }
+.frag__item::before { content: ''; position: absolute; left: -29px; top: 50%; width: 9px; height: 9px; margin-top: -4.5px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #d1d9d6, #56797f 55%, #07161b); }
+.frag__ico { box-sizing: content-box; width: 16px; height: 16px; padding: 7px; border-radius: 50%; color: #d1d9d6; background: radial-gradient(circle at 35% 30%, #47656b, #20333b 60%, #07161b); border: 1px solid #88a1a3; }
+.frag__together { color: #07161b; font-family: var(--sans); font-size: 15px; font-weight: 500; }
+.frag__together i { background: #07161b; box-shadow: 0 0 0 5px rgba(86, 121, 127, 0.25); }
+
+/* The question rule and the handover line in the same ink and silver */
+.know__qs { border-left-color: #07161b; }
+.mem__line i { background: linear-gradient(90deg, #07161b, #47656b); }
+.mem__step.is-on .mem__dot { background: radial-gradient(circle at 35% 30%, #d1d9d6, #56797f 55%, #07161b); border-color: #07161b; }

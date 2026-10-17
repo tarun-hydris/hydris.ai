@@ -22,7 +22,7 @@ export default function Infographic({ name, className = '', caption, bare = fals
             {labels.map((l, i) => (
               <li
                 key={l.t + i}
-                className={`ig__l ig__l--${l.k || 'tag'} ${l.align === 'left' ? 'is-left' : ''}`}
+                className={`ig__l ig__l--${l.k || 'tag'} ${l.align === 'left' ? 'is-left' : ''} ${l.on ? 'is-on' : ''}`}
                 style={{ left: `${((l.x / W) * 100).toFixed(2)}%`, top: `${((l.y / H) * 100).toFixed(2)}%`, '--i': i, maxWidth: l.w ? `${((l.w / W) * 100).toFixed(2)}%` : undefined }}
               >
                 <span className="ig__n">{i + 1}</span>

@@ -27,25 +27,25 @@ function venn() {
       <>
         <Defs id={id} />
         <defs>
-          <radialGradient id="vn-fill" cx="0.5" cy="0.5" r="0.6"><stop offset="0" stopColor="#FFFFFF" stopOpacity="0.2" /><stop offset="1" stopColor="#D9E9E9" stopOpacity="0.55" /></radialGradient>
+          <radialGradient id="vn-fill" cx="0.5" cy="0.5" r="0.6"><stop offset="0" stopColor="#2C4249" stopOpacity="0.92" /><stop offset="1" stopColor="#07161B" stopOpacity="0.96" /></radialGradient>
           <clipPath id="vn-a"><circle cx={c[0][0]} cy={c[0][1]} r={R} /></clipPath>
           <clipPath id="vn-b"><circle cx={c[1][0]} cy={c[1][1]} r={R} /></clipPath>
         </defs>
         <Mist id={id} cx={500} cy={450} rx={470} ry={400} />
-        {c.map(([x, y], i) => <circle key={i} cx={x} cy={y} r={R} fill="url(#vn-fill)" stroke={C.ice} strokeWidth="1.4" />)}
+        {c.map(([x, y], i) => <circle key={i} cx={x} cy={y} r={R} fill="url(#vn-fill)" fillOpacity="0.62" stroke="#88A1A3" strokeWidth="1.4" />)}
         {c.map(([x, y], i) => <circle key={`d${i}`} cx={x} cy={y} r={R + 10} fill="none" stroke={C.mist} strokeWidth="1" strokeDasharray="3 7" />)}
         <g clipPath="url(#vn-a)"><g clipPath="url(#vn-b)">
-          <circle cx={c[2][0]} cy={c[2][1]} r={R} fill={C.clear} fillOpacity="0.32" stroke={C.steel} strokeWidth="2" />
+          <circle cx={c[2][0]} cy={c[2][1]} r={R} fill="#56797F" fillOpacity="0.55" stroke="#D1D9D6" strokeWidth="1.6" />
         </g></g>
         <circle cx={500} cy={448} r={70} fill="url(#vn-glow)" />
         {[[500, 68], [268, 372], [732, 372], [500, 754], [140, 522], [860, 522]].map(([x, y], i) => <Node key={i} id={id} x={x} y={y} r={6} />)}
       </>
     ),
     labels: [
-      { t: 'Plant data', x: 500, y: 200, k: 'plain' },
-      { t: 'Water science', x: 300, y: 600, k: 'plain' },
-      { t: 'Team experience', x: 700, y: 600, k: 'plain' },
-      { t: 'Hydris', x: 500, y: 462, k: 'strong' },
+      { t: 'Plant data', x: 500, y: 200, k: 'plain', on: true },
+      { t: 'Water science', x: 300, y: 600, k: 'plain', on: true },
+      { t: 'Team experience', x: 700, y: 600, k: 'plain', on: true },
+      { t: 'Hydris', x: 500, y: 462, k: 'strong', on: true },
     ],
   };
 }
@@ -73,25 +73,25 @@ function liteSee() {
         {[0, 1, 2, 3].map((i) => (
           <g key={i}>
             <Slab P={P} id={id} x={0} y={0} w={W} d={W} z={z(i)} h={h} on={i === 3} shadow={i === 0} alpha={i === 3 ? 0.92 : 0.55} />
-            {i === 0 && raw.map(([a, b], k) => { const [X, Y] = P(a, b, top(0)); return <circle key={k} cx={X} cy={Y} r="2.3" fill={C.steel} opacity="0.55" />; })}
-            {i === 1 && clusters.map(([a, b], k) => { const [X, Y] = P(a, b, top(1)); return <circle key={k} cx={X} cy={Y} r="3" fill={k < 16 ? C.clear : C.waterlight} opacity="0.8" />; })}
+            {i === 0 && raw.map(([a, b], k) => { const [X, Y] = P(a, b, top(0)); return <circle key={k} cx={X} cy={Y} r="2.3" fill="#A9B7B8" opacity="0.75" />; })}
+            {i === 1 && clusters.map(([a, b], k) => { const [X, Y] = P(a, b, top(1)); return <circle key={k} cx={X} cy={Y} r="3" fill={k < 16 ? '#E7ECEC' : '#88A1A3'} opacity="0.9" />; })}
             {i === 2 && centres.slice(0, 4).map(([a, b], k) => { const [X, Y] = P(a, b, top(2)); return (
               <g key={k}><IsoRing cx={X} cy={Y} r={k === 1 ? 44 : 34} fill={`url(#${id}-glow)`} />
-                <IsoRing cx={X} cy={Y} r={k === 1 ? 22 : 14} fill="none" stroke={k === 1 ? C.steel : C.ice} strokeWidth={k === 1 ? 2 : 1.2} /></g>); })}
+                <IsoRing cx={X} cy={Y} r={k === 1 ? 22 : 14} fill="none" stroke={k === 1 ? '#E7ECEC' : '#88A1A3'} strokeWidth={k === 1 ? 2 : 1.2} /></g>); })}
             {i === 3 && (() => {
               const [X, Y] = P(110, 120, top(3));
               return (
                 <g>
-                  <IsoRing cx={X} cy={Y} r={62} fill="none" stroke={C.pale} strokeWidth="12" />
-                  <IsoRing cx={X} cy={Y} r={62} fill="none" stroke={C.steel} strokeWidth="12" pathLength="100" strokeDasharray="76 24" strokeLinecap="round" className="igv-grow" />
+                  <IsoRing cx={X} cy={Y} r={62} fill="none" stroke="#2C4249" strokeWidth="12" />
+                  <IsoRing cx={X} cy={Y} r={62} fill="none" stroke="#D1D9D6" strokeWidth="12" pathLength="100" strokeDasharray="76 24" strokeLinecap="round" className="igv-grow" />
                   {[[220, 70], [235, 150], [215, 230]].map(([a, b], k) => { const [x2, y2] = P(a, b, top(3)); return (
-                    <g key={k}><IsoRing cx={x2} cy={y2} r={20} fill="none" stroke={C.pale} strokeWidth="5" />
-                      <IsoRing cx={x2} cy={y2} r={20} fill="none" stroke={C.clear} strokeWidth="5" pathLength="100" strokeDasharray={`${[88, 64, 92][k]} 100`} /></g>); })}
+                    <g key={k}><IsoRing cx={x2} cy={y2} r={20} fill="none" stroke="#2C4249" strokeWidth="5" />
+                      <IsoRing cx={x2} cy={y2} r={20} fill="none" stroke="#A9B7B8" strokeWidth="5" pathLength="100" strokeDasharray={`${[88, 64, 92][k]} 100`} /></g>); })}
                 </g>
               );
             })()}
             {(() => { const a = corner(i, W, 0); return <path d={`M${a[0] + 6} ${a[1]} H 860`} stroke={C.mist} strokeWidth="1" strokeDasharray="2 5" fill="none" />; })()}
-            {(() => { const a = corner(i, W, 0); return <circle cx={a[0]} cy={a[1]} r="3.5" fill="#fff" stroke={C.steel} strokeWidth="1.4" />; })()}
+            {(() => { const a = corner(i, W, 0); return <circle cx={a[0]} cy={a[1]} r="3.5" fill="#0E2229" stroke={C.steel} strokeWidth="1.4" />; })()}
           </g>
         ))}
       </>
@@ -114,8 +114,8 @@ function pulseUnderstand() {
       <>
         <Defs id={id} />
         <defs>
-          <linearGradient id="pu-bar" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stopColor="#FFFFFF" /><stop offset="1" stopColor="#DCECEE" /></linearGradient>
-          <linearGradient id="pu-barOn" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stopColor="#FFFFFF" /><stop offset="1" stopColor="#BFE0E5" /></linearGradient>
+          <linearGradient id="pu-bar" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stopColor="#141D1B" /><stop offset="1" stopColor="#2C4249" /></linearGradient>
+          <linearGradient id="pu-barOn" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stopColor="#07161B" /><stop offset="1" stopColor="#47656B" /></linearGradient>
         </defs>
         <Mist id={id} cx={600} cy={310} rx={600} ry={300} />
         <rect x="56" y="216" width="292" height="172" rx="22" fill="url(#pu-top)" stroke={C.ice} strokeWidth="1.4" />
@@ -128,12 +128,12 @@ function pulseUnderstand() {
             <Dash d={`M440 302 C 490 302, 470 ${y}, 528 ${y}`} flow={i === 0} color={i === 0 ? C.steel : C.line} />
             <rect x="548" y={y - 24} width={L[i]} height="48" rx="14" fill={`url(#pu-${i === 0 ? 'barOn' : 'bar'})`} stroke={i === 0 ? C.clear : C.ice} strokeWidth={i === 0 ? 1.8 : 1.3} />
             {i === 0 && <rect x="548" y={y - 24} width={L[i]} height="48" rx="14" fill="none" stroke={C.clear} strokeWidth="10" opacity="0.12" />}
-            <path d={`M536 ${y - 15} L551 ${y} L536 ${y + 15} L521 ${y} Z`} fill="#fff" stroke={i === 0 ? C.steel : C.ice} strokeWidth="1.4" />
-            <text x="536" y={y + 4} textAnchor="middle" fontSize="12" fill={C.glacial} fontFamily="var(--sans)">{i + 1}</text>
+            <path d={`M536 ${y - 15} L551 ${y} L536 ${y + 15} L521 ${y} Z`} fill="#0E2229" stroke={i === 0 ? C.steel : C.ice} strokeWidth="1.4" />
+            <text x="536" y={y + 4} textAnchor="middle" fontSize="12" fill="#E7ECEC" fontFamily="var(--sans)">{i + 1}</text>
             {icons[i].map((g, k) => (
               <g key={g + k}>
                 <rect x={590 + k * 58} y={y - 88} width="46" height="46" rx="10" fill="url(#pu-top)" stroke={C.pale} strokeWidth="1.2" />
-                <Glyph name={g} x={613 + k * 58} y={y - 52} size={24} color={C.glacial} width={1.6} />
+                <Glyph name={g} x={613 + k * 58} y={y - 53} size={24} width={1.6} token={false} />
               </g>
             ))}
             <Dash d={`M${548 + L[i]} ${y} C ${960} ${y}, ${930} 302, ${990} 302`} color={C.line} opacity={i === 0 ? 1 : 0.7} />
@@ -142,15 +142,15 @@ function pulseUnderstand() {
         <Node id={id} x={995} y={302} r={6} />
         <circle cx="1080" cy="302" r="62" fill={`url(#${id}-glow)`} />
         <circle cx="1080" cy="302" r="40" fill="url(#pu-top)" stroke={C.steel} strokeWidth="1.8" />
-        <path d="M1062 303 L1075 316 L1100 289" fill="none" stroke={C.steel} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M1062 303 L1075 316 L1100 289" fill="none" stroke="#E7ECEC" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
         <path d="M1001 302 H1040" stroke={C.steel} strokeWidth="1.6" />
       </>
     ),
     labels: [
-      { t: 'Why is TSS drifting in the effluent?', x: 84, y: 302, k: 'q', w: 240 },
-      { t: 'Most likely cause', x: 578, y: 140, k: 'plain', align: 'left' },
-      { t: 'Possible cause', x: 578, y: 300, k: 'plain', align: 'left' },
-      { t: 'Less likely', x: 578, y: 460, k: 'plain', align: 'left' },
+      { t: 'Why is TSS drifting in the effluent?', x: 84, y: 302, k: 'q', w: 240, on: true },
+      { t: 'Most likely cause', x: 578, y: 140, k: 'plain', align: 'left', on: true },
+      { t: 'Possible cause', x: 578, y: 300, k: 'plain', align: 'left', on: true },
+      { t: 'Less likely', x: 578, y: 460, k: 'plain', align: 'left', on: true },
       { t: 'Evidence', x: 590, y: 36, k: 'small', align: 'left' },
       { t: 'Operator decides', x: 1080, y: 392, k: 'tag' },
     ],
@@ -191,15 +191,15 @@ function fieldAct() {
           <line x1="0" y1="66" x2="0" y2="40" stroke={C.glacial} strokeWidth="3" />
           <circle r="42" fill="url(#fa-top)" stroke={C.steel} strokeWidth="2.4" />
           <circle r="34" fill="none" stroke={C.pale} strokeWidth="1.2" />
-          {Array.from({ length: 9 }, (_, k) => { const a = (-210 + k * 30) * (Math.PI / 180); return <line key={k} x1={Math.cos(a) * 27} y1={Math.sin(a) * 27} x2={Math.cos(a) * 33} y2={Math.sin(a) * 33} stroke={C.glacial} strokeWidth="1.4" />; })}
-          <line x1="0" y1="0" x2="18" y2="-20" stroke={C.steel} strokeWidth="2.6" strokeLinecap="round" />
-          <circle r="4" fill={C.steel} />
+          {Array.from({ length: 9 }, (_, k) => { const a = (-210 + k * 30) * (Math.PI / 180); return <line key={k} x1={Math.cos(a) * 27} y1={Math.sin(a) * 27} x2={Math.cos(a) * 33} y2={Math.sin(a) * 33} stroke="#A9B7B8" strokeWidth="1.4" />; })}
+          <line x1="0" y1="0" x2="18" y2="-20" stroke="#E7ECEC" strokeWidth="2.6" strokeLinecap="round" />
+          <circle r="4" fill="#E7ECEC" />
         </g>
         {/* the readout panel beside it */}
         <Dash d="M630 292 L610 262" color={C.steel} dash="3 5" />
         <rect x="440" y="200" width="168" height="62" rx="14" fill="url(#fa-topOn)" stroke={C.clear} strokeWidth="1.6" />
-        <circle cx="580" cy="231" r="13" fill="#fff" stroke={C.steel} strokeWidth="1.6" />
-        <path d="M573 231 L578 236 L587 226" fill="none" stroke={C.steel} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+        <circle cx="580" cy="231" r="13" fill="#0E2229" stroke={C.steel} strokeWidth="1.6" />
+        <path d="M573 231 L578 236 L587 226" fill="none" stroke="#E7ECEC" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
         {/* smart glasses above */}
         <g transform="translate(670 92)" fill="url(#fa-top)" stroke={C.glacial} strokeWidth="2" strokeLinejoin="round">
           <path d="M-96 -10 H-14 Q-10 22 -40 26 H-70 Q-96 24 -96 -10 Z" />
@@ -218,7 +218,7 @@ function fieldAct() {
       { t: 'Check coupling', x: 420, y: 550, k: 'tag', n: 2 },
       { t: 'Read the gauge', x: 670, y: 460, k: 'tag', n: 3 },
       { t: 'Complete the checklist', x: 920, y: 370, k: 'tag', n: 4 },
-      { t: '4.2 bar', x: 508, y: 231, k: 'value' },
+      { t: '4.2 bar', x: 508, y: 231, k: 'value', on: true },
       { t: 'Shift record', x: 1080, y: 272, k: 'tag' },
     ],
   };
@@ -271,7 +271,7 @@ function shiftMemory() {
 
 /* Small factory outline and status ring used by Stewardship */
 const Factory = ({ x, y }) => (
-  <g transform={`translate(${x - 26} ${y - 46})`} fill="url(#st-top)" stroke={C.glacial} strokeWidth="1.8" strokeLinejoin="round">
+  <g transform={`translate(${x - 26} ${y - 46})`} fill="url(#st-top)" stroke="#D1D9D6" strokeWidth="1.6" strokeLinejoin="round">
     <path d="M0 46 V20 L14 28 V20 L28 28 V20 L40 28 V4 H50 V46 Z" />
     <path d="M8 36 H14 M22 36 H28 M34 36 H40" fill="none" />
   </g>
@@ -292,7 +292,7 @@ function stewardship() {
   const dots = [];
   for (let i = 0; i < WORLD_DOTS.length; i += 4) {
     const x = WORLD_DOTS[i] / 1000; const y = WORLD_DOTS[i + 1] / 1000;
-    dots.push(<circle key={i} cx={60 + x * 1180} cy={130 + y * 400} r="2.4" fill={C.waterlight} opacity="0.32" />);
+    dots.push(<circle key={i} cx={60 + x * 1180} cy={130 + y * 400} r="2.4" fill={C.waterlight} opacity="0.16" />);
   }
   return {
     vb: [W, 640],
@@ -303,7 +303,7 @@ function stewardship() {
         {F.map((x, i) => <Dash key={i} d={`M650 214 C 650 300, ${x} 300, ${x} 392`} color={i === 3 ? C.glacial : C.line} flow={i === 2} />)}
         <Tile P={P} id={id} ox={ox} oy={oy} X={650} Y={160} w={150} h={20} on />
         {/* a shopping bag: the brand */}
-        <g transform="translate(626 104)" fill="url(#st-top)" stroke={C.glacial} strokeWidth="2.2" strokeLinejoin="round" strokeLinecap="round">
+        <g transform="translate(626 104)" fill="url(#st-top)" stroke="#D1D9D6" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round">
           <path d="M4 18 H44 L41 52 H7 Z" /><path d="M15 18 V12 A9 9 0 0 1 33 12 V18" fill="none" />
         </g>
         {F.map((x, i) => (
@@ -313,7 +313,7 @@ function stewardship() {
             <Ring x={x + 62} y={474} v={v[i]} alert={i === 3} />
             {i === 2
               ? <g transform={`translate(${x} 420)`} fill="none" stroke={C.steel} strokeWidth="2" strokeLinecap="round"><path d="M-14 -4 A14 14 0 0 1 12 -8 M14 4 A14 14 0 0 1 -12 8" /><path d="M8 -14 L12 -8 L5 -5 M-8 14 L-12 8 L-5 5" /></g>
-              : <Glyph name="drop" x={x} y={438} size={30} color={C.steel} />}
+              : <Glyph name="drop" x={x} y={438} size={30} />}
           </g>
         ))}
       </>
@@ -322,7 +322,7 @@ function stewardship() {
       { t: 'Brand', x: 650, y: 248, k: 'tag' },
       ...['Supplier A', 'Supplier B', 'Supplier C', 'Supplier D', 'Supplier E'].map((t, i) => ({ t, x: F[i], y: 604, k: 'tag' })),
       { t: 'Water reuse', x: 650, y: 380, k: 'small' },
-      { t: 'Needs attention', x: 952, y: 440, k: 'small' },
+      { t: 'Needs attention', x: 952, y: 418, k: 'small' },
     ],
   };
 }
@@ -345,7 +345,7 @@ function portfolio() {
       <>
         <Defs id={id} />
         <Mist id={id} cx={cx} cy={cy} rx={560} ry={330} />
-        {dots.map(([x, y], i) => <circle key={i} cx={x} cy={y} r="2.6" fill={C.waterlight} opacity="0.5" />)}
+        {dots.map(([x, y], i) => <circle key={i} cx={x} cy={y} r="2.6" fill={C.waterlight} opacity="0.28" />)}
         {sites.map(([x, y], i) => <path key={`a${i}`} d={`M${cx} ${cy} Q ${(cx + x) / 2} ${Math.min(cy, y) - 70} ${x} ${y}`} fill="none" stroke={flag.includes(i) ? C.steel : C.line} strokeWidth="1" strokeDasharray="3 6" opacity={flag.includes(i) ? 0.9 : 0.55} />)}
         {sites.map(([x, y], i) => (flag.includes(i)
           ? <g key={i}><IsoRing cx={x} cy={y} r={18} fill="none" stroke={C.steel} strokeWidth="1.4" /><line x1={x} y1={y} x2={x} y2={y - 52} stroke={C.steel} strokeWidth="2" /><Node id={id} x={x} y={y - 56} r={7} on /></g>
@@ -360,9 +360,9 @@ function portfolio() {
     ),
     labels: [
       ...flag.map((s, i) => ({ t: `Site ${s}`, x: sites[s][0], y: sites[s][1] - 86, k: 'tag', n: i })),
-      { t: 'Invest first', x: 1185, y: 186, k: 'small' },
-      { t: 'Value of acting', x: 1022, y: 168, k: 'axis' },
-      { t: 'Operational risk', x: 1138, y: 256, k: 'small' },
+      { t: 'Invest first', x: 1185, y: 186, k: 'small', on: true },
+      { t: 'Value of acting', x: 1022, y: 168, k: 'axis', on: true },
+      { t: 'Operational risk', x: 1138, y: 256, k: 'small', on: true },
     ],
   };
 }
@@ -386,7 +386,7 @@ function everyDrop() {
         <Defs id={id} />
         <defs>
           <linearGradient id="ed-river" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stopColor={C.waterlight} /><stop offset="1" stopColor={C.steel} /></linearGradient>
-          <radialGradient id="ed-dawn2" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stopColor="#E6F2F3" /><stop offset="1" stopColor="#FFFFFF" stopOpacity="0" /></radialGradient>
+          <radialGradient id="ed-dawn2" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stopColor="#E6ECEC" /><stop offset="1" stopColor="#FFFFFF" stopOpacity="0" /></radialGradient>
           <linearGradient id="ed-fadeG" x1="0" y1="0" x2="1" y2="0"><stop offset="0.36" stopColor="#fff" stopOpacity="0" /><stop offset="0.62" stopColor="#fff" stopOpacity="1" /></linearGradient>
           <mask id="ed-fade"><rect width={W} height={H} fill="url(#ed-fadeG)" /></mask>
         </defs>
@@ -437,7 +437,7 @@ function fiveStepLoop() {
         {pos.map(([X, Y], i) => (
           <g key={i}>
             <Tile P={P} id={id} ox={ox} oy={oy} X={X} Y={Y - 14} w={120} h={16} on={i === 0} />
-            <Glyph name={names[i]} x={X} y={Y - 32} size={50} color={C.glacial} width={1.6} />
+            <Glyph name={names[i]} x={X} y={Y - 32} size={50} width={1.6} />
           </g>
         ))}
       </>
@@ -465,7 +465,7 @@ function onboarding() {
         <g stroke={C.lagoon} strokeWidth="1.6" strokeLinecap="round">{Array.from({ length: 5 }, (_, k) => { const a = (-160 + k * 35) * (Math.PI / 180); return <line key={k} x1={838 + Math.cos(a) * 18} y1={200 + Math.sin(a) * 18} x2={838 + Math.cos(a) * 25} y2={200 + Math.sin(a) * 25} />; })}</g>
         <Tile P={P} id={id} ox={ox} oy={oy} X={1110} Y={150} w={96} h={14} z={0} />
         <Tile P={P} id={id} ox={ox} oy={oy} X={1110} Y={112} w={70} h={12} z={0} on />
-        <Glyph name="plus" x={1110} y={108} size={30} color={C.steel} />
+        <Glyph name="plus" x={1110} y={108} size={30} />
       </>
     ),
     labels: [
@@ -484,7 +484,7 @@ function usIndia() {
   const dots = [];
   for (let i = 0; i < WORLD_DOTS.length; i += 2) {
     const [x, y] = M(WORLD_DOTS[i] / 1000, WORLD_DOTS[i + 1] / 1000);
-    dots.push(<circle key={i} cx={x.toFixed(1)} cy={y.toFixed(1)} r="3.6" fill={C.waterlight} opacity="0.55" />);
+    dots.push(<circle key={i} cx={x.toFixed(1)} cy={y.toFixed(1)} r="3.6" fill={C.waterlight} opacity="0.35" />);
   }
   const a = M(0.1302, 0.2425); const b = M(0.7126, 0.493);
   const arc = `M${a[0]} ${a[1]} Q ${(a[0] + b[0]) / 2} ${y0 - 60} ${b[0]} ${b[1]}`;
