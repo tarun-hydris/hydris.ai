@@ -5,6 +5,7 @@ import { LayerStack } from '../components/sections/Sections.jsx';
 import { Days } from '../components/viz/Days.jsx';
 import { KnowledgeBase } from '../components/viz/KnowledgeBase.jsx';
 import { Arrow, Reveal, SecHead, Words } from '../components/ui/Primitives.jsx';
+import Infographic from '../components/ui/Infographic.jsx';
 import {
   AUDIENCE, CTA, GET_IN, HOME_FAQ, HOW, IMAGERY, IMPL, KNOWLEDGE, MISSING, PLATFORM,
 } from '../lib/content.js';
@@ -50,6 +51,7 @@ export default function Platform() {
 
       <section className="sec alt" id="workflow">
         <SecHead index="02" label={HOW.eyebrow} title={HOW.title} text={HOW.lead} />
+        <div className="pfig grid"><Reveal className="ig-wrap"><Infographic name="five-step-loop" sizes="100vw" /></Reveal></div>
         <RowList rows={HOW.steps.map((s, i) => ({ a: String(i + 1).padStart(2, '0'), title: s.key, role: s.title, text: s.text }))} variant="rows--verb" />
       </section>
 
@@ -122,6 +124,7 @@ export default function Platform() {
 
       <section className="sec alt" id="implementation">
         <SecHead index="11" label={IMPL.eyebrow} title={GET_IN.title} text={GET_IN.lead} />
+        <div className="pfig grid"><Reveal className="ig-wrap"><Infographic name="onboarding-timeline" sizes="100vw" /></Reveal></div>
         <Assurances items={GET_IN.items} />
         <div className="wide"><Timeline steps={IMPL.steps} /><Oneline parts={IMPL.close} /></div>
       </section>

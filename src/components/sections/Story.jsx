@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Icon, { Arrow } from '../ui/Icon.jsx';
 import { FilmButton } from '../ui/Film.jsx';
+import Infographic from '../ui/Infographic.jsx';
 import { Reveal, Words } from '../ui/Primitives.jsx';
 import { CTA, STORY } from '../../lib/content.js';
 import { useMotionOff } from '../../lib/hooks.js';
@@ -136,6 +137,7 @@ export function Hydris({ index = '03' }) {
         <Label index={index}>{H.label}</Label>
         <Words as="h2" text={H.title} className="t-l hyd__title" />
         <Reveal as="p" className="lead hyd__lead" delay={0.15}>{H.lead}</Reveal>
+        <Reveal className="hyd__fig" delay={0.1}><Infographic name="venn-hydris" sizes="(min-width: 901px) 32vw, 90vw" /></Reveal>
       </div>
       <ol className="hyd__steps grid">
         {H.steps.map((s, i) => (
@@ -161,8 +163,8 @@ function ProductRow({ p, i, caption, tryLabel, moreLabel }) {
   return (
     <article id={p.key} className={`prow grid ${i % 2 ? 'prow--flip' : ''}`} aria-labelledby={`prow-${p.key}`}>
       <Reveal className="prow__media">
-        <div className="prow__frame">
-          <Still name={p.still} alt={p.alt} />
+        <div className="prow__frame prow__frame--ig">
+          <Infographic name={p.ig} bare />
         </div>
         <p className="s-label prow__cap">{caption}</p>
       </Reveal>
@@ -243,7 +245,7 @@ export function Memory({ index = '05' }) {
           <Reveal as="p" className="body mute mem__body" delay={0.2}>{M.text}</Reveal>
         </div>
         <Reveal className="mem__media" delay={0.1}>
-          <div className="mem__frame"><Still name="handover" alt="One operator hands a plant logbook to the next at shift change" sizes="(min-width: 901px) 45vw, 100vw" /></div>
+          <div className="mem__frame"><Infographic name="shift-memory" bare sizes="(min-width: 901px) 45vw, 100vw" /></div>
         </Reveal>
       </div>
 
@@ -279,7 +281,7 @@ export function Beyond({ index = '06' }) {
       <div className="beyond__cards grid">
         {B.items.map((c, i) => (
           <Reveal as="article" key={c.name} className="bcard" delay={i * 0.12}>
-            <div className="bcard__frame"><Still name={c.still} alt={c.alt} sizes="(min-width: 901px) 46vw, 100vw" /></div>
+            <div className="bcard__frame"><Infographic name={c.ig} bare sizes="(min-width: 901px) 46vw, 100vw" /></div>
             <h3 className="t-s bcard__name">{c.name}</h3>
             <p className="body bcard__text">{c.text}</p>
             <ul className="bcard__points">{c.points.map((t) => <li key={t}>{t}</li>)}</ul>
@@ -298,7 +300,7 @@ export function Close() {
   const C = STORY.close;
   return (
     <section className="close" data-tone="dark" aria-label={C.label}>
-      <div className="close__bg" aria-hidden="true"><Still name="river" sizes="100vw" /></div>
+      <div className="close__bg" aria-hidden="true"><img className="still" src="/ig/every-drop-1600.webp" srcSet="/ig/every-drop-900.webp 900w, /ig/every-drop-1600.webp 1600w" sizes="100vw" alt="" loading="lazy" decoding="async" /></div>
       <div className="close__shade" aria-hidden="true" />
       <div className="close__inner grid">
         <Reveal as="p" className="s-label close__label">{C.label}</Reveal>

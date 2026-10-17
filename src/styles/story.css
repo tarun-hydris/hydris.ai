@@ -258,3 +258,56 @@ html.motion-off .hyd__step::before { transform: scaleX(1); transition: none; }
 html.motion-off .mem__line i { transform: none; }
 html.motion-off .demo__stage, html.motion-off .film[open] { animation: none; }
 html.motion-off .demo__wait { animation: none; }
+
+/* ==========================================================================
+   Infographics: dark glass illustrations with their labels set as real text.
+   Wide: labels sit on the plates. Narrow: numbered dots on the image, a key below.
+   ========================================================================== */
+.ig { margin: 0; container-type: inline-size; }
+.ig__frame { position: relative; overflow: hidden; border-radius: 16px; background: #0b1a20; box-shadow: 0 50px 90px -60px rgba(7, 22, 27, 0.55); }
+.ig--bare .ig__frame { border-radius: 0; box-shadow: none; background: transparent; }
+.ig__img { display: block; width: 100%; height: auto; }
+.ig__labels { position: absolute; inset: 0; pointer-events: none; }
+.ig__l { position: absolute; transform: translate(-50%, -50%); color: #eaf3f4; font-size: clamp(10px, 1.45cqw, 15px); line-height: 1.2; letter-spacing: -0.005em; white-space: nowrap; opacity: 0; transition: opacity 0.6s var(--ease), transform 0.7s var(--ease); transition-delay: calc(0.35s + var(--i) * 0.08s); }
+.ig__l--plate { width: var(--w); text-align: center; white-space: normal; }
+.ig__l--tag { padding: 5px 10px; border-radius: 999px; background: rgba(7, 22, 27, 0.62); border: 1px solid rgba(200, 230, 233, 0.22); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.ig__l.is-strong { font-weight: 500; color: #fff; }
+.ig__l.is-q { text-align: left; font-family: var(--serif); font-size: clamp(11px, 1.6cqw, 17px); }
+.ig__n { display: none; }
+.reveal.is-in .ig__l, .ig.is-in .ig__l, .is-in .ig__l { opacity: 1; }
+.ig__cap { margin-top: 12px; }
+.ig__key { display: none; }
+.ig__note { font-size: 13px; color: var(--mute); }
+
+@container (max-width: 460px) {
+  .ig__l { font-size: 0; padding: 0; width: auto; border: 0; background: none; }
+  .ig__n { display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: rgba(7, 22, 27, 0.72); border: 1px solid rgba(200, 230, 233, 0.4); color: #fff; font-size: 11px; }
+}
+@container (max-width: 460px) {
+  .ig__key { display: grid; gap: 6px; margin-bottom: 8px; font-size: 14px; }
+  .ig__key li { display: grid; grid-template-columns: 24px 1fr; align-items: baseline; }
+  .ig__key span { color: var(--mute); font-size: 12px; }
+}
+html.motion-off .ig__l { opacity: 1; transition: none; }
+
+/* Act III: the overlap diagram beside the title */
+.hyd__fig { grid-column: 9 / span 4; grid-row: 1 / span 3; align-self: start; }
+.hyd__head:has(.hyd__fig) .hyd__title { grid-column: 4 / span 5; }
+.hyd__head:has(.hyd__fig) .hyd__lead { grid-column: 4 / span 5; }
+/* Platform: a figure above the rows or the timeline */
+.pfig { margin-top: clamp(48px, 6vw, 90px); }
+.pfig .ig { grid-column: 1 / -1; }
+.team__fig { grid-column: 1 / -1; margin-top: clamp(40px, 5vw, 70px); }
+@media (max-width: 900px) {
+  .hyd__fig, .hyd__head:has(.hyd__fig) .hyd__title, .hyd__head:has(.hyd__fig) .hyd__lead { grid-column: 1 / -1; grid-row: auto; }
+  .hyd__fig { max-width: 440px; }
+}
+.ig-wrap { grid-column: 1 / -1; }
+.prow__frame--ig, .bcard__frame:has(.ig) { background: #0b1a20; }
+.bcard__frame:has(.ig) { aspect-ratio: auto; }
+.mem__frame .ig__frame, .prow__frame .ig__frame, .bcard__frame .ig__frame { border-radius: 0; }
+.prow__frame .ig__cap, .mem__frame .ig__cap, .bcard__frame .ig__cap { margin: 0; padding: 0 14px; background: #fff; }
+.prow__frame .ig__cap:has(.ig__key) { padding: 12px 14px 4px; }
+.ig--bare .ig__cap { display: none; }
+@container (max-width: 460px) { .ig--bare .ig__cap { display: block; } }
+@container (max-width: 460px) { .ig__l.is-q, .ig__l.is-strong { font-size: 0; } }

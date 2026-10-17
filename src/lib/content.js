@@ -372,12 +372,12 @@ export const STORY = {
   products: {
     label: 'Three products, one workflow',
     title: 'See. Understand. Act.',
-    caption: 'From the Hydris platform film. Sample data.',
+    caption: 'Illustration of the workflow. Not plant data.',
     tryLabel: 'Try the demo',
     moreLabel: 'How it works',
     items: [
       {
-        key: 'lite', name: 'Hydris Lite', verb: 'See', still: 'lite',
+        key: 'lite', name: 'Hydris Lite', verb: 'See', still: 'lite', ig: 'lite-see',
         alt: 'The Hydris Lite dashboard with plant health, stability, compliance readiness and data confidence scores, marked as sample data',
         title: 'See how your plant is running today.',
         text: 'Lite brings readings, lab results and operating records into one view, so a team can move from separate signals to a shared picture of the plant.',
@@ -385,7 +385,7 @@ export const STORY = {
         note: 'Scores are a guide for the team, not a compliance guarantee.',
       },
       {
-        key: 'pulse', name: 'Hydris Pulse', verb: 'Understand', still: 'pulse',
+        key: 'pulse', name: 'Hydris Pulse', verb: 'Understand', still: 'pulse', ig: 'pulse-understand',
         alt: 'An operator asks Hydris Pulse why suspended solids are drifting in the plant effluent; Pulse shows the most likely cause with the sensor trend, plant procedure and shift log it used',
         title: 'Move from seeing a change to understanding what may be causing it.',
         text: 'Ask in plain words, for example why suspended solids are drifting in the effluent. Pulse brings plant context, operating history and the available evidence together, ranks the possible causes and shows what each one rests on.',
@@ -393,12 +393,12 @@ export const STORY = {
         note: 'Decision support, not a diagnosis. Your team verifies before acting.',
       },
       {
-        key: 'field', name: 'Hydris Field', verb: 'Act', still: 'field',
+        key: 'field', name: 'Hydris Field', verb: 'Act', still: 'field', ig: 'field-act',
         alt: 'The Hydris Field view in smart glasses: a pressure gauge reading of 4.2 bar is captured and added to the shift record',
         title: 'Bring guidance from the control room to the plant floor.',
         text: 'Field puts the next step in front of the operator on the round: equipment context, guided inspection steps and readings captured as they are taken.',
         points: ['Guided inspection steps', 'Equipment-specific context', 'Readings recorded for the next shift'],
-        note: 'The glasses view is from the film. The demo shows the Field app on a phone.',
+        note: 'The glasses are shown as a concept. The demo shows the Field app on a phone.',
       },
     ],
   },
@@ -422,13 +422,13 @@ export const STORY = {
     lead: 'The same understanding can support decisions made above a single plant.',
     items: [
       {
-        name: 'Hydris Stewardship', still: 'stewardship',
+        name: 'Hydris Stewardship', still: 'stewardship', ig: 'stewardship',
         alt: 'A brand manager reviews supplier water performance on a tablet beside a bottling line',
         text: 'For brands: how water is managed in the factories that make their products.',
         points: ['Factory-level water visibility', 'Evidence for stewardship decisions', 'Water reuse'],
       },
       {
-        name: 'Hydris Portfolio', still: 'portfolio',
+        name: 'Hydris Portfolio', still: 'portfolio', ig: 'portfolio',
         alt: 'Two executives study a map of many sites with risk markers on a large screen',
         text: 'For companies with many sites: where the risk is, and where to invest first.',
         points: ['Oversight across sites', 'Comparative operational risk', 'Where attention and investment matter most'],

@@ -5,6 +5,7 @@ import { Band } from '../components/sections/Imagery.jsx';
 import FounderPortrait from '../components/ui/FounderPortrait.jsx';
 import { Frame } from '../components/ui/Photo.jsx';
 import { Reveal, SecHead, Words } from '../components/ui/Primitives.jsx';
+import Infographic from '../components/ui/Infographic.jsx';
 import { ABOUT, IMAGERY } from '../lib/content.js';
 
 /* The company, told as one editorial story: the problem, why Vetri started Hydris, what is being
@@ -92,6 +93,7 @@ export default function About() {
             <span className="chip">United States</span>
             <span className="chip">India</span>
           </Reveal>
+          <Reveal className="team__fig" delay={0.1}><Infographic name="us-india" sizes="100vw" /></Reveal>
         </div>
       </section>
 
