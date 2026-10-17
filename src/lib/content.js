@@ -650,7 +650,7 @@ export const CONTACT = {
   ],
   details: [
     { h: 'Headquarters', lines: ['Hydris, Inc.', 'Portland, Oregon', 'United States'] },
-    { h: 'Operations', lines: ['Puducherry, India'], mail: EMAIL_OPS },
+    { h: 'Operations', lines: ['Chennai, India'], mail: EMAIL_OPS },
     { h: 'Telephone', lines: [PHONE] },
     { h: 'Data and security questions', lines: ['Industrial IT teams ask early. Write to us and you get a straight answer about what is true today rather than a brochure.'] },
   ],

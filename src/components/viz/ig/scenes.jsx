@@ -532,7 +532,7 @@ function onboarding() {
   };
 }
 
-/* ---------------------------------------------------------------- About: Portland to Puducherry */
+/* ---------------------------------------------------------------- About: Portland to Chennai */
 function usIndia() {
   const id = 'ui'; const W = 1400; const x0 = 40; const w = 1320; const y0 = 30; const h = (w * 134) / 348;
   const M = (u, v) => [x0 + u * w, y0 + v * h];
@@ -541,7 +541,7 @@ function usIndia() {
     const [x, y] = M(WORLD_DOTS[i] / 1000, WORLD_DOTS[i + 1] / 1000);
     dots.push(<circle key={i} cx={x.toFixed(1)} cy={y.toFixed(1)} r="3.6" fill={C.mist} opacity="0.85" />);
   }
-  const a = M(0.1302, 0.2425); const b = M(0.7126, 0.493);
+  const a = M(0.1302, 0.2425); const b = M(0.7114, 0.4845); // Chennai, 80.27 E, 13.08 N (nudged onto the coast dots)
   const arc = `M${a[0]} ${a[1]} Q ${(a[0] + b[0]) / 2} ${y0 - 60} ${b[0]} ${b[1]}`;
   return {
     vb: [W, Math.round(y0 * 2 + h)],
@@ -558,7 +558,7 @@ function usIndia() {
     ),
     labels: [
       { t: 'Portland, Oregon', x: a[0], y: a[1] + 46, k: 'tag' },
-      { t: 'Puducherry, India', x: b[0], y: b[1] + 46, k: 'tag' },
+      { t: 'Chennai, India', x: b[0], y: b[1] + 46, k: 'tag' },
     ],
   };
 }
@@ -574,5 +574,5 @@ export const SCENES = {
   'every-drop': { make: everyDrop, alt: '' },
   'five-step-loop': { make: fiveStepLoop, alt: 'Diagram: five steps on one loop: data, understand, reason, act and learn' },
   'onboarding-timeline': { make: onboarding, alt: 'Diagram: four rising steps: send your exports in week one, configure with your team in weeks two to three, go live with a daily read, then add Pulse and Field' },
-  'us-india': { make: usIndia, alt: 'Map: a line joins Portland, Oregon to Puducherry, India' },
+  'us-india': { make: usIndia, alt: 'Map: a line joins Portland, Oregon to Chennai, India' },
 };
