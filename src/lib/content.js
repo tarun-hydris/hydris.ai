@@ -269,7 +269,7 @@ export const START = {
 export const OPENING = {
   label: 'The intelligence layer for water',
   title: 'Every drop depends on what we know.',
-  sub: 'Hydris brings plant data, water science and the experience of your team together, so the people who run water systems can see what is changing and decide what to check next.',
+  sub: 'Hydris combines scientific principles, operational data and human reasoning, so the people who run water systems can see what is changing and decide what to check next.',
   explore: 'Explore Hydris',
   exploreHref: '#knowledge',
   scroll: 'Scroll',
@@ -361,7 +361,7 @@ export const STORY = {
   },
   hydris: {
     label: 'Hydris',
-    title: 'Plant data, water science and your team\u2019s experience, in one place.',
+    title: 'Scientific principles, operational data and human reasoning, in one place.',
     lead: 'Hydris is an operational water intelligence platform. It supports the people who run the plant. It does not replace them.',
     steps: [
       { verb: 'See', what: 'what is happening', product: 'Hydris Lite', href: '#lite' },

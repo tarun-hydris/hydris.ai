@@ -9,8 +9,8 @@ import Infographic from '../components/ui/Infographic.jsx';
 import { ABOUT, IMAGERY } from '../lib/content.js';
 
 /* The company, told as one editorial story: the problem, why Vetri started Hydris, what is being
-   protected, how the team works. The founder's portrait is a short sequence of photographs that plays as
-   the cursor comes near; no team photograph has been supplied yet. Nothing here is invented. */
+   protected, how the team works. The founder's portrait is a still photograph;
+   no team photograph has been supplied yet. Nothing here is invented. */
 export default function About() {
   const A = ABOUT;
   return (

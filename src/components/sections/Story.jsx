@@ -127,7 +127,7 @@ export function Knowledge({ index = '02' }) {
 }
 
 /* ------------------------------------------------------------------------------------------------
-   Act III. Hydris: plant data, water science and team experience, in one place. See, understand, act.
+   Act III. Hydris: scientific principles, operational data and human reasoning, in one place. See, understand, act.
    ------------------------------------------------------------------------------------------------ */
 export function Hydris({ index = '03' }) {
   const H = STORY.hydris;

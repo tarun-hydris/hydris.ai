@@ -53,9 +53,9 @@ function venn() {
       </>
     ),
     labels: [
-      { t: 'Plant data', x: 500, y: 196, k: 'plain' },
-      { t: 'Water science', x: 296, y: 604, k: 'plain' },
-      { t: 'Team experience', x: 704, y: 604, k: 'plain' },
+      { t: 'Scientific principles', x: 500, y: 196, k: 'plain' },
+      { t: 'Operational data', x: 296, y: 604, k: 'plain' },
+      { t: 'Human reasoning', x: 704, y: 604, k: 'plain' },
       { t: 'Hydris', x: 500, y: 456, k: 'strong', on: true },
     ],
   };
@@ -564,7 +564,7 @@ function usIndia() {
 }
 
 export const SCENES = {
-  'venn-hydris': { make: venn, alt: 'Diagram: plant data, water science and team experience overlap, and Hydris sits where all three meet' },
+  'venn-hydris': { make: venn, alt: 'Diagram: scientific principles, operational data and human reasoning overlap, and Hydris sits where all three meet' },
   'lite-see': { make: liteSee, alt: 'Diagram: four layers, from every reading the plant collects, to readings in context, to what needs attention, to a few clear scores' },
   'pulse-understand': { make: pulseUnderstand, alt: 'Diagram: an alert about drifting suspended solids starts a guided investigation: three ranked hypotheses, each with its evidence and confidence, lead to the next check, and the operator decides' },
   'field-act': { make: fieldAct, alt: 'Diagram: a guided round seen through smart glasses: Pump P-2, a coupling check, a gauge reading of 4.2 bar captured hands free, a checklist and the shift record' },

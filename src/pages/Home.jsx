@@ -5,7 +5,7 @@ import { IMAGERY } from '../lib/content.js';
 /* The Home story follows the Hydris platform film, one question at a time:
    I    why water matters (the mark filled with water, then the plant from above)
    II   why the problem is knowledge as much as water
-   III  what Hydris is: plant data, water science and team experience, in one place
+   III  what Hydris is: scientific principles, operational data and human reasoning, in one place
    IV   the three products, See, Understand, Act, each with a live demo
    V    the knowledge a plant keeps from one shift to the next
    VI   the reach beyond one plant: Stewardship and Portfolio
