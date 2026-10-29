@@ -532,7 +532,7 @@ function onboarding() {
   };
 }
 
-/* ---------------------------------------------------------------- About: Portland to Chennai */
+/* ---------------------------------------------------------------- About: Portland, Amsterdam, Chennai */
 function usIndia() {
   const id = 'ui'; const W = 1400; const x0 = 40; const w = 1320; const y0 = 30; const h = (w * 134) / 348;
   const M = (u, v) => [x0 + u * w, y0 + v * h];
@@ -542,22 +542,30 @@ function usIndia() {
     dots.push(<circle key={i} cx={x.toFixed(1)} cy={y.toFixed(1)} r="3.6" fill={C.mist} opacity="0.85" />);
   }
   const a = M(0.1302, 0.2425); const b = M(0.7114, 0.4845); // Chennai, 80.27 E, 13.08 N (nudged onto the coast dots)
-  const arc = `M${a[0]} ${a[1]} Q ${(a[0] + b[0]) / 2} ${y0 - 60} ${b[0]} ${b[1]}`;
+  const m = M(0.4956, 0.1914); // Amsterdam, 4.90 E, 52.37 N
+  const bow = (p, q, lift) => `M${p[0]} ${p[1]} Q ${(p[0] + q[0]) / 2} ${Math.min(p[1], q[1]) - lift} ${q[0]} ${q[1]}`;
+  const arcs = [bow(a, m, 90), bow(m, b, 70)];
   return {
     vb: [W, Math.round(y0 * 2 + h)],
     svg: (
       <>
         <Defs id={id} />
         {dots}
-        <path d={arc} fill="none" stroke={C.silver} strokeWidth="6" opacity="0.2" />
-        <path d={arc} fill="none" stroke={C.slate} strokeWidth="1.8" strokeDasharray="6 8" className="igv-flow" />
-        <Traveller d={arc} dur={6} r={5} />
+        {arcs.map((d, i) => (
+          <g key={i}>
+            <path d={d} fill="none" stroke={C.silver} strokeWidth="6" opacity="0.2" />
+            <path d={d} fill="none" stroke={C.slate} strokeWidth="1.8" strokeDasharray="6 8" className="igv-flow" />
+            <Traveller d={d} dur={5} delay={-i * 2.5} r={5} />
+          </g>
+        ))}
         <Node id={id} x={a[0]} y={a[1]} r={10} on />
+        <Node id={id} x={m[0]} y={m[1]} r={10} on />
         <Node id={id} x={b[0]} y={b[1]} r={10} on />
       </>
     ),
     labels: [
       { t: 'Portland, Oregon', x: a[0], y: a[1] + 46, k: 'tag' },
+      { t: 'Amsterdam, Netherlands', x: m[0], y: m[1] - 40, k: 'tag' },
       { t: 'Chennai, India', x: b[0], y: b[1] + 46, k: 'tag' },
     ],
   };
@@ -574,5 +582,5 @@ export const SCENES = {
   'every-drop': { make: everyDrop, alt: '' },
   'five-step-loop': { make: fiveStepLoop, alt: 'Diagram: five steps on one loop: data, understand, reason, act and learn' },
   'onboarding-timeline': { make: onboarding, alt: 'Diagram: four rising steps: send your exports in week one, configure with your team in weeks two to three, go live with a daily read, then add Pulse and Field' },
-  'us-india': { make: usIndia, alt: 'Map: a line joins Portland, Oregon to Chennai, India' },
+  'us-india': { make: usIndia, alt: 'Map: lines join Portland, Oregon, Amsterdam, Netherlands and Chennai, India' },
 };

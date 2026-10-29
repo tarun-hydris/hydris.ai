@@ -610,7 +610,7 @@ export const ABOUT = {
   team: {
     eyebrow: 'The team',
     title: 'Water engineers, process specialists and software people.',
-    text: 'Hydris is built by water engineers, process specialists and software people working together, across the United States and India. The curated expert knowledge base the platform runs on is built by that team, not scraped from the internet.',
+    text: 'Hydris is built by water engineers, process specialists and software people working together, across the United States, the Netherlands and India. The curated expert knowledge base the platform runs on is built by that team, not scraped from the internet.',
   },
 };
 

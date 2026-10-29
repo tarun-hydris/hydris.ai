@@ -91,6 +91,7 @@ export default function About() {
           <Reveal as="p" className="lead story__lede" delay={0.05}>{A.team.text}</Reveal>
           <Reveal className="team__places" delay={0.15}>
             <span className="chip">United States</span>
+            <span className="chip">Netherlands</span>
             <span className="chip">India</span>
           </Reveal>
           <Reveal className="team__fig" delay={0.1}><Infographic name="us-india" /></Reveal>
