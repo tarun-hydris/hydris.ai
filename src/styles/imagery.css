@@ -25,17 +25,17 @@
 .frame__cap span { color: var(--ink); }
 
 /* ---------- Band: a wide photograph that opens to the page edge ---------- */
-.band { position: relative; padding-bottom: clamp(70px, 9vw, 130px); }
+.band { position: relative; padding-bottom: clamp(49px, 5.6vw, 78px); }
 .band__wrap { will-change: clip-path; }
 .band__cap { margin-top: 18px; row-gap: 10px; align-items: baseline; }
 .band__label { grid-column: 1 / span 3; color: var(--mute); }
 .band__text { grid-column: 5 / span 7; max-width: 720px; }
 
 /* ---------- Mosaic: three photographs at different sizes ---------- */
-.mosaic { margin-top: clamp(60px, 8vw, 120px); row-gap: 40px; align-items: start; }
-.mosaic__cell--1 { grid-column: 1 / span 5; margin-top: clamp(40px, 6vw, 100px); }
+.mosaic { margin-top: clamp(42px, 5vw, 72px); row-gap: 40px; align-items: start; }
+.mosaic__cell--1 { grid-column: 1 / span 5; margin-top: clamp(36px, 3.7vw, 60px); }
 .mosaic__cell--2 { grid-column: 7 / span 3; }
-.mosaic__cell--3 { grid-column: 10 / span 3; margin-top: clamp(80px, 14vw, 220px); }
+.mosaic__cell--3 { grid-column: 10 / span 3; margin-top: clamp(56px, 8.7vw, 132px); }
 
 /* ---------- Placement inside About ---------- */
 .protect__photo { grid-column: 1 / span 3; grid-row: 1 / span 2; align-self: start; }
