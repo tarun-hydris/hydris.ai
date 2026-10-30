@@ -9,6 +9,7 @@ import { CTA, DEMO } from '../lib/content.js';
    its tab is opened and keeps its state when you switch away. Each demo reports its height so the
    frame fits it without an inner scrollbar. The tabs follow the WAI-ARIA tabs pattern. */
 const keyFromHash = () => {
+  if (typeof window === 'undefined') return 0;
   const h = window.location.hash.replace('#', '');
   const i = DEMO.items.findIndex((d) => d.key === h);
   return i < 0 ? 0 : i;

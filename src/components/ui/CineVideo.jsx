@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { saveData, useMotionOff } from '../../lib/hooks.js';
 
 /* One film, three encodes. The smallest suits phones and touch screens; larger screens take AV1 where
@@ -18,13 +18,15 @@ export default function CineVideo({ className = '', priority = false, poster = P
   const ref = useRef(null);
   const off = useMotionOff();
   const [failed, setFailed] = useState(false);
-  const src = useMemo(pickSource, []);
+  // The encode depends on the screen, so it is chosen in the browser; the pre-rendered page shows the poster
+  const [src, setSrc] = useState(null);
+  useEffect(() => { setSrc(pickSource()); }, []);
   const still = off || saveData || failed;
 
   /* Play only while the element is on screen and the tab is visible; pause the moment either stops */
   useEffect(() => {
     const v = ref.current;
-    if (!v || still) return undefined;
+    if (!v || still || !src) return undefined;
     let onScreen = false;
     let tabVisible = document.visibilityState === 'visible';
     const sync = () => {
@@ -41,7 +43,7 @@ export default function CineVideo({ className = '', priority = false, poster = P
   if (still) return <img className={`cine cine--still ${className}`} src={poster} alt="" width="1920" height="1080" decoding="async" fetchPriority={priority ? 'high' : undefined} />;
   return (
     <video
-      ref={ref} className={`cine ${className}`} src={src} poster={poster} muted loop playsInline
+      ref={ref} className={`cine ${className}`} src={src || undefined} poster={poster} muted loop playsInline
       preload={priority ? 'auto' : 'metadata'} disablePictureInPicture aria-hidden="true" tabIndex={-1}
       onError={() => setFailed(true)}
     />

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Mark, Wordmark } from '../ui/Brand.jsx';
 import { Arrow } from '../ui/Icon.jsx';
 import { FilmDialog } from '../ui/Film.jsx';
+import Chat from '../ui/Chat.jsx';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import { CTA, EMAIL, FOOTER, NAV, PHONE } from '../../lib/content.js';
@@ -164,6 +165,7 @@ export function Site({ page, children }) {
       <main id="main">{children}</main>
       <Footer />
       <FilmDialog />
+      <Chat />
       <Analytics />
       <SpeedInsights />
     </>

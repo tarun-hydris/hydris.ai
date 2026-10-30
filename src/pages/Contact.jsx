@@ -49,7 +49,7 @@ function ContactForm() {
 
   const draft = () => {
     const subject = SUBJECT[v.topic](v.org);
-    const body = [`Name: ${v.name}`, `Email: ${v.email}`, v.org && `Company: ${v.org}`, v.industry && `Industry: ${v.industry}`, '', v.message]
+    const body = [`Name: ${v.name}`, `Email: ${v.email}`, v.org && `Company: ${v.org}`, v.industry && `Sector: ${v.industry}`, '', v.message]
       .filter((l) => l !== false && l !== undefined && l !== null).join('\n');
     return { subject, body };
   };
@@ -112,9 +112,9 @@ function ContactForm() {
         <Field id={`${uid}-org`} label="Company" optional>
           <input id={`${uid}-org`} name="org" autoComplete="organization" value={v.org} onChange={set('org')} />
         </Field>
-        <Field id={`${uid}-industry`} label="Industry" optional>
+        <Field id={`${uid}-industry`} label="Sector" optional>
           <select id={`${uid}-industry`} name="industry" value={v.industry} onChange={set('industry')}>
-            <option value="">Select an industry</option>
+            <option value="">Select a sector</option>
             {FACILITIES.map((f) => <option key={f}>{f}</option>)}
           </select>
         </Field>

@@ -19,6 +19,8 @@ export default defineConfig({
     ],
   },
   resolve: { dedupe: ['react', 'react-dom'] },
+  // The pre-render bundle (scripts/prerender.mjs) inlines these: their Node builds are CommonJS
+  ssr: { noExternal: ['gsap', 'lenis', '@vercel/analytics', '@vercel/speed-insights'] },
   preview: { port: 4173 },
   build: {
     rollupOptions: {

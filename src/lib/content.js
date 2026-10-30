@@ -56,7 +56,7 @@ export const SYSTEMS = ['Operators', 'Lab', 'Excel', 'SCADA', 'IoT', 'CMMS', 'ER
 
 export const PROBLEM = {
   eyebrow: 'The problem',
-  title: 'Industrial water got digitised. It did not get intelligent.',
+  title: 'Water got digitised. It did not get intelligent.',
   lede: 'Your plant has more data than ever. None of it tells an operator at two in the morning why the plant is behaving this way, or what to do about it.',
   points: [
     { title: 'The operators are skilled. The system is blind.', text: 'The tools watch single numbers against single limits. Every reading can sit inside its limit while the plant quietly drifts somewhere it should not go.' },
@@ -151,9 +151,9 @@ export const IMPL = {
 export const PROOF = {
   eyebrow: 'Where we are today',
   title: 'Running in operating plants, not in a lab.',
-  lead: 'Live in industrial treatment plants today, on the instrumentation those plants already had. Not one of them bought a sensor to work with us.',
+  lead: 'Live in operating treatment plants today, on the instrumentation those plants already had. Not one of them bought a sensor to work with us.',
   big: 'Millions of litres',
-  unit: 'of industrial water under Hydris management every day',
+  unit: 'of water under Hydris management every day',
   note: 'We are early, and we say so plainly. What we can show you is your own plant\'s data, read back to you, before you commit to anything.',
 };
 
@@ -234,7 +234,7 @@ export const AUDIENCE = {
     { icon: 'bars', title: 'Operations executives', text: 'Compare every site on the same basis and find the ones quietly at risk.' },
   ],
   verticals: ['Food and beverage', 'Textiles', 'Pulp and paper', 'Chemicals'],
-  note: 'Hydris is built for industrial operations, not municipal utility billing. Industrial plants change what they make, and the water system has to follow.',
+  note: 'Hydris is built for the people who run water systems, wherever water is treated, reused or returned. The plant changes, the source changes, the demand changes, and the water system has to follow.',
 };
 
 export const HOME_FAQ = [
@@ -254,7 +254,7 @@ export const HOME_FAQ = [
 
 export const NOTE = {
   title: 'The monthly note',
-  text: 'One email a month on what we are learning about industrial water operations, written for people who run plants. No product news, no sales sequence, unsubscribe in one click.',
+  text: 'One email a month on what we are learning about running water systems, written for people who run plants. No product news, no sales sequence, unsubscribe in one click.',
 };
 
 export const START = {
@@ -485,7 +485,7 @@ export const PLATFORM = {
     term: 'What the AI is for',
     d1: 'Scaling judgement, not replacing it.',
     d2: [
-      'The scarce thing in industrial water is not data and it is not equipment. It is the number of people who can look at a plant and know what it is about to do. Those people are retiring faster than the industry can replace them, and until now nobody could copy what they know.',
+      'The scarce thing in water is not data and it is not equipment. It is the number of people who can look at a plant and know what it is about to do. Those people are retiring faster than the industry can replace them, and until now nobody could copy what they know.',
       'Hydris captures how they reason and applies it to a plant every day. Not a model left to guess from history, and not a chatbot with a manual attached. Structured judgement, running continuously, on your water.',
     ],
   },
@@ -566,7 +566,7 @@ export const PLATFORM = {
 
 export const ABOUT = {
   title: 'We have run the plants we build for.',
-  lead: 'Hydris was founded by people who spent their careers inside industrial water operations, not adjacent to them.',
+  lead: 'Hydris was founded by people who spent their careers inside water operations, not adjacent to them.',
   why: {
     eyebrow: 'Why we built Hydris',
     title: 'Twenty years of walking into plants, and the same thing happening every time.',
@@ -576,15 +576,15 @@ export const ABOUT = {
       'The same expensive mistake would happen twice, three years apart, in the same building. Somebody had solved it the first time. Nobody could find how.',
       'That is the gap Hydris was created to close. Not another way to measure water, and not another dashboard. A way to hold the judgement that runs a plant so it stops leaving through the door every time somebody does.',
     ],
-    quote: '"We did not start Hydris because industrial water needed more measurement. We started it because the industry had run out of the one thing it cannot buy more of: people who know what the numbers mean."',
+    quote: '"We did not start Hydris because water needed more measurement. We started it because the industry had run out of the one thing it cannot buy more of: people who know what the numbers mean."',
     cite: 'Vetri Dhagumudi, Founder and Chief Executive',
   },
   founder: {
     eyebrow: 'Founder',
     title: 'Vetri Dhagumudi, Founder and Chief Executive',
     paras: [
-      'Vetri grew up where water was not a given. Some days it came and some days it did not, and everyone planned their life around which kind of day it was. He has spent the twenty years since making sure industrial plants never have to find out.',
-      'Those twenty years were spent inside industrial water rather than beside it. Engineering and plant operations first, then global responsibility for water strategy across large manufacturing footprints, working on the same problem from the shop floor and from the boardroom. He left that work in June 2026 to build Hydris.',
+      'Vetri grew up where water was not a given. Some days it came and some days it did not, and everyone planned their life around which kind of day it was. He has spent the twenty years since making sure the plants he worked with never had to find out.',
+      'Those twenty years were spent inside water operations rather than beside them. Engineering and plant operations first, then global responsibility for water strategy across large manufacturing footprints, working on the same problem from the shop floor and from the boardroom. He left that work in June 2026 to build Hydris.',
       'What it taught him was narrow and unarguable. Measurement was never the constraint. Every plant he walked into had more data than it could use and fewer people who knew what it meant. Hydris exists to close that gap.',
     ],
     quote: '"The gap is not more data. We already have data. The gap is intelligence."',
@@ -593,7 +593,7 @@ export const ABOUT = {
   protect: {
     eyebrow: 'What we are protecting',
     title: 'A generation of operating knowledge is leaving, and nobody is writing it down.',
-    lede: 'Industrial plants are losing the people who know how they actually work. Not the manuals. The judgement. The pattern that says this drift means something and that one does not.',
+    lede: 'Water systems are losing the people who know how they actually work. Not the manuals. The judgement. The pattern that says this drift means something and that one does not.',
     paras: [
       'Succession planning covers the org chart. It rarely covers the knowledge. A plant can hire a replacement and still lose the thing that made the last operator good.',
       'Hydris captures that expertise and makes it available to whoever is on shift. We are not automating the decision. We are giving a newer operator access to how an experienced one would think.',
@@ -623,10 +623,10 @@ export const PRESS = {
   copyEyebrow: 'Ready-to-use copy',
   copyTitle: 'Boilerplate and bios',
   copy: [
-    { k: 'Company · 25 words', v: 'Hydris builds the intelligence layer for industrial water, combining fragmented plant data with captured operator expertise so teams can diagnose problems and act on them faster.' },
-    { k: 'Company · 50 words', v: 'Hydris builds the intelligence layer for industrial water. Industrial plants hold vast data across SCADA, laboratory systems, spreadsheets and operator logs, alongside decades of expertise that leaves when experienced staff retire. Hydris captures that expertise, applies it to live plant data, and guides operators toward action.' },
-    { k: 'Boilerplate · 100 words', v: 'Hydris, Inc. is building the intelligence layer for industrial water. Industrial plants hold vast operational data across SCADA, laboratory systems, spreadsheets and operator logs, alongside decades of expertise that leaves when experienced staff retire. Hydris captures that expertise, applies it to live plant data, and guides operators toward action. Three products serve the plant floor. Hydris Lite for daily plant intelligence, Hydris Pulse for guided troubleshooting, and Hydris Field for hands-free field operations. Hydris serves food and beverage, textile, pulp and paper and chemical manufacturers. The company was founded in 2025 and is headquartered in Portland, Oregon.' },
-    { k: 'Founder · 75 words', v: 'Vetri Dhagumudi is founder and chief executive of Hydris, which builds the operational intelligence layer for industrial water. He spent nearly two decades in industrial water engineering, plant operations and global water strategy for large manufacturers, working the same problem from the shop floor and from the boardroom. He grew up where water was not a given, which is what pointed him at the industry in the first place. He left that work in June 2026 to build Hydris.' },
+    { k: 'Company · 25 words', v: 'Hydris builds the intelligence layer for water, combining fragmented plant data with captured operator expertise so teams can diagnose problems and act on them faster.' },
+    { k: 'Company · 50 words', v: 'Hydris builds the intelligence layer for water. Water systems hold vast data across SCADA, laboratory systems, spreadsheets and operator logs, alongside decades of expertise that leaves when experienced staff retire. Hydris captures that expertise, applies it to live plant data, and guides operators toward action.' },
+    { k: 'Boilerplate · 100 words', v: 'Hydris, Inc. is building the intelligence layer for water. Water systems hold vast operational data across SCADA, laboratory systems, spreadsheets and operator logs, alongside decades of expertise that leaves when experienced staff retire. Hydris captures that expertise, applies it to live plant data, and guides operators toward action. Three products serve the plant floor. Hydris Lite for daily plant intelligence, Hydris Pulse for guided troubleshooting, and Hydris Field for hands-free field operations. Hydris is built for anyone who runs a water system, starting with treatment plants in food and beverage, textiles, pulp and paper and chemicals. The company was founded in 2025 and is headquartered in Portland, Oregon.' },
+    { k: 'Founder · 75 words', v: 'Vetri Dhagumudi is founder and chief executive of Hydris, which builds the operational intelligence layer for water. He spent nearly two decades in water engineering, plant operations and global water strategy for large manufacturers, working the same problem from the shop floor and from the boardroom. He grew up where water was not a given, which is what pointed him at the industry in the first place. He left that work in June 2026 to build Hydris.' },
   ],
   assetsEyebrow: 'Downloads',
   assetsTitle: 'Assets',
@@ -640,7 +640,7 @@ export const PRESS = {
 /* ------------------------------------------------------------- Contact */
 
 export const CONTACT = {
-  title: 'If you run an industrial water plant, we would like to hear how it actually runs.',
+  title: 'If you run a water system, we would like to hear how it actually runs.',
   lead: 'Different people arrive here for different reasons. Pick the one that fits and you will reach the right person rather than a queue.',
   transfer: 'Agree how plant data will be shared before you send it. Please do not put operating files or confidential plant data in this message.',
   routes: [
@@ -652,18 +652,18 @@ export const CONTACT = {
     { h: 'Headquarters', lines: ['Hydris, Inc.', 'Portland, Oregon', 'United States'] },
     { h: 'Operations', lines: ['Chennai, India'], mail: EMAIL_OPS },
     { h: 'Telephone', lines: [PHONE] },
-    { h: 'Data and security questions', lines: ['Industrial IT teams ask early. Write to us and you get a straight answer about what is true today rather than a brochure.'] },
+    { h: 'Data and security questions', lines: ['IT and OT teams ask early. Write to us and you get a straight answer about what is true today rather than a brochure.'] },
   ],
 };
 
-export const FACILITIES = ['Food and beverage', 'Textiles', 'Pulp and paper', 'Chemicals', 'Other industrial'];
+export const FACILITIES = ['Municipal water', 'Wastewater', 'Food and beverage', 'Textiles', 'Pulp and paper', 'Chemicals', 'Other'];
 
 /* --------------------------------------------------------------- Legal */
 
 export const PRIVACY = {
   title: 'Privacy policy',
   updated: 'Draft of 5 September 2026. Requires review by counsel before publishing.',
-  intro: 'Hydris, Inc. builds software for industrial water operations. This policy explains what personal information we collect through hydris.ai, why, and what you can do about it. It covers the website only. Personal information we process for a customer under a services agreement is governed by that agreement.',
+  intro: 'Hydris, Inc. builds software for water operations. This policy explains what personal information we collect through hydris.ai, why, and what you can do about it. It covers the website only. Personal information we process for a customer under a services agreement is governed by that agreement.',
   sections: [
     ['What we collect', 'When you email us we receive your address and whatever you write. When you subscribe to the monthly note we collect the address you give us. When you visit, our analytics provider records aggregate page views, referring site, approximate country and device type. No advertising cookies, no behavioural profiles, no cross-site tracking.'],
     ['Why we use it', 'To answer you, to send the monthly note if you asked for it, and to understand which pages are useful. That is the complete list. We do not sell personal information, we do not rent or share our list, and we do not use it for automated decision making.'],
@@ -748,7 +748,7 @@ export const IMAGERY = {
     platform: { name: 'aerial-river', label: 'On shift', caption: 'Built for the person on shift at two in the morning.' },
     about: { name: 'crew-clarifier', label: 'On the floor', caption: 'We have stood where your operators stand.' },
     protect: { name: 'outfall', caption: 'What leaves the plant is what the plant is accountable for.' },
-    press: { name: 'plant-fog', label: 'Industrial water', caption: 'Treatment, seen from above.' },
+    press: { name: 'plant-fog', label: 'Water treatment', caption: 'Treatment, seen from above.' },
     contact: { name: 'riverside', label: 'Write to us', caption: 'Tell us how your plant actually runs.' },
   },
   reach: [

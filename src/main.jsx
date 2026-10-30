@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect } from 'react';
-import { createRoot } from 'react-dom/client';
+import { createRoot, hydrateRoot } from 'react-dom/client';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Site } from './components/layout/Layout.jsx';
 import './styles/site.css';
@@ -29,7 +29,7 @@ function Mounted() {
 const key = document.body.dataset.page || 'notfound';
 const Page = pages[key] || pages.notfound;
 
-createRoot(document.getElementById('root')).render(
+const app = (
   <Site page={key}>
     <Suspense fallback={<div className="page-wait" />}>
       <Page />
@@ -37,3 +37,8 @@ createRoot(document.getElementById('root')).render(
     </Suspense>
   </Site>
 );
+
+// Built pages arrive pre-rendered (scripts/prerender.mjs), so the browser hydrates them; the dev server renders fresh
+const el = document.getElementById('root');
+if (el.firstElementChild) hydrateRoot(el, app);
+else createRoot(el).render(app);

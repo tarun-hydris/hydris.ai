@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from 'react';
 
 /* ------------------------------------------------------------------------------------------
    Motion preference: one live source of truth.
@@ -51,15 +51,13 @@ export const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 /* Live media query */
 export function useMedia(query) {
-  const [match, setMatch] = useState(() => window.matchMedia(query).matches);
-  useEffect(() => {
+  const sub = useCallback((l) => {
     const mq = window.matchMedia(query);
-    const on = () => setMatch(mq.matches);
-    mq.addEventListener('change', on);
-    on();
-    return () => mq.removeEventListener('change', on);
+    mq.addEventListener('change', l);
+    return () => mq.removeEventListener('change', l);
   }, [query]);
-  return match;
+  // The pre-rendered HTML assumes no match; the browser corrects it right after hydration
+  return useSyncExternalStore(sub, () => window.matchMedia(query).matches, () => false);
 }
 
 /* Live in-view state (true while the element intersects) */

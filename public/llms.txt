@@ -1,0 +1,28 @@
+# Hydris
+
+> Hydris is the operational intelligence layer for water. It combines scientific principles, operational data and human reasoning, so the people who run water systems can see what is changing and decide what to check next. It supports the people who run the plant. It does not replace them.
+
+Water systems hold vast operational data across SCADA, laboratory systems, spreadsheets and operator logs, alongside decades of expertise that leaves when experienced staff retire. Hydris captures that expertise, applies it to live plant data, and guides operators toward action. Hydris is built for anyone who runs a water system, starting with treatment plants in food and beverage, textiles, pulp and paper and chemicals.
+
+Hydris, Inc. was founded in 2025 and is headquartered in Portland, Oregon, with teams in the United States, the Netherlands and India. Founder and chief executive: Vetri Dhagumudi.
+
+## Products
+
+- Hydris Lite (See, operational intelligence): reads the data a plant already collects into a daily plant intelligence page, a few clear scores and what needs attention. Nothing is connected to the plant's controls.
+- Hydris Pulse (Understand, expert reasoning): guided troubleshooting. From an alert, it ranks the likely causes with their evidence and confidence and proposes the next check. The operator decides.
+- Hydris Field (Act, field execution): hands-free guidance on smart glasses for rounds and checks, capturing readings and records, so what happens in the field feeds back into the plant's knowledge.
+
+## Pages
+
+- [Home](https://www.hydris.ai/): what Hydris is and how See, Understand and Act fit together
+- [Platform](https://www.hydris.ai/platform): the three products, the shared knowledge base, and getting started
+- [Demo](https://www.hydris.ai/demo): interactive demos of Lite, Pulse and Field on a sample plant
+- [About](https://www.hydris.ai/about): why Hydris was founded, the founder, and the team
+- [Press](https://www.hydris.ai/press): boilerplate, bios and media assets
+- [Contact](https://www.hydris.ai/contact): request a walkthrough, or write to hello@hydris.ai
+
+## Contact
+
+- Email: hello@hydris.ai
+- Press: press@hydris.ai
+- Phone: +1 (503) 442-7560

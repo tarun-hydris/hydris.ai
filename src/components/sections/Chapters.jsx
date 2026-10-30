@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import CineVideo from '../ui/CineVideo.jsx';
+import GradientBlinds from '../ui/blinds/GradientBlinds.jsx';
 import { FilmButton } from '../ui/Film.jsx';
 import Icon, { Arrow } from '../ui/Icon.jsx';
 import { Frame, Photo } from '../ui/Photo.jsx';
@@ -16,6 +17,7 @@ import {
   PRODUCT_STAGE, PRODUCTS, PROOF,
 } from '../../lib/content.js';
 import { useInView, useMedia, useMotionOff, useReady } from '../../lib/hooks.js';
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -71,6 +73,24 @@ const smooth = (t) => t * t * (3 - 2 * t);
    that sheet (a vector, so the edge stays sharp however far in you go). Everything else is transform
    and opacity. With motion paused it is the still opening below.
    ------------------------------------------------------------------------------------------------ */
+/* The blinds in the Hydris palette: white leads, the water film's mist and slate give the slats their depth */
+const BLINDS = {
+  lightMode: true,
+  gradientColors: ['#FFFFFF', '#D1D9D6', '#8EA4AD', '#2A4148'],
+  lightColor: '#FFFFFF',
+  angle: -24,
+  blindCount: 16,
+  blindMinWidth: 60,
+  spotlightRadius: 0.5,
+  shine: 0.4,
+  relief: 0.5,
+  glow: 0.4,
+  sway: 0.35,
+  hoverTilt: 0.6,
+  clickEffect: 'ripple',
+  noise: 0.15,
+};
+
 const AX = 0.542; // the point the camera dives toward: the centre of the largest solid circle in the
 const AY = 0.859; // mark's lower bar (radius 0.1437 of the mark's width, measured on the path)
 const BAR = 0.138;  // that radius, with a little margin
@@ -89,6 +109,8 @@ function SplashLive() {
     const stage = el.querySelector('.splash__stage');
     const group = el.querySelector('.splash__g');
     const sheet = el.querySelector('.splash__sheet');
+    const cut = el.querySelector('.splash__cut');
+    const blinds = el.querySelector('.splash__blinds');
     const ax = AX * MARK_W;
     const ay = AY * MARK_H;
     const st = { z: 0 };
@@ -116,8 +138,12 @@ function SplashLive() {
       const k = smooth(Math.min(1, e * 1.4));                             // and where it drifts to: the centre
       const px = sx + (w / 2 - sx) * k;
       const py = sy + (h / 2 - sy) * k;
-      group.setAttribute('transform', `translate(${(px - ax * S).toFixed(2)} ${(py - ay * S).toFixed(2)}) scale(${S.toFixed(5)})`);
-      sheet.style.visibility = st.z >= 0.999 ? 'hidden' : 'visible';
+      const tf = `translate(${(px - ax * S).toFixed(2)} ${(py - ay * S).toFixed(2)}) scale(${S.toFixed(5)})`;
+      group.setAttribute('transform', tf);
+      cut.setAttribute('transform', tf);                                  // the blinds share the sheet's cut-out
+      const gone = st.z >= 0.999 ? 'hidden' : 'visible';
+      sheet.style.visibility = gone;
+      blinds.style.visibility = gone;
       const t = st.z > 0.55 ? 'dark' : 'light';                           // the header follows what is under it
       if (t !== tone) { tone = t; el.dataset.tone = t; }
     };
@@ -160,10 +186,20 @@ function SplashLive() {
       <div className="splash__stage">
         <div className="splash__film" aria-hidden="true"><CineVideo className="splash__vid" priority /></div>
         <svg className="splash__sheet" viewBox="0 0 1600 900" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+          <defs>
+            <clipPath id="splash-cut" clipPathUnits="userSpaceOnUse">
+              <path className="splash__cut" clipRule="evenodd" d={`M-6000 -6000H7000V7000H-6000Z ${MARK_D}`} />
+            </clipPath>
+          </defs>
           <g className="splash__g">
             <path fillRule="evenodd" d={`M-6000 -6000H7000V7000H-6000Z ${MARK_D}`} />
           </g>
         </svg>
+        {/* The white ground around the mark, as moving blinds: they lean toward the pointer and ripple from a click.
+            Clipped to the same cut-out as the sheet, so the water inside the mark is untouched. */}
+        <div className="splash__blinds" aria-hidden="true">
+          <GradientBlinds {...BLINDS} />
+        </div>
         <div className="splash__shade" aria-hidden="true" />
         <div className="splash__say open__inner grid">
           <p className="s-label open__label splash__label">{OPENING.label}</p>
