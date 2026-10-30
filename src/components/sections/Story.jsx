@@ -54,6 +54,9 @@ const SCATTER = [
   { x: 52, y: 26, r: -5 }, { x: -28, y: 48, r: 8 }, { x: 74, y: 58, r: -3 },
 ];
 const FRAG_ICONS = ['stack', 'flask', 'book', 'grid', 'doc', 'eye'];
+// The sideways scatter is a share of each record's width, and on a phone a record is nearly the
+// screen's width: narrow screens scatter less, so the records drift within the screen, never past it
+const spread = () => Math.min(1, Math.max(0.18, (window.innerWidth - 320) / 700));
 
 export function Knowledge({ index = '02' }) {
   const K = STORY.knowledge;
@@ -67,12 +70,12 @@ export function Knowledge({ index = '02' }) {
       const items = gsap.utils.toArray('.frag__item');
       const tl = gsap.timeline({
         defaults: { ease: 'none' },
-        scrollTrigger: { trigger: el, start: 'top 82%', end: 'center 48%', scrub: 0.6 },
+        scrollTrigger: { trigger: el, start: 'top 82%', end: 'center 48%', scrub: 0.6, invalidateOnRefresh: true },
       });
       items.forEach((it, i) => {
         const s = SCATTER[i % SCATTER.length];
         tl.fromTo(it,
-          { xPercent: s.x, yPercent: s.y * 2.2, rotation: s.r, opacity: 0.55 },
+          { xPercent: () => s.x * spread(), yPercent: s.y * 2.2, rotation: s.r, opacity: 0.55 },
           { xPercent: 0, yPercent: 0, rotation: 0, opacity: 1, duration: 1, ease: 'power2.out' }, i * 0.06);
       });
       tl.fromTo('.frag__rail', { scaleY: 0 }, { scaleY: 1, duration: 0.6, ease: 'power1.inOut' }, 0.5)

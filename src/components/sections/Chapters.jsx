@@ -246,8 +246,10 @@ export function Aperture({ name, circle, kicker, title, end, endSmall }) {
       const s = Math.max(w / p.W, h / p.H);
       const iw = p.W * s;
       const ih = p.H * s;
-      const dx = (w - iw) / 2;
-      const dy = (h - ih) / 2;
+      // Crop the cover-fitted photograph around its circle, not its middle, so the circle sits at the
+      // centre of the screen wherever the photograph allows (on a phone it would otherwise sit off to one side)
+      const dx = clamp(w / 2 - circle.x * iw, w - iw, 0);
+      const dy = clamp(h / 2 - circle.y * ih, h - ih, 0);
       const cx = dx + circle.x * iw;
       const cy = dy + circle.y * ih;
       const rImg = circle.r * iw;

@@ -57,7 +57,7 @@
 
 /* ---------- Base ---------- */
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; overflow-x: clip; background: var(--mineral); }
+html { -webkit-text-size-adjust: 100%; overflow-x: hidden; overflow-x: clip; /* hidden where clip is unsupported (Safari before 16) */ background: var(--mineral); }
 html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
 .lenis.lenis-stopped { overflow: hidden; }
