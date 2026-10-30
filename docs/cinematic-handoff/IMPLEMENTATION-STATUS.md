@@ -1,7 +1,7 @@
 # Implementation status: Stage A (cinematic redesign)
 
-Target: this worktree (branch `claude/hydris-site-content-animations-4e7dd6`), started from the latest
-`claude/hybrid-hero` commit (`e6deb76`). Stage B (sound, supplied films, real endpoints) is not started.
+Target: this worktree (the site content and animations branch), started from the latest
+hybrid-hero commit (`e6deb76`). Stage B (sound, supplied films, real endpoints) is not started.
 
 Updated: 2026-10-11. See "Verification" for what was actually run.
 

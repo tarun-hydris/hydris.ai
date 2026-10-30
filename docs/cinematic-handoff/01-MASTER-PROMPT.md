@@ -1,6 +1,6 @@
 # Hydris cinematic redesign: master implementation prompt
 
-Copy the text below into Claude Code, or ask it to read this file once. This is an implementation brief for the existing repository. Stage A is the requested first delivery. Stage B is a separate, optional enrichment pass after Stage A passes verification. The companion asset checklist is for collecting material; Claude does not need to read it during Stage A unless new assets have been supplied.
+Copy the text below into the coding assistant, or ask it to read this file once. This is an implementation brief for the existing repository. Stage A is the requested first delivery. Stage B is a separate, optional enrichment pass after Stage A passes verification. The companion asset checklist is for collecting material; the assistant does not need to read it during Stage A unless new assets have been supplied.
 
 ---
 
@@ -18,7 +18,7 @@ Complete all existing pages: Home, Platform, About, Contact, Press, Privacy, Ter
 
 ## 2. Usage-conscious execution contract
 
-I have approximately 50% of my current five-hour Claude allowance remaining. You cannot translate that into a guaranteed token count, number of messages, or duration. Use a bounded scope and preserve room for fixing defects.
+I have approximately 50% of my current five-hour usage allowance remaining. You cannot translate that into a guaranteed token count, number of messages, or duration. Use a bounded scope and preserve room for fixing defects.
 
 - Read this brief once. Inspect the named files and relevant implementations selectively. Avoid rereading the entire repository, printing asset manifests with embedded base64, dumping lockfiles, or generating lengthy analysis.
 - Use one resolved creative direction. Start with an implementation map of at most 150 words, then implement. Do not spend the allowance producing competing concepts or repeating the brief back to me.

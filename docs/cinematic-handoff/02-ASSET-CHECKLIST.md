@@ -51,7 +51,7 @@ Priority **A** means collect first; **B** strengthens the site; **C** is optiona
 | B | Contact / assessment facts | Exact offer, recipient addresses, response expectations if approved, data-transfer process, product-specific setup requirements | Short truth sheet; endpoint or booking URL only if already configured | Improves conversion without a misleading promise |
 | B | Press kit | Approved boilerplate, founder biography, actual logo downloads, portraits, usage notes, company facts | Individual original files plus an optional real ZIP; avoid buttons for missing files | Turns Press's described assets into genuine downloads |
 | B | Social preview artwork | Brand mark, concise proposition, restrained plant/water composition | 1200×630 PNG/JPG/WebP plus descriptive alt text | Makes shared links look intentional and consistent |
-| B | Approved policy replacements | Owner-approved Privacy/Terms text matching actual analytics, mailto/newsletter process, company identity and providers | Text/document; retain existing drafts until approved | Supplies accurate legal pages without asking Claude to invent legal facts |
+| B | Approved policy replacements | Owner-approved Privacy/Terms text matching actual analytics, mailto/newsletter process, company identity and providers | Text/document; retain existing drafts until approved | Supplies accurate legal pages without asking the assistant to invent legal facts |
 | C | Ambient music | One restrained original or commercially licensed instrumental track | 45–90s seamless loop or 2–3 minute master; WAV original plus small web encode; no vocals by default | Optional user-activated atmosphere; never needed to understand the site |
 | C | Water / plant ambience | Quiet water movement, soft room tone, subtle equipment sound | 2–3 separate 15–30s clean loops; no harsh starts or alarm-like sounds | Adds place and material when sound is enabled |
 | C | Founder film | Vetri explaining the operating knowledge gap in his own words | 30–60s edited take plus clean original audio; caption text/transcript | Optional About film; stronger than synthetic founder narration |
@@ -75,7 +75,7 @@ For operators, prioritize an action that relates to the narrative: reading, inte
 - Record the sequence the visitor should understand, not an aimless tour of tabs. Start with the operating question, open the evidence, show the reasoning and confidence/limits, then show the operator's next step and observation record.
 - For each file, add product name, software version/date if relevant, production/prototype/concept status, what the visitor is seeing, and the one point the image supports.
 - Field screenshots need a view of what the user actually sees. A photograph of generic smart glasses alone is insufficient to demonstrate guidance or observation capture.
-- If a product is not ready for public demonstration, provide an explicitly labelled prototype or omit the missing screen. Do not ask Claude to manufacture a “real” dashboard.
+- If a product is not ready for public demonstration, provide an explicitly labelled prototype or omit the missing screen. Do not ask the assistant to manufacture a “real” dashboard.
 
 ## Plant film shot list
 

@@ -12,9 +12,9 @@ The current website already has cinematic mechanics. Its long logo reveal, clari
 
 ## Files
 
-| File | Purpose | What Claude should read |
+| File | Purpose | What the assistant should read |
 |---|---|---|
-| `01-CLAUDE-MASTER-PROMPT.md` | Comprehensive design, page, motion, engineering, and verification brief | Read once for Stage A |
+| `01-MASTER-PROMPT.md` | Comprehensive design, page, motion, engineering, and verification brief | Read once for Stage A |
 | `02-ASSET-CHECKLIST.md` | Detailed table, quantities, capture specifications, shot list, audio direction, and timeline intake | Owner collects assets; read only when using supplied material |
 | This file | Findings, priorities, launcher, and optional follow-up prompts | Owner run guide |
 
@@ -44,9 +44,9 @@ The current website already has cinematic mechanics. Its long logo reveal, clari
 | Sharing | Missing canonical/OG URL/image/Twitter metadata | Verified route metadata and a designed social preview | Stage A; share artwork if supplied |
 | Sound | No integrated soundtrack | User-activated ambient music, optional place ambience, off by default | Stage B |
 
-## Protect the remaining Claude allowance
+## Protect the remaining usage allowance
 
-Use the Sonnet model available in your account for implementation. Check `/model` and `/usage` in Claude Code. Anthropic recommends Sonnet for most coding, explains that context grows with the session, and distinguishes `/compact` for ongoing work from `/clear` for changing tasks. [Official model and context guidance](https://support.claude.com/en/articles/14552983-models-usage-and-limits-in-claude-code).
+Use the model your account recommends for implementation, and check the current model and usage before starting. Context grows with the session: compact it during ongoing work and clear it when changing tasks.
 
 The reported 50% is an allowance indicator, not a guarantee of 2.5 hours of coding or a predictable number of prompts. I cannot see the account meter. This packet reduces repeated discovery and competing concept work; it cannot guarantee the entire project fits before a reset.
 
@@ -58,24 +58,24 @@ Treat these as planning priorities, not measured consumption forecasts:
 | Roughly 25% | Production build, desktop/mobile checks, functional/a11y fixes |
 | Roughly 10% | Reserve for unexpected defects and a useful continuation handoff |
 
-Avoid spending the remaining allowance on a fresh architectural debate, multiple independent concepts, 3D scenes on every route, an asset-generation pipeline, new backend infrastructure, or repeated full-site polish loops. Specific file targets and verification conditions help keep work focused. [Anthropic cost-management guidance](https://code.claude.com/docs/en/costs).
+Avoid spending the remaining allowance on a fresh architectural debate, multiple independent concepts, 3D scenes on every route, an asset-generation pipeline, new backend infrastructure, or repeated full-site polish loops. Specific file targets and verification conditions help keep work focused.
 
 ## Run Stage A
 
 1. Preserve any current work before starting. Use the actual `hydris-hybrid` project, not the older chat folder.
 2. Supply the minimum asset pack if ready. Do not hold the whole redesign for optional music or films. Current text/illustrations remain usable while missing material is listed in the handoff.
-3. Start Claude Code in the correct project. Use a fresh focused session if its existing history is unrelated; preserve any needed decisions before clearing. Paste this launcher:
+3. Start the coding assistant in the correct project. Use a fresh focused session if its existing history is unrelated; preserve any needed decisions before clearing. Paste this launcher:
 
 ```text
 The current Hydris website is http://localhost:4307/ and its actual source is E:\Startup\Hydris\website\hydris-hybrid. Work in that project, preserving existing changes and the running server.
 
-Read docs/cinematic-handoff/01-CLAUDE-MASTER-PROMPT.md once and implement Stage A. Customers are the primary audience; investors are secondary. I have about 50% of my current five-hour allowance left. Use the supplied direction, reuse the current stack, finish all routes with one coherent system, and reserve room for build/browser verification. Do not start Stage B or produce competing concept essays. Keep a compact implementation status file so work can resume if the allowance ends.
+Read docs/cinematic-handoff/01-MASTER-PROMPT.md once and implement Stage A. Customers are the primary audience; investors are secondary. I have about 50% of my current five-hour allowance left. Use the supplied direction, reuse the current stack, finish all routes with one coherent system, and reserve room for build/browser verification. Do not start Stage B or produce competing concept essays. Keep a compact implementation status file so work can resume if the allowance ends.
 ```
 
 4. Check usage after the first coherent implementation pass. Do not paste the entire master again in follow-ups.
 5. If defects remain, send one consolidated correction with affected page/state and a screenshot if useful. Do not ask vaguely for “even more premium” in a loop.
 
-If using ordinary Claude chat instead of Claude Code, it needs actual source access to implement. A localhost link alone does not give a remote chat access to the app. Supply a source bundle excluding `node_modules`, `.git`, secrets, generated `dist`, and large unchanged media; include package/config files, HTML entry points, `src`, and relevant brand/media filenames. Provide a few screenshots for visual reference. Ask for complete changed files and patch instructions, and apply/build them locally. Do not upload every encoded video or 168 photo variants as conversation context. Claude Code is the more direct route for this existing local project.
+If using an ordinary chat assistant instead of a coding assistant with local access, it needs actual source access to implement. A localhost link alone does not give a remote chat access to the app. Supply a source bundle excluding `node_modules`, `.git`, secrets, generated `dist`, and large unchanged media; include package/config files, HTML entry points, `src`, and relevant brand/media filenames. Provide a few screenshots for visual reference. Ask for complete changed files and patch instructions, and apply/build them locally. Do not upload every encoded video or 168 photo variants as conversation context. A coding assistant with local access is the more direct route for this existing local project.
 
 ## Optional follow-up prompts
 
